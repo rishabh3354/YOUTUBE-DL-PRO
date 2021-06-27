@@ -204,7 +204,11 @@ class MainWindow(QMainWindow):
         self.settings.setValue("default_loc_playlist", self.Default_loc_playlist)
         self.settings.setValue("net_speed_unit", self.ui.comboBox_3.currentText())
         self.settings.setValue("net_frequency", self.ui.horizontalSlider_2.value())
+        #  one time congratulate
         self.settings.setValue("one_time_congratulate", self.one_time_congratulate)
+        # save window state
+        self.settings.setValue("geometry", self.saveGeometry())
+        self.settings.setValue("windowState", self.saveState())
 
     def load_settings(self):
         if self.settings.contains("hd_radio_button"):
@@ -228,8 +232,16 @@ class MainWindow(QMainWindow):
             self.net_frequency = FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), 4)
             self.ui.horizontalSlider_2.setValue(int(self.settings.value("net_frequency")))
             self.ui.label_16.setText(str(FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), "1.0")) + " Sec")
+
+        #  one time congratulate
         if self.settings.contains("one_time_congratulate"):
             self.one_time_congratulate = json.loads(self.settings.value("one_time_congratulate"))
+
+        # load window state
+        if self.settings.contains("geometry"):
+            self.restoreGeometry(self.settings.value("geometry"))
+        if self.settings.contains("windowState"):
+            self.restoreState(self.settings.value("windowState", ""))
 
     def show_file_size(self):
         try:
