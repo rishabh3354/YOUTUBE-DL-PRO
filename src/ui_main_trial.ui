@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>981</width>
-    <height>662</height>
+    <width>1025</width>
+    <height>741</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -275,7 +275,7 @@ border:none;
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>5</number>
+             <number>1</number>
             </property>
             <property name="iconSize">
              <size>
@@ -1794,8 +1794,8 @@ border:none;
                  <property name="geometry">
                   <rect>
                    <x>0</x>
-                   <y>-144</y>
-                   <width>903</width>
+                   <y>0</y>
+                   <width>947</width>
                    <height>591</height>
                   </rect>
                  </property>
@@ -2468,8 +2468,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>917</width>
-                   <height>404</height>
+                   <width>961</width>
+                   <height>483</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_13">

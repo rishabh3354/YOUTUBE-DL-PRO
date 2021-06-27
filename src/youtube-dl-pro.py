@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setStyleSheet(open(THEME_PATH + 'dark.qss', 'r').read())
-        self.settings = QSettings("warlordsoft", "YOUTUBE_DL-pro")
+        self.settings = QSettings("warlordsoft", "youtube-dl-pro")
         self.is_plan_active = True
         self.delete_source_file = True
         self.one_time_congratulate = True
@@ -250,7 +250,7 @@ class MainWindow(QMainWindow):
     def file_download_success_dialog(self, title, folder_path, play_path):
         self.msg = QMessageBox()
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+        self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
         self.msg.setIcon(QMessageBox.Information)
         self.msg.setText(title)
         self.msg.setInformativeText("")
@@ -319,7 +319,7 @@ class MainWindow(QMainWindow):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Are you sure want to stop on-going task?")
             yes_button = self.msg.addButton(QMessageBox.Yes)
@@ -330,7 +330,7 @@ class MainWindow(QMainWindow):
             if self.msg.clickedButton() == no_button:
                 pass
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while deleting the task!", error=True)
+            self.popup_message(title="Error while deleting the task!", message="", error=True)
             pass
 
     def delete_button_pressed(self):
@@ -360,7 +360,7 @@ class MainWindow(QMainWindow):
     def popup_message(self, title, message, error=False):
         self.msg = QMessageBox()
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+        self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
         if error:
             self.msg.setIcon(QMessageBox.Warning)
         else:
@@ -964,7 +964,7 @@ class MainWindow(QMainWindow):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Are you sure want to clear all videos and playlist history?")
             cb = QCheckBox("Delete all Source file too")
@@ -988,7 +988,7 @@ class MainWindow(QMainWindow):
                     self.delete_source_file = False
 
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while deleting the file!", error=True)
+            self.popup_message(title="Error while deleting the file!", message="", error=True)
             pass
 
     def clear_download_history_all(self):
@@ -1072,7 +1072,7 @@ class MainWindow(QMainWindow):
                     self.ui.listWidget.addItem(item)
             self.ui.listWidget.setIconSize(QtCore.QSize(90, 90))
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while getting download history!", error=True)
+            self.popup_message(title="Error while getting download history!", message="", error=True)
             pass
 
     def show_downloads_folder(self):
@@ -1084,13 +1084,13 @@ class MainWindow(QMainWindow):
                 selected_video = user_json_data[c_index]
                 download_path = selected_video.get("download_path")
                 if not os.path.isdir(download_path):
-                    self.popup_message(title="Oops", message="Directory not found", error=True)
+                    self.popup_message(title="Directory not found!", message="", error=True)
                 else:
                     QDesktopServices.openUrl(QUrl(download_path))
             else:
-                self.popup_message(title="Oops!", message="Please select file first!", error=True)
+                self.popup_message(title="Please select file first!", message="", error=True)
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while opening the directory!", error=True)
+            self.popup_message(title="Error while opening the directory!", message="", error=True)
             pass
 
     def play_videos_from_downloads(self):
@@ -1106,13 +1106,13 @@ class MainWindow(QMainWindow):
                 selected_video = user_json_data[c_index]
                 file_path = selected_video.get("file_path")
                 if not os.path.isfile(file_path):
-                    self.popup_message(title="Oops", message="File not found or deleted!", error=True)
+                    self.popup_message(title="File not found or deleted!", message="", error=True)
                 else:
                     QDesktopServices.openUrl(QUrl(file_path))
             else:
-                self.popup_message(title="Oops!", message="Please select file first!", error=True)
+                self.popup_message(title="Please select file first!!", message="", error=True)
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while playing the media!", error=True)
+            self.popup_message(title="Error while playing the media!", message="", error=True)
             pass
 
     def details_video_from_downloads(self):
@@ -1155,16 +1155,16 @@ class MainWindow(QMainWindow):
                 res = "".join(all_videos_list)
                 self.popup_message(f"Title | {title}", res)
             else:
-                self.popup_message(title="Oops!", message="Please select file first!", error=True)
+                self.popup_message(title="Please select file first!", message="", error=True)
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while getting details!", error=True)
+            self.popup_message(title="Error while getting details!", message="", error=True)
             pass
 
     def delete_video_from_downloads(self):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
             self.msg.setIcon(QMessageBox.Information)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
@@ -1189,9 +1189,9 @@ class MainWindow(QMainWindow):
                     else:
                         self.delete_source_file = False
             else:
-                self.popup_message(title="Oops!", message="Please select file first!", error=True)
+                self.popup_message(title="Please select file first!", message="", error=True)
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while deleting the file!", error=True)
+            self.popup_message(title="Error while deleting the file!", message="", error=True)
             pass
 
     def delete_entry_from_list(self, delete_source_file=False):
@@ -1217,7 +1217,7 @@ class MainWindow(QMainWindow):
                 except Exception as e:
                     pass
         else:
-            self.popup_message(title="Oops!", message="Please select file first!", error=True)
+            self.popup_message(title="Please select file first!", message="", error=True)
 
     def search_videos(self):
         try:
@@ -1270,7 +1270,7 @@ class MainWindow(QMainWindow):
                             self.ui.listWidget.addItem(item)
                 self.ui.listWidget.setIconSize(QtCore.QSize(90, 90))
         except Exception as e:
-            self.popup_message(title="Oops", message="Error while searching the files!", error=True)
+            self.popup_message(title="Error while searching the files!", message="", error=True)
             pass
 
     def clear_search_bar_on_edit(self):
@@ -1400,7 +1400,7 @@ class MainWindow(QMainWindow):
         if not self.is_plan_active:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(59, 85, 112, 1);color:white;")
+            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
             self.msg.setInformativeText("In Y2MATE free version, HD+ option is not available. But you can still download SD quality videos.\n"

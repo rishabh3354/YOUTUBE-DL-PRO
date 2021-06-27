@@ -269,6 +269,8 @@ def get_thumbnail_path_from_local(title, thumbnail_url, location):
     title = safe_string(title)
     try:
         file_extension = os.path.splitext(thumbnail_url)[1]
+        if "?" in file_extension:
+            file_extension = str(file_extension.split("?")[0])
         image_file_path = f'{get_download_path(location, thumbnail=True)}/{title}{file_extension}'
     except Exception as ee:
         pass
