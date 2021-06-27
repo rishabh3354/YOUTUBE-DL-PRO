@@ -7,7 +7,7 @@ from cryptography.fernet import Fernet
 from helper import check_internet_connection
 from youtube_script import get_initial_document_dir
 
-APP_NAME = "YOUTUBE-DL"
+APP_NAME = "YOUTUBE_DL"
 
 ENCRYPT_APP_NAME = {
     "PDF2GO": "wsa_pd",
@@ -15,7 +15,7 @@ ENCRYPT_APP_NAME = {
     "Y2MATE": "wsa_ye",
     "HTOP": "wse_ht",
     "JPG2PDF": "wse_jf",
-    "YOUTUBE-DL": "wse_yl"
+    "YOUTUBE_DL": "wse_yl"
 }
 
 HOME = get_initial_document_dir()

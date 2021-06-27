@@ -19,7 +19,7 @@ from youtube_threads import ProcessYtV, DownloadVideo, NetSpeedThread, ProcessYt
     DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo
 from helper import FREQUENCY_MAPPER
 
-PRODUCT_NAME = "YOUTUBE-DL"
+PRODUCT_NAME = "YOUTUBE_DL"
 THEME_PATH = '/snap/youtube-dl-pro/current/'
 
 
@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setStyleSheet(open(THEME_PATH + 'dark.qss', 'r').read())
-        self.settings = QSettings("warlordsoft", "youtube-dl-pro")
+        self.settings = QSettings("warlordsoft", "YOUTUBE_DL-pro")
         self.is_plan_active = True
         self.delete_source_file = True
         self.one_time_congratulate = True
@@ -41,8 +41,8 @@ class MainWindow(QMainWindow):
 
         self.Default_loc = get_initial_download_dir()
         self.Default_loc_playlist = get_initial_download_dir()
-        self.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE-DL")
-        self.ui.download_path_edit_playlist.setText(self.Default_loc_playlist + "/YOUTUBE-DL")
+        self.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE_DL")
+        self.ui.download_path_edit_playlist.setText(self.Default_loc_playlist + "/YOUTUBE_DL")
 
         # download tab default item to show
         self.show_default_type = self.Default_loc
@@ -216,10 +216,10 @@ class MainWindow(QMainWindow):
             self.delete_source_file = json.loads(self.settings.value("delete_source_file_check").lower())
         if self.settings.contains("default_loc"):
             self.Default_loc = self.settings.value("default_loc")
-            self.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE-DL")
+            self.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE_DL")
         if self.settings.contains("default_loc_playlist"):
             self.Default_loc_playlist = self.settings.value("default_loc_playlist")
-            self.ui.download_path_edit_playlist.setText(self.Default_loc_playlist + "/YOUTUBE-DL")
+            self.ui.download_path_edit_playlist.setText(self.Default_loc_playlist + "/YOUTUBE_DL")
 
         if self.settings.contains("net_speed_unit"):
             self.speed_unit = self.settings.value("net_speed_unit")
@@ -389,7 +389,7 @@ class MainWindow(QMainWindow):
                                                       QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
         if folder_loc:
             if check_default_location(folder_loc):
-                self.ui.download_path_edit_2.setText(folder_loc + "/YOUTUBE-DL")
+                self.ui.download_path_edit_2.setText(folder_loc + "/YOUTUBE_DL")
                 self.Default_loc = folder_loc
             else:
                 self.popup_message(title="Download Path Invalid", message="Download Path Must Inside Home Directory")
@@ -613,7 +613,7 @@ class MainWindow(QMainWindow):
                                                       QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
         if folder_loc:
             if check_default_location(folder_loc):
-                self.ui.download_path_edit_playlist.setText(folder_loc + "/YOUTUBE-DL")
+                self.ui.download_path_edit_playlist.setText(folder_loc + "/YOUTUBE_DL")
                 self.Default_loc_playlist = folder_loc
             else:
                 self.popup_message(title="Download Path Invalid", message="Download Path Must Inside Home Directory")
@@ -993,23 +993,23 @@ class MainWindow(QMainWindow):
 
     def clear_download_history_all(self):
         try:
-            video_history_path = self.Default_loc + "/YOUTUBE-DL/.downloads/download_data.json"
+            video_history_path = self.Default_loc + "/YOUTUBE_DL/.downloads/download_data.json"
             os.remove(video_history_path)
         except Exception as e:
             pass
         try:
-            playlist_history_path = self.Default_loc_playlist + "/YOUTUBE-DL/.downloads/download_data.json"
+            playlist_history_path = self.Default_loc_playlist + "/YOUTUBE_DL/.downloads/download_data.json"
             os.remove(playlist_history_path)
         except Exception as e:
             pass
         if self.delete_source_file:
             try:
-                video_file_path = self.Default_loc + "/YOUTUBE-DL"
+                video_file_path = self.Default_loc + "/YOUTUBE_DL"
                 shutil.rmtree(video_file_path)
             except Exception as e:
                 pass
             try:
-                playlist_video_path = self.Default_loc_playlist + "/YOUTUBE-DL"
+                playlist_video_path = self.Default_loc_playlist + "/YOUTUBE_DL"
                 shutil.rmtree(playlist_video_path)
             except Exception as e:
                 pass

@@ -43,10 +43,10 @@ def save_download_info(yt, yt_obj, download_path, file_path, location_path, play
         video_info["download_path"] = download_path
         video_info["sort_param"] = str(datetime.datetime.now())
         video_info["file_path"] = file_path
-        video_info["thumbnail_path"] = f"{location_path}/YOUTUBE-DL/.thumbnails/{safe_string(yt_obj.title)}.jpg"
+        video_info["thumbnail_path"] = f"{location_path}/YOUTUBE_DL/.thumbnails/{safe_string(yt_obj.title)}.jpg"
 
         video_info_list.append(video_info.copy())
-        download_data_dir = f'{location_path}/YOUTUBE-DL/.downloads'
+        download_data_dir = f'{location_path}/YOUTUBE_DL/.downloads'
         prev_saved_data = get_local_download_data(location_path)
 
         if prev_saved_data:
@@ -67,7 +67,7 @@ def save_download_info(yt, yt_obj, download_path, file_path, location_path, play
 def save_after_delete(data, location_path):
     try:
         data = json.dumps(data)
-        download_data_dir = f'{location_path}/YOUTUBE-DL/.downloads'
+        download_data_dir = f'{location_path}/YOUTUBE_DL/.downloads'
         os.makedirs(download_data_dir, exist_ok=True)
         file_name = f'{download_data_dir}/download_data.json'
         with open(file_name, "w+") as file:
@@ -77,7 +77,7 @@ def save_after_delete(data, location_path):
 
 
 def get_local_download_data(location_path):
-    download_data_dir = f'{location_path}/YOUTUBE-DL/.downloads'
+    download_data_dir = f'{location_path}/YOUTUBE_DL/.downloads'
     prev_saved_data = []
     try:
         os.makedirs(download_data_dir, exist_ok=True)

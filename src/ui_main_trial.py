@@ -1259,7 +1259,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pause_button.setToolTip(_translate("MainWindow", "Play/Pause"))
         self.delete_button.setToolTip(_translate("MainWindow", "Delete"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"200\"/></p><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#eeeeec;\">YOUTUBE-DL PRO</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"200\"/></p><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#eeeeec;\">YOUTUBE_DL PRO</span></p></body></html>"))
         self.video_vs.setText(_translate("MainWindow", "VIDEO"))
         self.playlist_vs.setText(_translate("MainWindow", "PLAYLIST"))
         self.paste_button.setToolTip(_translate("MainWindow", "Clear and Paste"))

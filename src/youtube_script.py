@@ -25,22 +25,22 @@ def get_download_path(location,
     try:
         if location:
             if thumbnail:
-                location += '/YOUTUBE-DL/.thumbnails'
+                location += '/YOUTUBE_DL/.thumbnails'
                 os.makedirs(location, exist_ok=True)
             elif process_dash_stream:
-                location += '/YOUTUBE-DL/.dash_stream'
+                location += '/YOUTUBE_DL/.dash_stream'
                 os.makedirs(location, exist_ok=True)
             elif download_video_path:
-                location += '/YOUTUBE-DL/videos'
+                location += '/YOUTUBE_DL/videos'
                 os.makedirs(location, exist_ok=True)
             elif download_playlist_video_path:
-                location += '/YOUTUBE-DL/playlist/videos'
+                location += '/YOUTUBE_DL/playlist/videos'
                 os.makedirs(location, exist_ok=True)
             elif download_playlist_audio_path:
-                location += '/YOUTUBE-DL/playlist/audio'
+                location += '/YOUTUBE_DL/playlist/audio'
                 os.makedirs(location, exist_ok=True)
             elif download_audio_path:
-                location += '/YOUTUBE-DL/audio'
+                location += '/YOUTUBE_DL/audio'
                 os.makedirs(location, exist_ok=True)
             else:
                 location += '/Downloads'
@@ -49,23 +49,23 @@ def get_download_path(location,
             HOME = QProcessEnvironment().systemEnvironment().value('SNAP_REAL_HOME')
             if HOME != '':
                 if thumbnail:
-                    HOME += '/Downloads/YOUTUBE-DL/.thumbnails'
+                    HOME += '/Downloads/YOUTUBE_DL/.thumbnails'
                     os.makedirs(HOME, exist_ok=True)
                 elif process_dash_stream:
-                    HOME += '/Downloads/YOUTUBE-DL/.dash_stream'
+                    HOME += '/Downloads/YOUTUBE_DL/.dash_stream'
                     os.makedirs(HOME, exist_ok=True)
                 elif download_video_path:
-                    HOME += '/Downloads/YOUTUBE-DL/videos'
+                    HOME += '/Downloads/YOUTUBE_DL/videos'
                     os.makedirs(HOME, exist_ok=True)
                 elif download_audio_path:
-                    HOME += '/Downloads/YOUTUBE-DL/audio'
+                    HOME += '/Downloads/YOUTUBE_DL/audio'
                     os.makedirs(HOME, exist_ok=True)
                 else:
                     HOME += '/Downloads'
             else:
                 HOME = QStandardPaths.writableLocation(QStandardPaths.HomeLocation)
     except Exception as e:
-        HOME = QProcessEnvironment().systemEnvironment().value('SNAP_REAL_HOME') + "/Downloads/YOUTUBE-DL/"
+        HOME = QProcessEnvironment().systemEnvironment().value('SNAP_REAL_HOME') + "/Downloads/YOUTUBE_DL/"
 
     return HOME
 
