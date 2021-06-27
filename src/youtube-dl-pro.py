@@ -20,8 +20,7 @@ from youtube_threads import ProcessYtV, DownloadVideo, NetSpeedThread, ProcessYt
 from helper import FREQUENCY_MAPPER
 
 PRODUCT_NAME = "YOUTUBE-DL"
-# THEME_PATH = '/snap/youtube-dl-pro/current/'
-THEME_PATH = ''
+THEME_PATH = '/snap/youtube-dl-pro/current/'
 
 
 class MainWindow(QMainWindow):
