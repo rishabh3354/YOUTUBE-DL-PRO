@@ -30,9 +30,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setStyleSheet(open(THEME_PATH + 'dark.qss', 'r').read())
         self.settings = QSettings("warlordsoft", "youtube-dl-pro")
-        self.back_track_stack = 1
         self.is_plan_active = True
-        self.theme_selected = 2
         self.delete_source_file = True
         self.one_time_congratulate = True
 
@@ -202,7 +200,6 @@ class MainWindow(QMainWindow):
         self.settings.setValue("hd_radio_button", self.ui.hd_radio_button_2.isChecked())
         self.settings.setValue("hd_radio_button_playlist", self.ui.hd_radio_button_playlist_2.isChecked())
         self.settings.setValue("delete_source_file_check", self.delete_source_file)
-        self.settings.setValue("theme_select", self.theme_selected)
         self.settings.setValue("default_loc", self.Default_loc)
         self.settings.setValue("default_loc_playlist", self.Default_loc_playlist)
         self.settings.setValue("net_speed_unit", self.ui.comboBox_3.currentText())
