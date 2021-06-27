@@ -1,0 +1,37 @@
+<RCC>
+  <qresource prefix="myresource">
+    <file>resource/check-male--v1.png</file>
+    <file>resource/delete-sign.png</file>
+    <file>resource/icons8-account-96.png</file>
+    <file>resource/icons8-activity-history-90.png</file>
+    <file>resource/icons8-apps-tab-100.png</file>
+    <file>resource/icons8-buy-96.png</file>
+    <file>resource/icons8-delete-bin-96.png</file>
+    <file>resource/icons8-double-tick-100.png</file>
+    <file>resource/icons8-export-52.png</file>
+    <file>resource/icons8-facebook-like-96.png</file>
+    <file>resource/icons8-feedback-hub-144.png</file>
+    <file>resource/icons8-home-90.png</file>
+    <file>resource/icons8-info-104.png</file>
+    <file>resource/icons8-link-52.png</file>
+    <file>resource/icons8-more-details-100.png</file>
+    <file>resource/icons8-multiply-96.png</file>
+    <file>resource/icons8-paypal-144.png</file>
+    <file>resource/icons8-play-100.png</file>
+    <file>resource/icons8-refresh-128.png</file>
+    <file>resource/icons8-speed-camera-100.png</file>
+    <file>resource/icons8-stop-96.png</file>
+    <file>resource/icons8-symlink-directory-100.png</file>
+    <file>resource/icons8-youtube-play-button-500.png</file>
+    <file>resource/link_1.png</file>
+    <file>resource/pause_new.png</file>
+    <file>resource/play.png</file>
+    <file>resource/playlist_7.png</file>
+    <file>resource/search_white.png</file>
+    <file>resource/user_blue.png</file>
+    <file>resource/video_7.png</file>
+    <file>resource/icons8-clipboard-96.png</file>
+    <file>resource/icons8-speed-100.png</file>
+    <file>resource/download_preview.png</file>
+  </qresource>
+</RCC>

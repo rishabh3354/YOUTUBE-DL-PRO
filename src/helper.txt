@@ -1,0 +1,65 @@
+pyrcc5 resource.qrc -o resource_rc.py
+pyuic5 mainwindow.ui > mainwindow.py
+pyuic5 login.ui > login.py
+https://stackoverflow.com/questions/35508711/how-to-enable-pan-and-zoom-in-a-qgraphicsview
+
+https://github.com/Pythondeveloper6
+
+https://www.visualwatermark.com/add-text-to-photos/
+
+# swap between stack
+self.ui.stackedWidget.setCurrentIndex(1)
+
+pyuic5 ui_main_trial.ui > ui_main_trial.py
+
+# git repo useful
+https://github.com/Pythondeveloper6?tab=repositories&q=&type=&language=
+https://gist.github.com/Koasing/03f2f42d16a12c7938dbee6b6845f8a4
+
+https://github.com/ubuntu/snapcraft-desktop-helpers/blob/fb943e2be372e2ce605839c20e36cad95f9a7c64/snapcraft.yaml#L147
+
+
+
+https://github.com/search?l=YAML&q=snapcraft.yaml&type=Code
+
+
+https://github.com/keshavbhatt/CurrencyConv/tree/main/src/icons
+
+
+https://snapcraft.io/docs/python-appsp  p
+
+
+
+
+========================================================PYSIDE2=========================================
+
+PyQt5  ==> PySide2
+
+pyside2-rcc resource.qrc -o resource_rc.py
+
+pyqtSignal   ==>  Signal
+
+
+
+https://dashboard.snapcraft.io/stores/snaps/
+
+https://itsfoss.com/use-snap-packages-ubuntu-16-04/
+
+===============================================================================
+
+https://snapcraft.io/docs/remote-build
+
+
+==================snap shell====================
+
+snap run --shell pdf2go
+
+go home -->  cd $SNAP
+
+
+app setting cache data :
+
+https://stackoverflow.com/questions/49837565/how-to-save-text-in-qlineedits-in-pyqt-even-if-the-widget-gets-closed
+https://www.youtube.com/watch?v=YUuGAf4jwWo
+
+https://learndataanalysis.org/how-to-save-your-application-settings-with-qsettings-class/
