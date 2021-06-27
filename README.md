@@ -10,7 +10,7 @@ Youtube-dl-Pro is a powerful GUI application for linux for downloading youtube v
 
 **To Install, use cmd:**
 
-    snap install y2mate
+    snap install youtube-dl-pro
 
 [Get it from Snapstore](https://snapcraft.io/youtube-dl-pro)
 
