@@ -46,6 +46,8 @@ class MainWindow(QMainWindow):
 
         # download tab default item to show
         self.show_default_type = self.Default_loc
+        self.speed = "0.0"
+        self.unit = "B/s"
 
         self.load_settings()
         self.show()
@@ -136,9 +138,9 @@ class MainWindow(QMainWindow):
         self.ui.horizontalSlider_2.valueChanged.connect(self.change_frequency_net)
         self.ui.comboBox_3.currentIndexChanged.connect(self.change_net_speed_unit)
 
-        self.ui.progress_bar.setFixedHeight(13)
+        self.ui.progress_bar.setFixedHeight(20)
         self.ui.account_progress_bar.setFixedHeight(5)
-        self.ui.progress_bar.setFont(QFont('Ubuntu', 10))
+        self.ui.progress_bar.setFont(QFont('Ubuntu', 11))
         self.ui.progress_bar.setVisible(False)
         self.ui.tabWidget.setCurrentIndex(0)
 
@@ -231,7 +233,8 @@ class MainWindow(QMainWindow):
         if self.settings.contains("net_frequency"):
             self.net_frequency = FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), 4)
             self.ui.horizontalSlider_2.setValue(int(self.settings.value("net_frequency")))
-            self.ui.label_16.setText(str(FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), "1.0")) + " Sec")
+            self.ui.label_16.setText(
+                str(FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), "1.0")) + " Sec")
 
         #  one time congratulate
         if self.settings.contains("one_time_congratulate"):
@@ -394,6 +397,8 @@ class MainWindow(QMainWindow):
         self.ui.internet_speed_2.setText(value[0][0])
         self.ui.indicator_2.setText(value[0][1])
         self.ui.internet_2.setText(value[1])
+        self.speed = value[0][0]
+        self.unit = value[0][1]
 
     def open_download_path(self):
         folder_loc = QFileDialog.getExistingDirectory(self, "Select Downloads Directory",
@@ -463,6 +468,13 @@ class MainWindow(QMainWindow):
                         self.ui.select_format_obj_2.clear()
                         self.ui.select_quality_obj_2.clear()
                         self.ui.select_fps_obj_2.clear()
+                        try:
+                            net_speed_thread = self.net_speed_thread.isRunning()
+                        except Exception as e:
+                            net_speed_thread = False
+                            pass
+                        if not net_speed_thread:
+                            self.start_net_speed_thread()
                         self.process_ytv_thread = ProcessYtV(self.ui.yt_video_link.text(), self.is_hd_plus,
                                                              self.Default_loc)
                         self.process_ytv_thread.change_value.connect(self.setProgressVal)
@@ -503,7 +515,7 @@ class MainWindow(QMainWindow):
             self.popup_message(title="Invalid Youtube Url", message="Please check your YT video url !")
             # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
             #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
-            #                            "Y2mate is in schedule maintenance. Don't worry we are pushing new updates for y2mate soon.\nThanks\nSorry for inconvenience")
+            #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
 
     def download_action(self):
         context = dict()
@@ -555,8 +567,15 @@ class MainWindow(QMainWindow):
 
     def tc_process_download(self, value_dict):
         if not value_dict.get("is_killed"):
-            self.ui.progress_bar.resetFormat()
+            display_status = "({0}%) Completed: {1} of {2}               " \
+                             "Speed: @{3}{4}".format(value_dict.get("progress"),
+                                                     value_dict.get("downloaded"),
+                                                     value_dict.get("total_size"),
+                                                     self.speed,
+                                                     self.unit)
+
             self.ui.progress_bar.setRange(0, 100)
+            self.ui.progress_bar.setFormat(display_status)
             self.ui.progress_bar.setValue(value_dict.get("progress"))
         else:
             self.progress_bar_disable()
@@ -657,6 +676,10 @@ class MainWindow(QMainWindow):
                     except Exception as e:
                         is_running = False
                     try:
+                        is_size_running = self.file_size_thread.isRunning()
+                    except Exception as e:
+                        is_size_running = False
+                    try:
                         is_playlist_fetch_running = self.get_videos_list.isRunning()
                     except Exception as e:
                         is_playlist_fetch_running = False
@@ -668,8 +691,15 @@ class MainWindow(QMainWindow):
                         is_playlist_process = self.process_ytv_playlist_thread.isRunning()
                     except Exception as e:
                         is_playlist_process = False
-                    if not is_running and not is_playlist_fetch_running and not is_playlist_download_running and not is_playlist_process:
+                    if not is_running and not is_playlist_fetch_running and not is_playlist_download_running and not is_playlist_process and not is_size_running:
                         self.progress_bar_enable()
+                        try:
+                            net_speed_thread = self.net_speed_thread.isRunning()
+                        except Exception as e:
+                            net_speed_thread = False
+                            pass
+                        if not net_speed_thread:
+                            self.start_net_speed_thread()
                         self.ui.select_videos_playlist_2.clear()
                         self.ui.select_quality_playlist_2.clear()
                         self.ui.select_type_playlist_2.clear()
@@ -745,14 +775,28 @@ class MainWindow(QMainWindow):
     def tc_process_download_playlist(self, value_dict):
         if value_dict.get("complete_playlist"):
             counter = value_dict.get("counter")
-            display_status = "DownLoading File {0} of {1}".format(counter, self.total_videos)
+            display_status = "Video {0} of {1}:     ({2}%) Completed: {3} of {4}        " \
+                             "Speed: @{5}{6}".format(counter,
+                                                     self.total_videos,
+                                                     value_dict.get("progress"),
+                                                     value_dict.get("downloaded"),
+                                                     value_dict.get("total_size"),
+                                                     self.speed,
+                                                     self.unit)
             self.ui.progress_bar.setRange(0, self.total_videos)
             self.ui.progress_bar.setFormat(display_status)
             self.ui.progress_bar.setValue(counter)
         else:
             if not value_dict.get("is_killed"):
-                self.ui.progress_bar.resetFormat()
+                display_status = "({0}%) Completed: {1} of {2}               " \
+                                 "Speed: @{3}{4}".format(value_dict.get("progress"),
+                                                         value_dict.get("downloaded"),
+                                                         value_dict.get("total_size"),
+                                                         self.speed,
+                                                         self.unit)
+
                 self.ui.progress_bar.setRange(0, 100)
+                self.ui.progress_bar.setFormat(display_status)
                 self.ui.progress_bar.setValue(value_dict.get("progress"))
             else:
                 self.progress_bar_disable()
@@ -782,7 +826,8 @@ class MainWindow(QMainWindow):
             yt_video_data = yt_playlist.get("video_context")
             if yt_video_data:
                 self.total_videos = yt_playlist.get("playlist_length")
-                self.get_videos_list = GetPlaylistVideos(self.is_hd_plus_playlist, yt_playlist["playlist_videos"], self.Default_loc_playlist)
+                self.get_videos_list = GetPlaylistVideos(self.is_hd_plus_playlist, yt_playlist["playlist_videos"],
+                                                         self.Default_loc_playlist)
                 self.get_videos_list.get_video_list.connect(self.set_video_list)
                 self.get_videos_list.partial_finish.connect(self.partial_finish)
                 self.get_videos_list.finished_video_list.connect(self.finish_video_list)
@@ -814,13 +859,13 @@ class MainWindow(QMainWindow):
             self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
             # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
             #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
-            #                            "Y2mate is in schedule maintenance. Don't worry we are pushing new updates for y2mate soon.\nThanks\nSorry for inconvenience")
+            #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
 
     def set_video_list(self, play_list_videos):
         if self.play_list_counter > self.total_videos:
-            display_status = "Loading File {0} of {1}".format(self.total_videos, self.total_videos)
+            display_status = "Loading Video {0} of {1}".format(self.total_videos, self.total_videos)
         else:
-            display_status = "Loading File {0} of {1}".format(self.play_list_counter, self.total_videos)
+            display_status = "Loading Video {0} of {1}".format(self.play_list_counter, self.total_videos)
         self.ui.progress_bar.setRange(0, self.total_videos)
         self.ui.progress_bar.setFormat(display_status)
         self.ui.progress_bar.setValue(self.play_list_counter)
@@ -972,6 +1017,7 @@ class MainWindow(QMainWindow):
     """
         Downloads functionality:--------------------------------------------------
     """
+
     def clear_all_history(self):
         try:
             self.msg = QMessageBox()
@@ -1415,8 +1461,9 @@ class MainWindow(QMainWindow):
             self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
-            self.msg.setInformativeText("In Y2MATE free version, HD+ option is not available. But you can still download SD quality videos.\n"
-                                        "Please support the developer and purchase a license to UNLOCK this feature.")
+            self.msg.setInformativeText(
+                "In Youtube-dl free version, HD+ option is not available. But you can still download SD quality videos.\n"
+                "Please support the developer and purchase a license to UNLOCK this feature.")
             purchase = self.msg.addButton(QMessageBox.Yes)
             close = self.msg.addButton(QMessageBox.Yes)
             purchase.setText('Purchase Licence')

@@ -6,11 +6,11 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
 from pytube import YouTube
 from helper import run_ffmpeg_command, safe_string, save_download_info, get_file_size_for_playlist, get_file_size, \
-    get_all_playlist_quality, check_internet_connection_for_net_speed
+    get_all_playlist_quality, check_internet_connection_for_net_speed, humanbytes
 from youtube_script import process_ytv, get_download_path, process_playlist
 import youtube_script
 import pytube.request
-pytube.request.default_range_size = 1048576
+pytube.request.default_range_size = 500000
 
 
 class ProcessYtV(QtCore.QThread):
@@ -112,6 +112,8 @@ class DownloadVideo(QtCore.QThread):
                                  "file_path": self.video_download_path,
                                  "play_path": self.full_file_path,
                                  "title": self.title,
+                                 "total_size": humanbytes(self.yt_obj.filesize),
+                                 "downloaded": humanbytes(0)
                                  }
 
                 while self.is_paused:
@@ -124,6 +126,7 @@ class DownloadVideo(QtCore.QThread):
                     self.after_kill.emit(self.full_file_path)
 
                 size = self.yt_obj.filesize
+                progress_dict["downloaded"] = humanbytes(size - bytes_remaining)
                 progress_dict["progress"] = int(((size - bytes_remaining) / size) * 100)
                 if progress_dict["progress"] == 100 and self.yt_obj.is_progressive:
                     progress_dict["stop"] = True
@@ -422,7 +425,9 @@ class DownloadVideoPlayList(QtCore.QThread):
                                  "file_path": self.video_download_path,
                                  "play_path": self.full_file_path,
                                  "complete_playlist": self.complete_playlist,
-                                 "counter": self.counter
+                                 "counter": self.counter,
+                                 "total_size": humanbytes(self.pl_obj.filesize),
+                                 "downloaded": humanbytes(0)
                                  }
 
                 while self.is_paused:
@@ -435,6 +440,7 @@ class DownloadVideoPlayList(QtCore.QThread):
                     self.after_kill.emit(self.full_file_path)
                 else:
                     size = self.pl_obj.filesize
+                    progress_dict["downloaded"] = humanbytes(size - bytes_remaining)
                     progress_dict["progress"] = int(((size - bytes_remaining) / size) * 100)
                     self.change_value.emit(progress_dict)
 
@@ -481,12 +487,14 @@ class DownloadVideoPlayList(QtCore.QThread):
                             # video dash
                             self.main_obj.ui.progress_bar.setRange(0, 0)
                             self.pl_obj.download(self.dash_download_path, filename=filename)
-                            # Audio dash
-                            pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
-                            pl_audio_obj.download(self.dash_download_path, filename=filename_dash_audio)
-                            self.convert_video_using_ffmpeg()
                             save_download_info(video_obj, self.pl_obj, self.video_download_path, self.full_file_path,
                                                self.location, True)
+                            # Audio dash
+                            pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
+                            self.pl_obj = pl_audio_obj
+                            self.pl_obj.download(self.dash_download_path, filename=filename_dash_audio)
+                            self.convert_video_using_ffmpeg()
+
                             progress_dict = {"type": self.type,
                                              "is_killed": self.is_killed,
                                              "file_path": self.video_download_path,
@@ -532,13 +540,14 @@ class DownloadVideoPlayList(QtCore.QThread):
                             if not os.path.isfile(self.full_file_path):
                                 # video dash
                                 self.pl_obj.download(self.dash_download_path, filename=filename)
-                                # Audio dash
-                                pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
-                                pl_audio_obj.download(self.dash_download_path, filename=filename_dash_audio)
-                                self.convert_video_using_ffmpeg()
                                 save_download_info(video_obj, self.pl_obj, self.video_download_path,
                                                    self.full_file_path,
                                                    self.location, True)
+                                # Audio dash
+                                pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
+                                self.pl_obj = pl_audio_obj
+                                self.pl_obj.download(self.dash_download_path, filename=filename_dash_audio)
+                                self.convert_video_using_ffmpeg()
                                 if self.counter == len(self.all_yt_playlist_obj):
                                     progress_dict = {"type": self.type,
                                                      "is_killed": self.is_killed,
@@ -654,7 +663,9 @@ class DownloadVideoPlayList(QtCore.QThread):
                          "play_path": self.full_file_path,
                          "complete_playlist": self.complete_playlist,
                          "counter": self.counter,
-                         "title": self.title
+                         "title": self.title,
+                         "total_size": humanbytes(self.pl_obj.filesize),
+                         "downloaded": humanbytes(self.pl_obj.filesize)
                          }
         for progress_dict["progress"] in run_ffmpeg_command(
                 ['ffmpeg', '-i', self.in_file_path, '-vn', self.full_file_path]):
