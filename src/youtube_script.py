@@ -115,6 +115,7 @@ def get_initial_document_dir():
         return "/Documents"
     return download_path
 
+
 def process_ytv(url, is_hd_plus, location):
     from helper import select_format_data
     from helper import safe_string
@@ -128,6 +129,13 @@ def process_ytv(url, is_hd_plus, location):
         context["length"] = get_time_format(yt.length)
         file_extension = '.jpg'
         context["quality_data"] = select_format_data(yt, is_hd_plus)
+        context["channel"] = yt.author
+        context["views"] = yt.views
+        description = yt.description
+        if description == "":
+            context["description"] = "No description available!"
+        else:
+            context["description"] = yt.description
         image_url = yt.thumbnail_url
         r = requests.get(image_url)
         title = safe_string(yt.title)

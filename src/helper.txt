@@ -63,3 +63,11 @@ https://stackoverflow.com/questions/49837565/how-to-save-text-in-qlineedits-in-p
 https://www.youtube.com/watch?v=YUuGAf4jwWo
 
 https://learndataanalysis.org/how-to-save-your-application-settings-with-qsettings-class/
+
+
+qtablewidget advance
+https://www.programmersought.com/article/466539668/
+
+
+webview
+https://stackoverflow.com/questions/48103685/youtube-video-embedding-pyqt
