@@ -70,7 +70,7 @@ border-radius:12px;
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="paste_button">
+      <widget class="QToolButton" name="paste_button">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -138,6 +138,16 @@ border-radius:10px;
        <property name="text">
         <string>VIDEO</string>
        </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/myresource/resource/video_7.png</normaloff>:/myresource/resource/video_7.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>23</width>
+         <height>23</height>
+        </size>
+       </property>
        <property name="checked">
         <bool>true</bool>
        </property>
@@ -160,6 +170,16 @@ border-radius:10px;
        <property name="text">
         <string>PLAYLIST</string>
        </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/myresource/resource/playlist_7.png</normaloff>:/myresource/resource/playlist_7.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>
@@ -178,30 +198,66 @@ border-radius:10px;
     </spacer>
    </item>
    <item>
-    <widget class="QPushButton" name="process">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Process</string>
-     </property>
-     <property name="icon">
-      <iconset resource="resource.qrc">
-       <normaloff>:/myresource/resource/search_white.png</normaloff>:/myresource/resource/search_white.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>80</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="process">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>Process</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/myresource/resource/icons8-search-500.png</normaloff>:/myresource/resource/icons8-search-500.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>80</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
    <item>
     <spacer name="horizontalSpacer_3">
@@ -220,6 +276,8 @@ border-radius:10px;
  </widget>
  <resources>
   <include location="resource.qrc"/>
+  <include location="dark.qrc"/>
+  <include location="country_flag.qrc"/>
  </resources>
  <connections/>
 </ui>

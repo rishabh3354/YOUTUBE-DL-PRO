@@ -1,6 +1,6 @@
 import time
 from PyQt5 import QtGui
-from country_names_all import ALPHA2_CODES, COUNTRY_NAME, SERVER_LIST, SERVER_NAME
+from country_names_all import COUNTRIES, SERVER
 
 
 def get_time_format(length):
@@ -20,21 +20,16 @@ def human_format(num):
     return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
 
 
-def get_country_name_with_code_dict():
-    return dict(zip(COUNTRY_NAME, ALPHA2_CODES))
-
-
-def get_country_all():
-    return COUNTRY_NAME
-
-
 def set_all_countries_icons(self):
-    for index, name in enumerate(ALPHA2_CODES):
-        file_name = f":/myresource/resource/{name.lower()}.png"
+    for index, name in enumerate(list(COUNTRIES.values())):
+        file_name = f":/country_flag/country_flags/{name.lower()}.png"
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(file_name), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.youtube_setting_ui.ui.country.setItemIcon(index, icon)
 
 
-def get_all_server_name_dict():
-    return dict(zip(SERVER_NAME, SERVER_LIST))
+def set_server_icons(self):
+    for index, item in enumerate(list(SERVER.keys())):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-expand-arrow-100.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.youtube_setting_ui.ui.server.setItemIcon(index, icon)

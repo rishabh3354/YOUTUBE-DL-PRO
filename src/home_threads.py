@@ -2,7 +2,7 @@ import requests
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap
-from country_names_all import SERVER_LIST
+from src.country_names_all import SERVER
 
 UserAgent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'}
 Fields = "fields=videoId,title,videoThumbnails,lengthSeconds,author,viewCount,publishedText"
@@ -10,8 +10,8 @@ Fields = "fields=videoId,title,videoThumbnails,lengthSeconds,author,viewCount,pu
 
 def get_live_server():
     try:
-        default_server = SERVER_LIST[0]
-        for server in SERVER_LIST:
+        default_server = list(SERVER.values())[0]
+        for server in list(SERVER.values()):
             response = requests.get(server, UserAgent)
             if response.status_code in [200, 201]:
                 default_server = server
@@ -20,7 +20,7 @@ def get_live_server():
         return default_server
     except Exception as e:
         print(e)
-        return SERVER_LIST[0]
+        return list(SERVER.values())[0]
 
 
 class HomeThreads(QtCore.QThread):
@@ -113,12 +113,12 @@ class CompleterThread(QtCore.QThread):
 class SearchThreads(QtCore.QThread):
     search_results = pyqtSignal(list)
 
-    def __init__(self, default_server, query, country_code, page, search_type, sort_by, parent=None):
+    def __init__(self, default_server, query, country_code, page, sort_by, parent=None):
         super(SearchThreads, self).__init__(parent)
         self.query = query
         self.country_code = country_code
         self.page = page
-        self.search_type = search_type
+        self.search_type = "video"
         self.sort_by = sort_by
         self.end_point = default_server
 

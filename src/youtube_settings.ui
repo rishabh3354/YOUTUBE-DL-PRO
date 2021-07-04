@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-106</y>
         <width>501</width>
         <height>506</height>
        </rect>
@@ -130,8 +130,8 @@ p, li { white-space: pre-wrap; }
                 <string>Trending</string>
                </property>
                <property name="icon">
-                <iconset resource="../../JPG2PDF/src/resource.qrc">
-                 <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
                </property>
               </item>
               <item>
@@ -139,8 +139,8 @@ p, li { white-space: pre-wrap; }
                 <string>Popular</string>
                </property>
                <property name="icon">
-                <iconset resource="../../JPG2PDF/src/resource.qrc">
-                 <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
                </property>
               </item>
              </widget>
@@ -184,23 +184,35 @@ p, li { white-space: pre-wrap; }
                 <string>Relevance</string>
                </property>
                <property name="icon">
-                <iconset resource="../../JPG2PDF/src/resource.qrc">
-                 <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>Rating</string>
                </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>Upload date</string>
                </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+               </property>
               </item>
               <item>
                <property name="text">
                 <string>View count</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resource.qrc">
+                 <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
                </property>
               </item>
              </widget>
@@ -233,6 +245,9 @@ p, li { white-space: pre-wrap; }
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="no_of_videos">
+              <property name="suffix">
+               <string> videos</string>
+              </property>
               <property name="minimum">
                <number>1</number>
               </property>
@@ -275,11 +290,14 @@ p, li { white-space: pre-wrap; }
             </item>
             <item row="0" column="2">
              <widget class="QPushButton" name="download_path_button_2">
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Change</string>
               </property>
               <property name="icon">
-               <iconset resource="../../JPG2PDF/src/resource.qrc">
+               <iconset resource="resource.qrc">
                 <normaloff>:/myresource/resource/icons8-export-52.png</normaloff>:/myresource/resource/icons8-export-52.png</iconset>
               </property>
              </widget>
@@ -310,11 +328,14 @@ p, li { white-space: pre-wrap; }
             </item>
             <item row="1" column="2">
              <widget class="QPushButton" name="download_path_button_playlist">
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
               <property name="text">
                <string>Change</string>
               </property>
               <property name="icon">
-               <iconset resource="../../JPG2PDF/src/resource.qrc">
+               <iconset resource="resource.qrc">
                 <normaloff>:/myresource/resource/icons8-export-52.png</normaloff>:/myresource/resource/icons8-export-52.png</iconset>
               </property>
              </widget>
@@ -364,7 +385,7 @@ p, li { white-space: pre-wrap; }
                <string/>
               </property>
               <property name="icon">
-               <iconset resource="../../JPG2PDF/src/resource.qrc">
+               <iconset resource="resource.qrc">
                 <normaloff>:/myresource/resource/icons8-info-104.png</normaloff>:/myresource/resource/icons8-info-104.png</iconset>
               </property>
              </widget>
@@ -398,7 +419,7 @@ p, li { white-space: pre-wrap; }
            <string>Okay</string>
           </property>
           <property name="icon">
-           <iconset resource="../../JPG2PDF/src/resource.qrc">
+           <iconset resource="resource.qrc">
             <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
           </property>
           <property name="iconSize">
@@ -415,7 +436,7 @@ p, li { white-space: pre-wrap; }
            <string>Reset Defaults</string>
           </property>
           <property name="icon">
-           <iconset resource="../../JPG2PDF/src/resource.qrc">
+           <iconset resource="resource.qrc">
             <normaloff>:/myresource/resource/icons8-reset-256.png</normaloff>:/myresource/resource/icons8-reset-256.png</iconset>
           </property>
           <property name="iconSize">
@@ -434,7 +455,9 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <resources>
-  <include location="../../JPG2PDF/src/resource.qrc"/>
+  <include location="resource.qrc"/>
+  <include location="dark.qrc"/>
+  <include location="country_flag.qrc"/>
  </resources>
  <connections/>
 </ui>

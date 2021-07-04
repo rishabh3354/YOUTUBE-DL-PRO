@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>910</width>
-    <height>729</height>
+    <width>1151</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -148,7 +148,7 @@
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
-                  <height>20</height>
+                  <height>10</height>
                  </size>
                 </property>
                </spacer>
@@ -159,8 +159,27 @@
                  <layout class="QGridLayout" name="gridLayout_25">
                   <item row="0" column="3">
                    <widget class="QPushButton" name="enter_url">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+
+border-radius:8px;
+}</string>
+                    </property>
                     <property name="text">
-                     <string>Enter Url</string>
+                     <string>Url</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/link_1.png</normaloff>:/myresource/resource/link_1.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -171,7 +190,8 @@
 
 height: 25px;
 border-radius:12px;
-}</string>
+}
+</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignCenter</set>
@@ -183,28 +203,46 @@ border-radius:12px;
                   </item>
                   <item row="0" column="2">
                    <widget class="QPushButton" name="search">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton{
+
+border-radius:8px;
+}</string>
+                    </property>
                     <property name="text">
                      <string>Search</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../../JPG2PDF/src/resource.qrc">
-                      <normaloff>:/myresource/resource/icons8-zoom-in-52.png</normaloff>:/myresource/resource/icons8-zoom-in-52.png</iconset>
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-search-500.png</normaloff>:/myresource/resource/icons8-search-500.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="0">
                    <widget class="QToolButton" name="home_button">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
                     <property name="text">
                      <string>...</string>
                     </property>
                     <property name="icon">
                      <iconset resource="resource.qrc">
-                      <normaloff>:/myresource/resource/icons8-home-90.png</normaloff>:/myresource/resource/icons8-home-90.png</iconset>
+                      <normaloff>:/myresource/resource/icons8-home-120.png</normaloff>:/myresource/resource/icons8-home-120.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>25</width>
-                      <height>25</height>
+                      <width>27</width>
+                      <height>27</height>
                      </size>
                     </property>
                    </widget>
@@ -219,7 +257,7 @@ border-radius:12px;
                   <property name="sizeHint" stdset="0">
                    <size>
                     <width>40</width>
-                    <height>20</height>
+                    <height>10</height>
                    </size>
                   </property>
                  </spacer>
@@ -318,32 +356,61 @@ border:none;
                  <layout class="QGridLayout" name="gridLayout_27">
                   <item row="0" column="1">
                    <widget class="QPushButton" name="yt_settings">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
                     <property name="text">
                      <string> Youtube settings</string>
                     </property>
                     <property name="icon">
-                     <iconset resource="../../JPG2PDF/src/resource.qrc">
+                     <iconset resource="resource.qrc">
                       <normaloff>:/myresource/resource/icons8-settings-96.png</normaloff>:/myresource/resource/icons8-settings-96.png</iconset>
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>22</width>
-                      <height>22</height>
+                      <width>20</width>
+                      <height>20</height>
                      </size>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="3">
                    <widget class="QPushButton" name="next_page">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
                     <property name="text">
                      <string>Next</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-forward-button-90.png</normaloff>:/myresource/resource/icons8-forward-button-90.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
                   <item row="0" column="2">
                    <widget class="QPushButton" name="prev_page">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
                     <property name="text">
                      <string>Prev</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-go-back-90.png</normaloff>:/myresource/resource/icons8-go-back-90.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -1340,13 +1407,42 @@ p, li { white-space: pre-wrap; }
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
-                  <height>20</height>
+                  <height>15</height>
                  </size>
                 </property>
                </spacer>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QLineEdit" name="search_videos">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit{
+
+height: 25px;
+border-radius:12px;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Search Download History</string>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QPushButton" name="open_videos">
                   <property name="enabled">
@@ -1522,36 +1618,20 @@ p, li { white-space: pre-wrap; }
                   </property>
                  </widget>
                 </item>
-                <item>
-                 <widget class="QLineEdit" name="search_videos">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="autoFillBackground">
-                   <bool>false</bool>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit{
-
-height: 25px;
-border-radius:12px;
-}</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="placeholderText">
-                   <string>Search Download History</string>
-                  </property>
-                 </widget>
-                </item>
                </layout>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_12">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>10</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_24">
@@ -2040,8 +2120,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>846</width>
-                   <height>522</height>
+                   <width>1087</width>
+                   <height>469</height>
                   </rect>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -2098,22 +2178,6 @@ padding: 6px;
                         </property>
                         <property name="readOnly">
                          <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="4">
-                       <widget class="QPushButton" name="copy_id">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="text">
-                         <string>copy</string>
                         </property>
                        </widget>
                       </item>
@@ -2267,6 +2331,35 @@ padding: 6px;
                         <property name="icon">
                          <iconset resource="resource.qrc">
                           <normaloff>:/myresource/resource/icons8-refresh-128.png</normaloff>:/myresource/resource/icons8-refresh-128.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>25</width>
+                          <height>25</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="4">
+                       <widget class="QToolButton" name="copy_id">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="toolTip">
+                         <string>Copy account ID</string>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="resource.qrc">
+                          <normaloff>:/myresource/resource/icons8-copy-90.png</normaloff>:/myresource/resource/icons8-copy-90.png</iconset>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -2722,8 +2815,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>846</width>
-                   <height>545</height>
+                   <width>1087</width>
+                   <height>492</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -3222,7 +3315,7 @@ border:none;
  <resources>
   <include location="resource.qrc"/>
   <include location="dark.qrc"/>
-  <include location="../../JPG2PDF/src/resource.qrc"/>
+  <include location="country_flag.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -2,27 +2,49 @@
   <qresource prefix="myresource">
     <file>resource/check-male--v1.png</file>
     <file>resource/delete-sign.png</file>
+    <file>resource/download_preview.png</file>
     <file>resource/icons8-account-96.png</file>
     <file>resource/icons8-activity-history-90.png</file>
+    <file>resource/icons8-add-folder-96.png</file>
+    <file>resource/icons8-add-image-96.png</file>
     <file>resource/icons8-apps-tab-100.png</file>
     <file>resource/icons8-buy-96.png</file>
+    <file>resource/icons8-clipboard-96.png</file>
     <file>resource/icons8-delete-bin-96.png</file>
     <file>resource/icons8-double-tick-100.png</file>
     <file>resource/icons8-export-52.png</file>
     <file>resource/icons8-facebook-like-96.png</file>
     <file>resource/icons8-feedback-hub-144.png</file>
+    <file>resource/icons8-file-preview-96.png</file>
+    <file>resource/icons8-forward-button-90.png</file>
+    <file>resource/icons8-gear-90.png</file>
+    <file>resource/icons8-go-back-90.png</file>
     <file>resource/icons8-home-90.png</file>
+    <file>resource/icons8-image-90.png</file>
     <file>resource/icons8-info-104.png</file>
     <file>resource/icons8-link-52.png</file>
     <file>resource/icons8-more-details-100.png</file>
+    <file>resource/icons8-multiply-52.png</file>
     <file>resource/icons8-multiply-96.png</file>
+    <file>resource/icons8-ok-144.png</file>
     <file>resource/icons8-paypal-144.png</file>
     <file>resource/icons8-play-100.png</file>
     <file>resource/icons8-refresh-128.png</file>
+    <file>resource/icons8-remove-delivery-96.png</file>
+    <file>resource/icons8-reset-256.png</file>
+    <file>resource/icons8-rotate-96.png</file>
+    <file>resource/icons8-scroll-down-96.png</file>
+    <file>resource/icons8-scroll-up-96.png</file>
+    <file>resource/icons8-settings-96.png</file>
+    <file>resource/icons8-show-property-96.png</file>
+    <file>resource/icons8-speed-100.png</file>
     <file>resource/icons8-speed-camera-100.png</file>
     <file>resource/icons8-stop-96.png</file>
     <file>resource/icons8-symlink-directory-100.png</file>
     <file>resource/icons8-youtube-play-button-500.png</file>
+    <file>resource/icons8-zoom-in-52.png</file>
+    <file>resource/icons8-zoom-out-52.png</file>
+    <file>resource/jpg2pdf.png</file>
     <file>resource/link_1.png</file>
     <file>resource/pause_new.png</file>
     <file>resource/play.png</file>
@@ -30,8 +52,14 @@
     <file>resource/search_white.png</file>
     <file>resource/user_blue.png</file>
     <file>resource/video_7.png</file>
-    <file>resource/icons8-clipboard-96.png</file>
-    <file>resource/icons8-speed-100.png</file>
-    <file>resource/download_preview.png</file>
+    <file>resource/icons8-copy-90.png</file>
+    <file>resource/icons8-download-from-cloud-90.png</file>
+    <file>resource/icons8-expand-arrow-100.png</file>
+    <file>resource/icons8-home-120.png</file>
+    <file>resource/icons8-music-120.png</file>
+    <file>resource/icons8-search-144.png</file>
+    <file>resource/icons8-tick-box-120.png</file>
+    <file>resource/icons8-youtube-play-button-144.png</file>
+    <file>resource/icons8-search-500.png</file>
   </qresource>
 </RCC>
