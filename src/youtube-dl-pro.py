@@ -97,7 +97,7 @@ class MainWindow(QMainWindow):
         self.hide_show_video_initial_banner(show=False)
         self.hide_show_playlist_initial_banner(show=False)
         self.ui.progress_bar.setFixedHeight(17)
-        self.ui.account_progress_bar.setFixedHeight(5)
+        self.ui.account_progress_bar.setFixedHeight(2)
         self.ui.progress_bar.setFont(QFont('Ubuntu', 11))
         self.ui.tabWidget.setCurrentIndex(0)
         self.completer = QCompleter()
@@ -117,7 +117,8 @@ class MainWindow(QMainWindow):
         self.ui.tableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.copy_id.clicked.connect(
             lambda x: QApplication.clipboard().setText(self.ui.lineEdit_account_id_2.text()))
-
+        self.ui.info_suggestion.clicked.connect(self.suggestion_info_popup)
+        self.info_suggestion_count = 0
         # download tab default item to show
         self.show_default_type = self.Default_loc
         self.speed = "0.0"
@@ -130,6 +131,10 @@ class MainWindow(QMainWindow):
         self.hide_show_play_pause_button(hide=True)
         self.pause = False
         self.counter = 0
+
+        self.load_settings()
+        self.show()
+        self.get_home_page(True)
 
         # signal and slots =====
 
@@ -191,6 +196,7 @@ class MainWindow(QMainWindow):
         self.ui.error_message.clear()
         self.ui.error_message.setStyleSheet("color:red;")
         self.my_plan()
+        self.ui.groupBox_2.setVisible(False)
 
         # signal and slots
         self.ui.warlordsoft_button.clicked.connect(self.redirect_to_warlordsoft)
@@ -208,57 +214,13 @@ class MainWindow(QMainWindow):
         # Select theme icon ========================================================================
         self.set_icon_on_line_edit()
 
-        self.load_settings()
-        self.show()
-        self.get_home_page(True)
-
-    def keyPressEvent(self, qKeyEvent):
-        if qKeyEvent.key() == QtCore.Qt.Key_Return:
-            self.start_search_youtube()
-        else:
-            super().keyPressEvent(qKeyEvent)
+    """
+        Youtube settings ===============================================================================================
+        
+    """
 
     def change_no_of_home_item(self):
         self.home_button_item = self.youtube_setting_ui.ui.no_of_videos.value()
-
-    def hide_show_video_initial_banner(self, show=True):
-        if show:
-            for i in range(self.ui.gridLayout_5.count() - 1, -1, -1):
-                items = self.ui.gridLayout_5.itemAt(i).widget()
-                if items:
-                    items.setVisible(True)
-        else:
-            for i in range(self.ui.gridLayout_5.count() - 1, -1, -1):
-                items = self.ui.gridLayout_5.itemAt(i).widget()
-                if items:
-                    items.setVisible(False)
-
-    def hide_show_playlist_initial_banner(self, show=True):
-        if show:
-            for i in range(self.ui.gridLayout_8.count() - 1, -1, -1):
-                items = self.ui.gridLayout_8.itemAt(i).widget()
-                if items:
-                    items.setVisible(True)
-        else:
-            for i in range(self.ui.gridLayout_8.count() - 1, -1, -1):
-                items = self.ui.gridLayout_8.itemAt(i).widget()
-                if items:
-                    items.setVisible(False)
-
-    def hide_show_download_initial_banner(self, show=True):
-        if show:
-            self.ui.listWidget.setVisible(True)
-            self.ui.label_26.setVisible(False)
-        else:
-            self.ui.listWidget.setVisible(False)
-            self.ui.label_26.setVisible(True)
-
-    def server_info_popup(self):
-        title = "YOUTUBE-Dl PRO SERVER INFO!"
-        message = "Change the server name if you are facing any issues related to loading Home page/Search on youtube.\n\n" \
-                  "Reason: It might be possible that youtube-dl-pro server is down for temporary basis on your country.\n\n" \
-                  "Note: You can also switch to another server if home page loading speed is slow."
-        self.popup_message(title, message)
 
     def save_default_server(self):
         self.default_server = SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com")
@@ -303,6 +265,74 @@ class MainWindow(QMainWindow):
         self.youtube_setting_ui.show()
         self.youtube_setting_ui.raise_()
         self.youtube_setting_ui.activateWindow()
+
+    """
+            Home settings ===============================================================================================
+
+    """
+
+    def disable_enable_prev_next_page(self, show=True):
+        if show:
+            self.ui.next_page.setEnabled(True)
+            self.ui.prev_page.setEnabled(True)
+        else:
+            self.ui.next_page.setEnabled(False)
+            self.ui.prev_page.setEnabled(False)
+
+    def hide_show_video_initial_banner(self, show=True):
+        if show:
+            for i in range(self.ui.gridLayout_5.count() - 1, -1, -1):
+                items = self.ui.gridLayout_5.itemAt(i).widget()
+                if items:
+                    items.setVisible(True)
+        else:
+            for i in range(self.ui.gridLayout_5.count() - 1, -1, -1):
+                items = self.ui.gridLayout_5.itemAt(i).widget()
+                if items:
+                    items.setVisible(False)
+
+    def hide_show_playlist_initial_banner(self, show=True):
+        if show:
+            for i in range(self.ui.gridLayout_8.count() - 1, -1, -1):
+                items = self.ui.gridLayout_8.itemAt(i).widget()
+                if items:
+                    items.setVisible(True)
+        else:
+            for i in range(self.ui.gridLayout_8.count() - 1, -1, -1):
+                items = self.ui.gridLayout_8.itemAt(i).widget()
+                if items:
+                    items.setVisible(False)
+
+    def hide_show_download_initial_banner(self, show=True):
+        if show:
+            self.ui.listWidget.setVisible(True)
+            self.ui.label_26.setVisible(False)
+        else:
+            self.ui.listWidget.setVisible(False)
+            self.ui.label_26.setVisible(True)
+
+    def server_info_popup(self):
+        title = "YOUTUBE-Dl PRO SERVER INFO!"
+        message = "Change the server name if you are facing any issues related to loading Home page/Search on youtube.\n\n" \
+                  "Reason: It might be possible that youtube-dl-pro server is down for temporary basis on your country.\n\n" \
+                  "Note: You can also switch to another server if home page loading speed is slow."
+        self.popup_message(title, message)
+
+    def suggestion_info_popup(self):
+        title = "YOUTUBE-Dl PRO Tips and Tricks!"
+        message_1 = "For YouTube search suggestion, press space-bar key after your keyword on search bar."
+        message_2 = "Change your country from settings to improve search results and switch to regional home page."
+        message = message_1
+        if self.info_suggestion_count % 2 != 0:
+            message = message_2
+        self.info_suggestion_count += 1
+        self.popup_message(title, message)
+
+    def keyPressEvent(self, qKeyEvent):
+        if qKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.start_search_youtube()
+        else:
+            super().keyPressEvent(qKeyEvent)
 
     def open_url_dialog(self):
         self.url_dialog_ui.show()
@@ -351,6 +381,9 @@ class MainWindow(QMainWindow):
         self.ui.page_no.setText(f"Page {self.page}")
 
     def start_search_youtube(self):
+        self.disable_enable_prev_next_page(show=True)
+        if self.page == 1:
+            self.ui.prev_page.setEnabled(False)
         query = self.ui.youtube_search.text()
         if query not in [None, ""]:
             if check_internet_connection():
@@ -376,6 +409,7 @@ class MainWindow(QMainWindow):
 
     def get_home_page(self, initial=False):
         self.ui.page_no.setVisible(False)
+        self.disable_enable_prev_next_page(show=False)
         if check_internet_connection():
             try:
                 home_thread = self.home_thread.isRunning()
@@ -388,6 +422,7 @@ class MainWindow(QMainWindow):
 
             if not home_thread and not pixmap_thread:
                 self.ui.home_progress_bar.setRange(0, 0)
+                self.ui.youtube_search.clear()
                 self.home_thread = HomeThreads(self.default_server, self.country, self.explore, self)
                 self.home_thread.home_results.connect(self.result)
                 self.home_thread.server_change_error.connect(self.server_error_handle)
@@ -541,6 +576,11 @@ class MainWindow(QMainWindow):
     def setProgressVal_pixmap_finish(self, data):
         self.pixmap_cache.update(dict(zip(self.thumbnail_list, self.pixmap_list)))
 
+
+    """
+        Net speed settings =============================================================================================
+    """
+
     def default_frequency(self):
         self.ui.horizontalSlider_2.setValue(4)
         self.ui.label_16.setText("1.0 Sec")
@@ -566,6 +606,10 @@ class MainWindow(QMainWindow):
         self.net_speed_thread = NetSpeedThread(self.net_frequency, self.speed_unit, self)
         self.net_speed_thread.change_value.connect(self.setProgress_net_speed)
         self.net_speed_thread.start()
+
+    """
+        load/save settings =============================================================================================
+    """
 
     def closeEvent(self, event):
         self.save_settings()
@@ -819,8 +863,7 @@ class MainWindow(QMainWindow):
     def enable_hd_button_message(self):
         if self.ui.hd_radio_button_2.isChecked():
             if self.check_your_plan():
-                message = "On Enabling HD+ feature, YouTube videos will be available in more Quality formats. " \
-                          "\n\nINFO: For 2k, 4k, 8k Quality videos, system will auto use WEBM(.mkv) video format."
+                message = "On Enabling HD+ feature, YouTube videos will be available in more Quality formats."
                 self.popup_message(title="HD+ Quality Feature (Pro Feature)", message=message)
                 self.is_hd_plus = True
                 if self.download_url != "":
@@ -934,7 +977,7 @@ class MainWindow(QMainWindow):
             self.ui.select_fps_obj_2.setCurrentIndex(0)
             self.ui.tabWidget.setCurrentIndex(1)
         else:
-            self.popup_message(title="Invalid Youtube Url", message="Please check your YT video url !")
+            self.popup_message(title="Youtube video not available!", message="This video is not available. Please check your url !")
             # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
             #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
             #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
@@ -1786,8 +1829,14 @@ class MainWindow(QMainWindow):
             self.ui.search_videos.clear()
 
     """
-            About page functionality:--------------------------------------------------
+            About page functionality ===================================================================================
     """
+
+    def pro_plan_hide_plan_compare_chart(self):
+        self.ui.groupBox.setVisible(False)
+        self.ui.groupBox_2.setVisible(True)
+        self.ui.purchase_licence_2.setVisible(False)
+        self.ui.refresh_account_2.setVisible(False)
 
     def redirect_to_warlordsoft(self):
         warlord_soft_link = "https://warlordsoftwares.in/"
@@ -1875,7 +1924,7 @@ class MainWindow(QMainWindow):
             self.ui.purchase_licence_2.setEnabled(False)
             self.ui.refresh_account_2.setEnabled(False)
             self.ui.lineEdit_plan_2.setText(plan)
-            self.ui.groupBox_13.setVisible(False)
+            self.pro_plan_hide_plan_compare_chart()
             if self.one_time_congratulate:
                 self.ui.account_progress_bar.setRange(0, 1)
                 self.popup_message(title="Congratulations! Plan Upgraded to PRO",

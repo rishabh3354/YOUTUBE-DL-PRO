@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1151</width>
-    <height>676</height>
+    <width>1111</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -197,7 +197,7 @@ border-radius:12px;
                      <set>Qt::AlignCenter</set>
                     </property>
                     <property name="placeholderText">
-                     <string>Search YouTube</string>
+                     <string>Search Whole YouTube</string>
                     </property>
                    </widget>
                   </item>
@@ -354,6 +354,52 @@ border:none;
                 </item>
                 <item>
                  <layout class="QGridLayout" name="gridLayout_27">
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="prev_page">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="text">
+                     <string>Prev</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-go-back-90.png</normaloff>:/myresource/resource/icons8-go-back-90.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>23</width>
+                      <height>23</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <widget class="QPushButton" name="next_page">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="text">
+                     <string>Next</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-forward-button-90.png</normaloff>:/myresource/resource/icons8-forward-button-90.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>23</width>
+                      <height>23</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="0" column="1">
                    <widget class="QPushButton" name="yt_settings">
                     <property name="cursor">
@@ -368,48 +414,8 @@ border:none;
                     </property>
                     <property name="iconSize">
                      <size>
-                      <width>20</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="3">
-                   <widget class="QPushButton" name="next_page">
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>Next</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="resource.qrc">
-                      <normaloff>:/myresource/resource/icons8-forward-button-90.png</normaloff>:/myresource/resource/icons8-forward-button-90.png</iconset>
-                    </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>20</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
-                   <widget class="QPushButton" name="prev_page">
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>Prev</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="resource.qrc">
-                      <normaloff>:/myresource/resource/icons8-go-back-90.png</normaloff>:/myresource/resource/icons8-go-back-90.png</iconset>
-                    </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>20</width>
-                      <height>20</height>
+                      <width>17</width>
+                      <height>17</height>
                      </size>
                     </property>
                    </widget>
@@ -424,6 +430,26 @@ border:none;
                     </property>
                     <property name="text">
                      <string>Page 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="5">
+                   <widget class="QToolButton" name="info_suggestion">
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/myresource/resource/icons8-info-104.png</normaloff>:/myresource/resource/icons8-info-104.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>18</width>
+                      <height>18</height>
+                     </size>
                     </property>
                    </widget>
                   </item>
@@ -2088,7 +2114,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-account-96.png&quot; width=&quot;45&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-account-96.png&quot; width=&quot;40&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                  </widget>
                 </item>
@@ -2120,273 +2146,277 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1087</width>
-                   <height>469</height>
+                   <width>1033</width>
+                   <height>678</height>
                   </rect>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <layout class="QVBoxLayout" name="verticalLayout_11">
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_2">
-                    <item>
-                     <layout class="QGridLayout" name="gridLayout_4">
-                      <item row="0" column="2" colspan="2">
-                       <widget class="QLineEdit" name="lineEdit_account_id_2">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                   <widget class="QGroupBox" name="groupBox_3">
+                    <property name="title">
+                     <string/>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_16">
+                     <item>
+                      <layout class="QGridLayout" name="gridLayout_4">
+                       <item row="0" column="2" colspan="2">
+                        <widget class="QLineEdit" name="lineEdit_account_id_2">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>8fjfdjhqoifj383ld</string>
-                        </property>
-                        <property name="readOnly">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="2" colspan="3">
-                       <widget class="QLineEdit" name="lineEdit_plan_2">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                         </property>
+                         <property name="text">
+                          <string>8fjfdjhqoifj383ld</string>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2" colspan="3">
+                        <widget class="QLineEdit" name="lineEdit_plan_2">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>Evaluation</string>
-                        </property>
-                        <property name="readOnly">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0" colspan="2">
-                       <widget class="QLineEdit" name="lineEdit_10">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                         </property>
+                         <property name="text">
+                          <string>Evaluation</string>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="0" colspan="2">
+                        <widget class="QLineEdit" name="lineEdit_10">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>Account Status:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="0" colspan="2">
-                       <widget class="QLineEdit" name="lineEdit_5">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                         </property>
+                         <property name="text">
+                          <string>Account Status:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0" colspan="2">
+                        <widget class="QLineEdit" name="lineEdit_5">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>Account ID:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0" colspan="2">
-                       <widget class="QLineEdit" name="lineEdit_6">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                         </property>
+                         <property name="text">
+                          <string>Account ID:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0" colspan="2">
+                        <widget class="QLineEdit" name="lineEdit_6">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>Account Type:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="2" colspan="3">
-                       <widget class="QLineEdit" name="lineEdit_expires_on_2">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLineEdit {
+                         </property>
+                         <property name="text">
+                          <string>Account Type:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="2" colspan="3">
+                        <widget class="QLineEdit" name="lineEdit_expires_on_2">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QLineEdit {
 padding: 6px;
 }
 
 </string>
-                        </property>
-                        <property name="text">
-                         <string>Licence Expired! Purchase a new Licence</string>
-                        </property>
-                        <property name="readOnly">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="2" colspan="3">
-                       <widget class="QPushButton" name="purchase_licence_2">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
-                        </property>
-                        <property name="text">
-                         <string>Purchase Now</string>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource.qrc">
-                          <normaloff>:/myresource/resource/icons8-buy-96.png</normaloff>:/myresource/resource/icons8-buy-96.png</iconset>
-                        </property>
-                        <property name="iconSize">
-                         <size>
-                          <width>25</width>
-                          <height>25</height>
-                         </size>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0" colspan="2">
-                       <widget class="QPushButton" name="refresh_account_2">
-                        <property name="enabled">
-                         <bool>true</bool>
-                        </property>
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
-                        </property>
-                        <property name="text">
-                         <string>Refresh Account</string>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource.qrc">
-                          <normaloff>:/myresource/resource/icons8-refresh-128.png</normaloff>:/myresource/resource/icons8-refresh-128.png</iconset>
-                        </property>
-                        <property name="iconSize">
-                         <size>
-                          <width>25</width>
-                          <height>25</height>
-                         </size>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="4">
-                       <widget class="QToolButton" name="copy_id">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
-                        </property>
-                        <property name="toolTip">
-                         <string>Copy account ID</string>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource.qrc">
-                          <normaloff>:/myresource/resource/icons8-copy-90.png</normaloff>:/myresource/resource/icons8-copy-90.png</iconset>
-                        </property>
-                        <property name="iconSize">
-                         <size>
-                          <width>25</width>
-                          <height>25</height>
-                         </size>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <widget class="QProgressBar" name="account_progress_bar">
-                      <property name="enabled">
-                       <bool>true</bool>
-                      </property>
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>false</bool>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QProgressBar:horizontal {
+                         </property>
+                         <property name="text">
+                          <string>Licence Expired! Purchase a new Licence</string>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2" colspan="3">
+                        <widget class="QPushButton" name="purchase_licence_2">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Purchase Now</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resource.qrc">
+                           <normaloff>:/myresource/resource/icons8-buy-96.png</normaloff>:/myresource/resource/icons8-buy-96.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="0" colspan="2">
+                        <widget class="QPushButton" name="refresh_account_2">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Refresh Account</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resource.qrc">
+                           <normaloff>:/myresource/resource/icons8-refresh-128.png</normaloff>:/myresource/resource/icons8-refresh-128.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="4">
+                        <widget class="QToolButton" name="copy_id">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="toolTip">
+                          <string>Copy account ID</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resource.qrc">
+                           <normaloff>:/myresource/resource/icons8-copy-90.png</normaloff>:/myresource/resource/icons8-copy-90.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QProgressBar" name="account_progress_bar">
+                       <property name="enabled">
+                        <bool>true</bool>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="autoFillBackground">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">QProgressBar:horizontal {
 border-radius: 5px;
 background:rgba(0,0,0,0.1);
 color: white;
@@ -2404,358 +2434,371 @@ color: white;
 border:none;
 }
 </string>
+                       </property>
+                       <property name="maximum">
+                        <number>100</number>
+                       </property>
+                       <property name="value">
+                        <number>0</number>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                       </property>
+                       <property name="textVisible">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QGroupBox" name="groupBox_2">
+                    <property name="title">
+                     <string/>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_15">
+                     <item>
+                      <widget class="QLabel" name="label_27">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-youtube-play-button-500.png&quot; width=&quot;70&quot;/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#888a85;&quot;&gt;YOUTUBE-DL PRO VERSION&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-style:italic; color:#888a85;&quot;&gt;Congratulations you are using pro version!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_2">
+                    <item>
+                     <widget class="QGroupBox" name="groupBox">
+                      <property name="title">
+                       <string>PLAN COMPARISION</string>
                       </property>
-                      <property name="maximum">
-                       <number>100</number>
-                      </property>
-                      <property name="value">
-                       <number>0</number>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                      </property>
-                      <property name="textVisible">
-                       <bool>false</bool>
-                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_9">
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_6">
+                         <item row="6" column="1">
+                          <layout class="QHBoxLayout" name="horizontalLayout_37">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_53">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="7" column="1">
+                          <layout class="QHBoxLayout" name="horizontalLayout_42">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_55">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="8" column="0">
+                          <widget class="QLabel" name="label_14">
+                           <property name="text">
+                            <string>➤ UHD+ Playlist Download  (Upto 8K)</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="8" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_48">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_30">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="2" column="1">
+                          <widget class="QLineEdit" name="lineEdit_14">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="text">
+                            <string>FREE VERSION</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="2">
+                          <widget class="QLineEdit" name="lineEdit_9">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="text">
+                            <string>PRO/EVALUATION</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QLineEdit" name="lineEdit_4">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>12</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true"/>
+                           </property>
+                           <property name="text">
+                            <string>(FREE VS PRO)  FEATURES </string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="1">
+                          <layout class="QHBoxLayout" name="horizontalLayout_35">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_25">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="6" column="0">
+                          <widget class="QLabel" name="label_6">
+                           <property name="text">
+                            <string>➤ Audio Download (MP3)</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_40">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_28">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="7" column="0">
+                          <widget class="QLabel" name="label_7">
+                           <property name="text">
+                            <string>➤ UHD+ Videos Download (Upto 8K)</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="0">
+                          <widget class="QLabel" name="label_5">
+                           <property name="text">
+                            <string>➤ Youtube Videos Download (SD)</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="8" column="1">
+                          <layout class="QHBoxLayout" name="horizontalLayout_38">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_54">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="4" column="1">
+                          <layout class="QHBoxLayout" name="horizontalLayout_36">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_26">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="6" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_45">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_32">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="7" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_41">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_29">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item row="4" column="0">
+                          <widget class="QLabel" name="label_8">
+                           <property name="text">
+                            <string>➤ Whole Playlist Download (SD)</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_39">
+                           <item>
+                            <widget class="QToolButton" name="toolButton_27">
+                             <property name="text">
+                              <string>...</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resource.qrc">
+                               <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>20</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
                      </widget>
-                    </item>
-                    <item>
-                     <widget class="Line" name="line_2">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_3">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <layout class="QGridLayout" name="gridLayout_6">
-                      <item row="6" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_37">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_53">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="7" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_42">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_55">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="8" column="0">
-                       <widget class="QLabel" name="label_14">
-                        <property name="text">
-                         <string>➤ UHD+ Playlist Download  (Upto 8K)</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="8" column="2">
-                       <layout class="QHBoxLayout" name="horizontalLayout_48">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_30">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="2" column="1">
-                       <widget class="QLineEdit" name="lineEdit_14">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>12</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
-                        </property>
-                        <property name="text">
-                         <string>FREE VERSION</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="2">
-                       <widget class="QLineEdit" name="lineEdit_9">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>12</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
-                        </property>
-                        <property name="text">
-                         <string>PRO/EVALUATION</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0">
-                       <widget class="QLineEdit" name="lineEdit_4">
-                        <property name="enabled">
-                         <bool>false</bool>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>12</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true"/>
-                        </property>
-                        <property name="text">
-                         <string>(FREE VS PRO)  FEATURES </string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_35">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_25">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="6" column="0">
-                       <widget class="QLabel" name="label_6">
-                        <property name="text">
-                         <string>➤ Audio Download (MP3)</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="4" column="2">
-                       <layout class="QHBoxLayout" name="horizontalLayout_40">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_28">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="7" column="0">
-                       <widget class="QLabel" name="label_7">
-                        <property name="text">
-                         <string>➤ UHD+ Videos Download (Upto 8K)</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="label_5">
-                        <property name="text">
-                         <string>➤ Youtube Videos Download (SD)</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="8" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_38">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_54">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-multiply-96.png</normaloff>:/myresource/resource/icons8-multiply-96.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="4" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_36">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_26">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="6" column="2">
-                       <layout class="QHBoxLayout" name="horizontalLayout_45">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_32">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="7" column="2">
-                       <layout class="QHBoxLayout" name="horizontalLayout_41">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_29">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item row="4" column="0">
-                       <widget class="QLabel" name="label_8">
-                        <property name="text">
-                         <string>➤ Whole Playlist Download (SD)</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="2">
-                       <layout class="QHBoxLayout" name="horizontalLayout_39">
-                        <item>
-                         <widget class="QToolButton" name="toolButton_27">
-                          <property name="text">
-                           <string>...</string>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="resource.qrc">
-                            <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>20</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
                     </item>
                    </layout>
                   </item>
@@ -2799,7 +2842,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-info-104.png&quot; width=&quot;45&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-info-104.png&quot; width=&quot;35&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
                  </widget>
                 </item>
@@ -2815,8 +2858,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1087</width>
-                   <height>492</height>
+                   <width>1047</width>
+                   <height>456</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -2990,7 +3033,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/myresource/resource/icons8-youtube-play-button-500.png&quot; width=&quot;90&quot; /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#888a85;&quot;&gt;YOUTUBE-DL PRO&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#888a85;&quot;&gt;Language used: &lt;/span&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Python (PyQt5)&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#888a85;&quot;&gt;Language used: &lt;/span&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Python&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#888a85;&quot;&gt;Version: 0.1&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#888a85;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
