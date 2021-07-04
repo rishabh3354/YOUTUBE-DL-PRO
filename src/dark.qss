@@ -1275,6 +1275,12 @@ QComboBox::down-arrow:on, QComboBox::down-arrow:hover, QComboBox::down-arrow:foc
   image: url(":/qss_icons/dark/rc/arrow_down.png");
 }
 
+QComboBox::item
+{
+    height: 10px;
+    margin: 5px 0 0 5px;
+    padding: 6px 0 5px 20px;
+}
 /* QSlider ----------------------------------------------------------------
 
 https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qslider

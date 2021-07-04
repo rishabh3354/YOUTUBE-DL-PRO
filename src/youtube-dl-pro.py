@@ -27,7 +27,6 @@ from settings import YouTubeSettings, UrlDialog
 
 PRODUCT_NAME = "YOUTUBE_DL"
 THEME_PATH = '/snap/youtube-dl-pro/current/'
-# THEME_PATH = ''
 
 
 class MainWindow(QMainWindow):
