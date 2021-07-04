@@ -196,7 +196,6 @@ class MainWindow(QMainWindow):
         self.ui.error_message.clear()
         self.ui.error_message.setStyleSheet("color:red;")
         self.my_plan()
-        self.ui.groupBox_2.setVisible(False)
 
         # signal and slots
         self.ui.warlordsoft_button.clicked.connect(self.redirect_to_warlordsoft)
@@ -1910,6 +1909,7 @@ class MainWindow(QMainWindow):
                 self.logged_in_user_plan_page(user_plan_data)
 
     def logged_in_user_plan_page(self, user_plan_data):
+        self.ui.groupBox_2.setVisible(False)
         account_email = user_plan_data.get('email')
         plan = user_plan_data.get("plan", "N/A")
         expiry_date = user_plan_data.get("expiry_date")
