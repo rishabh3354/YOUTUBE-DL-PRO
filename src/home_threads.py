@@ -2,7 +2,7 @@ import requests
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap
-from src.country_names_all import SERVER
+from country_names_all import SERVER
 
 UserAgent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'}
 Fields = "fields=videoId,title,videoThumbnails,lengthSeconds,author,viewCount,publishedText"
