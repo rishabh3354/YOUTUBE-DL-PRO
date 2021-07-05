@@ -783,7 +783,35 @@ p, li { white-space: pre-wrap; }
                 <layout class="QHBoxLayout" name="horizontalLayout_44">
                  <item>
                   <layout class="QGridLayout" name="gridLayout">
-                   <item row="0" column="9">
+                   <item row="0" column="5">
+                    <widget class="QComboBox" name="select_quality_obj_2">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Select Quality</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="8">
                     <widget class="QPushButton" name="download_button_2">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -812,7 +840,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="7">
+                   <item row="0" column="6">
                     <widget class="QComboBox" name="select_format_obj_2">
                      <property name="cursor">
                       <cursorShape>PointingHandCursor</cursorShape>
@@ -822,18 +850,22 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="iconSize">
                       <size>
-                       <width>16</width>
-                       <height>16</height>
+                       <width>20</width>
+                       <height>20</height>
                       </size>
                      </property>
                      <item>
                       <property name="text">
                        <string>Select Format</string>
                       </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/video_7.png</normaloff>:/myresource/resource/video_7.png</iconset>
+                      </property>
                      </item>
                     </widget>
                    </item>
-                   <item row="0" column="8">
+                   <item row="0" column="7">
                     <widget class="QComboBox" name="select_fps_obj_2">
                      <property name="cursor">
                       <cursorShape>PointingHandCursor</cursorShape>
@@ -843,71 +875,19 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="iconSize">
                       <size>
-                       <width>16</width>
-                       <height>16</height>
+                       <width>20</width>
+                       <height>20</height>
                       </size>
                      </property>
                      <item>
                       <property name="text">
                        <string>Select FPS</string>
                       </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item row="0" column="6">
-                    <widget class="QComboBox" name="select_quality_obj_2">
-                     <property name="enabled">
-                      <bool>true</bool>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true"/>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>16</width>
-                       <height>16</height>
-                      </size>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>Select Quality</string>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/icons8-tick-box-120.png</normaloff>:/myresource/resource/icons8-tick-box-120.png</iconset>
                       </property>
                      </item>
-                    </widget>
-                   </item>
-                   <item row="0" column="5">
-                    <widget class="QRadioButton" name="hd_radio_button_2">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="toolTip">
-                      <string>More Video Resolutions</string>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QRadioButton::indicator { width: 20px;height:20px };</string>
-                     </property>
-                     <property name="text">
-                      <string>HD+ Quality (PRO)</string>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="resource.qrc">
-                       <normaloff>:/myresource/resource/icons8-speed-camera-100.png</normaloff>:/myresource/resource/icons8-speed-camera-100.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
                     </widget>
                    </item>
                   </layout>
@@ -1271,33 +1251,6 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <layout class="QGridLayout" name="gridLayout_2">
                    <item row="0" column="2">
-                    <widget class="QComboBox" name="select_quality_playlist_2">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true"/>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>16</width>
-                       <height>16</height>
-                      </size>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>Select Quality</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item row="0" column="3">
                     <widget class="QComboBox" name="select_type_playlist_2">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1313,18 +1266,87 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="iconSize">
                       <size>
-                       <width>16</width>
-                       <height>16</height>
+                       <width>20</width>
+                       <height>20</height>
                       </size>
                      </property>
                      <item>
                       <property name="text">
                        <string>Select Type</string>
                       </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/video_7.png</normaloff>:/myresource/resource/video_7.png</iconset>
+                      </property>
                      </item>
                     </widget>
                    </item>
-                   <item row="0" column="7">
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="select_quality_playlist_2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Select Quality</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/icons8-ok-144.png</normaloff>:/myresource/resource/icons8-ok-144.png</iconset>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QComboBox" name="select_videos_playlist_2">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="cursor">
+                      <cursorShape>PointingHandCursor</cursorShape>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>20</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Select All</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/myresource/resource/icons8-double-tick-100.png</normaloff>:/myresource/resource/icons8-double-tick-100.png</iconset>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="6">
                     <widget class="QPushButton" name="download_button_playlist_2">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1344,68 +1366,6 @@ p, li { white-space: pre-wrap; }
                      <property name="icon">
                       <iconset resource="resource.qrc">
                        <normaloff>:/myresource/resource/icons8-play-100.png</normaloff>:/myresource/resource/icons8-play-100.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>25</width>
-                       <height>25</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QComboBox" name="select_videos_playlist_2">
-                     <property name="enabled">
-                      <bool>true</bool>
-                     </property>
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true"/>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>16</width>
-                       <height>16</height>
-                      </size>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>Select All</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QRadioButton" name="hd_radio_button_playlist_2">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="toolTip">
-                      <string>More Video Resolutions</string>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QRadioButton::indicator { width: 20px;height:20px };</string>
-                     </property>
-                     <property name="text">
-                      <string>HD+ Quality (PRO)</string>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="resource.qrc">
-                       <normaloff>:/myresource/resource/icons8-speed-camera-100.png</normaloff>:/myresource/resource/icons8-speed-camera-100.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>

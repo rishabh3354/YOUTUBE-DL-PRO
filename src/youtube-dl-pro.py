@@ -125,7 +125,6 @@ class MainWindow(QMainWindow):
 
         # Video functionality ==================================================
         # init
-        self.is_hd_plus = False
         self.stop = False
         self.hide_show_play_pause_button(hide=True)
         self.pause = False
@@ -146,7 +145,6 @@ class MainWindow(QMainWindow):
         self.url_dialog_ui.ui.paste_button.clicked.connect(self.paste_button_clicked)
         self.ui.search.clicked.connect(self.start_search_youtube)
         self.ui.download_button_2.clicked.connect(self.download_action)
-        self.ui.hd_radio_button_2.clicked.connect(self.enable_hd_button_message)
         self.ui.select_format_obj_2.currentTextChanged.connect(self.check_for_audio_only)
         self.ui.select_quality_obj_2.currentIndexChanged.connect(self.show_file_size)
         self.ui.select_format_obj_2.currentIndexChanged.connect(self.show_file_size)
@@ -158,7 +156,6 @@ class MainWindow(QMainWindow):
         # playlist functionality ======================================================
 
         # init
-        self.is_hd_plus_playlist = False
         self.play_list_counter = 1
         self.total_obj = list()
 
@@ -167,7 +164,6 @@ class MainWindow(QMainWindow):
         self.ui.download_button_playlist_2.clicked.connect(self.download_action_playlist)
         self.ui.select_type_playlist_2.currentIndexChanged.connect(self.check_for_audio_only_playlist)
         self.ui.select_quality_playlist_2.currentIndexChanged.connect(self.check_for_audio_only_playlist)
-        self.ui.hd_radio_button_playlist_2.clicked.connect(self.enable_hd_button_playlist)
         self.youtube_setting_ui.ui.download_path_button_playlist.clicked.connect(self.open_download_path_playlist)
 
         # Downloads functionality ======================================================
@@ -619,8 +615,6 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     def save_settings(self):
-        self.settings.setValue("hd_radio_button", self.ui.hd_radio_button_2.isChecked())
-        self.settings.setValue("hd_radio_button_playlist", self.ui.hd_radio_button_playlist_2.isChecked())
         self.settings.setValue("delete_source_file_check", self.delete_source_file)
         self.settings.setValue("default_loc", self.Default_loc)
         self.settings.setValue("default_loc_playlist", self.Default_loc_playlist)
@@ -640,11 +634,6 @@ class MainWindow(QMainWindow):
                                SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
 
     def load_settings(self):
-        if self.settings.contains("hd_radio_button"):
-            self.ui.hd_radio_button_2.setChecked(json.loads(self.settings.value("hd_radio_button").lower()))
-        if self.settings.contains("hd_radio_button_playlist"):
-            self.ui.hd_radio_button_playlist_2.setChecked(
-                json.loads(self.settings.value("hd_radio_button_playlist").lower()))
         if self.settings.contains("delete_source_file_check"):
             self.delete_source_file = json.loads(self.settings.value("delete_source_file_check").lower())
         if self.settings.contains("default_loc"):
@@ -862,22 +851,6 @@ class MainWindow(QMainWindow):
             self.ui.select_fps_obj_2.setEnabled(True)
             self.ui.select_quality_obj_2.setEnabled(True)
 
-    def enable_hd_button_message(self):
-        if self.ui.hd_radio_button_2.isChecked():
-            if self.check_your_plan():
-                message = "On Enabling HD+ feature, YouTube videos will be available in more Quality formats."
-                self.popup_message(title="HD+ Quality Feature (Pro Feature)", message=message)
-                self.is_hd_plus = True
-                if self.download_url != "":
-                    self.ytv_link_clicked(self.download_url)
-            else:
-                self.is_hd_plus = False
-                self.ui.hd_radio_button_2.setChecked(False)
-        else:
-            self.is_hd_plus = False
-            if self.download_url != "":
-                self.ytv_link_clicked(self.download_url)
-
     def hide_show_play_pause_button(self, hide=True):
         self.ui.pause_button.setVisible(not hide)
         self.ui.delete_button.setVisible(not hide)
@@ -907,8 +880,6 @@ class MainWindow(QMainWindow):
                     is_playlist_process = False
                 if not is_running and not is_playlist_fetch_running and not is_playlist_download_running and not is_playlist_process:
                     self.progress_bar_enable()
-                    if self.ui.hd_radio_button_2.isChecked():
-                        self.is_hd_plus = True
                     self.ui.select_format_obj_2.clear()
                     self.ui.select_quality_obj_2.clear()
                     self.ui.select_fps_obj_2.clear()
@@ -919,7 +890,7 @@ class MainWindow(QMainWindow):
                         pass
                     if not net_speed_thread:
                         self.start_net_speed_thread()
-                    self.process_ytv_thread = ProcessYtV(data, self.is_hd_plus, self.Default_loc, self)
+                    self.process_ytv_thread = ProcessYtV(data, True, self.Default_loc, self)
                     self.process_ytv_thread.change_value.connect(self.setProgressVal)
                     self.process_ytv_thread.start()
                     self.url_dialog_ui.hide()
@@ -956,19 +927,36 @@ class MainWindow(QMainWindow):
             for index, item in enumerate(all_quality):
                 self.ui.select_quality_obj_2.addItem(item)
                 icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
-                               QtGui.QIcon.Off)
+                if index in [0, 1, 2]:
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
+                else:
+                    if not self.is_plan_active:
+                        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-lock-96.png"), QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
+                    else:
+                        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
                 self.ui.select_quality_obj_2.setItemIcon(index, icon)
 
             for index, item in enumerate(all_format):
                 self.ui.select_format_obj_2.addItem(item)
                 icon = QtGui.QIcon()
-                if item == "AUDIO - MP3":
-                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal,
-                                   QtGui.QIcon.Off)
-                else:
+                if index == 0:
                     icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal,
                                    QtGui.QIcon.Off)
+                else:
+                    if not self.is_plan_active:
+                        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-lock-96.png"), QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
+                    else:
+                        if index == 1:
+                            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"),
+                                           QtGui.QIcon.Normal,
+                                           QtGui.QIcon.Off)
+                        else:
+                            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal,
+                                           QtGui.QIcon.Off)
                 self.ui.select_format_obj_2.setItemIcon(index, icon)
 
             for index, item in enumerate(all_fps):
@@ -1013,7 +1001,7 @@ class MainWindow(QMainWindow):
                 context["formats"] = (str(self.ui.select_format_obj_2.currentText()).split(" ")[2]).lower()
                 context["fps"] = int(str(self.ui.select_fps_obj_2.currentText()).split(" ")[0])
                 context["url"] = self.url_dialog_ui.ui.yt_video_link.text()
-                context["is_hd_plus"] = self.is_hd_plus
+                context["is_hd_plus"] = True
                 if self.ui.select_format_obj_2.currentText() == "VIDEO - MP4" or self.ui.select_format_obj_2.currentText() == "VIDEO - WEBM":
                     context["type"] = "video"
                 if self.ui.select_format_obj_2.currentText() == "AUDIO - MP3" or self.ui.select_format_obj_2.currentText() == "AUDIO - MP3":
@@ -1026,16 +1014,26 @@ class MainWindow(QMainWindow):
                 self.counter = 0
                 self.all_videos = True
                 self.all_playlist = False
-                self.process_ytv_thread = DownloadVideo(context, self)
-                self.process_ytv_thread.change_value.connect(self.tc_process_download)
-                self.process_ytv_thread.finished.connect(self.tc_finished_downloading_thread)
-                self.process_ytv_thread.converting_videos.connect(self.tc_converting_videos)
-                self.process_ytv_thread.error.connect(self.tc_error_on_downloading)
-                self.process_ytv_thread.no_error.connect(self.tc_no_error)
-                self.process_ytv_thread.after_kill.connect(self.tc_after_kill)
-                self.process_ytv_thread.start()
+                response = self.block_pro_plan_for_videos()
+                if response:
+                    self.process_ytv_thread = DownloadVideo(context, self)
+                    self.process_ytv_thread.change_value.connect(self.tc_process_download)
+                    self.process_ytv_thread.finished.connect(self.tc_finished_downloading_thread)
+                    self.process_ytv_thread.converting_videos.connect(self.tc_converting_videos)
+                    self.process_ytv_thread.error.connect(self.tc_error_on_downloading)
+                    self.process_ytv_thread.no_error.connect(self.tc_no_error)
+                    self.process_ytv_thread.after_kill.connect(self.tc_after_kill)
+                    self.process_ytv_thread.start()
             else:
                 self.popup_message(title="Invalid Youtube Url", message="Please check your video link !")
+
+    def block_pro_plan_for_videos(self):
+        if self.ui.select_quality_obj_2.currentText() in ['144p (LD)', '240p (LD)', '360p (SD)']\
+                and self.ui.select_format_obj_2.currentText() == 'VIDEO - MP4':
+            return True
+        else:
+            response = self.check_your_plan()
+        return response
 
     def tc_process_download(self, value_dict):
         if not value_dict.get("is_killed"):
@@ -1122,20 +1120,6 @@ class MainWindow(QMainWindow):
                 self.popup_message(title="Download Path Invalid", message="Download Path Must Inside Home Directory")
                 return False
 
-    def enable_hd_button_playlist(self):
-        if self.ui.hd_radio_button_playlist_2.isChecked():
-            if self.check_your_plan():
-                message = "On Enabling HD+ feature, YouTube Playlist videos will be available in more Quality formats"
-                self.popup_message(title="HD+ Quality Feature (Pro Feature)", message=message)
-                self.is_hd_plus_playlist = True
-                self.ytv_link_clicked_playlist()
-            else:
-                self.is_hd_plus_playlist = False
-                self.ui.hd_radio_button_playlist_2.setChecked(False)
-        else:
-            self.is_hd_plus_playlist = False
-            self.ytv_link_clicked_playlist()
-
     def ytv_link_clicked_playlist(self):
         self.play_list_counter = 1
         data = self.url_dialog_ui.ui.yt_video_link.text()
@@ -1176,8 +1160,6 @@ class MainWindow(QMainWindow):
                     self.ui.select_videos_playlist_2.setEnabled(False)
                     self.ui.select_quality_playlist_2.setEnabled(False)
                     self.ui.select_type_playlist_2.setEnabled(False)
-                    if self.ui.hd_radio_button_playlist_2.isChecked():
-                        self.is_hd_plus_playlist = True
                     self.process_ytv_playlist_thread = ProcessYtVPlayList(self.url_dialog_ui.ui.yt_video_link.text(),
                                                                           self.Default_loc_playlist, self)
                     self.process_ytv_playlist_thread.change_value_playlist.connect(self.setProgressVal_playlist)
@@ -1230,18 +1212,29 @@ class MainWindow(QMainWindow):
                 self.ui.progress_bar.setRange(0, 100)
                 self.all_videos = False
                 self.all_playlist = True
-                self.process_ytv_play_list_thread = DownloadVideoPlayList(context, self)
-                self.process_ytv_play_list_thread.change_value.connect(self.tc_process_download_playlist)
-                self.process_ytv_play_list_thread.finished.connect(self.tc_finished_downloading_thread_playlist)
-                self.process_ytv_play_list_thread.after_kill.connect(self.tc_after_kill_playlist)
-                self.process_ytv_play_list_thread.playlist_finished.connect(
-                    self.tc_finished_downloading_thread_playlist_all)
-                self.process_ytv_play_list_thread.error_playlist.connect(self.error_playlist)
-                self.process_ytv_play_list_thread.ffmpeg_conversion.connect(self.ffmpeg_playlist_conversion)
-                self.process_ytv_play_list_thread.start()
-                self.hide_show_play_pause_button(hide=False)
+                response = self.block_pro_plan_for_playlist()
+                if response:
+                    self.process_ytv_play_list_thread = DownloadVideoPlayList(context, self)
+                    self.process_ytv_play_list_thread.change_value.connect(self.tc_process_download_playlist)
+                    self.process_ytv_play_list_thread.finished.connect(self.tc_finished_downloading_thread_playlist)
+                    self.process_ytv_play_list_thread.after_kill.connect(self.tc_after_kill_playlist)
+                    self.process_ytv_play_list_thread.playlist_finished.connect(
+                        self.tc_finished_downloading_thread_playlist_all)
+                    self.process_ytv_play_list_thread.error_playlist.connect(self.error_playlist)
+                    self.process_ytv_play_list_thread.ffmpeg_conversion.connect(self.ffmpeg_playlist_conversion)
+                    self.process_ytv_play_list_thread.start()
+                    self.hide_show_play_pause_button(hide=False)
             else:
                 self.popup_message(title="Invalid Youtube Url", message="Please check your YT video url !")
+
+    def block_pro_plan_for_playlist(self):
+        if self.ui.select_quality_playlist_2.currentText() in ['144p (LD)', '240p (LD)', '360p (SD)']\
+                and self.ui.select_type_playlist_2.currentText() == 'VIDEO - MP4' and \
+                self.ui.select_videos_playlist_2.currentText() != "Select All":
+            return True
+        else:
+            response = self.check_your_plan()
+        return response
 
     def tc_process_download_playlist(self, value_dict):
         if value_dict.get("complete_playlist"):
@@ -1297,7 +1290,7 @@ class MainWindow(QMainWindow):
             yt_video_data = yt_playlist.get("video_context")
             if yt_video_data:
                 self.total_videos = yt_playlist.get("playlist_length")
-                self.get_videos_list = GetPlaylistVideos(self.is_hd_plus_playlist, yt_playlist["playlist_videos"],
+                self.get_videos_list = GetPlaylistVideos(True, yt_playlist["playlist_videos"],
                                                          self.Default_loc_playlist)
                 self.get_videos_list.get_video_list.connect(self.set_video_list)
                 self.get_videos_list.partial_finish.connect(self.partial_finish)
@@ -1355,8 +1348,12 @@ class MainWindow(QMainWindow):
         self.ui.select_videos_playlist_2.addItem(play_list_videos)
         icon = QtGui.QIcon()
         if play_list_videos == "Select All":
-            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-double-tick-100.png"), QtGui.QIcon.Normal,
-                           QtGui.QIcon.Off)
+            if not self.is_plan_active:
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-lock-96.png"), QtGui.QIcon.Normal,
+                               QtGui.QIcon.Off)
+            else:
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-double-tick-100.png"), QtGui.QIcon.Normal,
+                               QtGui.QIcon.Off)
         else:
             icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.select_videos_playlist_2.setItemIcon(self.play_list_counter - 1, icon)
@@ -1378,18 +1375,36 @@ class MainWindow(QMainWindow):
         for index, item in enumerate(all_quality):
             self.ui.select_quality_playlist_2.addItem(item)
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
-                           QtGui.QIcon.Off)
+            if index in [0, 1, 2]:
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                               QtGui.QIcon.Off)
+            else:
+                if not self.is_plan_active:
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-lock-96.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
+                else:
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
             self.ui.select_quality_playlist_2.setItemIcon(index, icon)
 
         for index, item in enumerate(all_format):
             self.ui.select_type_playlist_2.addItem(item)
             icon = QtGui.QIcon()
-            if item == "AUDIO - MP3":
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal,
+            if index == 0:
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal,
                                QtGui.QIcon.Off)
             else:
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                if not self.is_plan_active:
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-lock-96.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
+                else:
+                    if index == 1:
+                        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"),
+                                       QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
+                    else:
+                        icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal,
+                                       QtGui.QIcon.Off)
             self.ui.select_type_playlist_2.setItemIcon(index, icon)
 
         self.progress_bar_disable()
@@ -1960,8 +1975,6 @@ class MainWindow(QMainWindow):
                     self.ui.error_message.setText("Evaluation period ended, Upgrade to Pro")
                     self.ui.lineEdit_expires_on_2.setText(plan_days_left)
                     self.is_plan_active = False
-                    self.ui.hd_radio_button_2.setChecked(False)
-                    self.ui.hd_radio_button_playlist_2.setChecked(False)
                 else:
                     self.is_plan_active = True
                     self.ui.lineEdit_expires_on_2.setText(plan_days_left)
@@ -1976,7 +1989,7 @@ class MainWindow(QMainWindow):
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
             self.msg.setInformativeText(
-                "In Youtube-dl free version, HD+ option is not available. But you can still download SD quality videos.\n"
+                "In Youtube-dl free version, HD+ video quality option is not available. But you can still download SD quality videos.\n"
                 "Please support the developer and purchase a license to UNLOCK this feature.")
             purchase = self.msg.addButton(QMessageBox.Yes)
             close = self.msg.addButton(QMessageBox.Yes)
