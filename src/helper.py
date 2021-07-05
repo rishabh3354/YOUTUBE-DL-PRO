@@ -97,6 +97,7 @@ def get_file_size(self):
         formats = (str(self.ui.select_format_obj_2.currentText()).split(" ")[2]).lower()
         fps = int(str(self.ui.select_fps_obj_2.currentText()).split(" ")[0])
         video_size = 0
+        audio_file = 0
 
         if formats == "mp3":
             yt = self.yt.streams.filter(only_audio=True)
@@ -117,6 +118,9 @@ def get_file_size(self):
 
                         if yt:
                             video_size = yt.first().filesize
+                yt = self.yt.streams.filter(only_audio=True)
+                if yt:
+                    audio_file = yt.first().filesize
             else:
                 yt = self.yt.streams.filter(progressive=True, file_extension=formats, fps=fps, resolution=quality)
                 if yt:
@@ -134,11 +138,17 @@ def get_file_size(self):
                             if yt:
                                 video_size = yt.first().filesize
 
+            yt = self.yt.streams.filter(only_audio=True)
+            if yt:
+                audio_file = yt.first().filesize
+
         if video_size == 0:
             video_size = ""
         else:
-            video_size = str(humanbytes(video_size))
-
+            if formats == "mp3":
+                video_size = f"Total: {str(humanbytes(video_size))}  ( Audio: {str(humanbytes(video_size))})"
+            else:
+                video_size = f"Total: {str(humanbytes(video_size + audio_file))}  ( Video: {str(humanbytes(video_size))} | Audio: {str(humanbytes(audio_file))} )"
     except Exception as e:
         return None
 
@@ -157,6 +167,7 @@ def get_file_size_for_playlist(self):
 
         video_size = 0
         video_length = 0
+        audio_file = 0
 
         if video_type == "AUDIO - MP3":
             if selected_video != "select-all":
@@ -197,8 +208,13 @@ def get_file_size_for_playlist(self):
                             yt = yt.streams.filter().first()
                 if yt:
                     video_size = yt.first().filesize
+
+                yt = yt_obj.streams.filter(only_audio=True)
+                if yt:
+                    audio_file = yt.first().filesize
             else:
                 sum_of_all_files = 0
+                sum_of_all_audio = 0
                 sum_of_all_length = 0
                 for item in all_yt_playlist_obj:
                     sum_of_all_length += item.length
@@ -223,11 +239,20 @@ def get_file_size_for_playlist(self):
                         sum_of_all_files += size
                         video_size = sum_of_all_files
 
+                for item in all_yt_playlist_obj:
+                    yt = item.streams.filter(only_audio=True)
+                    if yt:
+                        sum_of_all_audio += yt.first().filesize
+                        audio_file = sum_of_all_audio
+
         if video_size == 0 or video_length == 0:
             video_size = ""
             video_length = ""
         else:
-            video_size = str(humanbytes(video_size))
+            if video_type == "AUDIO - MP3":
+                video_size = f"Total: {str(humanbytes(video_size))}  ( Audio: {str(humanbytes(video_size))})"
+            else:
+                video_size = f"Total: {str(humanbytes(video_size + audio_file))}  ( Video: {str(humanbytes(video_size))} | Audio: {str(humanbytes(audio_file))} )"
             video_length = str(get_time_format(video_length))
 
     except Exception as e:

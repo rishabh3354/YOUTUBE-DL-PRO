@@ -391,7 +391,8 @@ class MainWindow(QMainWindow):
                     search_thread = False
                 if not search_thread:
                     self.ui.home_progress_bar.setRange(0, 0)
-                    self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page), self.sort_by, self)
+                    self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
+                                                       self.sort_by, self)
                     self.search_thread.search_results.connect(self.get_search_results)
                     self.search_thread.start()
                 else:
@@ -452,11 +453,13 @@ class MainWindow(QMainWindow):
 
             for row in range(len(self.pixmap_list)):
                 icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-youtube-play-button-500.png"), QtGui.QIcon.Normal,
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-youtube-play-button-500.png"),
+                               QtGui.QIcon.Normal,
                                QtGui.QIcon.Off)
                 icon2 = QtGui.QIcon()
-                icon2.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-download-from-cloud-90.png"), QtGui.QIcon.Normal,
-                               QtGui.QIcon.Off)
+                icon2.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-download-from-cloud-90.png"),
+                                QtGui.QIcon.Normal,
+                                QtGui.QIcon.Off)
                 widget = QtWidgets.QWidget()
                 horizontalLayout_24 = QtWidgets.QVBoxLayout()
                 button = QtWidgets.QToolButton(widget)
@@ -511,7 +514,8 @@ class MainWindow(QMainWindow):
         self.url_dialog_ui.ui.yt_video_link.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),
                                                       QLineEdit.LeadingPosition)
         self.ui.search_videos.addAction(QIcon(":/myresource/resource/icons8-search-500.png"), QLineEdit.LeadingPosition)
-        self.ui.youtube_search.addAction(QIcon(":/myresource/resource/icons8-search-500.png"), QLineEdit.LeadingPosition)
+        self.ui.youtube_search.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),
+                                         QLineEdit.LeadingPosition)
         self.url_dialog_ui.ui.yt_video_link.setTextMargins(5, 0, 0, 0)
         self.ui.search_videos.setTextMargins(5, 0, 0, 0)
         self.ui.youtube_search.setTextMargins(5, 0, 0, 0)
@@ -574,7 +578,6 @@ class MainWindow(QMainWindow):
     def setProgressVal_pixmap_finish(self, data):
         self.pixmap_cache.update(dict(zip(self.thumbnail_list, self.pixmap_list)))
 
-
     """
         Net speed settings =============================================================================================
     """
@@ -633,7 +636,8 @@ class MainWindow(QMainWindow):
         self.settings.setValue("explore", EXPLORE.get(self.youtube_setting_ui.ui.explore.currentText(), "trending"))
         self.settings.setValue("sort_by", SORT_BY.get(self.youtube_setting_ui.ui.sort_by.currentText(), "relevance"))
         self.settings.setValue("home_button_item", self.youtube_setting_ui.ui.no_of_videos.value())
-        self.settings.setValue("default_server", SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
+        self.settings.setValue("default_server",
+                               SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
 
     def load_settings(self):
         if self.settings.contains("hd_radio_button"):
@@ -952,22 +956,26 @@ class MainWindow(QMainWindow):
             for index, item in enumerate(all_quality):
                 self.ui.select_quality_obj_2.addItem(item)
                 icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                               QtGui.QIcon.Off)
                 self.ui.select_quality_obj_2.setItemIcon(index, icon)
 
             for index, item in enumerate(all_format):
                 self.ui.select_format_obj_2.addItem(item)
                 icon = QtGui.QIcon()
                 if item == "AUDIO - MP3":
-                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-music-120.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
                 else:
-                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal,
+                                   QtGui.QIcon.Off)
                 self.ui.select_format_obj_2.setItemIcon(index, icon)
 
             for index, item in enumerate(all_fps):
                 self.ui.select_fps_obj_2.addItem(item)
                 icon = QtGui.QIcon()
-                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-tick-box-120.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-tick-box-120.png"), QtGui.QIcon.Normal,
+                               QtGui.QIcon.Off)
                 self.ui.select_fps_obj_2.setItemIcon(index, icon)
 
             self.ui.select_quality_obj_2.setCurrentIndex(0)
@@ -975,7 +983,8 @@ class MainWindow(QMainWindow):
             self.ui.select_fps_obj_2.setCurrentIndex(0)
             self.ui.tabWidget.setCurrentIndex(1)
         else:
-            self.popup_message(title="Youtube video not available!", message="This video is not available. Please check your url !")
+            self.popup_message(title="Youtube video not available!",
+                               message="This video is not available. Please check your url !")
             # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
             #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
             #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
@@ -1316,6 +1325,14 @@ class MainWindow(QMainWindow):
                 all_format, all_quality_playlist, all_fps = yt_video_data.get("quality_data")
                 self.ui.select_quality_playlist_2.addItems(all_quality_playlist)
                 self.ui.select_type_playlist_2.addItems(["VIDEO - MP4", "AUDIO - MP3"])
+                icon1 = QtGui.QIcon()
+                icon1.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                                QtGui.QIcon.Off)
+                self.ui.select_quality_playlist_2.setItemIcon(0, icon1)
+                icon2 = QtGui.QIcon()
+                icon2.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal,
+                                QtGui.QIcon.Off)
+                self.ui.select_type_playlist_2.setItemIcon(0, icon2)
                 self.ui.tabWidget.setCurrentIndex(2)
             else:
                 self.progress_bar_disable()
@@ -1338,7 +1355,8 @@ class MainWindow(QMainWindow):
         self.ui.select_videos_playlist_2.addItem(play_list_videos)
         icon = QtGui.QIcon()
         if play_list_videos == "Select All":
-            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-double-tick-100.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-double-tick-100.png"), QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
         else:
             icon.addPixmap(QtGui.QPixmap(":/myresource/resource/video_7.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.select_videos_playlist_2.setItemIcon(self.play_list_counter - 1, icon)
@@ -1360,7 +1378,8 @@ class MainWindow(QMainWindow):
         for index, item in enumerate(all_quality):
             self.ui.select_quality_playlist_2.addItem(item)
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal,
+                           QtGui.QIcon.Off)
             self.ui.select_quality_playlist_2.setItemIcon(index, icon)
 
         for index, item in enumerate(all_format):
