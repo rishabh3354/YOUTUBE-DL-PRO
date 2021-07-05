@@ -1961,7 +1961,8 @@ class MainWindow(QMainWindow):
             if self.one_time_congratulate:
                 self.ui.account_progress_bar.setRange(0, 1)
                 self.popup_message(title="Congratulations! Plan Upgraded to PRO",
-                                   message="Your plan has been upgraded to PRO. Enjoy lifetime licence. Thankyou for your purchase.")
+                                   message="Your plan has been upgraded to PRO. Enjoy lifetime licence. "
+                                           "Thankyou for your purchase.\n\nPLEASE RESTART YOUR APP TO SEE CHANGES.")
                 self.one_time_congratulate = False
         else:
             self.ui.lineEdit_plan_2.setText(plan)
