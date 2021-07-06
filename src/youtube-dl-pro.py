@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QUrl, QSettings, QStringListModel
 from PyQt5.QtGui import QDesktopServices, QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QStyle, QCheckBox, QLineEdit, \
-    QCompleter, QAbstractItemView, QTableWidgetItem
+    QCompleter, QAbstractItemView, QTableWidgetItem, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
 from account_threads import SaveLocalInToken, RefreshButtonThread
 from accounts import get_user_data_from_local, days_left, ApplicationStartupTask, check_for_local_token
 from helper import process_html_data, check_internet_connection, check_default_location, process_html_data_playlist, \
@@ -27,6 +27,7 @@ from settings import YouTubeSettings, UrlDialog
 
 PRODUCT_NAME = "YOUTUBE_DL"
 THEME_PATH = '/snap/youtube-dl-pro/current/'
+# THEME_PATH = ''
 
 
 class MainWindow(QMainWindow):
@@ -134,6 +135,21 @@ class MainWindow(QMainWindow):
         self.show()
         self.get_home_page(True)
 
+        # scroll zoom functionality:-
+        self._zoom = 0
+        self._empty = False
+        self._scene = QGraphicsScene(self)
+        self._photo = QGraphicsPixmapItem()
+        self._scene.addItem(self._photo)
+        self.ui.graphicsView_video.setScene(self._scene)
+        self.ui.graphicsView_video.scale(2, 2)
+        self.factor = 1
+        self.setAcceptDrops(True)
+        self.ui.graphicsView_video.setVisible(False)
+        self.ui.graphicsView_playlist.setVisible(False)
+        self.ui.graphicsView_playlist.setScene(self._scene)
+        self.ui.graphicsView_playlist.scale(2, 2)
+
         # signal and slots =====
 
         # pause delete
@@ -207,6 +223,69 @@ class MainWindow(QMainWindow):
 
         # Select theme icon ========================================================================
         self.set_icon_on_line_edit()
+
+    # graphic view
+
+    def setPhoto(self, pixmap=None):
+        self._zoom = 0
+        if pixmap and not pixmap.isNull():
+            self._empty = False
+            self.ui.graphicsView_video.setDragMode(QGraphicsView.ScrollHandDrag)
+            self._photo.setPixmap(pixmap)
+        else:
+            self._empty = True
+            self.ui.graphicsView_video.setDragMode(QGraphicsView.NoDrag)
+            self._photo.setPixmap(QPixmap())
+        self.fitInView()
+
+    def setPhoto_playlist(self, pixmap=None):
+        self._zoom = 0
+        if pixmap and not pixmap.isNull():
+            self._empty = False
+            self.ui.graphicsView_playlist.setDragMode(QGraphicsView.ScrollHandDrag)
+            self._photo.setPixmap(pixmap)
+        else:
+            self._empty = True
+            self.ui.graphicsView_playlist.setDragMode(QGraphicsView.NoDrag)
+            self._photo.setPixmap(QPixmap())
+        self.fitInView_playlist()
+
+    def fitInView(self, scale=True):
+        try:
+            rect = QtCore.QRectF(self._photo.pixmap().rect())
+            if not rect.isNull():
+                self.ui.graphicsView_video.setSceneRect(rect)
+                if self.hasPhoto():
+                    unity = self.ui.graphicsView_video.transform().mapRect(QtCore.QRectF(0, 0, 1, 1))
+                    self.ui.graphicsView_video.scale(1 / unity.width(), 1 / unity.height())
+                    viewrect = self.ui.graphicsView_video.viewport().rect()
+                    scenerect = self.ui.graphicsView_video.transform().mapRect(rect)
+                    factor = min(viewrect.width() / scenerect.width(),
+                                 viewrect.height() / scenerect.height())
+                    self.ui.graphicsView_video.scale(factor, factor)
+                self._zoom = 0
+        except Exception as e:
+            pass
+
+    def fitInView_playlist(self, scale=True):
+        try:
+            rect = QtCore.QRectF(self._photo.pixmap().rect())
+            if not rect.isNull():
+                self.ui.graphicsView_playlist.setSceneRect(rect)
+                if self.hasPhoto():
+                    unity = self.ui.graphicsView_playlist.transform().mapRect(QtCore.QRectF(0, 0, 1, 1))
+                    self.ui.graphicsView_playlist.scale(1 / unity.width(), 1 / unity.height())
+                    viewrect = self.ui.graphicsView_playlist.viewport().rect()
+                    scenerect = self.ui.graphicsView_playlist.transform().mapRect(rect)
+                    factor = min(viewrect.width() / scenerect.width(),
+                                 viewrect.height() / scenerect.height())
+                    self.ui.graphicsView_playlist.scale(factor, factor)
+                self._zoom = 0
+        except Exception as e:
+            pass
+
+    def hasPhoto(self):
+        return not self._empty
 
     """
         Youtube settings ===============================================================================================
@@ -438,7 +517,7 @@ class MainWindow(QMainWindow):
         self.ui.tableWidget.setRowCount(0)
         self.ui.tableWidget.verticalHeader().setDefaultSectionSize(125)
         self.ui.tableWidget.setColumnWidth(0, 60)
-        self.ui.tableWidget.setColumnWidth(1, 215)
+        self.ui.tableWidget.setColumnWidth(1, 205)
         self.ui.tableWidget.setColumnWidth(2, 500)
         self.ui.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.ui.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -470,6 +549,8 @@ class MainWindow(QMainWindow):
                 button2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
                 button.setToolTip("Watch on YouTube")
                 button2.setToolTip("Download")
+                button.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
+                button2.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
                 button.setIconSize(QtCore.QSize(30, 30))
                 button2.setIconSize(QtCore.QSize(30, 30))
                 horizontalLayout_24.addWidget(button2)
@@ -551,10 +632,10 @@ class MainWindow(QMainWindow):
                         item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
                             0] + "/mqdefault.jpg"
             video_id = 'https://www.youtube.com/watch?v=' + item.get("videoId", '')
-            title = item.get("title", "") + "\n\n" + "VIEWS : " + human_format(
-                item.get("viewCount", 0)) + "   |   " + "DURATION : " + get_time_format(
-                item.get("lengthSeconds", 0)) + "\n\n" + "BY CHANNEL : " + item.get("author",
-                                                                                    "") + "   |   " + "PUBLISHED : " + item.get(
+            title = item.get("title", "") + "\n\n" + "Views : " + human_format(
+                item.get("viewCount", 0)) + "   |   " + "Duration : " + get_time_format(
+                item.get("lengthSeconds", 0)) + "\n\n" + "By : " + item.get("author",
+                                                                                    "") + "   |   " + "Published : " + item.get(
                 "publishedText", "")
 
             self.thumbnail_list.append(thumbnail)
@@ -911,8 +992,9 @@ class MainWindow(QMainWindow):
             self.yt = yt_data.get("yt")
             self.title = yt_data.get("title")
             self.length = yt_data.get("length")
-            thumbnail_path, title, length = process_html_data(yt_data, self.Default_loc)
-            self.ui.textBrowser_thumbnail_9.setPixmap(QPixmap(thumbnail_path))
+            self.thumbnail_path, title, length = process_html_data(yt_data, self.Default_loc)
+            self.ui.textBrowser_thumbnail_9.setVisible(False)
+            self.ui.graphicsView_video.setVisible(True)
             self.ui.video_title_5.setText(title)
             self.ui.video_length_5.setText(f"{length}")
             self.ui.by_channel.setText(yt_data.get("channel", ""))
@@ -970,6 +1052,7 @@ class MainWindow(QMainWindow):
             self.ui.select_format_obj_2.setCurrentIndex(0)
             self.ui.select_fps_obj_2.setCurrentIndex(0)
             self.ui.tabWidget.setCurrentIndex(1)
+            self.setPhoto(QPixmap(self.thumbnail_path))
         else:
             self.popup_message(title="Youtube video not available!",
                                message="This video is not available. Please check your url !")
@@ -1306,8 +1389,9 @@ class MainWindow(QMainWindow):
                 self.playlist = yt_playlist.get("playlist")
                 self.playlist_title = yt_playlist.get("playlist_title")
                 self.total_videos = yt_playlist.get("playlist_length")
-                thumbnail_path, title, total_videos = process_html_data_playlist(yt_playlist, self.Default_loc_playlist)
-                self.ui.textBrowser_playlist_thumbnail.setPixmap(QPixmap(thumbnail_path))
+                self.thumbnail_path_playlist, title, total_videos = process_html_data_playlist(yt_playlist, self.Default_loc_playlist)
+                self.ui.textBrowser_playlist_thumbnail.setVisible(False)
+                self.ui.graphicsView_playlist.setVisible(True)
                 self.ui.video_title_playlist.setText(f"{title}")
                 self.ui.video_length_playlist.setText(f"Calculating..")
                 self.ui.video_total_playlist.setText(f"{total_videos}")
@@ -1327,6 +1411,7 @@ class MainWindow(QMainWindow):
                                 QtGui.QIcon.Off)
                 self.ui.select_type_playlist_2.setItemIcon(0, icon2)
                 self.ui.tabWidget.setCurrentIndex(2)
+                self.setPhoto_playlist(QPixmap(self.thumbnail_path_playlist))
             else:
                 self.progress_bar_disable()
                 self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")

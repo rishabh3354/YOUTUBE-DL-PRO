@@ -104,39 +104,22 @@ def get_file_size(self):
             if yt:
                 video_size = yt.first().filesize
         else:
-            if self.ui.hd_radio_button_2.isChecked():
-                yt = self.yt.streams.filter(file_extension=formats, fps=fps, resolution=quality)
-                if yt:
-                    video_size = yt.first().filesize
-                else:
-                    yt = self.yt.streams.filter(file_extension=formats, resolution=quality)
-
-                    if yt:
-                        video_size = yt.first().filesize
-                    else:
-                        yt = self.yt.streams.filter(resolution=quality)
-
-                        if yt:
-                            video_size = yt.first().filesize
-                yt = self.yt.streams.filter(only_audio=True)
-                if yt:
-                    audio_file = yt.first().filesize
+            yt = self.yt.streams.filter(file_extension=formats, fps=fps, resolution=quality)
+            if yt:
+                video_size = yt.first().filesize
             else:
-                yt = self.yt.streams.filter(progressive=True, file_extension=formats, fps=fps, resolution=quality)
+                yt = self.yt.streams.filter(file_extension=formats, resolution=quality)
+
                 if yt:
                     video_size = yt.first().filesize
                 else:
-                    yt = self.yt.streams.filter(progressive=True, file_extension=formats, resolution=quality)
+                    yt = self.yt.streams.filter(resolution=quality)
+
                     if yt:
                         video_size = yt.first().filesize
-                    else:
-                        yt = self.yt.streams.filter(progressive=True, resolution=quality)
-                        if yt:
-                            video_size = yt.first().filesize
-                        else:
-                            yt = self.yt.streams.filter(progressive=True, resolution=quality)
-                            if yt:
-                                video_size = yt.first().filesize
+            yt = self.yt.streams.filter(only_audio=True)
+            if yt:
+                audio_file = yt.first().filesize
 
             yt = self.yt.streams.filter(only_audio=True)
             if yt:

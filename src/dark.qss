@@ -103,11 +103,11 @@ https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtooltip
 --------------------------------------------------------------------------- */
 QToolTip {
   background-color: #346792;
-  color: #E0E1E3;
+  color: black;
   /* If you remove the border property, background stops working on Windows */
   border: none;
   /* Remove padding, for fix combo box tooltip */
-  padding: 0px;
+  padding: 2px;
   /* Remove opacity, fix #174 - may need to use RGBA */
 }
 
@@ -969,7 +969,6 @@ https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qpushbutton
 
 --------------------------------------------------------------------------- */
 QPushButton {
-  background-color: #455364;
   color: #E0E1E3;
   border-radius: 4px;
   padding: 5px;
@@ -978,7 +977,6 @@ QPushButton {
 }
 
 QPushButton:disabled {
-  background-color: #455364;
   color: #9DA9B5;
   border-radius: 4px;
   padding: 2px;
@@ -1004,7 +1002,7 @@ QPushButton:checked:selected {
 }
 
 QPushButton:hover {
-  background-color: #54687A;
+  background-color: #233547;
   color: #E0E1E3;
 }
 
@@ -1082,7 +1080,8 @@ QToolButton:checked:selected {
 }
 
 QToolButton:hover {
-  background-color: #54687A;
+background-color: #233547;
+
   color: #E0E1E3;
 }
 
@@ -1413,29 +1412,6 @@ QLineEdit:selected {
 https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
 
 --------------------------------------------------------------------------- */
-QTabWidget {
-  padding: 12px;
-  selection-background-color: #455364;
-}
-
-QTabWidget QWidget {
-  /* Fixes #189 */
-  border-radius: 4px;
-}
-
-QTabWidget::pane {
-  border: 1px solid #455364;
-  border-radius: 4px;
-  margin: 0px;
-  /* Fixes double border inside pane with pyqt5 */
-  padding: 0px;
-}
-
-QTabWidget::pane:selected {
-  background-color: #455364;
-  border: 1px solid #346792;
-}
-
 /* QTabBar ----------------------------------------------------------------
 
 https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
@@ -1544,23 +1520,17 @@ QTabBar::tab:right:!selected, QDockWidget QTabBar::tab:right:!selected {
 }
 
 QTabBar::tab:top, QDockWidget QTabBar::tab:top {
-  background-color: #455364;
+  background-color: #19232d;
   margin-left: 2px;
   padding-left: 4px;
   padding-right: 4px;
   padding-top: 2px;
   padding-bottom: 2px;
   min-width: 5px;
-  border-bottom: 3px solid #455364;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
 }
 
 QTabBar::tab:top:selected, QDockWidget QTabBar::tab:top:selected {
-  background-color: #54687A;
   border-bottom: 3px solid #259AE9;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
 }
 
 QTabBar::tab:top:!selected:hover, QDockWidget QTabBar::tab:top:!selected:hover {
