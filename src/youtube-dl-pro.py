@@ -310,7 +310,7 @@ class MainWindow(QMainWindow):
     def yt_settings_defaults(self):
         self.msg = QMessageBox()
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+        self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
         self.msg.setIcon(QMessageBox.Information)
         self.msg.setText("Are you sure want to reset to default settings?")
         yes_button = self.msg.addButton(QMessageBox.Yes)
@@ -779,7 +779,7 @@ class MainWindow(QMainWindow):
     def file_download_success_dialog(self, title, folder_path, play_path):
         self.msg = QMessageBox()
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+        self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
         self.msg.setIcon(QMessageBox.Information)
         self.msg.setText(title)
         self.msg.setInformativeText("")
@@ -848,7 +848,7 @@ class MainWindow(QMainWindow):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+            self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Are you sure want to stop on-going task?")
             yes_button = self.msg.addButton(QMessageBox.Yes)
@@ -889,7 +889,7 @@ class MainWindow(QMainWindow):
     def popup_message(self, title, message, error=False):
         self.msg = QMessageBox()
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+        self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
         if error:
             self.msg.setIcon(QMessageBox.Warning)
         else:
@@ -1628,7 +1628,7 @@ class MainWindow(QMainWindow):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+            self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Are you sure want to clear all videos and playlist history?")
             cb = QCheckBox("Delete all Source file too")
@@ -1832,7 +1832,7 @@ class MainWindow(QMainWindow):
         try:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+            self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
             self.msg.setIcon(QMessageBox.Information)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
@@ -2071,7 +2071,7 @@ class MainWindow(QMainWindow):
         if not self.is_plan_active:
             self.msg = QMessageBox()
             self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-            self.msg.setStyleSheet("background-color:rgba(0, 57, 96, 1);color:white;")
+            self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
             self.msg.setInformativeText(
