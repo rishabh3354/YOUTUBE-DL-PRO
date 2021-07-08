@@ -595,18 +595,18 @@ class MainWindow(QMainWindow):
                 self.start_net_speed_thread()
 
     def set_icon_on_line_edit(self):
-        self.url_dialog_ui.ui.yt_video_link.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),
-                                                      QLineEdit.LeadingPosition)
+        self.url_dialog_ui.ui.yt_video_link.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),QLineEdit.LeadingPosition)
         self.ui.search_videos.addAction(QIcon(":/myresource/resource/icons8-search-500.png"), QLineEdit.LeadingPosition)
-        self.ui.youtube_search.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),
-                                         QLineEdit.LeadingPosition)
+        self.ui.youtube_search.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),QLineEdit.LeadingPosition)
         self.url_dialog_ui.ui.yt_video_link.setTextMargins(5, 0, 0, 0)
         self.ui.search_videos.setTextMargins(5, 0, 0, 0)
         self.ui.youtube_search.setTextMargins(5, 0, 0, 0)
         self.ui.youtube_search.setClearButtonEnabled(True)
         self.ui.search_videos.setClearButtonEnabled(True)
+        self.url_dialog_ui.ui.yt_video_link.setClearButtonEnabled(True)
         self.ui.youtube_search.findChild(QtWidgets.QAction, "_q_qlineeditclearaction").setIcon(QtGui.QIcon(":/myresource/resource/icons8-multiply-52.png"))
         self.ui.search_videos.findChild(QtWidgets.QAction, "_q_qlineeditclearaction").setIcon(QtGui.QIcon(":/myresource/resource/icons8-multiply-52.png"))
+        self.url_dialog_ui.ui.yt_video_link.findChild(QtWidgets.QAction, "_q_qlineeditclearaction").setIcon(QtGui.QIcon(":/myresource/resource/icons8-multiply-52.png"))
 
     def save_completer(self):
         try:

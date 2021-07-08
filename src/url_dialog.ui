@@ -51,8 +51,8 @@
        <property name="styleSheet">
         <string notr="true">QLineEdit{
 
-height: 30px;
-border-radius:12px;
+height: 25px;
+border-radius:15px;
 }</string>
        </property>
        <property name="text">

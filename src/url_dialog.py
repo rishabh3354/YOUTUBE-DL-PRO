@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UrlDialog(object):
     def setupUi(self, UrlDialog):
         UrlDialog.setObjectName("UrlDialog")
-        UrlDialog.resize(498, 339)
+        UrlDialog.resize(498, 342)
         self.verticalLayout = QtWidgets.QVBoxLayout(UrlDialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(UrlDialog)
@@ -39,8 +39,8 @@ class Ui_UrlDialog(object):
         self.yt_video_link.setAutoFillBackground(False)
         self.yt_video_link.setStyleSheet("QLineEdit{\n"
 "\n"
-"height: 30px;\n"
-"border-radius:12px;\n"
+"height: 25px;\n"
+"border-radius:15px;\n"
 "}")
         self.yt_video_link.setText("")
         self.yt_video_link.setAlignment(QtCore.Qt.AlignCenter)
