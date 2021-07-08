@@ -6,16 +6,16 @@ COUNTRIES_REVERSE = {'AS': 'American Samoa', 'AR': 'Argentina', 'AW': 'Aruba', '
 
 SERVER = {
     "YT-DL-SERVER-1": "http://ytprivate.com",
-    "YT-DL-SERVER-2": "http://vid.puffyan.us",
-    "YT-DL-SERVER-3": "http://invidious.silkky.cloud",
-    "YT-DL-SERVER-4": "http://invidious-us.kavin.rocks",
+    "YT-DL-SERVER-2": "http://invidious.silkky.cloud",
+    "YT-DL-SERVER-3": "http://invidious-us.kavin.rocks",
+    "YT-DL-SERVER-4": "http://vid.puffyan.us",
 }
 
 SERVER_REVERSE = {
     "http://ytprivate.com": "YT-DL-SERVER-1",
-    "http://vid.puffyan.us": "YT-DL-SERVER-2",
-    "http://invidious.silkky.cloud": "YT-DL-SERVER-3",
-    "http://invidious-us.kavin.rocks": "YT-DL-SERVER-4",
+    "http://invidious.silkky.cloud": "YT-DL-SERVER-2",
+    "http://invidious-us.kavin.rocks": "YT-DL-SERVER-3",
+    "http://vid.puffyan.us": "YT-DL-SERVER-4",
 }
 
 EXPLORE = {"Trending": "trending", "Popular": "popular"}

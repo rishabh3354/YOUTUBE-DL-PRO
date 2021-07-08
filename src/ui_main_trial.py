@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
         self.youtube_search.setStyleSheet("QLineEdit{\n"
 "\n"
 "height: 25px;\n"
-"border-radius:12px;\n"
+"border-radius:15px;\n"
 "}\n"
 "")
         self.youtube_search.setAlignment(QtCore.Qt.AlignCenter)
@@ -671,7 +671,7 @@ class Ui_MainWindow(object):
         self.search_videos.setStyleSheet("QLineEdit{\n"
 "\n"
 "height: 25px;\n"
-"border-radius:12px;\n"
+"border-radius:15px;\n"
 "}")
         self.search_videos.setText("")
         self.search_videos.setAlignment(QtCore.Qt.AlignCenter)
@@ -1015,7 +1015,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -324, 994, 676))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 994, 676))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
@@ -1532,7 +1532,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1542,7 +1542,7 @@ class Ui_MainWindow(object):
         self.youtube_search.setPlaceholderText(_translate("MainWindow", "Search Whole YouTube"))
         self.search.setText(_translate("MainWindow", "Search"))
         self.home_button.setText(_translate("MainWindow", "..."))
-        self.tableWidget.setToolTip(_translate("MainWindow", "Double click to process download"))
+        self.tableWidget.setToolTip(_translate("MainWindow", "Double click on thumbnail to process download"))
         self.tableWidget.setSortingEnabled(False)
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.new_home), _translate("MainWindow", "Home"))
         self.textBrowser_thumbnail_9.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/video_7.png\" height=\"50\"/></p><p align=\"center\"><span style=\" font-size:14pt; color:#555753;\">No videos to download!</span></p><p align=\"center\"><span style=\" font-style:italic; color:#555753;\">Tip: Paste youTube video url from home.</span></p></body></html>"))

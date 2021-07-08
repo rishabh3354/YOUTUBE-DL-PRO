@@ -7,7 +7,7 @@ def set_style_for_pause_play_button(self, pause=False):
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap(":/myresource/resource/pause_new.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.pause_button.setIcon(icon9)
-        self.ui.pause_button.setIconSize(QtCore.QSize(20, 20))
+        self.ui.pause_button.setIconSize(QtCore.QSize(25, 25))
 
     else:
         self.ui.pause_button.setText("")
@@ -15,7 +15,7 @@ def set_style_for_pause_play_button(self, pause=False):
         icon10.addPixmap(QtGui.QPixmap(":/myresource/resource/play.png"), QtGui.QIcon.Normal,
                          QtGui.QIcon.Off)
         self.ui.pause_button.setIcon(icon10)
-        self.ui.pause_button.setIconSize(QtCore.QSize(20, 20))
+        self.ui.pause_button.setIconSize(QtCore.QSize(25, 25))
 
 
 def selected_download_button_css(self):

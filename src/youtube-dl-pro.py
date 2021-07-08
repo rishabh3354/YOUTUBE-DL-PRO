@@ -434,6 +434,7 @@ class MainWindow(QMainWindow):
             search_thread = False
         if not search_thread:
             self.page += 1
+            self.ui.tabWidget.setCurrentIndex(0)
             self.start_search_youtube()
 
     def prev_page(self):
@@ -444,6 +445,7 @@ class MainWindow(QMainWindow):
         if not search_thread:
             if self.page > 1:
                 self.page -= 1
+                self.ui.tabWidget.setCurrentIndex(0)
                 self.start_search_youtube()
 
     def get_search_suggestion_text(self):
@@ -567,8 +569,13 @@ class MainWindow(QMainWindow):
                 self.ui.tableWidget.setItem(row, 1, chkBoxItem)
 
             for row, value in enumerate(self.title_list, 0):
-                item = QTableWidgetItem(value)
-                self.ui.tableWidget.setItem(row, 2, item)
+                widget = QtWidgets.QWidget()
+                widgetText = QtWidgets.QLabel(f"{value}")
+                widgetLayout = QtWidgets.QHBoxLayout()
+                widgetLayout.addWidget(widgetText)
+                widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+                widget.setLayout(widgetLayout)
+                self.ui.tableWidget.setCellWidget(row, 2, widget)
             self.ui.tableWidget.setIconSize(QtCore.QSize(197, 165))
         except Exception as e:
             print(e)
@@ -596,6 +603,10 @@ class MainWindow(QMainWindow):
         self.url_dialog_ui.ui.yt_video_link.setTextMargins(5, 0, 0, 0)
         self.ui.search_videos.setTextMargins(5, 0, 0, 0)
         self.ui.youtube_search.setTextMargins(5, 0, 0, 0)
+        self.ui.youtube_search.setClearButtonEnabled(True)
+        self.ui.search_videos.setClearButtonEnabled(True)
+        self.ui.youtube_search.findChild(QtWidgets.QAction, "_q_qlineeditclearaction").setIcon(QtGui.QIcon(":/myresource/resource/icons8-multiply-52.png"))
+        self.ui.search_videos.findChild(QtWidgets.QAction, "_q_qlineeditclearaction").setIcon(QtGui.QIcon(":/myresource/resource/icons8-multiply-52.png"))
 
     def save_completer(self):
         try:
@@ -632,15 +643,17 @@ class MainWindow(QMainWindow):
                         item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
                             0] + "/mqdefault.jpg"
             video_id = 'https://www.youtube.com/watch?v=' + item.get("videoId", '')
-            title = item.get("title", "") + "\n\n" + "Views : " + human_format(
-                item.get("viewCount", 0)) + "   |   " + "Duration : " + get_time_format(
-                item.get("lengthSeconds", 0)) + "\n\n" + "By : " + item.get("author",
-                                                                                    "") + "   |   " + "Published : " + item.get(
-                "publishedText", "")
+            content = """<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-weight:600;">{{title}}</span></p>
+            <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"><br /></p>
+            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Views</span><span style=" font-size:10pt;"> : {{views}}</span></p>
+            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Channel</span><span style=" font-size:10pt;"> : {{channel}}</span></p>
+            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Duration</span><span style=" font-size:10pt;">: {{duration}}</span></p>
+            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Published</span><span style=" font-size:10pt;">: {{published_on}}</span></p>"""
+            content = content.replace("{{title}}", item.get("title", "")).replace("{{views}}", human_format(item.get("viewCount", 0))).replace("{{channel}}", item.get("author", "")).replace("{{duration}}", get_time_format(item.get("lengthSeconds", 0))).replace("{{published_on}}", item.get("publishedText", ""))
 
             self.thumbnail_list.append(thumbnail)
             self.videoid_list.append(video_id)
-            self.title_list.append(title)
+            self.title_list.append(content)
 
         self.pixmap_load_thread = PixMapLoadingThread(self.thumbnail_list, self.pixmap_cache, self)
         self.pixmap_load_thread.finish.connect(self.setProgressVal_pixmap_finish)

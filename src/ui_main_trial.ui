@@ -123,7 +123,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>3</number>
             </property>
             <property name="iconSize">
              <size>
@@ -186,7 +186,7 @@
                      <string notr="true">QLineEdit{
 
 height: 25px;
-border-radius:12px;
+border-radius:15px;
 }
 </string>
                     </property>
@@ -300,7 +300,7 @@ border:none;
                    </font>
                   </property>
                   <property name="toolTip">
-                   <string>Double click to process download</string>
+                   <string>Double click on thumbnail to process download</string>
                   </property>
                   <property name="lineWidth">
                    <number>1</number>
@@ -1416,7 +1416,7 @@ p, li { white-space: pre-wrap; }
                    <string notr="true">QLineEdit{
 
 height: 25px;
-border-radius:12px;
+border-radius:15px;
 }</string>
                   </property>
                   <property name="text">
@@ -2184,7 +2184,7 @@ QPushButton:hover {background-color: #314a62;}</string>
                  <property name="geometry">
                   <rect>
                    <x>0</x>
-                   <y>-324</y>
+                   <y>0</y>
                    <width>994</width>
                    <height>676</height>
                   </rect>

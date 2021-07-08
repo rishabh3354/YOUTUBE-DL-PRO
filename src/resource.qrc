@@ -62,5 +62,7 @@
     <file>resource/icons8-youtube-play-button-144.png</file>
     <file>resource/icons8-search-500.png</file>
     <file>resource/icons8-lock-96.png</file>
+    <file>resource/icons8-clear-symbol-90.png</file>
+    <file>resource/icons8-clear-symbol-100.png</file>
   </qresource>
 </RCC>

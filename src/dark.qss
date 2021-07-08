@@ -1724,9 +1724,7 @@ QHeaderView::section{
     border-bottom: 1px solid rgb(44, 49, 60);
     border-right: 1px solid rgb(44, 49, 60);
 }
-QTableWidget::horizontalHeader {
-	background-color: rgb(33, 37, 43);
-}
+
 QHeaderView::section:horizontal
 {
     border: 1px solid rgb(33, 37, 43);
@@ -1778,7 +1776,6 @@ QTreeView:branch:open:has-children:!has-siblings:hover, QTreeView:branch:open:ha
 
 QTreeView::indicator:checked,
 QListView::indicator:checked,
-QTableView::indicator:checked,
 QColumnView::indicator:checked {
   image: url(":/qss_icons/dark/rc/checkbox_checked_focus@2x.png");
 }
@@ -1787,9 +1784,6 @@ QTreeView::indicator:checked:hover, QTreeView::indicator:checked:focus, QTreeVie
 QListView::indicator:checked:hover,
 QListView::indicator:checked:focus,
 QListView::indicator:checked:pressed,
-QTableView::indicator:checked:hover,
-QTableView::indicator:checked:focus,
-QTableView::indicator:checked:pressed,
 QColumnView::indicator:checked:hover,
 QColumnView::indicator:checked:focus,
 QColumnView::indicator:checked:pressed {
@@ -1798,7 +1792,6 @@ QColumnView::indicator:checked:pressed {
 
 QTreeView::indicator:unchecked,
 QListView::indicator:unchecked,
-QTableView::indicator:unchecked,
 QColumnView::indicator:unchecked {
   image: url(":/qss_icons/dark/rc/checkbox_unchecked.png");
 }
@@ -1807,9 +1800,6 @@ QTreeView::indicator:unchecked:hover, QTreeView::indicator:unchecked:focus, QTre
 QListView::indicator:unchecked:hover,
 QListView::indicator:unchecked:focus,
 QListView::indicator:unchecked:pressed,
-QTableView::indicator:unchecked:hover,
-QTableView::indicator:unchecked:focus,
-QTableView::indicator:unchecked:pressed,
 QColumnView::indicator:unchecked:hover,
 QColumnView::indicator:unchecked:focus,
 QColumnView::indicator:unchecked:pressed {
@@ -1818,7 +1808,6 @@ QColumnView::indicator:unchecked:pressed {
 
 QTreeView::indicator:indeterminate,
 QListView::indicator:indeterminate,
-QTableView::indicator:indeterminate,
 QColumnView::indicator:indeterminate {
   image: url(":/qss_icons/dark/rc/checkbox_indeterminate.png");
 }
@@ -1827,9 +1816,6 @@ QTreeView::indicator:indeterminate:hover, QTreeView::indicator:indeterminate:foc
 QListView::indicator:indeterminate:hover,
 QListView::indicator:indeterminate:focus,
 QListView::indicator:indeterminate:pressed,
-QTableView::indicator:indeterminate:hover,
-QTableView::indicator:indeterminate:focus,
-QTableView::indicator:indeterminate:pressed,
 QColumnView::indicator:indeterminate:hover,
 QColumnView::indicator:indeterminate:focus,
 QColumnView::indicator:indeterminate:pressed {
@@ -1838,7 +1824,6 @@ QColumnView::indicator:indeterminate:pressed {
 
 QTreeView,
 QListView,
-QTableView,
 QColumnView {
   background-color: #19232D;
   border: 1px solid #455364;
@@ -1849,7 +1834,6 @@ QColumnView {
 
 QTreeView:disabled,
 QListView:disabled,
-QTableView:disabled,
 QColumnView:disabled {
   background-color: #19232D;
   color: #9DA9B5;
@@ -1857,7 +1841,6 @@ QColumnView:disabled {
 
 QTreeView:selected,
 QListView:selected,
-QTableView:selected,
 QColumnView:selected {
   background-color: #346792;
   color: #455364;
@@ -1865,28 +1848,24 @@ QColumnView:selected {
 
 QTreeView:focus,
 QListView:focus,
-QTableView:focus,
 QColumnView:focus {
   border: 1px solid #1A72BB;
 }
 
 QTreeView::item:pressed,
 QListView::item:pressed,
-QTableView::item:pressed,
 QColumnView::item:pressed {
   background-color: #346792;
 }
 
 QTreeView::item:selected:active,
 QListView::item:selected:active,
-QTableView::item:selected:active,
 QColumnView::item:selected:active {
   background-color: #346792;
 }
 
 QTreeView::item:selected:!active,
 QListView::item:selected:!active,
-QTableView::item:selected:!active,
 QColumnView::item:selected:!active {
   color: #E0E1E3;
   background-color: #37414F;
@@ -1894,7 +1873,6 @@ QColumnView::item:selected:!active {
 
 QTreeView::item:!selected:hover,
 QListView::item:!selected:hover,
-QTableView::item:!selected:hover,
 QColumnView::item:!selected:hover {
   outline: 0;
   color: #E0E1E3;
@@ -2159,4 +2137,17 @@ QAbstractView:selected {
 PlotWidget {
   /* Fix cut labels in plots #134 */
   padding: 0px;
+}
+
+
+QTableView::item:selected {
+        background: #19232D;
+}
+
+QTableView::item:hover {
+        background-color: #19232D;
+}
+
+QTableView::item:hover:!selected {
+  background-color: #19232D;
 }
