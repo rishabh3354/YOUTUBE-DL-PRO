@@ -123,7 +123,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>4</number>
             </property>
             <property name="iconSize">
              <size>
@@ -2026,10 +2026,18 @@ color: rgb(60, 231, 195);</string>
                      <property name="text">
                       <string>MB/s | KB/s | B/s</string>
                      </property>
+                     <property name="icon">
+                      <iconset resource="resource.qrc">
+                       <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                     </property>
                     </item>
                     <item>
                      <property name="text">
                       <string>mb/s | kb/s | b/s</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="resource.qrc">
+                       <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
                      </property>
                     </item>
                    </widget>
