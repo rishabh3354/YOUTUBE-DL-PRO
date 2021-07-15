@@ -300,6 +300,7 @@ class MainWindow(QMainWindow):
 
     def select_country(self):
         self.country = COUNTRIES.get(self.youtube_setting_ui.ui.country.currentText(), "US")
+        print(self.country)
 
     def select_explore(self):
         self.explore = EXPLORE.get(self.youtube_setting_ui.ui.explore.currentText(), "trending")
@@ -470,6 +471,7 @@ class MainWindow(QMainWindow):
                     self.ui.home_progress_bar.setRange(0, 0)
                     self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
                                                        self.sort_by, self)
+                    print(self.country)
                     self.search_thread.search_results.connect(self.get_search_results)
                     self.search_thread.start()
                 else:
@@ -500,6 +502,8 @@ class MainWindow(QMainWindow):
                 self.ui.home_progress_bar.setRange(0, 0)
                 self.ui.youtube_search.clear()
                 self.home_thread = HomeThreads(self.default_server, self.country, self.explore, self)
+                print(self.country)
+
                 self.home_thread.home_results.connect(self.result)
                 self.home_thread.server_change_error.connect(self.server_error_handle)
                 self.home_thread.start()
@@ -759,6 +763,7 @@ class MainWindow(QMainWindow):
         #  youtube settings load
         if self.settings.contains("country"):
             self.country = self.settings.value("country")
+            print(self.country)
             self.youtube_setting_ui.ui.country.setCurrentText(COUNTRIES_REVERSE.get(self.country, "United States"))
         if self.settings.contains("explore"):
             self.explore = self.settings.value("explore")
@@ -1591,7 +1596,6 @@ class MainWindow(QMainWindow):
         video_size = size_dict.get("video_size")
         video_length = size_dict.get("video_length")
 
-        print(video_size, video_length)
         if video_size or video_length:
             self.ui.video_size_playlist.setText(f"{video_size}")
             title_text = self.ui.select_videos_playlist_2.currentText()
