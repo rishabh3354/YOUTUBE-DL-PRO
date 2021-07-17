@@ -123,7 +123,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>0</number>
             </property>
             <property name="iconSize">
              <size>
@@ -225,6 +225,9 @@ border-radius:15px;
                    <widget class="QToolButton" name="home_button">
                     <property name="cursor">
                      <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="toolTip">
+                     <string>Reload</string>
                     </property>
                     <property name="text">
                      <string>...</string>
@@ -3093,6 +3096,22 @@ p, li { white-space: pre-wrap; }
               <number>0</number>
              </property>
              <item>
+              <spacer name="horizontalSpacer_17">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QProgressBar" name="progress_bar">
                <property name="enabled">
                 <bool>true</bool>
@@ -3202,7 +3221,7 @@ border:none;
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>30</width>
+                 <width>15</width>
                  <height>20</height>
                 </size>
                </property>

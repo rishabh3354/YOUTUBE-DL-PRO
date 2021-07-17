@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
         self.youtube_setting_ui.ui.info_server.clicked.connect(self.server_info_popup)
         self.youtube_setting_ui.ui.no_of_videos.valueChanged.connect(self.change_no_of_home_item)
         self.youtube_setting_ui.ui.download_path_button_2.clicked.connect(self.open_download_path)
-        self.youtube_setting_ui.ui.close.clicked.connect(lambda x: self.youtube_setting_ui.hide())
+        self.youtube_setting_ui.ui.close.clicked.connect(self.click_ok_button)
         self.youtube_setting_ui.ui.reset_default.clicked.connect(self.yt_settings_defaults)
         self.youtube_setting_ui.ui.country.currentIndexChanged.connect(self.select_country)
         self.youtube_setting_ui.ui.explore.currentIndexChanged.connect(self.select_explore)
@@ -291,6 +291,11 @@ class MainWindow(QMainWindow):
         Youtube settings ===============================================================================================
         
     """
+
+    def click_ok_button(self):
+        self.youtube_setting_ui.hide()
+        self.ui.tabWidget.setCurrentIndex(0)
+        self.get_home_page()
 
     def change_no_of_home_item(self):
         self.home_button_item = self.youtube_setting_ui.ui.no_of_videos.value()
