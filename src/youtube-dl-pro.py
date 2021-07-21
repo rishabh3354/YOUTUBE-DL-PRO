@@ -5,7 +5,7 @@ import sys
 import webbrowser
 from copy import deepcopy
 from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtCore import QUrl, QSettings, QStringListModel
+from PyQt5.QtCore import QUrl, QSettings, QStringListModel, QEvent
 from PyQt5.QtGui import QDesktopServices, QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QStyle, QCheckBox, QLineEdit, \
     QCompleter, QAbstractItemView, QTableWidgetItem, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
         self.completer.setMaxVisibleItems(20)
         self.ui.youtube_search.setCompleter(self.completer)
         self.completer.popup().setStyleSheet(self.theme)
-        self.completer.activated.connect(self.get_search_suggestion_text)
+        self.completer.activated.connect(self.get_search_suggestion_text, QtCore.Qt.QueuedConnection)
         self.ui.yt_settings.clicked.connect(self.open_yt_setting_page)
         self.ui.enter_url.clicked.connect(self.open_url_dialog)
         self.ui.next_page.clicked.connect(self.next_page)
@@ -305,7 +305,6 @@ class MainWindow(QMainWindow):
 
     def select_country(self):
         self.country = COUNTRIES.get(self.youtube_setting_ui.ui.country.currentText(), "US")
-        print(self.country)
 
     def select_explore(self):
         self.explore = EXPLORE.get(self.youtube_setting_ui.ui.explore.currentText(), "trending")
@@ -455,7 +454,12 @@ class MainWindow(QMainWindow):
                 self.start_search_youtube()
 
     def get_search_suggestion_text(self):
-        self.start_search_youtube()
+        try:
+            self.ui.youtube_search.setText(str(str(self.ui.youtube_search.text()).split("🔍  ")[1]))
+            self.start_search_youtube()
+        except Exception as e:
+            print(e)
+            pass
 
     def set_page_no(self):
         self.ui.page_no.setVisible(True)
@@ -476,7 +480,6 @@ class MainWindow(QMainWindow):
                     self.ui.home_progress_bar.setRange(0, 0)
                     self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
                                                        self.sort_by, self)
-                    print(self.country)
                     self.search_thread.search_results.connect(self.get_search_results)
                     self.search_thread.start()
                 else:
@@ -507,7 +510,6 @@ class MainWindow(QMainWindow):
                 self.ui.home_progress_bar.setRange(0, 0)
                 self.ui.youtube_search.clear()
                 self.home_thread = HomeThreads(self.default_server, self.country, self.explore, self)
-                print(self.country)
 
                 self.home_thread.home_results.connect(self.result)
                 self.home_thread.server_change_error.connect(self.server_error_handle)
@@ -670,7 +672,12 @@ class MainWindow(QMainWindow):
         self.pixmap_load_thread.start()
 
     def setProgressVal_pixmap(self, pixmap_image):
-        self.ui.home_progress_bar.setRange(0, 1)
+        try:
+            search_thread = self.search_thread.isRunning()
+        except Exception as e:
+            search_thread = False
+        if not search_thread:
+            self.ui.home_progress_bar.setRange(0, 1)
         self.pixmap_list.append(pixmap_image.get("pixmap"))
         self.process_images_into_table()
 
@@ -768,7 +775,6 @@ class MainWindow(QMainWindow):
         #  youtube settings load
         if self.settings.contains("country"):
             self.country = self.settings.value("country")
-            print(self.country)
             self.youtube_setting_ui.ui.country.setCurrentText(COUNTRIES_REVERSE.get(self.country, "United States"))
         if self.settings.contains("explore"):
             self.explore = self.settings.value("explore")

@@ -89,24 +89,45 @@ class CompleterThread(QtCore.QThread):
         self.region = region
         self.end_point = default_server
 
-    def get_end_points(self):
-        self.end_point = get_live_server()
+    # def get_end_points(self):
+    #     self.end_point = get_live_server()
+
+    # def run(self):
+    #     try:
+    #         result = self.get_result()
+    #         if result.status_code in [200, 201]:
+    #             self.get_completer_value.emit(result.json().get("suggestions"))
+    #         else:
+    #             self.get_end_points()
+    #             result = self.get_result()
+    #             self.get_completer_value.emit(result.json().get("suggestions"))
+    #     except Exception as e:
+    #         print(e)
+    #         pass
+    #
+    # def get_result(self):
+    #     query = self.end_point + "/api/v1/search/suggestions" + "?q=" + self.query
+    #     return requests.get(query, UserAgent)
 
     def run(self):
         try:
-            result = self.get_result()
+            result = self.get_result_google_api()
             if result.status_code in [200, 201]:
-                self.get_completer_value.emit(result.json().get("suggestions"))
+                self.get_completer_value.emit([f"🔍  {x[0]}" for x in result.json()[1]])
             else:
                 self.get_end_points()
-                result = self.get_result()
-                self.get_completer_value.emit(result.json().get("suggestions"))
+                result = self.get_result_google_api()
+                self.get_completer_value.emit([f"🔍  {x[0]}" for x in result.json()[1]])
         except Exception as e:
             print(e)
             pass
 
     def get_result(self):
         query = self.end_point + "/api/v1/search/suggestions" + "?q=" + self.query
+        return requests.get(query, UserAgent)
+
+    def get_result_google_api(self):
+        query = "https://suggestqueries.google.com/complete/search?ds=yt&client=youtube&hjson=t&cp=1&format=5&alt=json&q=" + self.query
         return requests.get(query, UserAgent)
 
 
