@@ -533,7 +533,7 @@ class Ui_MainWindow(object):
         self.video_title_playlist.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.video_title_playlist.setText("")
         self.video_title_playlist.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.video_title_playlist.setWordWrap(True)
+        self.video_title_playlist.setWordWrap(False)
         self.video_title_playlist.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         self.video_title_playlist.setObjectName("video_title_playlist")
         self.gridLayout_8.addWidget(self.video_title_playlist, 0, 1, 1, 1)
@@ -1536,7 +1536,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

@@ -298,3 +298,33 @@ def days_left(date_str):
             days_left = "0 Day(s) Left"
 
     return days_left
+
+
+def get_pytube_status():
+    pytube_status_api = DOMAIN + 'accounts_api/pytube_status/'
+
+    context = dict()
+    context["status"] = False
+    context["message"] = ""
+    context["title"] = ""
+    try:
+        response = requests.post(pytube_status_api, data={'product': APP_NAME})
+        if response.status_code in [200, 201]:
+            message = json.loads(response.text)
+            if message.get("status"):
+                context["status"] = message.get("data", {}).get("status")
+                context["title"] = message.get("data", {}).get("title")
+                context["message"] = message.get("data", {}).get("message")
+            else:
+                context["status"] = False
+                context["title"] = ""
+                context["message"] = ""
+        else:
+            context["status"] = False
+            context["title"] = ""
+            context["message"] = ""
+    except Exception as e:
+        context["status"] = False
+        context["message"] = ""
+
+    return context["status"], context["title"], context["message"]

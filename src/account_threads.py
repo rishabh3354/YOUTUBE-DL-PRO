@@ -1,7 +1,8 @@
 import time
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
-from accounts import get_login_and_save_token, check_for_local_token, SignInUpdatePlan, check_internet_connection
+from accounts import get_login_and_save_token, check_for_local_token, SignInUpdatePlan, check_internet_connection, \
+    get_pytube_status
 
 
 class RefreshButtonThread(QtCore.QThread):
@@ -48,3 +49,20 @@ class SaveLocalInToken(QtCore.QThread):
             get_login_and_save_token(self.data)
         except Exception as e:
             pass
+
+
+class PytubeStatusThread(QtCore.QThread):
+    change_value_pytube_status = pyqtSignal(dict)
+
+    def __init__(self, product_name, parent=None):
+        super(PytubeStatusThread, self).__init__(parent)
+        self.product_name = product_name
+
+    def run(self):
+        context = dict()
+        context["response"], context["title"], context["message"] = False, "", ""
+        try:
+            context["response"], context["title"], context["message"] = get_pytube_status()
+            self.change_value_pytube_status.emit(context)
+        except Exception as e:
+            self.change_value_pytube_status.emit(context)

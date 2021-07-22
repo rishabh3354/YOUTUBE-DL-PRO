@@ -9,7 +9,7 @@ from PyQt5.QtCore import QUrl, QSettings, QStringListModel
 from PyQt5.QtGui import QDesktopServices, QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QStyle, QCheckBox, QLineEdit, \
     QCompleter, QAbstractItemView, QTableWidgetItem, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
-from account_threads import SaveLocalInToken, RefreshButtonThread
+from account_threads import SaveLocalInToken, RefreshButtonThread, PytubeStatusThread
 from accounts import get_user_data_from_local, days_left, ApplicationStartupTask, check_for_local_token
 from helper import process_html_data, check_internet_connection, check_default_location, process_html_data_playlist, \
     get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete
@@ -207,6 +207,7 @@ class MainWindow(QMainWindow):
         self.ui.error_message.clear()
         self.ui.error_message.setStyleSheet("color:red;")
         self.my_plan()
+        self.check_pytube_issue()
 
         # signal and slots
         self.ui.warlordsoft_button.clicked.connect(self.redirect_to_warlordsoft)
@@ -2053,6 +2054,19 @@ class MainWindow(QMainWindow):
             user_plan_data = get_user_data_from_local()
             if user_plan_data:
                 self.logged_in_user_plan_page(user_plan_data)
+
+    def check_pytube_issue(self):
+        if check_internet_connection():
+            self.pytube_status_thread = PytubeStatusThread(PRODUCT_NAME, self)
+            self.pytube_status_thread.change_value_pytube_status.connect(self.get_pytube_response)
+            self.pytube_status_thread.start()
+
+    def get_pytube_response(self, context):
+        try:
+            if context["response"]:
+                self.popup_message(context["title"], context["message"], error=True)
+        except Exception as e:
+            pass
 
     def logged_in_user_plan_page(self, user_plan_data):
         self.ui.groupBox_2.setVisible(False)
