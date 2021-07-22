@@ -2064,7 +2064,7 @@ class MainWindow(QMainWindow):
     def get_pytube_response(self, context):
         try:
             if context["response"]:
-                self.popup_message(context["title"], context["message"], error=True)
+                self.popup_message(context["title"], str(context["message"]).replace('\\n', '\n'), error=True)
         except Exception as e:
             pass
 
