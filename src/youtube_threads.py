@@ -486,13 +486,13 @@ class DownloadVideoPlayList(QtCore.QThread):
                         if not os.path.isfile(self.full_file_path):
                             # video dash
                             self.main_obj.ui.progress_bar.setRange(0, 0)
-                            self.pl_obj.download(self.dash_download_path, filename=filename)
+                            self.pl_obj.download(self.dash_download_path, filename=f"{filename}.{self.pl_obj.subtype}")
                             save_download_info(video_obj, self.pl_obj, self.video_download_path, self.full_file_path,
                                                self.location, True)
                             # Audio dash
                             pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
                             self.pl_obj = pl_audio_obj
-                            self.pl_obj.download(self.dash_download_path, filename=filename_dash_audio)
+                            self.pl_obj.download(self.dash_download_path, filename=f"{filename_dash_audio}.{self.pl_obj.subtype}")
                             self.convert_video_using_ffmpeg()
 
                             progress_dict = {"type": self.type,
@@ -539,14 +539,14 @@ class DownloadVideoPlayList(QtCore.QThread):
                             self.full_audio_path_dash = self.dash_download_path + "/" + filename_dash_audio + "." + "mp4"
                             if not os.path.isfile(self.full_file_path):
                                 # video dash
-                                self.pl_obj.download(self.dash_download_path, filename=filename)
+                                self.pl_obj.download(self.dash_download_path, filename=f"{filename}.{self.pl_obj.subtype}")
                                 save_download_info(video_obj, self.pl_obj, self.video_download_path,
                                                    self.full_file_path,
                                                    self.location, True)
                                 # Audio dash
                                 pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
                                 self.pl_obj = pl_audio_obj
-                                self.pl_obj.download(self.dash_download_path, filename=filename_dash_audio)
+                                self.pl_obj.download(self.dash_download_path, filename=f"{filename_dash_audio}.{self.pl_obj.subtype}")
                                 self.convert_video_using_ffmpeg()
                                 if self.counter == len(self.all_yt_playlist_obj):
                                     progress_dict = {"type": self.type,
@@ -588,7 +588,7 @@ class DownloadVideoPlayList(QtCore.QThread):
                         self.full_file_path = f"{self.audio_download_path}/{self.audio_filename}.mp3"
                         if not os.path.isfile(self.full_file_path):
                             self.main_obj.ui.progress_bar.setRange(0, 0)
-                            self.pl_obj.download(self.audio_download_path, filename=self.audio_filename)
+                            self.pl_obj.download(self.audio_download_path, filename=f"{self.audio_filename}.{self.pl_obj.subtype}")
                             self.convert_audio_using_ffmpeg()
                             save_download_info(video_obj, self.pl_obj, self.audio_download_path, self.full_file_path,
                                                self.location, True)
@@ -608,7 +608,7 @@ class DownloadVideoPlayList(QtCore.QThread):
                             self.in_file_path = f"{self.audio_download_path}/{self.audio_filename}.mp4"
                             self.full_file_path = f"{self.audio_download_path}/{self.audio_filename}.mp3"
                             if not os.path.isfile(self.full_file_path):
-                                self.pl_obj.download(self.audio_download_path, filename=self.audio_filename)
+                                self.pl_obj.download(self.audio_download_path, filename=f"{self.audio_filename}.{self.pl_obj.subtype}")
                                 self.convert_audio_using_ffmpeg(single_audio=False)
                                 save_download_info(video_obj, self.pl_obj, self.audio_download_path,
                                                    self.full_file_path,
