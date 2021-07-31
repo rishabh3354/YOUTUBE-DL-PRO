@@ -236,7 +236,7 @@ class DownloadVideo(QtCore.QThread):
                     if not os.path.isfile(self.full_file_path):
                         self.no_error.emit("no_error")
                         self.main_obj.ui.progress_bar.setRange(0, 0)
-                        self.yt_obj.download(self.video_download_path, filename=filename)
+                        self.yt_obj.download(self.video_download_path, filename=f"{filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
                                            self.location)
                     else:
@@ -253,7 +253,7 @@ class DownloadVideo(QtCore.QThread):
                     if not os.path.isfile(full_file_path):
                         self.no_error.emit("no_error")
                         self.main_obj.ui.progress_bar.setRange(0, 0)
-                        self.yt_obj.download(self.audio_download_path, filename=self.audio_filename)
+                        self.yt_obj.download(self.audio_download_path, filename=f"{self.audio_filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.audio_download_path, full_file_path,
                                            self.location)
                     else:
@@ -286,9 +286,9 @@ class DownloadVideo(QtCore.QThread):
                         self.main_obj.ui.progress_bar.setRange(0, 0)
                         if self.yt_obj.is_progressive:
                             skip_audio = True
-                            self.yt_obj.download(self.video_download_path, filename=self.dash_video_filename)
+                            self.yt_obj.download(self.video_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                         else:
-                            self.yt_obj.download(self.dash_download_path, filename=self.dash_video_filename)
+                            self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
                                            self.location)
                     else:
@@ -317,9 +317,9 @@ class DownloadVideo(QtCore.QThread):
                             self.main_obj.ui.progress_bar.setRange(0, 0)
                             if self.yt_obj.is_progressive:
                                 skip_audio = True
-                                self.yt_obj.download(self.video_download_path, filename=self.dash_video_filename)
+                                self.yt_obj.download(self.video_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             else:
-                                self.yt_obj.download(self.dash_download_path, filename=self.dash_video_filename)
+                                self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
                                                self.location)
                         else:
@@ -344,9 +344,9 @@ class DownloadVideo(QtCore.QThread):
                             self.main_obj.ui.progress_bar.setRange(0, 0)
                             if self.yt_obj.is_progressive:
                                 skip_audio = True
-                                self.yt_obj.download(self.video_download_path, filename=self.dash_video_filename)
+                                self.yt_obj.download(self.video_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             else:
-                                self.yt_obj.download(self.dash_download_path, filename=self.dash_video_filename)
+                                self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
                                                self.location)
                         else:
@@ -362,7 +362,7 @@ class DownloadVideo(QtCore.QThread):
                             self.yt_obj = audio_yt.first()
                             title = str(self.yt_obj.title)
                             self.dash_audio_filename = safe_string("{0}_{1}".format(title, self.yt_obj.type))
-                            self.yt_obj.download(self.dash_download_path, filename=self.dash_audio_filename)
+                            self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_audio_filename}.{self.yt_obj.subtype}")
 
         except Exception as e:
             self.error.emit({"error": str(e), "file_path": self.video_download_path,
