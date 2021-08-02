@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
         self.explore = "trending"
         self.sort_by = "relevance"
         self.home_button_item = 20
-        self.default_server = "http://ytprivate.com"
+        self.default_server = "http://invidio.xamh.de"
         self.Default_loc = get_initial_download_dir()
         self.Default_loc_playlist = get_initial_download_dir()
         self.youtube_setting_ui.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE_DL")
@@ -2064,7 +2064,7 @@ class MainWindow(QMainWindow):
     def get_pytube_response(self, context):
         try:
             if context["response"]:
-                self.popup_message(context["title"], str(context["message"]).replace('\\n', '\n'), error=True)
+                self.popup_message(context["title"], str(context["message"]).replace('\\n', '\n'))
         except Exception as e:
             pass
 
