@@ -71,7 +71,7 @@ parts:
       python-packages: 
           - requests
           - cryptography
-          - git+https://github.com/Zeecka/pytube@fix_1060
+          - pytube
           - psutil
           - ffmpeg-python
           - python-slugify
