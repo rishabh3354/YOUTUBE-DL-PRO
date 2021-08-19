@@ -59,6 +59,7 @@ class HomeThreads(QtCore.QThread):
 class PixMapLoadingThread(QtCore.QThread):
     finish = pyqtSignal(dict)
     progress = pyqtSignal(dict)
+    finish_first_pixmap = pyqtSignal()
 
     def __init__(self, load_images, pixmap_cache, parent=None):
         super(PixMapLoadingThread, self).__init__(parent)
@@ -67,6 +68,7 @@ class PixMapLoadingThread(QtCore.QThread):
 
     def run(self):
         try:
+            counter = 0
             for sno, urls in enumerate(self.load_images, 1):
                 if self.pixmap_cache.get(urls):
                     self.progress.emit({"pixmap": self.pixmap_cache.get(urls), "progress": sno})
@@ -74,6 +76,11 @@ class PixMapLoadingThread(QtCore.QThread):
                     image = QImage()
                     image.loadFromData(requests.get(urls, UserAgent).content)
                     self.progress.emit({"pixmap": QPixmap(image), "progress": sno})
+
+                if counter == 0:
+                    self.finish_first_pixmap.emit()
+                    counter += 1
+
         except Exception as e:
             print(str(e))
             self.finish.emit({"status": False, 'message': str(e)})

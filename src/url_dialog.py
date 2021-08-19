@@ -132,7 +132,7 @@ class Ui_UrlDialog(object):
     def retranslateUi(self, UrlDialog):
         _translate = QtCore.QCoreApplication.translate
         UrlDialog.setWindowTitle(_translate("UrlDialog", "Form"))
-        self.label.setText(_translate("UrlDialog", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"100\"/></p><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#eeeeec;\">YOUTUBE-DL PRO</span></p></body></html>"))
+        self.label.setText(_translate("UrlDialog", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"100\"/></p><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#eeeeec;\">YOUTUBE-DL GUI</span></p></body></html>"))
         self.paste_button.setToolTip(_translate("UrlDialog", "Clear and Paste"))
         self.video_vs.setText(_translate("UrlDialog", "VIDEO"))
         self.playlist_vs.setText(_translate("UrlDialog", "PLAYLIST"))

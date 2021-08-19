@@ -427,7 +427,7 @@ def check_default_location(path):
         return False
 
 
-def get_all_playlist_quality(playlist_all_obj, is_hd_plus_playlist):
+def get_all_playlist_quality(playlist_all_obj, is_hd_plus_playlist, self):
     all_quality = list()
     all_format = list()
     res_fps_list = []
@@ -438,8 +438,11 @@ def get_all_playlist_quality(playlist_all_obj, is_hd_plus_playlist):
             res_fps_list.append([x.__dict__ for x in yt.streams.filter(progressive=True).order_by('resolution')])
             all_format = ['VIDEO - MP4']
     else:
+        counter = 1
         for yt in playlist_all_obj:
             res_fps_list.append([x.__dict__ for x in yt.streams.order_by('resolution')])
+            self.partial_progress.emit({"counter": counter})
+            counter += 1
             all_format = ['VIDEO - MP4', 'VIDEO - WEBM', 'AUDIO - MP3']
 
     for data in res_fps_list:
@@ -456,3 +459,18 @@ def get_all_playlist_quality(playlist_all_obj, is_hd_plus_playlist):
     response_dict["all_quality"] = list(all_quality)
 
     return response_dict
+
+
+def get_stream_quality(stream_url, stream_quality):
+    try:
+        if len(stream_url) <= 3:
+            stream = stream_url[stream_quality]
+        elif len(stream_url) <= 2:
+            stream = stream_url[1]
+        else:
+            stream = stream_url[0]
+    except Exception as e:
+        stream = stream_url[0]
+
+    print(stream_quality, stream)
+    return stream

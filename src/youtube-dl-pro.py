@@ -5,29 +5,29 @@ import sys
 import webbrowser
 from copy import deepcopy
 from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtCore import QUrl, QSettings, QStringListModel
+from PyQt5.QtCore import QUrl, QSettings, QStringListModel, QProcess
 from PyQt5.QtGui import QDesktopServices, QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QStyle, QCheckBox, QLineEdit, \
     QCompleter, QAbstractItemView, QTableWidgetItem, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
 from account_threads import SaveLocalInToken, RefreshButtonThread, PytubeStatusThread
 from accounts import get_user_data_from_local, days_left, ApplicationStartupTask, check_for_local_token
 from helper import process_html_data, check_internet_connection, check_default_location, process_html_data_playlist, \
-    get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete
+    get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete, get_stream_quality
 from home_threads import HomeThreads, PixMapLoadingThread, CompleterThread, SearchThreads
 from country_names_all import COUNTRIES, SERVER_REVERSE, COUNTRIES_REVERSE, SORT_BY_REVERSE, \
-    EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER
+    EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER, STREAM_QUALITY_DICT, STREAM_QUALITY_REVERSE_DICT
 from utils import get_time_format, human_format, set_all_countries_icons, set_server_icons
 from youtube_script import get_initial_download_dir
 from template import set_style_for_pause_play_button, selected_download_button_css
 from ui_main_trial import Ui_MainWindow
 from youtube_threads import ProcessYtV, DownloadVideo, NetSpeedThread, ProcessYtVPlayList, GetPlaylistVideos, \
-    DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo
+    DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo, PlayThread
 from helper import FREQUENCY_MAPPER
 from settings import YouTubeSettings, UrlDialog
 
 PRODUCT_NAME = "YOUTUBE_DL"
 THEME_PATH = '/snap/youtube-dl-pro/current/'
-# THEME_PATH = ''
+PLAYLIST_SIZE_CACHE = {}
 
 
 class MainWindow(QMainWindow):
@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         self.is_plan_active = True
         self.delete_source_file = True
         self.one_time_congratulate = True
-        self.setWindowTitle("YouTube-Dl PRO")
+        self.setWindowTitle("YouTube-Dl GUI")
 
         #  init net speed settings
         self.net_frequency = 1.0
@@ -57,6 +57,7 @@ class MainWindow(QMainWindow):
         self.explore = "trending"
         self.sort_by = "relevance"
         self.home_button_item = 20
+        self.stream_quality = 1
         self.default_server = "http://invidio.xamh.de"
         self.Default_loc = get_initial_download_dir()
         self.Default_loc_playlist = get_initial_download_dir()
@@ -69,6 +70,7 @@ class MainWindow(QMainWindow):
         set_server_icons(self)
         self.youtube_setting_ui.ui.info_server.clicked.connect(self.server_info_popup)
         self.youtube_setting_ui.ui.no_of_videos.valueChanged.connect(self.change_no_of_home_item)
+        self.youtube_setting_ui.ui.stream_quality.currentIndexChanged.connect(self.change_stream_quality)
         self.youtube_setting_ui.ui.download_path_button_2.clicked.connect(self.open_download_path)
         self.youtube_setting_ui.ui.close.clicked.connect(self.click_ok_button)
         self.youtube_setting_ui.ui.reset_default.clicked.connect(self.yt_settings_defaults)
@@ -81,6 +83,7 @@ class MainWindow(QMainWindow):
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.horizontalHeader().setVisible(False)
         self.ui.home_progress_bar.setFixedHeight(2)
+        self.ui.video_progressBar.setFixedHeight(2)
         self.ui.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.main_table_pointer = 140
         self.table_view_default_setting()
@@ -165,6 +168,7 @@ class MainWindow(QMainWindow):
         self.ui.select_quality_obj_2.currentIndexChanged.connect(self.show_file_size)
         self.ui.select_format_obj_2.currentIndexChanged.connect(self.show_file_size)
         self.ui.select_fps_obj_2.currentIndexChanged.connect(self.show_file_size)
+        self.ui.play_from_videos.clicked.connect(self.play_video_from_videos_tab)
 
         # tab widget index change
         self.ui.tabWidget.currentChanged.connect(self.tab_widget_changed)
@@ -191,9 +195,10 @@ class MainWindow(QMainWindow):
         # signal and slots
         self.ui.open_videos.clicked.connect(self.show_downloads_folder)
         self.ui.play_video.clicked.connect(self.play_videos_from_downloads)
+        self.ui.play_video_mpv.clicked.connect(self.play_videos_mpv_from_downloads)
         self.ui.details_video.clicked.connect(self.details_video_from_downloads)
         self.ui.delete_videos.clicked.connect(self.delete_video_from_downloads)
-        self.ui.listWidget.itemDoubleClicked.connect(self.play_videos_from_downloads)
+        self.ui.listWidget.itemDoubleClicked.connect(self.play_videos_mpv_from_downloads)
         self.ui.search_videos.textChanged.connect(self.search_videos)
         self.ui.search_videos.cursorPositionChanged.connect(self.clear_search_bar_on_edit)
         self.ui.all_videos.clicked.connect(self.set_all_videos)
@@ -301,6 +306,10 @@ class MainWindow(QMainWindow):
     def change_no_of_home_item(self):
         self.home_button_item = self.youtube_setting_ui.ui.no_of_videos.value()
 
+    def change_stream_quality(self):
+        self.stream_quality = STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 1)
+        print(self.stream_quality)
+
     def save_default_server(self):
         self.default_server = SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com")
 
@@ -329,6 +338,7 @@ class MainWindow(QMainWindow):
             self.youtube_setting_ui.ui.sort_by.setCurrentIndex(0)
             self.youtube_setting_ui.ui.server.setCurrentIndex(0)
             self.youtube_setting_ui.ui.no_of_videos.setValue(20)
+            self.youtube_setting_ui.ui.stream_quality.setCurrentIndex(0)
             self.country = "US"
             self.explore = "trending"
             self.sort_by = "relevance"
@@ -391,14 +401,14 @@ class MainWindow(QMainWindow):
             self.ui.label_26.setVisible(True)
 
     def server_info_popup(self):
-        title = "YOUTUBE-Dl PRO SERVER INFO!"
+        title = "YOUTUBE-Dl GUI SERVER INFO!"
         message = "Change the server name if you are facing any issues related to loading Home page/Search on youtube.\n\n" \
-                  "Reason: It might be possible that youtube-dl-pro server is down for temporary basis on your country.\n\n" \
+                  "Reason: It might be possible that youtube-dl-gui server is down for temporary basis on your country.\n\n" \
                   "Note: You can also switch to another server if home page loading speed is slow."
         self.popup_message(title, message)
 
     def suggestion_info_popup(self):
-        title = "YOUTUBE-Dl PRO Tips and Tricks!"
+        title = "YOUTUBE-Dl GUI Tips and Tricks!"
         message_1 = "For YouTube search suggestion, press space-bar key after your keyword on search bar."
         message_2 = "Change your country from settings to improve search results and switch to regional home page."
         message = message_1
@@ -424,14 +434,59 @@ class MainWindow(QMainWindow):
         self.ytv_link_clicked(video_id)
 
     def signal_for_row_button_table(self, row):
+        self.video_url = self.videoid_list[int(str(row).split("-")[1])]
         if "v" in row:
-            self.play_url = self.videoid_list[int(str(row).split("-")[1])]
-            webbrowser.open(self.play_url)
+            webbrowser.open(self.video_url)
         elif "d" in row:
-            self.download_url = self.videoid_list[int(str(row).split("-")[1])]
-            self.ytv_link_clicked(self.download_url)
+            self.ytv_link_clicked(self.video_url)
+        elif "w" in row:
+            self.play_video(self.video_url)
         else:
             webbrowser.open(self.videoid_list[int(str(row).split("-")[1])])
+
+    def play_video(self, stream_url):
+        self.ui.home_progress_bar.setRange(0, 0)
+        try:
+            play_thread = self.play_thread.isRunning()
+        except Exception as e:
+            play_thread = False
+        if not play_thread:
+            self.play_thread = PlayThread(stream_url, self)
+            self.play_thread.get_stream_url.connect(self.finish_getting_stream_url)
+            self.play_thread.start()
+
+    def play_video_from_videos_tab(self):
+        self.ui.video_progressBar.setRange(0, 0)
+        stream = get_stream_quality(self.stream_url, self.stream_quality)
+        self.process = QProcess()
+        self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
+        self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+
+    def finish_getting_stream_url(self, stream_url):
+        try:
+            mvp_thread = self.process.isRunning()
+        except Exception as e:
+            mvp_thread = False
+        if not mvp_thread:
+            try:
+                stream = get_stream_quality(stream_url, self.stream_quality)
+                self.process = QProcess()
+                self.process.readyReadStandardOutput.connect(self.handle_stdout)
+                self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+            except Exception as e:
+                print(e)
+
+    def handle_stdout_from_videos(self):
+        try:
+            self.ui.video_progressBar.setRange(0, 1)
+        except Exception as e:
+            print(e)
+
+    def handle_stdout(self):
+        try:
+            self.ui.home_progress_bar.setRange(0, 1)
+        except Exception as e:
+            print(e)
 
     def next_page(self):
         try:
@@ -522,7 +577,7 @@ class MainWindow(QMainWindow):
 
     def server_error_handle(self, msg):
         self.ui.home_progress_bar.setRange(0, 1)
-        self.popup_message(title="Could not connect to the server!", message="Youtube-Dl Pro server is currently busy,"
+        self.popup_message(title="Could not connect to the server!", message="Youtube-Dl GUI server is currently busy,"
                                                                              " please try again after some time.\n\n"
                                                                              "Tip: Switch to another server from settings might resolve this issue.")
 
@@ -539,7 +594,6 @@ class MainWindow(QMainWindow):
     def process_images_into_table(self):
         try:
             self.ui.tableWidget.setRowCount(len(self.thumbnail_list))
-
             for row in range(len(self.pixmap_list)):
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-youtube-play-button-500.png"),
@@ -549,29 +603,43 @@ class MainWindow(QMainWindow):
                 icon2.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-download-from-cloud-90.png"),
                                 QtGui.QIcon.Normal,
                                 QtGui.QIcon.Off)
+
+                icon3 = QtGui.QIcon()
+                icon3.addPixmap(QtGui.QPixmap(":/myresource/resource/play.png"),
+                                QtGui.QIcon.Normal,
+                                QtGui.QIcon.Off)
                 widget = QtWidgets.QWidget()
                 horizontalLayout_24 = QtWidgets.QVBoxLayout()
                 button = QtWidgets.QToolButton(widget)
                 horizontalLayout_24.addWidget(button)
                 button2 = QtWidgets.QToolButton(widget)
+                button3 = QtWidgets.QToolButton(widget)
                 sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
                 button.setSizePolicy(sizePolicy)
                 button2.setSizePolicy(sizePolicy)
+                button3.setSizePolicy(sizePolicy)
                 button.setIcon(icon)
                 button2.setIcon(icon2)
+                button3.setIcon(icon3)
                 button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
                 button2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+                button3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
                 button.setToolTip("Watch on YouTube")
                 button2.setToolTip("Download")
+                button3.setToolTip("Play Now")
                 button.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
                 button2.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
+                button3.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
                 button.setIconSize(QtCore.QSize(30, 30))
                 button2.setIconSize(QtCore.QSize(30, 30))
+                button3.setIconSize(QtCore.QSize(30, 30))
                 horizontalLayout_24.addWidget(button2)
+                horizontalLayout_24.addWidget(button3)
                 verticalLayout_8 = QtWidgets.QVBoxLayout(widget)
                 verticalLayout_8.addLayout(horizontalLayout_24)
                 button.clicked.connect(lambda _, r=f"v-{row}": self.signal_for_row_button_table(r))
                 button2.clicked.connect(lambda _, r=f"d-{row}": self.signal_for_row_button_table(r))
+                button3.clicked.connect(lambda _, r=f"w-{row}": self.signal_for_row_button_table(r))
                 self.ui.tableWidget.setCellWidget(row, 0, widget)
 
             for row in range(len(self.pixmap_list)):
@@ -670,17 +738,20 @@ class MainWindow(QMainWindow):
         self.pixmap_load_thread = PixMapLoadingThread(self.thumbnail_list, self.pixmap_cache, self)
         self.pixmap_load_thread.finish.connect(self.setProgressVal_pixmap_finish)
         self.pixmap_load_thread.progress.connect(self.setProgressVal_pixmap)
+        self.pixmap_load_thread.finish_first_pixmap.connect(self.first_finish_pixmap)
         self.pixmap_load_thread.start()
 
     def setProgressVal_pixmap(self, pixmap_image):
+        self.pixmap_list.append(pixmap_image.get("pixmap"))
+        self.process_images_into_table()
+
+    def first_finish_pixmap(self):
         try:
             search_thread = self.search_thread.isRunning()
         except Exception as e:
             search_thread = False
         if not search_thread:
             self.ui.home_progress_bar.setRange(0, 1)
-        self.pixmap_list.append(pixmap_image.get("pixmap"))
-        self.process_images_into_table()
 
     def setProgressVal_pixmap_finish(self, data):
         self.pixmap_cache.update(dict(zip(self.thumbnail_list, self.pixmap_list)))
@@ -743,6 +814,7 @@ class MainWindow(QMainWindow):
         self.settings.setValue("home_button_item", self.youtube_setting_ui.ui.no_of_videos.value())
         self.settings.setValue("default_server",
                                SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
+        self.settings.setValue("stream_quality", STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 1))
 
     def load_settings(self):
         if self.settings.contains("delete_source_file_check"):
@@ -789,6 +861,9 @@ class MainWindow(QMainWindow):
         if self.settings.contains("default_server"):
             self.default_server = self.settings.value("default_server")
             self.youtube_setting_ui.ui.server.setCurrentText(SERVER_REVERSE.get(self.default_server, "YT-DL-SERVER-1"))
+        if self.settings.contains("stream_quality"):
+            self.stream_quality = json.loads(self.settings.value("stream_quality"))
+            self.youtube_setting_ui.ui.stream_quality.setCurrentText(STREAM_QUALITY_REVERSE_DICT.get(self.stream_quality, "Medium"))
 
     def show_file_size(self):
         try:
@@ -816,12 +891,15 @@ class MainWindow(QMainWindow):
         close = self.msg.addButton(QMessageBox.Yes)
         show_in_downloads = self.msg.addButton(QMessageBox.Yes)
         play = self.msg.addButton(QMessageBox.Yes)
+        mpv_play = self.msg.addButton(QMessageBox.Yes)
         open_folder = self.msg.addButton(QMessageBox.Yes)
         open_folder.setText('Open Folder')
         show_in_downloads.setText('Show Downloads')
         play.setText('Play')
+        mpv_play.setText('MPV Play')
         close.setText('Close')
         play.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_MediaPlay)))
+        mpv_play.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_MediaPlay)))
         close.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_BrowserStop)))
         open_folder.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_DirIcon)))
         show_in_downloads.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_DirOpenIcon)))
@@ -831,6 +909,9 @@ class MainWindow(QMainWindow):
                 QDesktopServices.openUrl(QUrl(folder_path))
             elif self.msg.clickedButton() == play:
                 QDesktopServices.openUrl(QUrl(play_path))
+            elif self.msg.clickedButton() == mpv_play:
+                self.process = QProcess()
+                self.process.start("mpv", ["--force-window", "{0}".format(play_path)])
             elif self.msg.clickedButton() == show_in_downloads:
                 self.show_downloads_page()
             elif self.msg.clickedButton() == close:
@@ -904,15 +985,13 @@ class MainWindow(QMainWindow):
 
         try:
             if video_thread_running:
+                self.progress_bar_disable()
+                self.hide_show_play_pause_button(hide=True)
                 self.process_ytv_thread.kill()
-                self.progress_bar_disable()
-                self.hide_show_play_pause_button(hide=True)
-                self.process_ytv_thread.terminate()
             elif playlist_thread_running:
-                self.process_ytv_play_list_thread.kill()
                 self.progress_bar_disable()
                 self.hide_show_play_pause_button(hide=True)
-                self.process_ytv_play_list_thread.terminate()
+                self.process_ytv_play_list_thread.kill()
         except Exception as e:
             pass
 
@@ -990,7 +1069,7 @@ class MainWindow(QMainWindow):
                 except Exception as e:
                     is_playlist_process = False
                 if not is_running and not is_playlist_fetch_running and not is_playlist_download_running and not is_playlist_process:
-                    self.progress_bar_enable()
+                    self.ui.home_progress_bar.setRange(0, 0)
                     self.ui.select_format_obj_2.clear()
                     self.ui.select_quality_obj_2.clear()
                     self.ui.select_fps_obj_2.clear()
@@ -1016,12 +1095,13 @@ class MainWindow(QMainWindow):
         self.url_dialog_ui.ui.yt_video_link.setText(QApplication.clipboard().text())
 
     def setProgressVal(self, yt_data):
-        self.progress_bar_disable()
+        self.ui.home_progress_bar.setRange(0, 1)
         if yt_data.get("status"):
             self.hide_show_video_initial_banner(show=True)
             self.yt = yt_data.get("yt")
             self.title = yt_data.get("title")
             self.length = yt_data.get("length")
+            self.stream_url = yt_data.get("stream_url")
             self.thumbnail_path, title, length = process_html_data(yt_data, self.Default_loc)
             self.ui.textBrowser_thumbnail_9.setVisible(False)
             self.ui.graphicsView_video.setVisible(True)
@@ -1161,6 +1241,7 @@ class MainWindow(QMainWindow):
             self.ui.progress_bar.setFormat(display_status)
             self.ui.progress_bar.setValue(value_dict.get("progress"))
         else:
+            self.ui.progress_bar.reset()
             self.progress_bar_disable()
 
     def tc_finished_downloading_thread(self, json_data):
@@ -1259,7 +1340,7 @@ class MainWindow(QMainWindow):
                 except Exception as e:
                     is_playlist_process = False
                 if not is_running and not is_playlist_fetch_running and not is_playlist_download_running and not is_playlist_process and not is_size_running:
-                    self.progress_bar_enable()
+                    self.ui.home_progress_bar.setRange(0, 0)
                     try:
                         net_speed_thread = self.net_speed_thread.isRunning()
                     except Exception as e:
@@ -1400,6 +1481,7 @@ class MainWindow(QMainWindow):
 
     def setProgressVal_playlist(self, yt_playlist):
         if yt_playlist.get("status"):
+            self.ui.home_progress_bar.setRange(0, 1)
             yt_video_data = yt_playlist.get("video_context")
             if yt_video_data:
                 self.total_videos = yt_playlist.get("playlist_length")
@@ -1408,9 +1490,10 @@ class MainWindow(QMainWindow):
                 self.get_videos_list.get_video_list.connect(self.set_video_list)
                 self.get_videos_list.partial_finish.connect(self.partial_finish)
                 self.get_videos_list.finished_video_list.connect(self.finish_video_list)
+                self.get_videos_list.partial_progress.connect(self.partial_progress_format)
                 self.get_videos_list.start()
             else:
-                self.progress_bar_disable()
+                self.ui.home_progress_bar.setRange(0, 1)
                 self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
                 return
 
@@ -1443,10 +1526,10 @@ class MainWindow(QMainWindow):
                 self.ui.tabWidget.setCurrentIndex(2)
                 self.setPhoto_playlist(QPixmap(self.thumbnail_path_playlist))
             else:
-                self.progress_bar_disable()
+                self.ui.home_progress_bar.setRange(0, 1)
                 self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
         else:
-            self.progress_bar_disable()
+            self.ui.home_progress_bar.setRange(0, 1)
             self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
             # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
             #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
@@ -1476,6 +1559,14 @@ class MainWindow(QMainWindow):
 
     def partial_finish(self):
         self.progress_bar_enable()
+
+    def partial_progress_format(self, size_dict):
+        self.ui.progress_bar.resetFormat()
+        v_index = size_dict.get("counter", 1)
+        display_status = "Fetching Video Quality {0} of {1}".format(v_index, self.total_videos)
+        self.ui.progress_bar.setRange(0, self.total_videos)
+        self.ui.progress_bar.setFormat(display_status)
+        self.ui.progress_bar.setValue(v_index)
 
     def finish_video_list(self, playlist_quality_dict):
         self.total_obj = playlist_quality_dict.get("total_obj")
@@ -1522,7 +1613,7 @@ class MainWindow(QMainWindow):
                                        QtGui.QIcon.Off)
             self.ui.select_type_playlist_2.setItemIcon(index, icon)
 
-        self.progress_bar_disable()
+        self.ui.home_progress_bar.setRange(0, 1)
 
     def tc_finished_downloading_thread_playlist(self, json_data):
         if not json_data.get("is_killed"):
@@ -1599,12 +1690,42 @@ class MainWindow(QMainWindow):
             if self.ui.select_videos_playlist_2.currentText() in ["", None]:
                 pass
             else:
-                self.file_size_thread = FileSizeThread(self, self)
-                self.file_size_thread.get_size_of_file.connect(self.set_file_size)
-                self.file_size_thread.start()
-                self.progress_bar_enable()
+                if len(PLAYLIST_SIZE_CACHE) != 0:
+                    title = safe_string(self.ui.select_videos_playlist_2.currentText())
+                    quality = safe_string(self.ui.select_quality_playlist_2.currentText())
+                    p_type = safe_string(self.ui.select_type_playlist_2.currentText())
+
+                    if PLAYLIST_SIZE_CACHE.get(f"{title}{quality}{p_type}") is not None:
+                        values_dict = PLAYLIST_SIZE_CACHE.get(f"{title}{quality}{p_type}")
+                        video_size = values_dict.get("video_size", "N/A")
+                        video_length = values_dict.get("video_length", "N/A")
+                        if video_size or video_length:
+                            self.ui.video_size_playlist.setText(f"{video_size}")
+                            title_text = self.ui.select_videos_playlist_2.currentText()
+                            if title_text in ["Select All", None, ""]:
+                                self.ui.video_title_playlist.setText(f"{self.playlist_title}")
+                            else:
+                                self.ui.video_title_playlist.setText(f"{self.ui.select_videos_playlist_2.currentText()}")
+                            self.ui.video_total_playlist.setText(f"{str(self.total_videos)}")
+                            self.ui.video_length_playlist.setText(f"{video_length}")
+                        self.progress_bar_disable()
+                    else:
+                        self.file_size_thread = FileSizeThread(self, self)
+                        self.file_size_thread.get_size_of_file.connect(self.set_file_size)
+                        self.file_size_thread.start()
+                        self.progress_bar_enable()
+                else:
+                    self.file_size_thread = FileSizeThread(self, self)
+                    self.file_size_thread.get_size_of_file.connect(self.set_file_size)
+                    self.file_size_thread.start()
+                    self.progress_bar_enable()
 
     def set_file_size(self, size_dict):
+        global PLAYLIST_SIZE_CACHE
+        title = safe_string(self.ui.select_videos_playlist_2.currentText())
+        quality = safe_string(self.ui.select_quality_playlist_2.currentText())
+        p_type = safe_string(self.ui.select_type_playlist_2.currentText())
+        PLAYLIST_SIZE_CACHE[f"{title}{quality}{p_type}"] = size_dict
         video_size = size_dict.get("video_size")
         video_length = size_dict.get("video_length")
 
@@ -1806,6 +1927,29 @@ class MainWindow(QMainWindow):
                     self.popup_message(title="File not found or deleted!", message="", error=True)
                 else:
                     QDesktopServices.openUrl(QUrl(file_path))
+            else:
+                self.popup_message(title="Please select file first!!", message="", error=True)
+        except Exception as e:
+            self.popup_message(title="Error while playing the media!", message="", error=True)
+            pass
+
+    def play_videos_mpv_from_downloads(self):
+        try:
+            user_json_data = get_local_download_data(self.show_default_type)
+            user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
+            if self.all_playlist:
+                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "playlist"]
+            else:
+                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "videos"]
+            c_index = self.ui.listWidget.currentIndex().row()
+            if c_index != -1:
+                selected_video = user_json_data[c_index]
+                file_path = selected_video.get("file_path")
+                if not os.path.isfile(file_path):
+                    self.popup_message(title="File not found or deleted!", message="", error=True)
+                else:
+                    self.process = QProcess()
+                    self.process.start("mpv", ["--force-window", "{0}".format(file_path)])
             else:
                 self.popup_message(title="Please select file first!!", message="", error=True)
         except Exception as e:
@@ -2117,7 +2261,7 @@ class MainWindow(QMainWindow):
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
             self.msg.setInformativeText(
-                "In Youtube-dl free version, HD+ video quality option is not available. But you can still download SD quality videos.\n"
+                "In Youtube-dl GUI free version, HD+ video quality option is not available. But you can still download SD quality videos.\n"
                 "Please support the developer and purchase a license to UNLOCK this feature.")
             purchase = self.msg.addButton(QMessageBox.Yes)
             close = self.msg.addButton(QMessageBox.Yes)

@@ -3,6 +3,10 @@ COUNTRIES = {'American Samoa': 'AS', 'Argentina': 'AR', 'Aruba': 'AW', 'Australi
 
 COUNTRIES_REVERSE = {'AS': 'American Samoa', 'AR': 'Argentina', 'AW': 'Aruba', 'AU': 'Australia', 'AT': 'Austria', 'BH': 'Bahrain', 'BY': 'Belarus', 'BE': 'Belgium', 'BM': 'Bermuda', 'BR': 'Brazil', 'BG': 'Bulgaria', 'CA': 'Canada', 'KY': 'Cayman Islands', 'CL': 'Chile', 'CO': 'Colombia', 'CR': 'Costa Rica', 'HR': 'Croatia', 'CY': 'Cyprus', 'DK': 'Denmark', 'DO': 'Dominican Republic', 'EC': 'Ecuador', 'EG': 'Egypt', 'SV': 'El Salvador', 'EE': 'Estonia', 'FI': 'Finland', 'FR': 'France', 'PF': 'French Polynesia', 'DE': 'Germany', 'GR': 'Greece', 'GP': 'Guadeloupe', 'GU': 'Guam', 'GT': 'Guatemala', 'HN': 'Honduras', 'HK': 'Hong Kong', 'HU': 'Hungary', 'IS': 'Iceland', 'IN': 'India', 'ID': 'Indonesia', 'IE': 'Ireland', 'IL': 'Israel', 'IT': 'Italy', 'JP': 'Japan', 'KW': 'Kuwait', 'LV': 'Latvia', 'LB': 'Lebanon', 'LI': 'Liechtenstein', 'LT': 'Lithuania', 'LU': 'Luxembourg', 'MY': 'Malaysia', 'MT': 'Malta', 'MX': 'Mexico', 'NL': 'Netherlands', 'NZ': 'New Zealand', 'NI': 'Nicaragua', 'NG': 'Nigeria', 'MP': 'Northern Mariana Islands', 'NO': 'Norway', 'OM': 'Oman', 'PA': 'Panama', 'PG': 'Papua New Guinea', 'PY': 'Paraguay', 'PE': 'Peru', 'PH': 'Philippines', 'PL': 'Poland', 'PT': 'Portugal', 'PR': 'Puerto Rico', 'QA': 'Qatar', 'RO': 'Romania', 'SA': 'Saudi Arabia', 'RS': 'Serbia', 'SG': 'Singapore', 'SK': 'Slovakia', 'SI': 'Slovenia', 'ZA': 'South Africa', 'ES': 'Spain', 'SE': 'Sweden', 'CH': 'Switzerland', 'TH': 'Thailand', 'TR': 'Turkey', 'TC': 'Turks and Caicos Islands', 'UA': 'Ukraine', 'AE': 'United Arab Emirates', 'GB': 'United Kingdom', 'US': 'United States', 'UY': 'Uruguay'}
 
+STREAM_QUALITY_DICT = {"High": 2, "Medium": 1, "Low": 0}
+
+STREAM_QUALITY_REVERSE_DICT = {2: "High", 1: "Medium", 0: "Low"}
+
 
 SERVER = {
     "YT-DL-SERVER-1": "http://invidio.xamh.de",

@@ -31,6 +31,7 @@ class GetPlaylistVideos(QtCore.QThread):
     get_video_list = pyqtSignal(str)
     partial_finish = pyqtSignal()
     finished_video_list = pyqtSignal(dict)
+    partial_progress = pyqtSignal(dict)
 
     def __init__(self, is_hd_plus_playlist, all_videos, location, parent=None):
         super(GetPlaylistVideos, self).__init__(parent)
@@ -59,7 +60,7 @@ class GetPlaylistVideos(QtCore.QThread):
                 print(e)
 
         self.partial_finish.emit()
-        playlist_quality_dict = get_all_playlist_quality(total_obj, self.is_hd_plus_playlist)
+        playlist_quality_dict = get_all_playlist_quality(total_obj, self.is_hd_plus_playlist, self)
         playlist_quality_dict["total_obj"] = total_obj
         self.finished_video_list.emit(playlist_quality_dict)
 
@@ -119,11 +120,14 @@ class DownloadVideo(QtCore.QThread):
                 while self.is_paused:
                     time.sleep(0)
                     if self.is_killed:
+                        self.terminate()
                         self.after_kill.emit(self.full_file_path)
                         break
 
                 if self.is_killed:
+                    self.change_value.emit(progress_dict)
                     self.after_kill.emit(self.full_file_path)
+                    self.terminate()
 
                 size = self.yt_obj.filesize
                 progress_dict["downloaded"] = humanbytes(size - bytes_remaining)
@@ -165,9 +169,11 @@ class DownloadVideo(QtCore.QThread):
                         while self.is_paused:
                             time.sleep(0)
                             if self.is_killed:
+                                self.terminate()
                                 self.after_kill.emit(self.full_file_path)
                                 break
                         if self.is_killed:
+                            self.terminate()
                             self.after_kill.emit(self.full_file_path)
                             break
                         if progress_dict["progress"] == 100 and self.process_dash:
@@ -196,10 +202,12 @@ class DownloadVideo(QtCore.QThread):
                         while self.is_paused:
                             time.sleep(0)
                             if self.is_killed:
+                                self.terminate()
                                 self.after_kill.emit(out_file_path)
                                 break
 
                         if self.is_killed:
+                            self.terminate()
                             self.after_kill.emit(out_file_path)
                             break
                         if progress_dict["progress"] == 100:
@@ -433,10 +441,12 @@ class DownloadVideoPlayList(QtCore.QThread):
                 while self.is_paused:
                     time.sleep(0)
                     if self.is_killed:
+                        self.terminate()
                         self.after_kill.emit(self.full_file_path)
                         break
 
                 if self.is_killed:
+                    self.terminate()
                     self.after_kill.emit(self.full_file_path)
                 else:
                     size = self.pl_obj.filesize
@@ -756,3 +766,16 @@ class FileSizeThreadSingleVideo(QtCore.QThread):
     def run(self):
         size = get_file_size(self.yt_obj)
         self.get_size_of_single_video_file.emit(size)
+
+
+class PlayThread(QtCore.QThread):
+    get_stream_url = pyqtSignal(list)
+
+    def __init__(self, video_url, parent=None):
+        super(PlayThread, self).__init__(parent)
+        self.video_url = video_url
+
+    def run(self):
+        from pytube import YouTube
+        stream_url = [item.url for item in YouTube(self.video_url).streams.filter(progressive=True)]
+        self.get_stream_url.emit(stream_url)

@@ -127,6 +127,7 @@ def process_ytv(url, is_hd_plus, location):
         context["title"] = str(yt.title)
         context["thumbnail_url"] = yt.thumbnail_url
         context["length"] = get_time_format(yt.length)
+        context["stream_url"] = [item.url for item in yt.streams.filter(progressive=True)]
         file_extension = '.jpg'
         context["quality_data"] = select_format_data(yt, is_hd_plus)
         context["channel"] = yt.author
