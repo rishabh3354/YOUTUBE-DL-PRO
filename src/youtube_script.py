@@ -86,7 +86,6 @@ def get_initial_download_dir():
                 else:
                     download_path = os.path.expanduser("~") + "/Downloads"
         os.makedirs(download_path, exist_ok=True)
-        print(download_path)
     except Exception as e:
         print("error in getting download path", str(e))
         return "/Downloads"
@@ -109,7 +108,6 @@ def get_initial_document_dir():
                 else:
                     download_path = os.path.expanduser("~") + "/Documents"
         os.makedirs(download_path, exist_ok=True)
-        print(download_path)
     except Exception as e:
         print("error in getting download path", str(e))
         return "/Documents"
@@ -127,7 +125,8 @@ def process_ytv(url, is_hd_plus, location):
         context["title"] = str(yt.title)
         context["thumbnail_url"] = yt.thumbnail_url
         context["length"] = get_time_format(yt.length)
-        context["stream_url"] = [item.url for item in yt.streams.filter(progressive=True)]
+        context["stream_url"] = [item.url for item in yt.streams.filter(progressive=True).order_by('resolution')]
+        context["audio_stream_url"] = [item.url for item in yt.streams.filter(only_audio=True).order_by('abr')]
         file_extension = '.jpg'
         context["quality_data"] = select_format_data(yt, is_hd_plus)
         context["channel"] = yt.author

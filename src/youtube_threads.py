@@ -777,5 +777,5 @@ class PlayThread(QtCore.QThread):
 
     def run(self):
         from pytube import YouTube
-        stream_url = [item.url for item in YouTube(self.video_url).streams.filter(progressive=True)]
+        stream_url = [item.url for item in YouTube(self.video_url).streams.filter(progressive=True).order_by('resolution')]
         self.get_stream_url.emit(stream_url)

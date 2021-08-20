@@ -46,6 +46,7 @@ class MainWindow(QMainWindow):
         self.delete_source_file = True
         self.one_time_congratulate = True
         self.setWindowTitle("YouTube-Dl GUI")
+        self.tip_count = -1
 
         #  init net speed settings
         self.net_frequency = 1.0
@@ -121,7 +122,6 @@ class MainWindow(QMainWindow):
         self.ui.copy_id.clicked.connect(
             lambda x: QApplication.clipboard().setText(self.ui.lineEdit_account_id_2.text()))
         self.ui.info_suggestion.clicked.connect(self.suggestion_info_popup)
-        self.info_suggestion_count = 0
         # download tab default item to show
         self.show_default_type = self.Default_loc
         self.speed = "0.0"
@@ -308,7 +308,6 @@ class MainWindow(QMainWindow):
 
     def change_stream_quality(self):
         self.stream_quality = STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 1)
-        print(self.stream_quality)
 
     def save_default_server(self):
         self.default_server = SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com")
@@ -407,15 +406,53 @@ class MainWindow(QMainWindow):
                   "Note: You can also switch to another server if home page loading speed is slow."
         self.popup_message(title, message)
 
-    def suggestion_info_popup(self):
-        title = "YOUTUBE-Dl GUI Tips and Tricks!"
-        message_1 = "For YouTube search suggestion, press space-bar key after your keyword on search bar."
-        message_2 = "Change your country from settings to improve search results and switch to regional home page."
-        message = message_1
-        if self.info_suggestion_count % 2 != 0:
-            message = message_2
-        self.info_suggestion_count += 1
-        self.popup_message(title, message)
+    def suggestion_info_popup(self, message=None):
+        self.msg = QMessageBox()
+        self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
+        self.msg.setIcon(QMessageBox.Information)
+        self.msg.setText("YOUTUBE-Dl GUI Tips and Tricks!")
+        if message:
+            self.msg.setInformativeText(message)
+        else:
+            self.msg.setInformativeText("Change your country from settings to improve search results and switch to regional home page.")
+        close = self.msg.addButton(QMessageBox.Yes)
+        next_tip = self.msg.addButton(QMessageBox.Yes)
+        prev_tip = self.msg.addButton(QMessageBox.Yes)
+        next_tip.setText('Next Tip')
+        prev_tip.setText('Previous Tip')
+        close.setText('Close')
+        next_tip.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_ArrowRight)))
+        prev_tip.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_ArrowLeft)))
+        close.setIcon(QIcon(QApplication.style().standardIcon(QStyle.SP_BrowserStop)))
+        self.msg.exec_()
+        message_list = ["For YouTube search suggestion, press space-bar key after keyword for accurate search suggestion.",
+                        "You can select YouTube stream play quality from the App settings.",
+                        "You can set number of video item by default on home screen from the App settings.",
+                        "Mpv stream player Keyboard shortcuts:\n\nQ :   Stop and Quit Player\nF :   "
+                        "Toggle Fullscreen\nP :  Pause / Playback\n9 and 0 :    Volume Control\nW and E :"
+                        "   ZoomIn/ZoomOut\nShift+A :    Screen Aspect Ratio\nArrow Keys :   Seek 5 seconds.",
+                        "Change Youtube-Dl-GUI server from the App settings if you are facing server down issues in your country.",
+                        ]
+        try:
+            if self.msg.clickedButton() == next_tip:
+                if self.tip_count <= 3:
+                    self.tip_count += 1
+                    self.suggestion_info_popup(message_list[self.tip_count])
+                else:
+                    self.tip_count = 0
+                    self.suggestion_info_popup(message_list[self.tip_count])
+            elif self.msg.clickedButton() == prev_tip:
+                if self.tip_count >= 1:
+                    self.tip_count -= 1
+                    self.suggestion_info_popup(message_list[self.tip_count])
+                else:
+                    self.tip_count = 4
+                    self.suggestion_info_popup(message_list[self.tip_count])
+            elif self.msg.clickedButton() == close:
+                pass
+        except Exception as e:
+            pass
 
     def keyPressEvent(self, qKeyEvent):
         if qKeyEvent.key() == QtCore.Qt.Key_Return:
@@ -456,11 +493,17 @@ class MainWindow(QMainWindow):
             self.play_thread.start()
 
     def play_video_from_videos_tab(self):
-        self.ui.video_progressBar.setRange(0, 0)
-        stream = get_stream_quality(self.stream_url, self.stream_quality)
-        self.process = QProcess()
-        self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
-        self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+        if self.ui.select_format_obj_2.currentText() != "Select Format":
+            self.ui.video_progressBar.setRange(0, 0)
+            if self.ui.select_format_obj_2.currentText() == "AUDIO - MP3":
+                stream = get_stream_quality(self.audio_stream_url, self.stream_quality, True)
+            else:
+                stream = get_stream_quality(self.stream_url, self.stream_quality, False)
+            self.process = QProcess()
+            self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
+            self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+        else:
+            self.popup_message(title="No Audio/Video File To Play!", message="Please Select YouTube Video From The Home Tab.")
 
     def finish_getting_stream_url(self, stream_url):
         try:
@@ -1102,6 +1145,7 @@ class MainWindow(QMainWindow):
             self.title = yt_data.get("title")
             self.length = yt_data.get("length")
             self.stream_url = yt_data.get("stream_url")
+            self.audio_stream_url = yt_data.get("audio_stream_url")
             self.thumbnail_path, title, length = process_html_data(yt_data, self.Default_loc)
             self.ui.textBrowser_thumbnail_9.setVisible(False)
             self.ui.graphicsView_video.setVisible(True)
@@ -1218,7 +1262,11 @@ class MainWindow(QMainWindow):
                     self.process_ytv_thread.after_kill.connect(self.tc_after_kill)
                     self.process_ytv_thread.start()
             else:
-                self.popup_message(title="Invalid Youtube Url", message="Please check your video link !")
+                if context["quality"] == "select":
+                    self.popup_message(title="No Audio/Video File To Download!",
+                                       message="Please Select YouTube Video From The Home Tab.")
+                else:
+                    self.popup_message(title="Invalid Youtube Url", message="Please check your video link !")
 
     def block_pro_plan_for_videos(self):
         if self.ui.select_quality_obj_2.currentText() in ['144p (LD)', '240p (LD)', '360p (SD)']\
@@ -1419,7 +1467,11 @@ class MainWindow(QMainWindow):
                     self.process_ytv_play_list_thread.start()
                     self.hide_show_play_pause_button(hide=False)
             else:
-                self.popup_message(title="Invalid Youtube Url", message="Please check your YT video url !")
+                if context["quality"] == "select":
+                    self.popup_message(title="No Audio/Video Playlist To Download!",
+                                       message="Please Select YouTube Video From The Home Tab.")
+                else:
+                    self.popup_message(title="Invalid Youtube Url", message="Please check your YT video url !")
 
     def block_pro_plan_for_playlist(self):
         if self.ui.select_quality_playlist_2.currentText() in ['144p (LD)', '240p (LD)', '360p (SD)']\

@@ -461,16 +461,30 @@ def get_all_playlist_quality(playlist_all_obj, is_hd_plus_playlist, self):
     return response_dict
 
 
-def get_stream_quality(stream_url, stream_quality):
-    try:
-        if len(stream_url) <= 3:
-            stream = stream_url[stream_quality]
-        elif len(stream_url) <= 2:
-            stream = stream_url[1]
-        else:
+def get_stream_quality(stream_url, stream_quality, audio_type=False):
+    if audio_type:
+        try:
+            if len(stream_url) <= 4:
+                stream = stream_url[stream_quality]
+            elif len(stream_url) <= 3:
+                stream = stream_url[2]
+            elif len(stream_url) <= 2:
+                stream = stream_url[1]
+            else:
+                stream = stream_url[0]
+        except Exception as e:
+            print(e)
             stream = stream_url[0]
-    except Exception as e:
-        stream = stream_url[0]
+    else:
+        try:
+            if len(stream_url) <= 3:
+                stream = stream_url[stream_quality]
+            elif len(stream_url) <= 2:
+                stream = stream_url[1]
+            else:
+                stream = stream_url[0]
+        except Exception as e:
+            print(e)
+            stream = stream_url[0]
 
-    print(stream_quality, stream)
     return stream

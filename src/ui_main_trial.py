@@ -679,7 +679,7 @@ class Ui_MainWindow(object):
         self.download_button_playlist_2.setSizePolicy(sizePolicy)
         self.download_button_playlist_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.download_button_playlist_2.setStyleSheet("")
-        self.download_button_playlist_2.setIcon(icon8)
+        self.download_button_playlist_2.setIcon(icon4)
         self.download_button_playlist_2.setIconSize(QtCore.QSize(25, 25))
         self.download_button_playlist_2.setObjectName("download_button_playlist_2")
         self.gridLayout_2.addWidget(self.download_button_playlist_2, 0, 6, 1, 1)
@@ -1585,7 +1585,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(6)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1630,7 +1630,7 @@ class Ui_MainWindow(object):
         self.select_type_playlist_2.setItemText(0, _translate("MainWindow", "Select Type"))
         self.select_quality_playlist_2.setItemText(0, _translate("MainWindow", "Select Quality"))
         self.select_videos_playlist_2.setItemText(0, _translate("MainWindow", "Select All"))
-        self.download_button_playlist_2.setText(_translate("MainWindow", "Start Download"))
+        self.download_button_playlist_2.setText(_translate("MainWindow", " Start Download"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.stack_playlist), _translate("MainWindow", "Playlist"))
         self.search_videos.setPlaceholderText(_translate("MainWindow", "Search Download History"))
         self.open_videos.setText(_translate("MainWindow", "Open"))

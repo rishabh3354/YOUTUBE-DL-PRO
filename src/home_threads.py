@@ -16,7 +16,6 @@ def get_live_server():
             if response.status_code in [200, 201]:
                 default_server = server
                 break
-        print(default_server)
         return default_server
     except Exception as e:
         print(e)
@@ -44,7 +43,6 @@ class HomeThreads(QtCore.QThread):
     def run(self):
         try:
             result = self.get_result()
-            print(result.status_code)
             if result.status_code in [200, 201]:
                 self.home_results.emit(result.json())
             else:
@@ -162,7 +160,6 @@ class SearchThreads(QtCore.QThread):
     def run(self):
         try:
             result = self.get_result()
-            print(result.status_code)
             if result.status_code in [200, 201]:
                 self.search_results.emit(result.json())
             else:
