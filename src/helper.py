@@ -20,14 +20,11 @@ TIME_REGEX = re.compile(
 )
 
 
-def save_download_info(yt, yt_obj, download_path, file_path, location_path, playlist=False):
+def save_download_info(yt, yt_obj, download_path, file_path, location_path, download_type):
     try:
         video_info_list = list()
         video_info = dict()
-        if playlist:
-            video_info["download_type"] = "playlist"
-        else:
-            video_info["download_type"] = "videos"
+        video_info["download_type"] = download_type
         video_info["title_show"] = yt_obj.title
         video_info["title_safe"] = safe_string(yt_obj.title)
         video_info["length"] = get_time_format(yt.length)
@@ -36,7 +33,10 @@ def save_download_info(yt, yt_obj, download_path, file_path, location_path, play
         video_info["size"] = humanbytes(yt_obj.filesize)
         video_info["resolution"] = yt_obj.resolution
         video_info["type"] = yt_obj.type
-        video_info["fps"] = yt_obj.fps
+        if download_type in ["audio", "playlist_audio"]:
+            video_info["fps"] = "-"
+        else:
+            video_info["fps"] = yt_obj.fps
         video_info["subtype"] = yt_obj.subtype
         video_info["download_date"] = datetime.datetime.strftime(datetime.datetime.now(), '%d %b %Y')
         video_info["download_time"] = datetime.datetime.strftime(datetime.datetime.now(), "%H:%M")
@@ -100,9 +100,9 @@ def get_file_size(self):
         audio_file = 0
 
         if formats == "mp3":
-            yt = self.yt.streams.filter(only_audio=True)
+            yt = self.yt.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
             if yt:
-                video_size = yt.first().filesize
+                video_size = yt.last().filesize
         else:
             yt = self.yt.streams.filter(file_extension=formats, fps=fps, resolution=quality)
             if yt:
@@ -117,13 +117,13 @@ def get_file_size(self):
 
                     if yt:
                         video_size = yt.first().filesize
-            yt = self.yt.streams.filter(only_audio=True)
+            yt = self.yt.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
             if yt:
-                audio_file = yt.first().filesize
+                audio_file = yt.last().filesize
 
-            yt = self.yt.streams.filter(only_audio=True)
+            yt = self.yt.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
             if yt:
-                audio_file = yt.first().filesize
+                audio_file = yt.last().filesize
 
         if video_size == 0:
             video_size = ""
@@ -156,18 +156,18 @@ def get_file_size_for_playlist(self):
             if selected_video != "select-all":
                 yt_obj = all_yt_playlist_obj[selected_video_index - 1]
                 video_length = yt_obj.length
-                yt = yt_obj.streams.filter(only_audio=True)
+                yt = yt_obj.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                 if yt:
-                    video_size = yt.first().filesize
+                    video_size = yt.last().filesize
             else:
                 sum_of_all_files = 0
                 sum_of_all_length = 0
                 for item in all_yt_playlist_obj:
                     sum_of_all_length += item.length
                     video_length = sum_of_all_length
-                    yt = item.streams.filter(only_audio=True)
+                    yt = item.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                     if yt:
-                        size = yt.first().filesize
+                        size = yt.last().filesize
                         sum_of_all_files += size
                         video_size = sum_of_all_files
 
@@ -192,9 +192,9 @@ def get_file_size_for_playlist(self):
                 if yt:
                     video_size = yt.first().filesize
 
-                yt = yt_obj.streams.filter(only_audio=True)
+                yt = yt_obj.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                 if yt:
-                    audio_file = yt.first().filesize
+                    audio_file = yt.last().filesize
             else:
                 sum_of_all_files = 0
                 sum_of_all_audio = 0
@@ -223,9 +223,9 @@ def get_file_size_for_playlist(self):
                         video_size = sum_of_all_files
 
                 for item in all_yt_playlist_obj:
-                    yt = item.streams.filter(only_audio=True)
+                    yt = item.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                     if yt:
-                        sum_of_all_audio += yt.first().filesize
+                        sum_of_all_audio += yt.last().filesize
                         audio_file = sum_of_all_audio
 
         if video_size == 0 or video_length == 0:
@@ -488,3 +488,10 @@ def get_stream_quality(stream_url, stream_quality, audio_type=False):
             stream = stream_url[0]
 
     return stream
+
+
+def get_downloaded_data_filter(data, filter_type):
+    if filter_type == "all_files":
+        return data
+    else:
+        return [item_dict for item_dict in data if item_dict.get("download_type") == filter_type]

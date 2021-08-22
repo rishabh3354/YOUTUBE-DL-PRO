@@ -12,14 +12,15 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog,
 from account_threads import SaveLocalInToken, RefreshButtonThread, PytubeStatusThread
 from accounts import get_user_data_from_local, days_left, ApplicationStartupTask, check_for_local_token
 from helper import process_html_data, check_internet_connection, check_default_location, process_html_data_playlist, \
-    get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete, get_stream_quality
+    get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete, get_stream_quality, \
+    get_downloaded_data_filter
 from home_threads import HomeThreads, PixMapLoadingThread, CompleterThread, SearchThreads
 from country_names_all import COUNTRIES, SERVER_REVERSE, COUNTRIES_REVERSE, SORT_BY_REVERSE, \
     EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER, STREAM_QUALITY_DICT, STREAM_QUALITY_REVERSE_DICT
 from system_monitor import RamThread, NetSpeedThread, CpuThread, DummyDataThread
 from utils import get_time_format, human_format, set_all_countries_icons, set_server_icons
 from youtube_script import get_initial_download_dir
-from template import set_style_for_pause_play_button, selected_download_button_css
+from template import set_style_for_pause_play_button
 from ui_main_trial import Ui_MainWindow
 from youtube_threads import ProcessYtV, DownloadVideo, ProcessYtVPlayList, GetPlaylistVideos, \
     DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo, PlayThread
@@ -125,7 +126,6 @@ class MainWindow(QMainWindow):
             lambda x: QApplication.clipboard().setText(self.ui.lineEdit_account_id_2.text()))
         self.ui.info_suggestion.clicked.connect(self.suggestion_info_popup)
         # download tab default item to show
-        self.show_default_type = self.Default_loc
         self.speed = "0.0"
         self.unit = "B/s"
 
@@ -191,8 +191,8 @@ class MainWindow(QMainWindow):
         # Downloads functionality ======================================================
 
         # init
-        self.all_videos = True
-        self.all_playlist = False
+        self.downloaded_file_filter = "all_files"
+        self.ui.filter_by.currentIndexChanged.connect(self.set_file_downloaded_filter)
 
         # signal and slots
         self.ui.open_videos.clicked.connect(self.show_downloads_folder)
@@ -203,8 +203,6 @@ class MainWindow(QMainWindow):
         self.ui.listWidget.itemDoubleClicked.connect(self.play_videos_mpv_from_downloads)
         self.ui.search_videos.textChanged.connect(self.search_videos)
         self.ui.search_videos.cursorPositionChanged.connect(self.clear_search_bar_on_edit)
-        self.ui.all_videos.clicked.connect(self.set_all_videos)
-        self.ui.all_playlist.clicked.connect(self.set_all_playlist)
         self.ui.clear_history.clicked.connect(self.clear_all_history)
 
         # Accounts/About functionality ======================================================
@@ -1339,8 +1337,6 @@ class MainWindow(QMainWindow):
                 context["yt"] = self.yt
                 context["main_obj"] = self
                 self.counter = 0
-                self.all_videos = True
-                self.all_playlist = False
                 response = self.block_pro_plan_for_videos()
                 if response:
                     self.process_ytv_thread = DownloadVideo(context, self)
@@ -1542,8 +1538,6 @@ class MainWindow(QMainWindow):
                 context["main_obj"] = self
                 self.progress_bar_enable()
                 self.ui.progress_bar.setRange(0, 100)
-                self.all_videos = False
-                self.all_playlist = True
                 response = self.block_pro_plan_for_playlist()
                 if response:
                     self.process_ytv_play_list_thread = DownloadVideoPlayList(context, self)
@@ -1970,46 +1964,33 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 pass
 
-    def set_all_videos(self):
-        self.show_default_type = self.Default_loc
-        self.all_videos = True
-        self.all_playlist = False
-        selected_download_button_css(self)
-        self.get_user_download_data()
-
-    def set_all_playlist(self):
-        self.show_default_type = self.Default_loc_playlist
-        self.all_videos = False
-        self.all_playlist = True
-        selected_download_button_css(self)
+    def set_file_downloaded_filter(self):
+        self.downloaded_file_filter = "_".join(str(self.ui.filter_by.currentText()).lower().split(" "))
         self.get_user_download_data()
 
     def get_user_download_data(self):
-        selected_download_button_css(self)
-        if self.all_playlist:
-            self.show_default_type = self.Default_loc_playlist
-        else:
-            self.show_default_type = self.Default_loc
         try:
             self.ui.listWidget.clear()
             size = QtCore.QSize()
             size.setHeight(100)
             size.setWidth(100)
-            user_json_data = get_local_download_data(self.show_default_type)
+            if self.downloaded_file_filter == "all_files":
+                if self.Default_loc == self.Default_loc_playlist:
+                    user_json_data = get_local_download_data(self.Default_loc)
+                else:
+                    user_json_data = get_local_download_data(self.Default_loc) + get_local_download_data(self.Default_loc_playlist)
+            elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+                user_json_data = get_local_download_data(self.Default_loc_playlist)
+            else:
+                user_json_data = get_local_download_data(self.Default_loc)
             if user_json_data:
                 self.hide_show_download_initial_banner(show=True)
             else:
                 self.hide_show_download_initial_banner(show=False)
             user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             exist_entry = [self.ui.listWidget.item(x).text() for x in range(self.ui.listWidget.count())]
-
-            for row in user_json_data:
-                if self.all_playlist:
-                    if row.get("download_type", "") == "videos":
-                        continue
-                else:
-                    if row.get("download_type", "") == "playlist":
-                        continue
+            filter_user_json_data = get_downloaded_data_filter(user_json_data, self.downloaded_file_filter)
+            for row in filter_user_json_data:
                 thumbnail_path = row.get("thumbnail_path")
                 if not os.path.isfile(thumbnail_path):
                     thumbnail_path = ":/myresource/resource/download_preview.png"
@@ -2037,7 +2018,17 @@ class MainWindow(QMainWindow):
 
     def show_downloads_folder(self):
         try:
-            user_json_data = get_local_download_data(self.show_default_type)
+            if self.downloaded_file_filter == "all_files":
+                if self.Default_loc == self.Default_loc_playlist:
+                    user_json_data = get_local_download_data(self.Default_loc)
+                else:
+                    user_json_data = get_local_download_data(self.Default_loc) + get_local_download_data(
+                        self.Default_loc_playlist)
+            elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+                user_json_data = get_local_download_data(self.Default_loc_playlist)
+            else:
+                user_json_data = get_local_download_data(self.Default_loc)
+            user_json_data = get_downloaded_data_filter(user_json_data, self.downloaded_file_filter)
             user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
@@ -2055,12 +2046,18 @@ class MainWindow(QMainWindow):
 
     def play_videos_from_downloads(self):
         try:
-            user_json_data = get_local_download_data(self.show_default_type)
-            user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
-            if self.all_playlist:
-                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "playlist"]
+            if self.downloaded_file_filter == "all_files":
+                if self.Default_loc == self.Default_loc_playlist:
+                    user_json_data = get_local_download_data(self.Default_loc)
+                else:
+                    user_json_data = get_local_download_data(self.Default_loc) + get_local_download_data(
+                        self.Default_loc_playlist)
+            elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+                user_json_data = get_local_download_data(self.Default_loc_playlist)
             else:
-                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "videos"]
+                user_json_data = get_local_download_data(self.Default_loc)
+            user_json_data = get_downloaded_data_filter(user_json_data, self.downloaded_file_filter)
+            user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
                 selected_video = user_json_data[c_index]
@@ -2077,12 +2074,18 @@ class MainWindow(QMainWindow):
 
     def play_videos_mpv_from_downloads(self):
         try:
-            user_json_data = get_local_download_data(self.show_default_type)
-            user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
-            if self.all_playlist:
-                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "playlist"]
+            if self.downloaded_file_filter == "all_files":
+                if self.Default_loc == self.Default_loc_playlist:
+                    user_json_data = get_local_download_data(self.Default_loc)
+                else:
+                    user_json_data = get_local_download_data(self.Default_loc) + get_local_download_data(
+                        self.Default_loc_playlist)
+            elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+                user_json_data = get_local_download_data(self.Default_loc_playlist)
             else:
-                user_json_data = [row for row in user_json_data if row.get("download_type", "") == "videos"]
+                user_json_data = get_local_download_data(self.Default_loc)
+            user_json_data = get_downloaded_data_filter(user_json_data, self.downloaded_file_filter)
+            user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
                 selected_video = user_json_data[c_index]
@@ -2102,12 +2105,18 @@ class MainWindow(QMainWindow):
         try:
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
-                video_info = get_local_download_data(self.show_default_type)
-                video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
-                if self.all_playlist:
-                    video_info = [row for row in video_info if row.get("download_type", "") == "playlist"]
+                if self.downloaded_file_filter == "all_files":
+                    if self.Default_loc == self.Default_loc_playlist:
+                        video_info = get_local_download_data(self.Default_loc)
+                    else:
+                        video_info = get_local_download_data(self.Default_loc) + get_local_download_data(
+                            self.Default_loc_playlist)
+                elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+                    video_info = get_local_download_data(self.Default_loc_playlist)
                 else:
-                    video_info = [row for row in video_info if row.get("download_type", "") == "videos"]
+                    video_info = get_local_download_data(self.Default_loc)
+                video_info = get_downloaded_data_filter(video_info, self.downloaded_file_filter)
+                video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
                 video_info = video_info[c_index]
                 title = video_info.get("title_show", "-")
                 length = video_info.get("length", "-")
@@ -2178,19 +2187,30 @@ class MainWindow(QMainWindow):
             pass
 
     def delete_entry_from_list(self, delete_source_file=False):
-        video_info = get_local_download_data(self.show_default_type)
+        if self.downloaded_file_filter == "all_files":
+            if self.Default_loc == self.Default_loc_playlist:
+                video_info = get_local_download_data(self.Default_loc)
+            else:
+                video_info = get_local_download_data(self.Default_loc) + get_local_download_data(
+                    self.Default_loc_playlist)
+        elif self.downloaded_file_filter in ["playlist_video", "playlist_audio"]:
+            video_info = get_local_download_data(self.Default_loc_playlist)
+        else:
+            video_info = get_local_download_data(self.Default_loc)
         c_index = self.ui.listWidget.currentIndex().row()
         if c_index != -1:
+            video_info = get_downloaded_data_filter(video_info, self.downloaded_file_filter)
             video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
             video_info_copy = deepcopy(video_info)
-            if self.all_playlist:
-                video_info = [row for row in video_info if row.get("download_type", "") == "playlist"]
-            else:
-                video_info = [row for row in video_info if row.get("download_type", "") == "videos"]
             poped_item = video_info.pop(c_index)
             poped_item_copy_index = video_info_copy.index(poped_item)
             video_info_copy.pop(poped_item_copy_index)
-            save_after_delete(video_info_copy, self.show_default_type)
+            delete_location = str(poped_item.get("download_path")).split("YOUTUBE_DL")[0]
+            video_info_copy_1 = []
+            for item_dict in video_info_copy:
+                if delete_location in item_dict.get("download_path"):
+                    video_info_copy_1.append(item_dict)
+            save_after_delete(video_info_copy_1, delete_location)
             self.ui.listWidget.clear()
             self.get_user_download_data()
             if delete_source_file:
@@ -2205,7 +2225,15 @@ class MainWindow(QMainWindow):
     def search_videos(self):
         try:
             search_string = self.ui.search_videos.text()
-            video_info = get_local_download_data(self.show_default_type)
+            if search_string in ["", None]:
+                self.ui.filter_by.setCurrentIndex(0)
+                self.downloaded_file_filter = "all_files"
+
+            if self.Default_loc == self.Default_loc_playlist:
+                video_info = get_local_download_data(self.Default_loc)
+            else:
+                video_info = get_local_download_data(self.Default_loc) + get_local_download_data(
+                    self.Default_loc_playlist)
             video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
             exist_entry = [x.get("title_show") for x in video_info]
             index = -1
@@ -2226,12 +2254,6 @@ class MainWindow(QMainWindow):
                 for number in range(0, len(video_info)):
                     if number in index_list:
                         row = video_info[number]
-                        if self.all_playlist:
-                            if row.get("download_type", "") == "videos":
-                                continue
-                        else:
-                            if row.get("download_type", "") == "playlist":
-                                continue
                         thumbnail_path = row.get("thumbnail_path")
                         if not os.path.isfile(thumbnail_path):
                             thumbnail_path = ":/myresource/resource/download_preview.png"

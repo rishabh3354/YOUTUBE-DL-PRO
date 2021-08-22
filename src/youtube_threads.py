@@ -1,12 +1,11 @@
 import os
 import time
-import psutil
 import requests
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
 from pytube import YouTube
 from helper import run_ffmpeg_command, safe_string, save_download_info, get_file_size_for_playlist, get_file_size, \
-    get_all_playlist_quality, check_internet_connection_for_net_speed, humanbytes
+    get_all_playlist_quality, humanbytes
 from youtube_script import process_ytv, get_download_path, process_playlist
 import youtube_script
 import pytube.request
@@ -246,15 +245,15 @@ class DownloadVideo(QtCore.QThread):
                         self.main_obj.ui.progress_bar.setRange(0, 0)
                         self.yt_obj.download(self.video_download_path, filename=f"{filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
-                                           self.location)
+                                           self.location, "video")
                     else:
                         self.error.emit({"error": "File Already Exists", "file_path": self.video_download_path,
                                          "play_path": self.full_file_path, "title": title
                                          })
             elif self.type == "audio":
-                yt = self.yt.streams.filter(only_audio=True, subtype='mp4')
+                yt = self.yt.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                 if yt:
-                    self.yt_obj = yt.first()
+                    self.yt_obj = yt.last()
                     title = str(self.yt_obj.title)
                     self.audio_filename = safe_string("{0}_{1}".format(title, self.yt_obj.type))
                     full_file_path = self.audio_download_path + "/" + self.audio_filename + "." + "mp3"
@@ -263,7 +262,7 @@ class DownloadVideo(QtCore.QThread):
                         self.main_obj.ui.progress_bar.setRange(0, 0)
                         self.yt_obj.download(self.audio_download_path, filename=f"{self.audio_filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.audio_download_path, full_file_path,
-                                           self.location)
+                                           self.location, "audio")
                     else:
                         self.error.emit({"error": "File Already Exists", "file_path": self.audio_download_path,
                                          "play_path": full_file_path, "title": title
@@ -298,7 +297,7 @@ class DownloadVideo(QtCore.QThread):
                         else:
                             self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                         save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
-                                           self.location)
+                                           self.location, "video")
                     else:
                         skip_audio = True
                         self.error.emit({"error": "File Already Exists", "file_path": self.video_download_path,
@@ -329,7 +328,7 @@ class DownloadVideo(QtCore.QThread):
                             else:
                                 self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
-                                               self.location)
+                                               self.location, "video")
                         else:
                             skip_audio = True
                             self.error.emit({"error": "File Already Exists", "file_path": self.video_download_path,
@@ -356,7 +355,7 @@ class DownloadVideo(QtCore.QThread):
                             else:
                                 self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_video_filename}.{self.yt_obj.subtype}")
                             save_download_info(self.yt, self.yt_obj, self.video_download_path, self.full_file_path,
-                                               self.location)
+                                               self.location, "video")
                         else:
                             skip_audio = True
                             self.error.emit({"error": "File Already Exists", "file_path": self.video_download_path,
@@ -364,10 +363,10 @@ class DownloadVideo(QtCore.QThread):
                                              })
                 if skip_audio is False:
                     if not self.is_killed:
-                        audio_yt = self.yt.streams.filter(only_audio=True, subtype='mp4')
+                        audio_yt = self.yt.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                         if audio_yt:
                             self.process_dash = True
-                            self.yt_obj = audio_yt.first()
+                            self.yt_obj = audio_yt.last()
                             title = str(self.yt_obj.title)
                             self.dash_audio_filename = safe_string("{0}_{1}".format(title, self.yt_obj.type))
                             self.yt_obj.download(self.dash_download_path, filename=f"{self.dash_audio_filename}.{self.yt_obj.subtype}")
@@ -498,9 +497,9 @@ class DownloadVideoPlayList(QtCore.QThread):
                             self.main_obj.ui.progress_bar.setRange(0, 0)
                             self.pl_obj.download(self.dash_download_path, filename=f"{filename}.{self.pl_obj.subtype}")
                             save_download_info(video_obj, self.pl_obj, self.video_download_path, self.full_file_path,
-                                               self.location, True)
+                                               self.location, "playlist_video")
                             # Audio dash
-                            pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
+                            pl_audio_obj = video_obj.streams.filter(only_audio=True, subtype="mp4").order_by("abr").last()
                             self.pl_obj = pl_audio_obj
                             self.pl_obj.download(self.dash_download_path, filename=f"{filename_dash_audio}.{self.pl_obj.subtype}")
                             self.convert_video_using_ffmpeg()
@@ -552,9 +551,9 @@ class DownloadVideoPlayList(QtCore.QThread):
                                 self.pl_obj.download(self.dash_download_path, filename=f"{filename}.{self.pl_obj.subtype}")
                                 save_download_info(video_obj, self.pl_obj, self.video_download_path,
                                                    self.full_file_path,
-                                                   self.location, True)
+                                                   self.location, "playlist_video")
                                 # Audio dash
-                                pl_audio_obj = video_obj.streams.filter(only_audio=True).first()
+                                pl_audio_obj = video_obj.streams.filter(only_audio=True, subtype='mp4').order_by("abr").last()
                                 self.pl_obj = pl_audio_obj
                                 self.pl_obj.download(self.dash_download_path, filename=f"{filename_dash_audio}.{self.pl_obj.subtype}")
                                 self.convert_video_using_ffmpeg()
@@ -588,10 +587,10 @@ class DownloadVideoPlayList(QtCore.QThread):
                 # Audio
                 if not self.complete_playlist:
                     video_obj = self.all_yt_playlist_obj[self.selected_video_index - 1]
-                    pl_obj = video_obj.streams.filter(only_audio=True)
+                    pl_obj = video_obj.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
 
                     if pl_obj:
-                        self.pl_obj = pl_obj.first()
+                        self.pl_obj = pl_obj.last()
                         self.title = self.pl_obj.title
                         self.audio_filename = safe_string("{0}_{1}".format(self.title, self.pl_obj.type))
                         self.in_file_path = f"{self.audio_download_path}/{self.audio_filename}.mp4"
@@ -601,7 +600,7 @@ class DownloadVideoPlayList(QtCore.QThread):
                             self.pl_obj.download(self.audio_download_path, filename=f"{self.audio_filename}.{self.pl_obj.subtype}")
                             self.convert_audio_using_ffmpeg()
                             save_download_info(video_obj, self.pl_obj, self.audio_download_path, self.full_file_path,
-                                               self.location, True)
+                                               self.location, "playlist_audio")
                         else:
                             self.error_playlist.emit(
                                 {"error": "File Already Exists", "file_path": self.audio_download_path,
@@ -610,9 +609,9 @@ class DownloadVideoPlayList(QtCore.QThread):
                 else:
                     self.counter = 1
                     for video_obj in self.all_yt_playlist_obj:
-                        pl_obj = video_obj.streams.filter(only_audio=True)
+                        pl_obj = video_obj.streams.filter(only_audio=True, subtype='mp4').order_by("abr")
                         if pl_obj:
-                            self.pl_obj = pl_obj.first()
+                            self.pl_obj = pl_obj.last()
                             self.title = self.pl_obj.title
                             self.audio_filename = safe_string("{0}_{1}".format(self.title, self.pl_obj.type))
                             self.in_file_path = f"{self.audio_download_path}/{self.audio_filename}.mp4"
@@ -622,7 +621,7 @@ class DownloadVideoPlayList(QtCore.QThread):
                                 self.convert_audio_using_ffmpeg(single_audio=False)
                                 save_download_info(video_obj, self.pl_obj, self.audio_download_path,
                                                    self.full_file_path,
-                                                   self.location, True)
+                                                   self.location, "playlist_audio")
                                 if self.counter == len(self.all_yt_playlist_obj):
                                     progress_dict = {"type": self.type,
                                                      "is_killed": self.is_killed,

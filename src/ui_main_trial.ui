@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>990</width>
+    <width>1105</width>
     <height>599</height>
    </rect>
   </property>
@@ -123,7 +123,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>3</number>
             </property>
             <property name="iconSize">
              <size>
@@ -1686,6 +1686,61 @@ border-radius:15px;
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QComboBox" name="filter_by">
+                  <property name="focusPolicy">
+                   <enum>Qt::ClickFocus</enum>
+                  </property>
+                  <property name="toolTip">
+                   <string>If Angle is blank, No operation will perform</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>All Files</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Video</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Audio</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Playlist Video</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Playlist Audio</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item>
@@ -1700,56 +1755,6 @@ border-radius:15px;
                  </size>
                 </property>
                </spacer>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_24">
-                <item>
-                 <widget class="QPushButton" name="all_videos">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>Videos</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="resource.qrc">
-                    <normaloff>:/myresource/resource/video_7.png</normaloff>:/myresource/resource/video_7.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>19</width>
-                    <height>19</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="all_playlist">
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="text">
-                   <string>Playlist</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="resource.qrc">
-                    <normaloff>:/myresource/resource/playlist_7.png</normaloff>:/myresource/resource/playlist_7.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>19</width>
-                    <height>19</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -2631,7 +2636,7 @@ QPushButton:hover {background-color: #314a62;}</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>912</width>
+                   <width>1027</width>
                    <height>676</height>
                   </rect>
                  </property>
@@ -3195,7 +3200,7 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>926</width>
+                   <width>1041</width>
                    <height>419</height>
                   </rect>
                  </property>
