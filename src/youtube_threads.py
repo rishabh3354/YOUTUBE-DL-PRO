@@ -697,53 +697,6 @@ class DownloadVideoPlayList(QtCore.QThread):
         self.is_killed = True
 
 
-class NetSpeedThread(QtCore.QThread):
-    change_value = pyqtSignal(list)
-
-    def __init__(self, frequency, speed_unit, parent=None):
-        super(NetSpeedThread, self).__init__(parent)
-        self.frequency = frequency
-        self.speed_unit = speed_unit
-
-    def convert_to_gbit(self, value):
-        return str(self.convert_bytes(value)).split("-")
-
-    def send_stat(self, value):
-        return self.convert_to_gbit(value)
-
-    def convert_bytes(self, num):
-        """
-        this function will convert bytes to MB.... GB... etc
-        """
-        if self.speed_unit == "MB/s | KB/s | B/s":
-            step_unit = 1000.0  # 1024 bad the size
-            for x in ['B/S', 'KB/S', 'MB/S', 'GB/S', 'TB/S']:
-                if num < step_unit:
-                    return "%3.1f-%s" % (num, x)
-                num /= step_unit
-
-        elif self.speed_unit == "mb/s | kb/s | b/s":
-            num *= 8
-            step_unit = 1000.0  # 1024 bad the size
-            for x in ['Bps', 'Kbps', 'Mbps', 'Gbps', 'Tbps']:
-                if num < step_unit:
-                    return "%3.1f-%s" % (num, x)
-                num /= step_unit
-
-    def run(self):
-        old_value = 0
-        while True:
-            new_value = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
-            ping_data = str(check_internet_connection_for_net_speed())
-            if ping_data == "Connected":
-                if old_value:
-                    self.change_value.emit([self.send_stat(new_value - old_value), ping_data])
-                old_value = new_value
-            else:
-                self.change_value.emit([["0", "B/s"], ping_data])
-            time.sleep(self.frequency)
-
-
 class FileSizeThread(QtCore.QThread):
     get_size_of_file = pyqtSignal(dict)
 

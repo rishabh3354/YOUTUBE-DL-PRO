@@ -28,6 +28,8 @@ apps:
        - wayland
        - opengl
        - audio-playback
+       - hardware-observe
+
     desktop: youtube-dl-pro.desktop
 
 plugs:

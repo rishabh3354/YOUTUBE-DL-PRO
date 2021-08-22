@@ -16,11 +16,12 @@ from helper import process_html_data, check_internet_connection, check_default_l
 from home_threads import HomeThreads, PixMapLoadingThread, CompleterThread, SearchThreads
 from country_names_all import COUNTRIES, SERVER_REVERSE, COUNTRIES_REVERSE, SORT_BY_REVERSE, \
     EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER, STREAM_QUALITY_DICT, STREAM_QUALITY_REVERSE_DICT
+from system_monitor import RamThread, NetSpeedThread, CpuThread, DummyDataThread
 from utils import get_time_format, human_format, set_all_countries_icons, set_server_icons
 from youtube_script import get_initial_download_dir
 from template import set_style_for_pause_play_button, selected_download_button_css
 from ui_main_trial import Ui_MainWindow
-from youtube_threads import ProcessYtV, DownloadVideo, NetSpeedThread, ProcessYtVPlayList, GetPlaylistVideos, \
+from youtube_threads import ProcessYtV, DownloadVideo, ProcessYtVPlayList, GetPlaylistVideos, \
     DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo, PlayThread
 from helper import FREQUENCY_MAPPER
 from settings import YouTubeSettings, UrlDialog
@@ -49,8 +50,9 @@ class MainWindow(QMainWindow):
         self.tip_count = -1
 
         #  init net speed settings
-        self.net_frequency = 1.0
+        self.system_frequency = 1
         self.speed_unit = "MB/s | KB/s | B/s"
+        self.temp_unit = "°C  (Celsius)"
         self.default_frequency()
 
         #  youtube settings ============================================================================================
@@ -224,8 +226,9 @@ class MainWindow(QMainWindow):
         self.ui.ge_more_apps.clicked.connect(self.ge_more_apps)
 
         # net speed settings
-        self.ui.horizontalSlider_2.valueChanged.connect(self.change_frequency_net)
-        self.ui.comboBox_3.currentIndexChanged.connect(self.change_net_speed_unit)
+        self.ui.horizontalSlider_freq.valueChanged.connect(self.change_frequency_net)
+        self.ui.comboBox_speed_unit.currentIndexChanged.connect(self.change_net_speed_unit)
+        self.ui.comboBox_cpu_temp.currentIndexChanged.connect(self.change_temp_unit)
 
         # Select theme icon ========================================================================
         self.set_icon_on_line_edit()
@@ -710,10 +713,27 @@ class MainWindow(QMainWindow):
             self.get_user_download_data()
         if index == 4:
             try:
+                dummy_data_thread = self.dummy_data_thread.isRunning()
+            except Exception:
+                dummy_data_thread = False
+            try:
+                cpu_thread = self.cpu_thread.isRunning()
+            except Exception:
+                cpu_thread = False
+            try:
+                ram_thread = self.ram_thread.isRunning()
+            except Exception:
+                ram_thread = False
+            try:
                 net_speed_thread = self.net_speed_thread.isRunning()
-            except Exception as e:
+            except Exception:
                 net_speed_thread = False
-                pass
+            if not dummy_data_thread:
+                self.load_annimation_data()
+            if not cpu_thread:
+                self.start_cpu_thread()
+            if not ram_thread:
+                self.start_ram_thread()
             if not net_speed_thread:
                 self.start_net_speed_thread()
 
@@ -804,30 +824,102 @@ class MainWindow(QMainWindow):
     """
 
     def default_frequency(self):
-        self.ui.horizontalSlider_2.setValue(4)
-        self.ui.label_16.setText("1.0 Sec")
+        self.ui.horizontalSlider_freq.setValue(4)
+        self.ui.frequency_label.setText("1.0 Sec")
 
     def change_net_speed_unit(self):
-        self.speed_unit = self.ui.comboBox_3.currentText()
+        self.speed_unit = self.ui.comboBox_speed_unit.currentText()
+        try:
+            dummy_data_thread = self.dummy_data_thread.isRunning()
+        except Exception:
+            dummy_data_thread = False
+        if not dummy_data_thread:
+            self.load_annimation_data()
         try:
             self.net_speed_thread.terminate()
             self.start_net_speed_thread()
+        except Exception as e:
+            pass
+
+    def change_temp_unit(self):
+        self.temp_unit = self.ui.comboBox_cpu_temp.currentText()
+        try:
+            dummy_data_thread = self.dummy_data_thread.isRunning()
+        except Exception:
+            dummy_data_thread = False
+        if not dummy_data_thread:
+            self.load_annimation_data()
+        try:
+            self.cpu_thread.terminate()
+            self.start_cpu_thread()
         except Exception as e:
             pass
 
     def change_frequency_net(self):
-        self.net_frequency = FREQUENCY_MAPPER.get(self.ui.horizontalSlider_2.value(), 4)
-        self.ui.label_16.setText(str(self.net_frequency) + " Sec")
+        self.system_frequency = FREQUENCY_MAPPER.get(self.ui.horizontalSlider_freq.value(), 4)
+        self.ui.frequency_label.setText(str(self.system_frequency) + " Sec")
+        try:
+            dummy_data_thread = self.dummy_data_thread.isRunning()
+        except Exception:
+            dummy_data_thread = False
+        if not dummy_data_thread:
+            self.load_annimation_data()
         try:
             self.net_speed_thread.terminate()
             self.start_net_speed_thread()
         except Exception as e:
             pass
+        try:
+            self.cpu_thread.terminate()
+            self.start_cpu_thread()
+        except Exception as e:
+            pass
+        try:
+            self.ram_thread.terminate()
+            self.start_ram_thread()
+        except Exception as e:
+            pass
+
+    def start_cpu_thread(self):
+        self.cpu_thread = CpuThread(self.system_frequency, self.temp_unit, self)
+        self.cpu_thread.change_value.connect(self.setProgress_cpu)
+        self.cpu_thread.start()
+
+    def start_ram_thread(self):
+        self.ram_thread = RamThread(self.system_frequency, self)
+        self.ram_thread.change_value.connect(self.setProgress_ram)
+        self.ram_thread.start()
 
     def start_net_speed_thread(self):
-        self.net_speed_thread = NetSpeedThread(self.net_frequency, self.speed_unit, self)
+        self.net_speed_thread = NetSpeedThread(self.system_frequency, self.speed_unit, self)
         self.net_speed_thread.change_value.connect(self.setProgress_net_speed)
         self.net_speed_thread.start()
+
+    def load_annimation_data(self):
+        self.dummy_data_thread = DummyDataThread(self)
+        self.dummy_data_thread.change_value.connect(self.setProgress_dummy_data)
+        self.dummy_data_thread.start()
+
+    def setProgress_cpu(self, value):
+        self.ui.cpu_usage.setText(value[0])
+        self.ui.cpu_temp.setText(value[1])
+
+    def setProgress_ram(self, value):
+        self.ui.ram_usage.setText(value[0])
+        self.ui.ram_total.setText(value[1])
+        self.ui.ram_free.setText(value[2])
+
+    def setProgress_net_speed(self, value):
+        self.ui.internet_speed.setText(value[0][0])
+        self.ui.internet_unit.setText(value[0][1])
+        self.ui.internet_connection.setText(value[1])
+        self.speed = value[0][0]
+        self.unit = value[0][1]
+
+    def setProgress_dummy_data(self, value):
+        self.ui.cpu_usage.setText(value[0])
+        self.ui.ram_usage.setText(value[0])
+        self.ui.internet_speed.setText(value[1])
 
     """
         load/save settings =============================================================================================
@@ -843,8 +935,10 @@ class MainWindow(QMainWindow):
         self.settings.setValue("delete_source_file_check", self.delete_source_file)
         self.settings.setValue("default_loc", self.Default_loc)
         self.settings.setValue("default_loc_playlist", self.Default_loc_playlist)
-        self.settings.setValue("net_speed_unit", self.ui.comboBox_3.currentText())
-        self.settings.setValue("net_frequency", self.ui.horizontalSlider_2.value())
+        self.settings.setValue("net_speed_unit", self.ui.comboBox_speed_unit.currentText())
+        self.settings.setValue("system_frequency", self.ui.horizontalSlider_freq.value())
+        self.settings.setValue("cpu_temp_unit", self.ui.comboBox_cpu_temp.currentText())
+
         #  one time congratulate
         self.settings.setValue("one_time_congratulate", self.one_time_congratulate)
         # save window state
@@ -871,12 +965,15 @@ class MainWindow(QMainWindow):
 
         if self.settings.contains("net_speed_unit"):
             self.speed_unit = self.settings.value("net_speed_unit")
-            self.ui.comboBox_3.setCurrentText(self.speed_unit)
-        if self.settings.contains("net_frequency"):
-            self.net_frequency = FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), 4)
-            self.ui.horizontalSlider_2.setValue(int(self.settings.value("net_frequency")))
-            self.ui.label_16.setText(
-                str(FREQUENCY_MAPPER.get(int(self.settings.value("net_frequency")), "1.0")) + " Sec")
+            self.ui.comboBox_speed_unit.setCurrentText(self.speed_unit)
+        if self.settings.contains("system_frequency"):
+            self.system_frequency = FREQUENCY_MAPPER.get(int(self.settings.value("system_frequency")), 4)
+            self.ui.horizontalSlider_freq.setValue(int(self.settings.value("system_frequency")))
+            self.ui.frequency_label.setText(
+                str(FREQUENCY_MAPPER.get(int(self.settings.value("system_frequency")), "1.0")) + " Sec")
+        if self.settings.contains("cpu_temp_unit"):
+            self.temp_unit = self.settings.value("cpu_temp_unit")
+            self.ui.comboBox_cpu_temp.setCurrentText(self.temp_unit)
 
         #  one time congratulate
         if self.settings.contains("one_time_congratulate"):
@@ -1056,13 +1153,6 @@ class MainWindow(QMainWindow):
 
     def progress_bar_disable(self):
         self.ui.progress_bar.setRange(0, 1)
-
-    def setProgress_net_speed(self, value):
-        self.ui.internet_speed_2.setText(value[0][0])
-        self.ui.indicator_2.setText(value[0][1])
-        self.ui.internet_2.setText(value[1])
-        self.speed = value[0][0]
-        self.unit = value[0][1]
 
     def open_download_path(self):
         folder_loc = QFileDialog.getExistingDirectory(self, "Select Downloads Directory",

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1072</width>
+    <width>990</width>
     <height>599</height>
    </rect>
   </property>
@@ -123,7 +123,7 @@
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>6</number>
+             <number>4</number>
             </property>
             <property name="iconSize">
              <size>
@@ -1792,19 +1792,13 @@ border-radius:15px;
                <normaloff>:/myresource/resource/icons8-speed-100.png</normaloff>:/myresource/resource/icons8-speed-100.png</iconset>
              </attribute>
              <attribute name="title">
-              <string>Net speed</string>
+              <string>System Monitor</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_18">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_5">
                 <item>
-                 <widget class="QFrame" name="frame_circle_18">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
+                 <widget class="QFrame" name="frame_circle_1">
                   <property name="minimumSize">
                    <size>
                     <width>250</width>
@@ -1819,11 +1813,11 @@ border-radius:15px;
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QFrame{
-	border: 5px solid rgb(60, 231, 195);
-	border-radius: 5px;
+	border: 3px solid rgb(60, 231, 195);
+	border-radius: 8px;
 }
 QFrame:hover {
-	border: 5px solid rgb(105, 95, 148);
+	border: 3px solid rgb(105, 95, 148);
 }</string>
                   </property>
                   <property name="frameShape">
@@ -1832,7 +1826,7 @@ QFrame:hover {
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_28">
+                  <layout class="QVBoxLayout" name="verticalLayout_21">
                    <property name="spacing">
                     <number>10</number>
                    </property>
@@ -1849,11 +1843,139 @@ QFrame:hover {
                     <number>50</number>
                    </property>
                    <item>
-                    <widget class="QLabel" name="header_2">
+                    <widget class="QLabel" name="label_cpu">
                      <property name="font">
                       <font>
                        <family>Roboto</family>
                        <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(60, 231, 195);</string>
+                     </property>
+                     <property name="text">
+                      <string>CPU USAGE</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="cpu_usage">
+                     <property name="font">
+                      <font>
+                       <family>Sans Serif</family>
+                       <pointsize>30</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(220,220,220);</string>
+                     </property>
+                     <property name="text">
+                      <string>0%</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_38">
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Sans</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+ color: rgb(128, 102, 168);</string>
+                     </property>
+                     <property name="text">
+                      <string>CPU Info</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="cpu_temp">
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Sans</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(60, 231, 195);</string>
+                     </property>
+                     <property name="text">
+                      <string>Temp: 0 Cº</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_circle_2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>257</width>
+                    <height>300</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>300</width>
+                    <height>300</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QFrame{
+	border: 3px solid rgb(60, 231, 195);
+	border-radius: 8px;
+}
+QFrame:hover {
+	border: 3px solid rgb(105, 95, 148);
+}</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_22">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>50</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>50</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_internet">
+                     <property name="font">
+                      <font>
+                       <family>Roboto</family>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                      <property name="styleSheet">
@@ -1869,11 +1991,11 @@ color: rgb(60, 231, 195);</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="internet_speed_2">
+                    <widget class="QLabel" name="internet_speed">
                      <property name="font">
                       <font>
                        <family>Sans Serif</family>
-                       <pointsize>35</pointsize>
+                       <pointsize>40</pointsize>
                       </font>
                      </property>
                      <property name="styleSheet">
@@ -1889,19 +2011,19 @@ color: rgb(220,220,220);</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="indicator_2">
+                    <widget class="QLabel" name="internet_unit">
                      <property name="font">
                       <font>
                        <family>DejaVu Sans</family>
-                       <pointsize>11</pointsize>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">border: none;
-color: rgb(220,220,220);</string>
+ color: rgb(128, 102, 168);</string>
                      </property>
                      <property name="text">
-                      <string>KB/s</string>
+                      <string>MB/S</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
@@ -1909,11 +2031,11 @@ color: rgb(220,220,220);</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="internet_2">
+                    <widget class="QLabel" name="internet_connection">
                      <property name="font">
                       <font>
                        <family>DejaVu Sans</family>
-                       <pointsize>11</pointsize>
+                       <pointsize>12</pointsize>
                       </font>
                      </property>
                      <property name="styleSheet">
@@ -1929,6 +2051,138 @@ color: rgb(60, 231, 195);</string>
                     </widget>
                    </item>
                   </layout>
+                  <zorder>internet_speed</zorder>
+                  <zorder>internet_unit</zorder>
+                  <zorder>internet_connection</zorder>
+                  <zorder>label_internet</zorder>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_circle_3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>250</width>
+                    <height>250</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>250</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QFrame{
+	border: 3px solid rgb(60, 231, 195);
+	border-radius: 8px;
+}
+QFrame:hover {
+	border: 3px solid rgb(105, 95, 148);
+}</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_20">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>50</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>50</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="label_ram">
+                     <property name="font">
+                      <font>
+                       <family>Roboto</family>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(60, 231, 195);</string>
+                     </property>
+                     <property name="text">
+                      <string>RAM USAGE</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="ram_usage">
+                     <property name="font">
+                      <font>
+                       <family>Sans Serif</family>
+                       <pointsize>30</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(220,220,220);</string>
+                     </property>
+                     <property name="text">
+                      <string>0%</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="ram_total">
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Sans</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+ color: rgb(128, 102, 168);</string>
+                     </property>
+                     <property name="text">
+                      <string>Total: 0 GB</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="ram_free">
+                     <property name="font">
+                      <font>
+                       <family>DejaVu Sans</family>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: none;
+color: rgb(60, 231, 195);</string>
+                     </property>
+                     <property name="text">
+                      <string>Free 0 GB</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -1937,8 +2191,65 @@ color: rgb(60, 231, 195);</string>
                <layout class="QVBoxLayout" name="verticalLayout_14">
                 <item>
                  <layout class="QGridLayout" name="gridLayout_12">
-                  <item row="1" column="4">
-                   <widget class="QLabel" name="label_16">
+                  <item row="2" column="1">
+                   <widget class="QLabel" name="label_23">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="autoFillBackground">
+                     <bool>false</bool>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>Indicator Frequency :</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <spacer name="horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="2" column="5">
+                   <spacer name="horizontalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>130</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="2" column="4">
+                   <widget class="QLabel" name="frequency_label">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -1972,22 +2283,6 @@ color: rgb(60, 231, 195);</string>
                     </property>
                    </spacer>
                   </item>
-                  <item row="1" column="0">
-                   <spacer name="horizontalSpacer_5">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Expanding</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
                   <item row="0" column="1">
                    <widget class="QLabel" name="label_20">
                     <property name="sizePolicy">
@@ -2003,34 +2298,37 @@ color: rgb(60, 231, 195);</string>
                      <string notr="true"/>
                     </property>
                     <property name="text">
-                     <string>  Net Speed Unit :  </string>
+                     <string>Net Speed Unit :  </string>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignCenter</set>
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QLabel" name="label_23">
+                   <widget class="QLabel" name="label_45">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
                     <property name="styleSheet">
                      <string notr="true"/>
                     </property>
                     <property name="text">
-                     <string>Net Speed Freq :</string>
+                     <string>CPU Temp Unit :  </string>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignCenter</set>
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="5">
-                   <spacer name="horizontalSpacer_22">
+                  <item row="1" column="0">
+                   <spacer name="horizontalSpacer_11">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -2039,14 +2337,14 @@ color: rgb(60, 231, 195);</string>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>130</width>
+                      <width>40</width>
                       <height>20</height>
                      </size>
                     </property>
                    </spacer>
                   </item>
                   <item row="1" column="5">
-                   <spacer name="horizontalSpacer_20">
+                   <spacer name="horizontalSpacer_23">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -2061,8 +2359,45 @@ color: rgb(60, 231, 195);</string>
                     </property>
                    </spacer>
                   </item>
-                  <item row="1" column="2">
-                   <widget class="QSlider" name="horizontalSlider_2">
+                  <item row="1" column="2" colspan="3">
+                   <widget class="QComboBox" name="comboBox_cpu_temp">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>°C  (Celsius)</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="resource.qrc">
+                       <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>°F  (Fahrenheit)</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="resource.qrc">
+                       <normaloff>:/myresource/resource/icons8-expand-arrow-100.png</normaloff>:/myresource/resource/icons8-expand-arrow-100.png</iconset>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="2" column="2" colspan="2">
+                   <widget class="QSlider" name="horizontalSlider_freq">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -2092,13 +2427,35 @@ color: rgb(60, 231, 195);</string>
                     </property>
                    </widget>
                   </item>
+                  <item row="0" column="5">
+                   <spacer name="horizontalSpacer_22">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>130</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                   <item row="0" column="2" colspan="3">
-                   <widget class="QComboBox" name="comboBox_3">
+                   <widget class="QComboBox" name="comboBox_speed_unit">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
                     </property>
                     <property name="styleSheet">
                      <string notr="true"/>
@@ -2274,7 +2631,7 @@ QPushButton:hover {background-color: #314a62;}</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>994</width>
+                   <width>912</width>
                    <height>676</height>
                   </rect>
                  </property>
@@ -2838,7 +3195,7 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1008</width>
+                   <width>926</width>
                    <height>419</height>
                   </rect>
                  </property>
