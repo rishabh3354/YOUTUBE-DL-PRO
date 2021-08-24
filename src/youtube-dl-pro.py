@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
         self.explore = "trending"
         self.sort_by = "relevance"
         self.home_button_item = 20
-        self.stream_quality = 1
+        self.stream_quality = 2
         self.default_server = "http://invidio.xamh.de"
         self.Default_loc = get_initial_download_dir()
         self.Default_loc_playlist = get_initial_download_dir()
@@ -338,7 +338,7 @@ class MainWindow(QMainWindow):
             self.youtube_setting_ui.ui.sort_by.setCurrentIndex(0)
             self.youtube_setting_ui.ui.server.setCurrentIndex(0)
             self.youtube_setting_ui.ui.no_of_videos.setValue(20)
-            self.youtube_setting_ui.ui.stream_quality.setCurrentIndex(0)
+            self.youtube_setting_ui.ui.stream_quality.setCurrentIndex(1)
             self.country = "US"
             self.explore = "trending"
             self.sort_by = "relevance"
@@ -491,20 +491,24 @@ class MainWindow(QMainWindow):
         if not play_thread:
             self.play_thread = PlayThread(stream_url, self)
             self.play_thread.get_stream_url.connect(self.finish_getting_stream_url)
+            self.play_thread.stream_url_error.connect(self.error_getting_stream_url)
             self.play_thread.start()
 
     def play_video_from_videos_tab(self):
-        if self.ui.select_format_obj_2.currentText() != "Select Format":
-            self.ui.video_progressBar.setRange(0, 0)
-            if self.ui.select_format_obj_2.currentText() == "AUDIO - MP3":
-                stream = get_stream_quality(self.audio_stream_url, self.stream_quality, True)
+        try:
+            if self.ui.select_format_obj_2.currentText() != "Select Format":
+                self.ui.video_progressBar.setRange(0, 0)
+                if self.ui.select_format_obj_2.currentText() == "AUDIO - MP3":
+                    stream = get_stream_quality(self.audio_stream_url, self.stream_quality, True)
+                else:
+                    stream = get_stream_quality(self.stream_url, self.stream_quality, False)
+                self.process = QProcess()
+                self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
+                self.process.start("mpv", ["--force-window", "{0}".format(stream)])
             else:
-                stream = get_stream_quality(self.stream_url, self.stream_quality, False)
-            self.process = QProcess()
-            self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
-            self.process.start("mpv", ["--force-window", "{0}".format(stream)])
-        else:
-            self.popup_message(title="No Audio/Video File To Play!", message="Please Select YouTube Video From The Home Tab.")
+                self.popup_message(title="No Audio/Video File To Play!", message="Please Select YouTube Video From The Home Tab.")
+        except Exception as e:
+            print(e)
 
     def finish_getting_stream_url(self, stream_url):
         try:
@@ -519,6 +523,11 @@ class MainWindow(QMainWindow):
                 self.process.start("mpv", ["--force-window", "{0}".format(stream)])
             except Exception as e:
                 print(e)
+
+    def error_getting_stream_url(self, error_string):
+        self.ui.home_progress_bar.setRange(0, 1)
+        self.popup_message(title="YouTube Video Could not Play!",
+                           message="This Video Is Not Available Or Deleted Or Regionally Restricted From YouTube.")
 
     def handle_stdout_from_videos(self):
         try:
@@ -949,7 +958,7 @@ class MainWindow(QMainWindow):
         self.settings.setValue("home_button_item", self.youtube_setting_ui.ui.no_of_videos.value())
         self.settings.setValue("default_server",
                                SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
-        self.settings.setValue("stream_quality", STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 1))
+        self.settings.setValue("stream_quality", STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 2))
 
     def load_settings(self):
         if self.settings.contains("delete_source_file_check"):
@@ -1001,7 +1010,7 @@ class MainWindow(QMainWindow):
             self.youtube_setting_ui.ui.server.setCurrentText(SERVER_REVERSE.get(self.default_server, "YT-DL-SERVER-1"))
         if self.settings.contains("stream_quality"):
             self.stream_quality = json.loads(self.settings.value("stream_quality"))
-            self.youtube_setting_ui.ui.stream_quality.setCurrentText(STREAM_QUALITY_REVERSE_DICT.get(self.stream_quality, "Medium"))
+            self.youtube_setting_ui.ui.stream_quality.setCurrentText(STREAM_QUALITY_REVERSE_DICT.get(self.stream_quality, "High"))
 
     def show_file_size(self):
         try:
