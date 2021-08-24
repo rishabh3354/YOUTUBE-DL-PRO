@@ -31,3 +31,6 @@ EXPLORE_REVERSE = {"trending": "Trending", "popular": "Popular"}
 SORT_BY = {"Relevance": "relevance", "Rating": "rating", "Upload date": "upload_date", "View count": "view_count"}
 SORT_BY_REVERSE = {"relevance": "Relevance", "rating": "Rating", "upload_date": "Upload date", "view_count": "View count"}
 
+AFTER_PLAYBACK = {"Loop Play": "loop_play", "Stop And Quit": "stop_and_quit"}
+AFTER_PLAYBACK_REVERSE = {"loop_play": "Loop Play", "stop_and_quit": "Stop And Quit"}
+

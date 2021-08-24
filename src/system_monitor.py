@@ -139,7 +139,7 @@ class UtilsInfo:
         return "Total {0} GB".format("{:.1f}".format(psutil.virtual_memory().total / 1073741824))
 
     def get_available_ram(self):
-        return "Free {0} GB".format("{:.1f}".format(psutil.virtual_memory().free / 1073741824))
+        return "Free {0} GB".format("{:.1f}".format((psutil.virtual_memory().total - psutil.virtual_memory().used) / 1073741824))
 
     # Internet speed
 

@@ -721,7 +721,7 @@ class FileSizeThreadSingleVideo(QtCore.QThread):
 
 
 class PlayThread(QtCore.QThread):
-    get_stream_url = pyqtSignal(list)
+    get_stream_url = pyqtSignal(dict)
     stream_url_error = pyqtSignal(str)
 
     def __init__(self, video_url, parent=None):
@@ -731,8 +731,9 @@ class PlayThread(QtCore.QThread):
     def run(self):
         from pytube import YouTube
         try:
-            stream_url = [item.url for item in YouTube(self.video_url).streams.filter(progressive=True).order_by('resolution')]
-            self.get_stream_url.emit(stream_url)
+            yt_obj = YouTube(self.video_url)
+            stream_url = [item.url for item in yt_obj.streams.filter(progressive=True).order_by('resolution')]
+            self.get_stream_url.emit({"stream_url": stream_url, "title": str(yt_obj.title)})
         except Exception as e:
             self.stream_url_error.emit(str(e))
             print(e)

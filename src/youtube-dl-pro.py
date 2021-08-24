@@ -16,7 +16,8 @@ from helper import process_html_data, check_internet_connection, check_default_l
     get_downloaded_data_filter
 from home_threads import HomeThreads, PixMapLoadingThread, CompleterThread, SearchThreads
 from country_names_all import COUNTRIES, SERVER_REVERSE, COUNTRIES_REVERSE, SORT_BY_REVERSE, \
-    EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER, STREAM_QUALITY_DICT, STREAM_QUALITY_REVERSE_DICT
+    EXPLORE_REVERSE, EXPLORE, SORT_BY, SERVER, STREAM_QUALITY_DICT, STREAM_QUALITY_REVERSE_DICT, AFTER_PLAYBACK, \
+    AFTER_PLAYBACK_REVERSE
 from system_monitor import RamThread, NetSpeedThread, CpuThread, DummyDataThread
 from utils import get_time_format, human_format, set_all_countries_icons, set_server_icons
 from youtube_script import get_initial_download_dir
@@ -63,6 +64,8 @@ class MainWindow(QMainWindow):
         self.home_button_item = 20
         self.stream_quality = 2
         self.default_server = "http://invidio.xamh.de"
+        self.after_playback_action = "loop_play"
+        self.mpv_arguments = []
         self.Default_loc = get_initial_download_dir()
         self.Default_loc_playlist = get_initial_download_dir()
         self.youtube_setting_ui.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE_DL")
@@ -82,6 +85,7 @@ class MainWindow(QMainWindow):
         self.youtube_setting_ui.ui.explore.currentIndexChanged.connect(self.select_explore)
         self.youtube_setting_ui.ui.sort_by.currentIndexChanged.connect(self.select_sort_by)
         self.youtube_setting_ui.ui.server.currentIndexChanged.connect(self.save_default_server)
+        self.youtube_setting_ui.ui.after_playback.currentIndexChanged.connect(self.select_after_playback_action)
 
         # home widget ==================================================================================================
         self.ui.tableWidget.verticalHeader().setVisible(False)
@@ -311,10 +315,13 @@ class MainWindow(QMainWindow):
         self.stream_quality = STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 1)
 
     def save_default_server(self):
-        self.default_server = SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com")
+        self.default_server = SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://invidio.xamh.de")
 
     def select_country(self):
         self.country = COUNTRIES.get(self.youtube_setting_ui.ui.country.currentText(), "US")
+
+    def select_after_playback_action(self):
+        self.after_playback_action = AFTER_PLAYBACK.get(self.youtube_setting_ui.ui.after_playback.currentText(), "loop_play")
 
     def select_explore(self):
         self.explore = EXPLORE.get(self.youtube_setting_ui.ui.explore.currentText(), "trending")
@@ -339,10 +346,12 @@ class MainWindow(QMainWindow):
             self.youtube_setting_ui.ui.server.setCurrentIndex(0)
             self.youtube_setting_ui.ui.no_of_videos.setValue(20)
             self.youtube_setting_ui.ui.stream_quality.setCurrentIndex(1)
+            self.youtube_setting_ui.ui.after_playback.setCurrentIndex(0)
             self.country = "US"
             self.explore = "trending"
             self.sort_by = "relevance"
-            self.default_server = "http://ytprivate.com"
+            self.default_server = "http://invidio.xamh.de"
+            self.after_playback_action = "loop_play"
             self.Default_loc = get_initial_download_dir()
             self.Default_loc_playlist = get_initial_download_dir()
             self.youtube_setting_ui.ui.download_path_edit_2.setText(self.Default_loc + "/YOUTUBE_DL")
@@ -504,7 +513,13 @@ class MainWindow(QMainWindow):
                     stream = get_stream_quality(self.stream_url, self.stream_quality, False)
                 self.process = QProcess()
                 self.process.readyReadStandardOutput.connect(self.handle_stdout_from_videos)
-                self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+                self.mpv_arguments = []
+                if self.after_playback_action == "loop_play":
+                    self.mpv_arguments.append("--loop")
+                self.mpv_arguments.append("--force-window")
+                self.mpv_arguments.append(stream)
+                self.mpv_arguments.append("--title={0}".format(self.title))
+                self.process.start("mpv", self.mpv_arguments)
             else:
                 self.popup_message(title="No Audio/Video File To Play!", message="Please Select YouTube Video From The Home Tab.")
         except Exception as e:
@@ -517,10 +532,16 @@ class MainWindow(QMainWindow):
             mvp_thread = False
         if not mvp_thread:
             try:
-                stream = get_stream_quality(stream_url, self.stream_quality)
+                stream = get_stream_quality(stream_url.get("stream_url"), self.stream_quality)
                 self.process = QProcess()
                 self.process.readyReadStandardOutput.connect(self.handle_stdout)
-                self.process.start("mpv", ["--force-window", "{0}".format(stream)])
+                self.mpv_arguments = []
+                if self.after_playback_action == "loop_play":
+                    self.mpv_arguments.append("--loop")
+                self.mpv_arguments.append("--force-window")
+                self.mpv_arguments.append(stream)
+                self.mpv_arguments.append("--title={0}".format(stream_url.get("title")))
+                self.process.start("mpv", self.mpv_arguments)
             except Exception as e:
                 print(e)
 
@@ -957,8 +978,9 @@ class MainWindow(QMainWindow):
         self.settings.setValue("sort_by", SORT_BY.get(self.youtube_setting_ui.ui.sort_by.currentText(), "relevance"))
         self.settings.setValue("home_button_item", self.youtube_setting_ui.ui.no_of_videos.value())
         self.settings.setValue("default_server",
-                               SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://ytprivate.com"))
+                               SERVER.get(self.youtube_setting_ui.ui.server.currentText(), "http://invidio.xamh.de"))
         self.settings.setValue("stream_quality", STREAM_QUALITY_DICT.get(self.youtube_setting_ui.ui.stream_quality.currentText(), 2))
+        self.settings.setValue("after_playback_action", AFTER_PLAYBACK.get(self.youtube_setting_ui.ui.after_playback.currentText(), "loop_play"))
 
     def load_settings(self):
         if self.settings.contains("delete_source_file_check"):
@@ -1011,6 +1033,9 @@ class MainWindow(QMainWindow):
         if self.settings.contains("stream_quality"):
             self.stream_quality = json.loads(self.settings.value("stream_quality"))
             self.youtube_setting_ui.ui.stream_quality.setCurrentText(STREAM_QUALITY_REVERSE_DICT.get(self.stream_quality, "High"))
+        if self.settings.contains("after_playback_action"):
+            self.after_playback_action = self.settings.value("after_playback_action")
+            self.youtube_setting_ui.ui.after_playback.setCurrentText(AFTER_PLAYBACK_REVERSE.get(self.after_playback_action, "Loop Play"))
 
     def show_file_size(self):
         try:
@@ -1058,7 +1083,13 @@ class MainWindow(QMainWindow):
                 QDesktopServices.openUrl(QUrl(play_path))
             elif self.msg.clickedButton() == mpv_play:
                 self.process = QProcess()
-                self.process.start("mpv", ["--force-window", "{0}".format(play_path)])
+                self.mpv_arguments = []
+                if self.after_playback_action == "loop_play":
+                    self.mpv_arguments.append("--loop")
+                self.mpv_arguments.append("--force-window")
+                self.mpv_arguments.append(play_path)
+                self.mpv_arguments.append("--title={0}".format(title))
+                self.process.start("mpv", self.mpv_arguments)
             elif self.msg.clickedButton() == show_in_downloads:
                 self.show_downloads_page()
             elif self.msg.clickedButton() == close:
@@ -2103,7 +2134,13 @@ class MainWindow(QMainWindow):
                     self.popup_message(title="File not found or deleted!", message="", error=True)
                 else:
                     self.process = QProcess()
-                    self.process.start("mpv", ["--force-window", "{0}".format(file_path)])
+                    self.mpv_arguments = []
+                    if self.after_playback_action == "loop_play":
+                        self.mpv_arguments.append("--loop")
+                    self.mpv_arguments.append("--force-window")
+                    self.mpv_arguments.append(file_path)
+                    self.mpv_arguments.append("--title={0}".format(selected_video.get("title_show", PRODUCT_NAME)))
+                    self.process.start("mpv", self.mpv_arguments)
             else:
                 self.popup_message(title="Please select file first!!", message="", error=True)
         except Exception as e:
