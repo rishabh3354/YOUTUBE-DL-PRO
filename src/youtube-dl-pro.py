@@ -50,6 +50,7 @@ class MainWindow(QMainWindow):
         self.one_time_congratulate = True
         self.setWindowTitle("YouTube-Dl GUI")
         self.tip_count = -1
+        self.pytube_status = True
 
         #  init net speed settings
         self.system_frequency = 1
@@ -498,7 +499,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             play_thread = False
         if not play_thread:
-            self.play_thread = PlayThread(stream_url, self)
+            self.play_thread = PlayThread(stream_url, self.pytube_status, self)
             self.play_thread.get_stream_url.connect(self.finish_getting_stream_url)
             self.play_thread.stream_url_error.connect(self.error_getting_stream_url)
             self.play_thread.start()
@@ -1336,11 +1337,14 @@ class MainWindow(QMainWindow):
             self.ui.tabWidget.setCurrentIndex(1)
             self.setPhoto(QPixmap(self.thumbnail_path))
         else:
-            self.popup_message(title="Youtube video not available!",
-                               message="This video is not available. Please check your url !")
-            # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
-            #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
-            #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
+            if not self.pytube_status:
+                self.popup_message(title="Application is in Schedule Maintenance",
+                                   message="Video Downloading Option Is Not Available Right Now."
+                                           " We Are Pushing New Updates, Please Check In A While."
+                                           "\n\nNote: You Can Still Play Videos In The App. Sorry For The Inconvenience.")
+            else:
+                self.popup_message(title="Youtube video not available!",
+                                   message="This video is not available. Please check your url !")
 
     def download_action(self):
         context = dict()
@@ -1706,10 +1710,13 @@ class MainWindow(QMainWindow):
                 self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
         else:
             self.ui.home_progress_bar.setRange(0, 1)
-            self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
-            # self.popup_message(title="Video cannot be downloaded right now! (Schedule maintenance)",
-            #                    message="Youtube always change their backend server, we are fixing our application in order to download videos for you.\n\n"
-            #                            "Youtube-dl is in schedule maintenance. Don't worry we are pushing new updates for Youtube-dl soon.\nThanks\nSorry for inconvenience")
+            if not self.pytube_status:
+                self.popup_message(title="Application is in Schedule Maintenance",
+                                   message="Video Downloading Option Is Not Available Right Now."
+                                           " We Are Pushing New Updates, Please Check In A While."
+                                           "\n\nNote: You Can Still Play Videos In The App. Sorry For The Inconvenience.")
+            else:
+                self.popup_message(title="Invalid Youtube Playlist Url", message="Please check your Playlist link !")
 
     def set_video_list(self, play_list_videos):
         if self.play_list_counter > self.total_videos:
@@ -2418,6 +2425,9 @@ class MainWindow(QMainWindow):
     def get_pytube_response(self, context):
         try:
             if context["response"]:
+                print(context["message"])
+                if context["title"] == "Video Downloading Option Is Not Available Right Now! (Schedule Maintenance).":
+                    self.pytube_status = False
                 self.popup_message(context["title"], str(context["message"]).replace('\\n', '\n'))
         except Exception as e:
             pass

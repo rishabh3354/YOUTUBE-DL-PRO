@@ -164,7 +164,10 @@ def process_playlist(url, location):
         if len(playlist.video_urls) > 0:
             first_video_in_playlist = playlist.video_urls[0]
             context["video_context"] = process_ytv(first_video_in_playlist, False, location)
-        context["status"] = True
+            if context["video_context"].get("status", True) is False:
+                context["status"] = False
+            else:
+                context["status"] = True
 
     except Exception as e:
         context["status"] = False

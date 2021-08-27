@@ -78,4 +78,5 @@ parts:
           - psutil
           - ffmpeg-python
           - python-slugify
+          - youtube_dl
       build-attributes: [ keep-execstack ]

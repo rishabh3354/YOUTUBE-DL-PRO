@@ -9,7 +9,10 @@ from helper import run_ffmpeg_command, safe_string, save_download_info, get_file
 from youtube_script import process_ytv, get_download_path, process_playlist
 import youtube_script
 import pytube.request
+import youtube_dl
+
 pytube.request.default_range_size = 500000
+PRODUCT_NAME = "YOUTUBE_DL"
 
 
 class ProcessYtV(QtCore.QThread):
@@ -724,16 +727,29 @@ class PlayThread(QtCore.QThread):
     get_stream_url = pyqtSignal(dict)
     stream_url_error = pyqtSignal(str)
 
-    def __init__(self, video_url, parent=None):
+    def __init__(self, video_url, pytube_status, parent=None):
         super(PlayThread, self).__init__(parent)
         self.video_url = video_url
+        self.pytube_status = pytube_status
 
     def run(self):
         from pytube import YouTube
         try:
-            yt_obj = YouTube(self.video_url)
-            stream_url = [item.url for item in yt_obj.streams.filter(progressive=True).order_by('resolution')]
-            self.get_stream_url.emit({"stream_url": stream_url, "title": str(yt_obj.title)})
+            if self.pytube_status:
+                yt_obj = YouTube(self.video_url)
+                stream_url = [item.url for item in yt_obj.streams.filter(progressive=True).order_by('resolution')]
+                self.get_stream_url.emit({"stream_url": stream_url, "title": str(yt_obj.title)})
+            else:
+                ydl = youtube_dl.YoutubeDL()
+                with ydl:
+                    result = ydl.extract_info(self.video_url, download=False)
+                stream_url_list = [x.get("url") for x in result.get("formats") if x.get("format_id") in ["18", "22"]]
+                if stream_url_list:
+                    self.get_stream_url.emit(
+                        {"stream_url": stream_url_list, "title": str(result.get("title", PRODUCT_NAME))})
+                else:
+                    self.stream_url_error.emit("YouTube Play Url Not Found")
+
         except Exception as e:
             self.stream_url_error.emit(str(e))
             print(e)

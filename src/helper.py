@@ -485,7 +485,7 @@ def get_stream_quality(stream_url, stream_quality, audio_type=False):
                 stream = stream_url[0]
         except Exception as e:
             print(e)
-            stream = stream_url[0]
+            stream = stream_url[-1]
 
     return stream
 
