@@ -2425,7 +2425,6 @@ class MainWindow(QMainWindow):
     def get_pytube_response(self, context):
         try:
             if context["response"]:
-                print(context["message"])
                 if context["title"] == "Video Downloading Option Is Not Available Right Now! (Schedule Maintenance).":
                     self.pytube_status = False
                 self.popup_message(context["title"], str(context["message"]).replace('\\n', '\n'))
