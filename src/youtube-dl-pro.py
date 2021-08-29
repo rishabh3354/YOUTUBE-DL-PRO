@@ -941,7 +941,7 @@ class MainWindow(QMainWindow):
             try:
                 account_id = str(self.ui.lineEdit_account_id_2.text())
                 if account_id not in ["", None]:
-                    self.ui.error_message_2.setText(f'<html><head/><body><p align="center"><span style=" color:#4e9a06;">If you have changed your PC or lost your account, </span><a href="https://warlordsoftwares.in/contact_us/?account_id={account_id}"><span style=" text-decoration: underline; color:#ef2929;">@Contact us</span></a><span style=" color:#4e9a06;"> to restore.</span></p></body></html>')
+                    self.ui.error_message_2.setText(f'<html><head/><body><p align="center"><span style=" color:#4e9a06;">If you have changed your PC or lost your account, </span><a href="https://warlordsoftwares.in/contact_us/?account_id={account_id}&application={PRODUCT_NAME}"><span style=" text-decoration: underline; color:#ef2929;">@Contact us</span></a><span style=" color:#4e9a06;"> to restore.</span></p></body></html>')
             except Exception as e:
                 print(e)
                 self.ui.error_message_2.setText('<html><head/><body><p align="center"><span style=" color:#4e9a06;">If you have changed your PC or lost your account, </span><a href="https://warlordsoftwares.in/contact_us/"><span style=" text-decoration: underline; color:#ef2929;">@Contact us</span></a><span style=" color:#4e9a06;"> to restore.</span></p></body></html>')
