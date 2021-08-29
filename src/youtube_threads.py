@@ -44,11 +44,13 @@ class GetPlaylistVideos(QtCore.QThread):
     def run(self):
         self.get_video_list.emit("Select All")
         total_obj = []
+        playlist_urls = []
 
         for url in self.all_videos:
             try:
                 yt = YouTube(url)
                 total_obj.append(yt)
+                playlist_urls.append(yt.watch_url)
                 self.get_video_list.emit(yt.title)
                 try:
                     image_url = yt.thumbnail_url
@@ -64,6 +66,7 @@ class GetPlaylistVideos(QtCore.QThread):
         self.partial_finish.emit()
         playlist_quality_dict = get_all_playlist_quality(total_obj, self.is_hd_plus_playlist, self)
         playlist_quality_dict["total_obj"] = total_obj
+        playlist_quality_dict["playlist_urls"] = playlist_urls
         self.finished_video_list.emit(playlist_quality_dict)
 
 
@@ -739,6 +742,42 @@ class PlayThread(QtCore.QThread):
                 yt_obj = YouTube(self.video_url)
                 stream_url = [item.url for item in yt_obj.streams.filter(progressive=True).order_by('resolution')]
                 self.get_stream_url.emit({"stream_url": stream_url, "title": str(yt_obj.title)})
+            else:
+                ydl = youtube_dl.YoutubeDL()
+                with ydl:
+                    result = ydl.extract_info(self.video_url, download=False)
+                stream_url_list = [x.get("url") for x in result.get("formats") if x.get("format_id") in ["18", "22"]]
+                if stream_url_list:
+                    self.get_stream_url.emit(
+                        {"stream_url": stream_url_list, "title": str(result.get("title", PRODUCT_NAME))})
+                else:
+                    self.stream_url_error.emit("YouTube Play Url Not Found")
+
+        except Exception as e:
+            self.stream_url_error.emit(str(e))
+            print(e)
+
+
+class PlayPlaylistThread(QtCore.QThread):
+    get_stream_url = pyqtSignal(dict)
+    stream_url_error = pyqtSignal(str)
+
+    def __init__(self, video_url, pytube_status, audio, parent=None):
+        super(PlayPlaylistThread, self).__init__(parent)
+        self.video_url = video_url
+        self.pytube_status = pytube_status
+        self.audio_only = audio
+
+    def run(self):
+        from pytube import YouTube
+        try:
+            if self.pytube_status:
+                yt_obj = YouTube(self.video_url)
+                if self.audio_only:
+                    stream_url = [item.url for item in yt_obj.streams.filter(only_audio=True).order_by('abr')]
+                else:
+                    stream_url = [item.url for item in yt_obj.streams.filter(progressive=True).order_by('resolution')]
+                self.get_stream_url.emit({"stream_url": stream_url, "title": str(yt_obj.title), "audio_type": self.audio_only})
             else:
                 ydl = youtube_dl.YoutubeDL()
                 with ydl:

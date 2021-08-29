@@ -215,6 +215,12 @@ class Ui_YouTubeSettings(object):
         self.gridLayout_27 = QtWidgets.QGridLayout()
         self.gridLayout_27.setObjectName("gridLayout_27")
         self.close = QtWidgets.QPushButton(self.groupBox_6)
+        self.close.setStyleSheet("QPushButton{\n"
+"  background-color: #233547;\n"
+"  color: #E0E1E3;\n"
+"}\n"
+"\n"
+"QPushButton:hover {background-color: #314a62;}")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-ok-144.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.close.setIcon(icon3)
@@ -222,6 +228,12 @@ class Ui_YouTubeSettings(object):
         self.close.setObjectName("close")
         self.gridLayout_27.addWidget(self.close, 0, 1, 1, 1)
         self.reset_default = QtWidgets.QPushButton(self.groupBox_6)
+        self.reset_default.setStyleSheet("QPushButton{\n"
+"  background-color: #233547;\n"
+"  color: #E0E1E3;\n"
+"}\n"
+"\n"
+"QPushButton:hover {background-color: #314a62;}")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-reset-256.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.reset_default.setIcon(icon4)
@@ -282,7 +294,7 @@ class Ui_YouTubeSettings(object):
         self.server.setToolTip(_translate("YouTubeSettings", "If Angle is blank, No operation will perform"))
         self.label_14.setText(_translate("YouTubeSettings", "Select server"))
         self.groupBox_6.setTitle(_translate("YouTubeSettings", "ACTION"))
-        self.close.setText(_translate("YouTubeSettings", "Okay"))
+        self.close.setText(_translate("YouTubeSettings", "Apply Changes"))
         self.reset_default.setText(_translate("YouTubeSettings", "Reset Defaults"))
 import country_flag_rc
 import dark_rc

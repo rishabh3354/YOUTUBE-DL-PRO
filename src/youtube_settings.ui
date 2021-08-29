@@ -475,8 +475,16 @@ p, li { white-space: pre-wrap; }
        <layout class="QGridLayout" name="gridLayout_27">
         <item row="0" column="1">
          <widget class="QPushButton" name="close">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+  background-color: #233547;
+  color: #E0E1E3;
+}
+
+QPushButton:hover {background-color: #314a62;}</string>
+          </property>
           <property name="text">
-           <string>Okay</string>
+           <string>Apply Changes</string>
           </property>
           <property name="icon">
            <iconset resource="resource.qrc">
@@ -492,6 +500,14 @@ p, li { white-space: pre-wrap; }
         </item>
         <item row="0" column="0">
          <widget class="QPushButton" name="reset_default">
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+  background-color: #233547;
+  color: #E0E1E3;
+}
+
+QPushButton:hover {background-color: #314a62;}</string>
+          </property>
           <property name="text">
            <string>Reset Defaults</string>
           </property>

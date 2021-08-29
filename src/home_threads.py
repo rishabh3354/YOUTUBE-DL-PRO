@@ -23,14 +23,15 @@ def get_live_server():
 
 
 class HomeThreads(QtCore.QThread):
-    home_results = pyqtSignal(list)
+    home_results = pyqtSignal(dict)
     server_change_error = pyqtSignal(str)
 
-    def __init__(self, default_server, country_code, category, parent=None):
+    def __init__(self, default_server, country_code, category, content_type="home", parent=None):
         super(HomeThreads, self).__init__(parent)
         self.country_code = country_code
         self.category = category
         self.end_point = default_server
+        self.content_type = content_type
 
     def get_end_points(self):
         self.end_point = get_live_server()
@@ -44,11 +45,11 @@ class HomeThreads(QtCore.QThread):
         try:
             result = self.get_result()
             if result.status_code in [200, 201]:
-                self.home_results.emit(result.json())
+                self.home_results.emit({"content_type": "home", "result_data": result.json()})
             else:
                 self.get_end_points()
                 result = self.get_result()
-                self.home_results.emit(result.json())
+                self.home_results.emit({"content_type": "home", "result_data": result.json()})
         except Exception as e:
             print(e)
             self.server_change_error.emit("")
@@ -59,21 +60,22 @@ class PixMapLoadingThread(QtCore.QThread):
     progress = pyqtSignal(dict)
     finish_first_pixmap = pyqtSignal()
 
-    def __init__(self, load_images, pixmap_cache, parent=None):
+    def __init__(self, load_images, pixmap_cache, content_type="home", parent=None):
         super(PixMapLoadingThread, self).__init__(parent)
         self.load_images = load_images
         self.pixmap_cache = pixmap_cache
+        self.content_type = content_type
 
     def run(self):
         try:
             counter = 0
             for sno, urls in enumerate(self.load_images, 1):
                 if self.pixmap_cache.get(urls):
-                    self.progress.emit({"pixmap": self.pixmap_cache.get(urls), "progress": sno})
+                    self.progress.emit({"pixmap": self.pixmap_cache.get(urls), "progress": sno, "content_type": self.content_type})
                 else:
                     image = QImage()
                     image.loadFromData(requests.get(urls, UserAgent).content)
-                    self.progress.emit({"pixmap": QPixmap(image), "progress": sno})
+                    self.progress.emit({"pixmap": QPixmap(image), "progress": sno, "content_type": self.content_type})
 
                 if counter == 0:
                     self.finish_first_pixmap.emit()
@@ -137,7 +139,7 @@ class CompleterThread(QtCore.QThread):
 
 
 class SearchThreads(QtCore.QThread):
-    search_results = pyqtSignal(list)
+    search_results = pyqtSignal(dict)
 
     def __init__(self, default_server, query, country_code, page, sort_by, parent=None):
         super(SearchThreads, self).__init__(parent)
@@ -161,12 +163,11 @@ class SearchThreads(QtCore.QThread):
         try:
             result = self.get_result()
             if result.status_code in [200, 201]:
-                self.search_results.emit(result.json())
+                self.search_results.emit({"content_type": "search", "result_data": result.json()})
             else:
                 self.get_end_points()
                 result = self.get_result()
-                self.search_results.emit(result.json())
+                self.search_results.emit({"content_type": "search", "result_data": result.json()})
         except Exception as e:
             print(e)
             pass
-

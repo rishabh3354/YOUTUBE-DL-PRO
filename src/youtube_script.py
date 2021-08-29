@@ -125,6 +125,7 @@ def process_ytv(url, is_hd_plus, location):
         context["title"] = str(yt.title)
         context["thumbnail_url"] = yt.thumbnail_url
         context["length"] = get_time_format(yt.length)
+        context["watch_url"] = yt.watch_url
         context["stream_url"] = [item.url for item in yt.streams.filter(progressive=True).order_by('resolution')]
         context["audio_stream_url"] = [item.url for item in yt.streams.filter(only_audio=True).order_by('abr')]
         file_extension = '.jpg'
@@ -161,6 +162,7 @@ def process_playlist(url, location):
         context["playlist_length"] = len(playlist.video_urls)
         context["playlist_videos"] = playlist.video_urls
         context["playlist_title"] = playlist.title
+        context["playlist_url"] = playlist.playlist_url
         if len(playlist.video_urls) > 0:
             first_video_in_playlist = playlist.video_urls[0]
             context["video_context"] = process_ytv(first_video_in_playlist, False, location)

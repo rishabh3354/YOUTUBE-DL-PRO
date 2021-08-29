@@ -24,13 +24,14 @@ from youtube_script import get_initial_download_dir
 from template import set_style_for_pause_play_button
 from ui_main_trial import Ui_MainWindow
 from youtube_threads import ProcessYtV, DownloadVideo, ProcessYtVPlayList, GetPlaylistVideos, \
-    DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo, PlayThread
+    DownloadVideoPlayList, FileSizeThread, FileSizeThreadSingleVideo, PlayThread, PlayPlaylistThread
 from helper import FREQUENCY_MAPPER
 from settings import YouTubeSettings, UrlDialog
 
 PRODUCT_NAME = "YOUTUBE_DL"
 THEME_PATH = '/snap/youtube-dl-pro/current/'
 PLAYLIST_SIZE_CACHE = {}
+HOME_CACHE = {}
 
 
 class MainWindow(QMainWindow):
@@ -93,6 +94,7 @@ class MainWindow(QMainWindow):
         self.ui.tableWidget.horizontalHeader().setVisible(False)
         self.ui.home_progress_bar.setFixedHeight(2)
         self.ui.video_progressBar.setFixedHeight(2)
+        self.ui.playlist_progressBar.setFixedHeight(2)
         self.ui.tableWidget.verticalHeader().setDefaultSectionSize(30)
         self.main_table_pointer = 140
         self.table_view_default_setting()
@@ -185,6 +187,7 @@ class MainWindow(QMainWindow):
         # init
         self.play_list_counter = 1
         self.total_obj = list()
+        self.playlist_urls = []
 
         # signal and slots
         self.ui.select_videos_playlist_2.currentIndexChanged.connect(self.show_video_thumbnail)
@@ -192,12 +195,14 @@ class MainWindow(QMainWindow):
         self.ui.select_type_playlist_2.currentIndexChanged.connect(self.check_for_audio_only_playlist)
         self.ui.select_quality_playlist_2.currentIndexChanged.connect(self.check_for_audio_only_playlist)
         self.youtube_setting_ui.ui.download_path_button_playlist.clicked.connect(self.open_download_path_playlist)
+        self.ui.play_from_playlist.clicked.connect(self.play_playlist)
 
         # Downloads functionality ======================================================
 
         # init
         self.downloaded_file_filter = "all_files"
         self.ui.filter_by.currentIndexChanged.connect(self.set_file_downloaded_filter)
+        self.download_search_map_list = []
 
         # signal and slots
         self.ui.open_videos.clicked.connect(self.show_downloads_folder)
@@ -307,6 +312,8 @@ class MainWindow(QMainWindow):
     def click_ok_button(self):
         self.youtube_setting_ui.hide()
         self.ui.tabWidget.setCurrentIndex(0)
+        global HOME_CACHE
+        HOME_CACHE = {}
         self.get_home_page()
 
     def change_no_of_home_item(self):
@@ -479,7 +486,7 @@ class MainWindow(QMainWindow):
     def select_item_on_double_clicked(self, item):
         video_id = self.videoid_list[item.row()]
         self.download_url = video_id
-        self.ytv_link_clicked(video_id)
+        self.play_video(video_id)
 
     def signal_for_row_button_table(self, row):
         self.video_url = self.videoid_list[int(str(row).split("-")[1])]
@@ -503,6 +510,36 @@ class MainWindow(QMainWindow):
             self.play_thread.get_stream_url.connect(self.finish_getting_stream_url)
             self.play_thread.stream_url_error.connect(self.error_getting_stream_url)
             self.play_thread.start()
+
+    def play_playlist(self):
+        if self.playlist_urls:
+            self.ui.playlist_progressBar.setRange(0, 0)
+            try:
+                play_playlist_thread = self.play_playlist_thread.isRunning()
+            except Exception as e:
+                play_playlist_thread = False
+
+            if not play_playlist_thread:
+                try:
+                    if self.ui.select_videos_playlist_2.currentText() != "Select All":
+                        stream_url = self.playlist_urls[self.ui.select_videos_playlist_2.currentIndex() - 1]
+                    else:
+                        stream_url = self.playlist_urls[0]
+                except Exception as e:
+                    print(e)
+                    stream_url = self.self.playlist_urls[-1]
+
+                if self.ui.select_type_playlist_2.currentText() == "AUDIO - MP3":
+                    self.play_playlist_thread = PlayPlaylistThread(stream_url, self.pytube_status, True, self)
+                else:
+                    self.play_playlist_thread = PlayPlaylistThread(stream_url, self.pytube_status, False, self)
+
+                self.play_playlist_thread.get_stream_url.connect(self.finish_getting_stream_url_playlist)
+                self.play_playlist_thread.stream_url_error.connect(self.error_getting_stream_url_playlist)
+                self.play_playlist_thread.start()
+        else:
+            self.popup_message(title="No YouTube playlist To Watch!",
+                               message="Please add YouTube Playlist From The Home Tab.")
 
     def play_video_from_videos_tab(self):
         try:
@@ -546,10 +583,39 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 print(e)
 
+    def finish_getting_stream_url_playlist(self, stream_url):
+        try:
+            mvp_thread = self.process.isRunning()
+        except Exception as e:
+            mvp_thread = False
+        if not mvp_thread:
+            try:
+                if stream_url.get("audio_type"):
+                    stream = get_stream_quality(stream_url.get("stream_url"), self.stream_quality, True)
+                else:
+                    stream = get_stream_quality(stream_url.get("stream_url"), self.stream_quality)
+
+                self.process = QProcess()
+                self.process.readyReadStandardOutput.connect(self.handle_stdout_playlist)
+                self.mpv_arguments = []
+                if self.after_playback_action == "loop_play":
+                    self.mpv_arguments.append("--loop")
+                self.mpv_arguments.append("--force-window")
+                self.mpv_arguments.append(stream)
+                self.mpv_arguments.append("--title={0}".format(stream_url.get("title")))
+                self.process.start("mpv", self.mpv_arguments)
+            except Exception as e:
+                print(e)
+
     def error_getting_stream_url(self, error_string):
         self.ui.home_progress_bar.setRange(0, 1)
         self.popup_message(title="YouTube Video Could not Play!",
                            message="This Video Is Not Available Or Deleted Or Regionally Restricted From YouTube.")
+
+    def error_getting_stream_url_playlist(self, error_string):
+        self.ui.playlist_progressBar.setRange(0, 0)
+        self.popup_message(title="YouTube Playlist Video Could not Play!",
+                           message="This Playlist Video Is Not Available Or Deleted Or Regionally Restricted From YouTube.")
 
     def handle_stdout_from_videos(self):
         try:
@@ -563,26 +629,87 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(e)
 
+    def handle_stdout_playlist(self):
+        try:
+            self.ui.playlist_progressBar.setRange(0, 1)
+        except Exception as e:
+            print(e)
+
     def next_page(self):
         try:
             search_thread = self.search_thread.isRunning()
         except Exception as e:
             search_thread = False
-        if not search_thread:
+        try:
+            pixmap_thread = self.pixmap_load_thread.isRunning()
+        except Exception as e:
+            pixmap_thread = False
+
+        if not search_thread and not pixmap_thread:
             self.page += 1
             self.ui.tabWidget.setCurrentIndex(0)
-            self.start_search_youtube()
+            if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get("content", [])) != 0:
+                self.disable_enable_prev_next_page(show=True)
+                if self.page == 1:
+                    self.ui.prev_page.setEnabled(False)
+                self.ui.home_progress_bar.setRange(0, 0)
+                self.title_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get("content", [])
+                self.pixmap_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get("pixmap_cache", [])
+                self.videoid_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get("videoid_list", [])
+                self.thumbnail_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get("thumbnail_list", [])
+                self.process_images_into_table()
+                self.ui.home_progress_bar.setRange(0, 1)
+                self.set_page_no()
+            else:
+                self.disable_enable_prev_next_page(show=True)
+                if self.page == 1:
+                    self.ui.prev_page.setEnabled(False)
+                self.start_search_youtube()
+        else:
+            self.popup_message(title="Process Already In Queue",
+                               message="Please wait, Image thumbnails on this page are loading!")
 
     def prev_page(self):
         try:
             search_thread = self.search_thread.isRunning()
         except Exception as e:
             search_thread = False
-        if not search_thread:
+        try:
+            pixmap_thread = self.pixmap_load_thread.isRunning()
+        except Exception as e:
+            pixmap_thread = False
+
+        if not search_thread and not pixmap_thread:
             if self.page > 1:
                 self.page -= 1
                 self.ui.tabWidget.setCurrentIndex(0)
+
+            if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get(
+                    "content", [])) != 0:
+                self.disable_enable_prev_next_page(show=True)
+                if self.page == 1:
+                    self.ui.prev_page.setEnabled(False)
+
+                self.ui.home_progress_bar.setRange(0, 0)
+                self.title_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("content", [])
+                self.pixmap_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("pixmap_cache", [])
+                self.videoid_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("videoid_list", [])
+                self.thumbnail_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("thumbnail_list", [])
+                self.process_images_into_table()
+                self.set_page_no()
+                self.ui.home_progress_bar.setRange(0, 1)
+            else:
+                self.disable_enable_prev_next_page(show=True)
+                if self.page == 1:
+                    self.ui.prev_page.setEnabled(False)
                 self.start_search_youtube()
+        else:
+            self.popup_message(title="Process Already In Queue",
+                               message="Please wait, Image thumbnails on this page are loading!")
 
     def get_search_suggestion_text(self):
         try:
@@ -597,58 +724,103 @@ class MainWindow(QMainWindow):
         self.ui.page_no.setText(f"Page {self.page}")
 
     def start_search_youtube(self):
+        if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {})) == 0:
+            self.page = 1
+        query = self.ui.youtube_search.text()
+
+        if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get(
+                "content", [])) != 0:
+            self.disable_enable_prev_next_page(show=True)
+            self.page = 1
+            if self.page == 1:
+                self.ui.prev_page.setEnabled(False)
+
+            self.ui.home_progress_bar.setRange(0, 0)
+            self.title_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                f"{self.page}", {}).get("content", [])
+            self.pixmap_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                f"{self.page}", {}).get("pixmap_cache", [])
+            self.videoid_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                f"{self.page}", {}).get("videoid_list", [])
+            self.thumbnail_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                f"{self.page}", {}).get("thumbnail_list", [])
+            self.process_images_into_table()
+            self.set_page_no()
+            self.ui.home_progress_bar.setRange(0, 1)
+        else:
+            if query not in [None, ""]:
+                if check_internet_connection():
+                    try:
+                        search_thread = self.search_thread.isRunning()
+                    except Exception as e:
+                        search_thread = False
+                    if not search_thread:
+                        self.ui.home_progress_bar.setRange(0, 0)
+                        self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
+                                                           self.sort_by, self)
+                        self.search_thread.search_results.connect(self.get_search_results)
+                        self.search_thread.start()
+                    else:
+                        self.popup_message(title="Process Already In Queue",
+                                           message="Please wait for the Running process to finish!")
+                else:
+                    self.ui.home_progress_bar.setRange(0, 1)
+                    self.popup_message(title="No internet connection", message="Please connect to the internet")
+
+    def get_search_results(self, data):
         self.disable_enable_prev_next_page(show=True)
         if self.page == 1:
             self.ui.prev_page.setEnabled(False)
-        query = self.ui.youtube_search.text()
-        if query not in [None, ""]:
-            if check_internet_connection():
-                try:
-                    search_thread = self.search_thread.isRunning()
-                except Exception as e:
-                    search_thread = False
-                if not search_thread:
-                    self.ui.home_progress_bar.setRange(0, 0)
-                    self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
-                                                       self.sort_by, self)
-                    self.search_thread.search_results.connect(self.get_search_results)
-                    self.search_thread.start()
-                else:
-                    self.popup_message(title="Process Already In Queue",
-                                       message="Please wait for the Running process to finish!")
-            else:
-                self.ui.home_progress_bar.setRange(0, 1)
-                self.popup_message(title="No internet connection", message="Please connect to the internet")
-
-    def get_search_results(self, data):
         self.set_page_no()
         self.result(data)
 
     def get_home_page(self, initial=False):
-        self.ui.page_no.setVisible(False)
-        self.disable_enable_prev_next_page(show=False)
-        if check_internet_connection():
-            try:
-                home_thread = self.home_thread.isRunning()
-            except Exception as e:
-                home_thread = False
-            try:
-                pixmap_thread = self.pixmap_load_thread.isRunning()
-            except Exception as e:
-                pixmap_thread = False
+        try:
+            search_thread = self.search_thread.isRunning()
+        except Exception as e:
+            search_thread = False
+        try:
+            pixmap_thread = self.pixmap_load_thread.isRunning()
+        except Exception as e:
+            pixmap_thread = False
 
-            if not home_thread and not pixmap_thread:
+        if not search_thread and not pixmap_thread:
+            self.ui.page_no.setVisible(False)
+            self.disable_enable_prev_next_page(show=False)
+            if len(HOME_CACHE.get("home", {}).get("content", [])) != 0:
                 self.ui.home_progress_bar.setRange(0, 0)
-                self.ui.youtube_search.clear()
-                self.home_thread = HomeThreads(self.default_server, self.country, self.explore, self)
+                self.title_list = HOME_CACHE.get("home", {}).get("content", [])
+                self.pixmap_list = HOME_CACHE.get("home", {}).get("pixmap_cache", [])
+                self.videoid_list = HOME_CACHE.get("home", {}).get("videoid_list", [])
+                self.thumbnail_list = HOME_CACHE.get("home", {}).get("thumbnail_list", [])
+                self.process_images_into_table()
+                self.ui.home_progress_bar.setRange(0, 1)
+            else:
+                if check_internet_connection():
+                    try:
+                        home_thread = self.home_thread.isRunning()
+                    except Exception as e:
+                        home_thread = False
+                    try:
+                        pixmap_thread = self.pixmap_load_thread.isRunning()
+                    except Exception as e:
+                        pixmap_thread = False
 
-                self.home_thread.home_results.connect(self.result)
-                self.home_thread.server_change_error.connect(self.server_error_handle)
-                self.home_thread.start()
+                    if not home_thread and not pixmap_thread:
+                        self.ui.home_progress_bar.setRange(0, 0)
+                        self.ui.youtube_search.clear()
+                        self.home_thread = HomeThreads(self.default_server, self.country, self.explore, self)
+
+                        self.home_thread.home_results.connect(self.result)
+                        self.home_thread.server_change_error.connect(self.server_error_handle)
+                        self.home_thread.start()
+                else:
+                    self.ui.home_progress_bar.setRange(0, 1)
+                    if not initial:
+                        self.popup_message(title="No internet connection", message="Please connect to the internet")
         else:
-            self.ui.home_progress_bar.setRange(0, 1)
-            if not initial:
-                self.popup_message(title="No internet connection", message="Please connect to the internet")
+            self.popup_message(title="Search Process Already In Queue",
+                               message="Please wait, Image thumbnails on this page are loading!")
 
     def server_error_handle(self, msg):
         self.ui.home_progress_bar.setRange(0, 1)
@@ -701,7 +873,7 @@ class MainWindow(QMainWindow):
                 button3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
                 button.setToolTip("Watch on YouTube")
                 button2.setToolTip("Download")
-                button3.setToolTip("Play Now")
+                button3.setToolTip("Watch")
                 button.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
                 button2.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
                 button3.setStyleSheet("QToolButton{background-color: #233547;}\nQToolButton:hover {background-color: #314a62;}")
@@ -765,6 +937,14 @@ class MainWindow(QMainWindow):
                 self.start_ram_thread()
             if not net_speed_thread:
                 self.start_net_speed_thread()
+        if index == 5:
+            try:
+                account_id = str(self.ui.lineEdit_account_id_2.text())
+                if account_id not in ["", None]:
+                    self.ui.error_message_2.setText(f'<html><head/><body><p align="center"><span style=" color:#4e9a06;">If you have changed your PC or lost your account, </span><a href="https://warlordsoftwares.in/contact_us/?account_id={account_id}"><span style=" text-decoration: underline; color:#ef2929;">@Contact us</span></a><span style=" color:#4e9a06;"> to restore.</span></p></body></html>')
+            except Exception as e:
+                print(e)
+                self.ui.error_message_2.setText('<html><head/><body><p align="center"><span style=" color:#4e9a06;">If you have changed your PC or lost your account, </span><a href="https://warlordsoftwares.in/contact_us/"><span style=" text-decoration: underline; color:#ef2929;">@Contact us</span></a><span style=" color:#4e9a06;"> to restore.</span></p></body></html>')
 
     def set_icon_on_line_edit(self):
         self.url_dialog_ui.ui.yt_video_link.addAction(QIcon(":/myresource/resource/icons8-search-500.png"),QLineEdit.LeadingPosition)
@@ -810,7 +990,7 @@ class MainWindow(QMainWindow):
         self.pixmap_list = []
         self.videoid_list = []
         self.table_view_default_setting()
-        for item in data[: self.home_button_item]:
+        for item in data.get("result_data", [])[: self.home_button_item]:
             thumbnail = "https://i.ytimg.com/vi/" + \
                         item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
                             0] + "/mqdefault.jpg"
@@ -827,14 +1007,53 @@ class MainWindow(QMainWindow):
             self.videoid_list.append(video_id)
             self.title_list.append(content)
 
-        self.pixmap_load_thread = PixMapLoadingThread(self.thumbnail_list, self.pixmap_cache, self)
+        if data.get("content_type", "") == "home":
+            try:
+                HOME_CACHE["home"] = {"content": self.title_list,
+                                      "pixmap_cache": [],
+                                      "thumbnail_list": self.thumbnail_list,
+                                      "videoid_list": self.videoid_list,
+                                      }
+            except Exception as e:
+                print(e)
+
+            self.pixmap_load_thread = PixMapLoadingThread(self.thumbnail_list, self.pixmap_cache, "home", self)
+        else:
+            self.pixmap_load_thread = PixMapLoadingThread(self.thumbnail_list, self.pixmap_cache, "search", self)
+            try:
+                if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {})) != 0:
+                    HOME_CACHE["search"][str(self.ui.youtube_search.text())][str(self.page)] = {"content": self.title_list,
+                                      "pixmap_cache": [],
+                                      "thumbnail_list": self.thumbnail_list,
+                                      "videoid_list": self.videoid_list,
+                                      }
+                else:
+                    HOME_CACHE.setdefault("search", {str(self.ui.youtube_search.text()): {str(self.page): {}}})
+                    HOME_CACHE["search"].setdefault(str(self.ui.youtube_search.text()), {str(self.page): {}})
+                    HOME_CACHE["search"][str(self.ui.youtube_search.text())][str(self.page)] = {"content": self.title_list,
+                                          "pixmap_cache": [],
+                                          "thumbnail_list": self.thumbnail_list,
+                                          "videoid_list": self.videoid_list,
+                                          }
+            except Exception as e:
+                print(e)
+
         self.pixmap_load_thread.finish.connect(self.setProgressVal_pixmap_finish)
         self.pixmap_load_thread.progress.connect(self.setProgressVal_pixmap)
         self.pixmap_load_thread.finish_first_pixmap.connect(self.first_finish_pixmap)
         self.pixmap_load_thread.start()
 
     def setProgressVal_pixmap(self, pixmap_image):
-        self.pixmap_list.append(pixmap_image.get("pixmap"))
+        try:
+            self.pixmap_list.append(pixmap_image.get("pixmap"))
+            if pixmap_image.get("content_type", "") == "home":
+                HOME_CACHE["home"]["pixmap_cache"].append(pixmap_image.get("pixmap"))
+            else:
+                HOME_CACHE["search"][str(self.ui.youtube_search.text())][str(self.page)].get("pixmap_cache", []).append(
+                    pixmap_image.get("pixmap"))
+        except Exception as e:
+            print(e)
+
         self.process_images_into_table()
 
     def first_finish_pixmap(self):
@@ -1165,10 +1384,14 @@ class MainWindow(QMainWindow):
         try:
             if video_thread_running:
                 self.progress_bar_disable()
+                self.pause = False
+                set_style_for_pause_play_button(self, pause=True)
                 self.hide_show_play_pause_button(hide=True)
                 self.process_ytv_thread.kill()
             elif playlist_thread_running:
                 self.progress_bar_disable()
+                self.pause = False
+                set_style_for_pause_play_button(self, pause=True)
                 self.hide_show_play_pause_button(hide=True)
                 self.process_ytv_play_list_thread.kill()
         except Exception as e:
@@ -1274,6 +1497,7 @@ class MainWindow(QMainWindow):
             self.title = yt_data.get("title")
             self.length = yt_data.get("length")
             self.stream_url = yt_data.get("stream_url")
+            self.watch_url = yt_data.get("watch_url")
             self.audio_stream_url = yt_data.get("audio_stream_url")
             self.thumbnail_path, title, length = process_html_data(yt_data, self.Default_loc)
             self.ui.textBrowser_thumbnail_9.setVisible(False)
@@ -1283,6 +1507,9 @@ class MainWindow(QMainWindow):
             self.ui.by_channel.setText(yt_data.get("channel", ""))
             self.ui.views.setText(human_format(yt_data.get("views", 0)))
             self.ui.descriptions.setText(yt_data.get("description", ""))
+            self.ui.watch_url.setText(f"<html><head/><body><p><a href='{self.watch_url}'>"
+                                      f"<span style=' text-decoration: none; "
+                                      f"color:#4e9a06;'>{self.watch_url}</span></a></p></body></html>")
 
             if yt_data.get("length") == '00m:00s':
                 self.popup_message(title="Live youtube Video Detected!",
@@ -1682,6 +1909,7 @@ class MainWindow(QMainWindow):
                 self.playlist = yt_playlist.get("playlist")
                 self.playlist_title = yt_playlist.get("playlist_title")
                 self.total_videos = yt_playlist.get("playlist_length")
+                self.watch_url_playlist = yt_playlist.get("playlist_url", "")
                 self.thumbnail_path_playlist, title, total_videos = process_html_data_playlist(yt_playlist, self.Default_loc_playlist)
                 self.ui.textBrowser_playlist_thumbnail.setVisible(False)
                 self.ui.graphicsView_playlist.setVisible(True)
@@ -1689,6 +1917,9 @@ class MainWindow(QMainWindow):
                 self.ui.video_length_playlist.setText(f"Calculating..")
                 self.ui.video_total_playlist.setText(f"{total_videos}")
                 self.ui.video_size_playlist.setText(f"Calculating..")
+                self.ui.watch_url_playlist.setText(f"<html><head/><body><p><a href='{self.watch_url_playlist}'>"
+                                          f"<span style=' text-decoration: none; "
+                                          f"color:#4e9a06;'>{self.watch_url_playlist}</span></a></p></body></html>")
                 self.ui.by_channel_playlist.setText(yt_playlist.get("video_context", {}).get("channel", ""))
                 self.ui.views_playlist.setText(human_format(yt_playlist.get("video_context", {}).get("views", "")))
                 self.ui.descriptions_playlist.setText(yt_playlist.get("video_context", {}).get("description", ""))
@@ -1753,6 +1984,7 @@ class MainWindow(QMainWindow):
 
     def finish_video_list(self, playlist_quality_dict):
         self.total_obj = playlist_quality_dict.get("total_obj")
+        self.playlist_urls = playlist_quality_dict.get("playlist_urls")
         self.ui.select_videos_playlist_2.setEnabled(True)
         self.ui.select_quality_playlist_2.setEnabled(True)
         self.ui.select_type_playlist_2.setEnabled(True)
@@ -2013,6 +2245,8 @@ class MainWindow(QMainWindow):
 
     def set_file_downloaded_filter(self):
         self.downloaded_file_filter = "_".join(str(self.ui.filter_by.currentText()).lower().split(" "))
+        self.ui.search_videos.clear()
+        self.download_search_map_list = []
         self.get_user_download_data()
 
     def get_user_download_data(self):
@@ -2048,9 +2282,9 @@ class MainWindow(QMainWindow):
                 length = row.get("length")
                 file_size = row.get("size")
                 if file_type == "AUDIO":
-                    details = f"{title}\n{file_type}\nSize: {file_size}\nLength: {length}"
+                    details = f"{title}\n🇦​​​​​🇺​​​​​🇩​​​​​🇮​​​​​🇴​​​​​\nSize: {file_size}\nLength: {length}"
                 else:
-                    details = f"{title}\n{file_type}-{resolution}-{subtype}\nSize: {file_size}\nLength: {length}"
+                    details = f"{title}\n🇻​​​​​🇮​​​​​🇩​​​​​🇪​​​​​🇴​​​​​-{resolution}-{subtype}\nSize: {file_size}\nLength: {length}"
 
                 if details not in exist_entry:
                     icon = QtGui.QIcon()
@@ -2107,7 +2341,10 @@ class MainWindow(QMainWindow):
             user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
-                selected_video = user_json_data[c_index]
+                if len(self.download_search_map_list) > 0:
+                    selected_video = self.download_search_map_list[c_index]
+                else:
+                    selected_video = user_json_data[c_index]
                 file_path = selected_video.get("file_path")
                 if not os.path.isfile(file_path):
                     self.popup_message(title="File not found or deleted!", message="", error=True)
@@ -2135,7 +2372,10 @@ class MainWindow(QMainWindow):
             user_json_data = sorted(user_json_data, key=lambda k: k['sort_param'], reverse=True)
             c_index = self.ui.listWidget.currentIndex().row()
             if c_index != -1:
-                selected_video = user_json_data[c_index]
+                if len(self.download_search_map_list) > 0:
+                    selected_video = self.download_search_map_list[c_index]
+                else:
+                    selected_video = user_json_data[c_index]
                 file_path = selected_video.get("file_path")
                 if not os.path.isfile(file_path):
                     self.popup_message(title="File not found or deleted!", message="", error=True)
@@ -2170,7 +2410,10 @@ class MainWindow(QMainWindow):
                     video_info = get_local_download_data(self.Default_loc)
                 video_info = get_downloaded_data_filter(video_info, self.downloaded_file_filter)
                 video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
-                video_info = video_info[c_index]
+                if len(self.download_search_map_list) > 0:
+                    video_info = self.download_search_map_list[c_index]
+                else:
+                    video_info = video_info[c_index]
                 title = video_info.get("title_show", "-")
                 length = video_info.get("length", "-")
                 author = video_info.get("author", "-")
@@ -2250,12 +2493,19 @@ class MainWindow(QMainWindow):
             video_info = get_local_download_data(self.Default_loc_playlist)
         else:
             video_info = get_local_download_data(self.Default_loc)
+        video_info_without_filter = deepcopy(video_info)
         c_index = self.ui.listWidget.currentIndex().row()
         if c_index != -1:
             video_info = get_downloaded_data_filter(video_info, self.downloaded_file_filter)
             video_info = sorted(video_info, key=lambda k: k['sort_param'], reverse=True)
-            video_info_copy = deepcopy(video_info)
-            poped_item = video_info.pop(c_index)
+            if self.downloaded_file_filter != "all_files":
+                video_info_copy = video_info_without_filter
+            else:
+                video_info_copy = deepcopy(video_info)
+            if len(self.download_search_map_list) > 0:
+                poped_item = self.download_search_map_list.pop(c_index)
+            else:
+                poped_item = video_info.pop(c_index)
             poped_item_copy_index = video_info_copy.index(poped_item)
             video_info_copy.pop(poped_item_copy_index)
             delete_location = str(poped_item.get("download_path")).split("YOUTUBE_DL")[0]
@@ -2265,6 +2515,7 @@ class MainWindow(QMainWindow):
                     video_info_copy_1.append(item_dict)
             save_after_delete(video_info_copy_1, delete_location)
             self.ui.listWidget.clear()
+            self.ui.search_videos.clear()
             self.get_user_download_data()
             if delete_source_file:
                 try:
@@ -2304,9 +2555,11 @@ class MainWindow(QMainWindow):
                 size = QtCore.QSize()
                 size.setHeight(100)
                 size.setWidth(100)
+                self.download_search_map_list = []
                 for number in range(0, len(video_info)):
                     if number in index_list:
                         row = video_info[number]
+                        self.download_search_map_list.append(row)
                         thumbnail_path = row.get("thumbnail_path")
                         if not os.path.isfile(thumbnail_path):
                             thumbnail_path = ":/myresource/resource/download_preview.png"
@@ -2317,9 +2570,10 @@ class MainWindow(QMainWindow):
                         length = row.get("length")
                         file_size = row.get("size")
                         if file_type == "AUDIO":
-                            details = f"{title}\n{file_type}\nSize: {file_size}\nLength: {length}"
+                            details = f"{title}\n🇦​​​​​🇺​​​​​🇩​​​​​🇮​​​​​🇴​​​​​\nSize: {file_size}\nLength: {length}"
                         else:
-                            details = f"{title}\n{file_type}-{resolution}-{subtype}\nSize: {file_size}\nLength: {length}"
+                            details = f"{title}\n🇻​​​​​🇮​​​​​🇩​​​​​🇪​​​​​🇴​​​​​-{resolution}-{subtype}\nSize: {file_size}\nLength: {length}"
+
                         if details not in exist_entry:
                             icon = QtGui.QIcon()
                             icon.addPixmap(QtGui.QPixmap(thumbnail_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
