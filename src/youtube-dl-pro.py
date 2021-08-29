@@ -724,48 +724,52 @@ class MainWindow(QMainWindow):
         self.ui.page_no.setText(f"Page {self.page}")
 
     def start_search_youtube(self):
+        query = self.ui.youtube_search.text()
         if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {})) == 0:
             self.page = 1
-        query = self.ui.youtube_search.text()
+        try:
+            search_thread = self.search_thread.isRunning()
+        except Exception as e:
+            search_thread = False
+        try:
+            pixmap_thread = self.pixmap_load_thread.isRunning()
+        except Exception as e:
+            pixmap_thread = False
 
-        if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get(
-                "content", [])) != 0:
-            self.disable_enable_prev_next_page(show=True)
-            self.page = 1
-            if self.page == 1:
-                self.ui.prev_page.setEnabled(False)
+        if not search_thread and not pixmap_thread:
+            if len(HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(f"{self.page}", {}).get(
+                    "content", [])) != 0:
+                self.disable_enable_prev_next_page(show=True)
+                self.page = 1
+                if self.page == 1:
+                    self.ui.prev_page.setEnabled(False)
 
-            self.ui.home_progress_bar.setRange(0, 0)
-            self.title_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
-                f"{self.page}", {}).get("content", [])
-            self.pixmap_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
-                f"{self.page}", {}).get("pixmap_cache", [])
-            self.videoid_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
-                f"{self.page}", {}).get("videoid_list", [])
-            self.thumbnail_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
-                f"{self.page}", {}).get("thumbnail_list", [])
-            self.process_images_into_table()
-            self.set_page_no()
-            self.ui.home_progress_bar.setRange(0, 1)
-        else:
-            if query not in [None, ""]:
-                if check_internet_connection():
-                    try:
-                        search_thread = self.search_thread.isRunning()
-                    except Exception as e:
-                        search_thread = False
-                    if not search_thread:
+                self.ui.home_progress_bar.setRange(0, 0)
+                self.title_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("content", [])
+                self.pixmap_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("pixmap_cache", [])
+                self.videoid_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("videoid_list", [])
+                self.thumbnail_list = HOME_CACHE.get("search", {}).get(str(self.ui.youtube_search.text()), {}).get(
+                    f"{self.page}", {}).get("thumbnail_list", [])
+                self.process_images_into_table()
+                self.set_page_no()
+                self.ui.home_progress_bar.setRange(0, 1)
+            else:
+                if query not in [None, ""]:
+                    if check_internet_connection():
                         self.ui.home_progress_bar.setRange(0, 0)
                         self.search_thread = SearchThreads(self.default_server, query, self.country, str(self.page),
                                                            self.sort_by, self)
                         self.search_thread.search_results.connect(self.get_search_results)
                         self.search_thread.start()
                     else:
-                        self.popup_message(title="Process Already In Queue",
-                                           message="Please wait for the Running process to finish!")
-                else:
-                    self.ui.home_progress_bar.setRange(0, 1)
-                    self.popup_message(title="No internet connection", message="Please connect to the internet")
+                        self.ui.home_progress_bar.setRange(0, 1)
+                        self.popup_message(title="No internet connection", message="Please connect to the internet")
+        else:
+            self.popup_message(title="Process Already In Queue",
+                               message="Please wait for the Running process to finish!")
 
     def get_search_results(self, data):
         self.disable_enable_prev_next_page(show=True)
