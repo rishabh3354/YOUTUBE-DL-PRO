@@ -1,12 +1,34 @@
-Youtube-dl-Pro is a powerful GUI application for linux for downloading youtube videos, playlist and music audio in full UHD+ resolutions and supports MP4, WEBM and MP3 formats.
+Summary: Download YouTube Videos or Playlist or Music Audio in full HD formats
 
-**Features of Youtube-dl-Pro:**
+**YouTube DL GUI** is a Powerful Application For Downloading **YouTube Videos**, **Playlists and Music Audios** in **Full HD Resolutions.**
 
-1. Download youtube videos in all format (supports 8k, 4k, 2k videos)
-2. Download youtube **whole playlist** in single click.
-3. Download youtube Audio music (supports Mp3 audio) ​
-4. **HD+ button** for download videos in more formats  (Mp4, Webm, Mp3 etc)
-5. Download manager for managing your videos.
+**Features of YouTube DL GUI :-**
+
+ * Download YouTube Videos in **One Click** with Different Formats.
+ * Download YouTube **Whole Playlist** in Single Click.
+ * Download YouTube **Audio Music.** in Single Click.
+ * Stream **Youtube Videos Online** Without Download.
+ * YouTube **Search Suggestion** For Searching Audio/Videos
+ * Complete **100% Ads Free** Online Stream.
+ * **Play** Downloaded Videos In App Itself.
+ * You Can **Select Stream Quality** From the App Settings.
+ * Cool **System Monitor** for Internet Speed and CPU Utilisation.
+ * YouTube Home Page and Search with **Regional Country Support.**
+
+**Note1:** If Your are Facing any Issues with the App, then Run below command in Your Terminal/Shell.
+
+```sudo snap refresh youtube-dl-pro```
+
+```sudo snap refresh pyqt5-runtime```
+
+
+**Note2:**  If CPU Temp is not Coming in the System Monitor, then run below command in your Terminal/Shell.
+
+```
+sudo snap connect speedx:hardware-observe
+```
+
+Keywords: SnapDownloader, YTD Video Downloader & Converter, By Click Downloader, Allavsoft, VideoHunter, Youtube to mp3, dl youtube, snaptube, youtube dl, ktube, utube, redtube, video downloader, VideoSolo Inovideo, MP3 Studio, Leawo, iTubeGo, 4K Video Downloader, WinX HD Video Converter Deluxe, VideoProc, Y2mate, SaveFrom, Youtube Download, SaveMedia, Addoncrop YouTube Video Downloader, Youtube Video Downloader, BitDownloader, SConverter
 
 **To Install, use cmd:**
 
