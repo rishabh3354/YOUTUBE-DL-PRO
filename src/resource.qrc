@@ -64,5 +64,7 @@
     <file>resource/icons8-lock-96.png</file>
     <file>resource/icons8-clear-symbol-90.png</file>
     <file>resource/icons8-clear-symbol-100.png</file>
+    <file>resource/refresh--v1.png</file>
+    <file>resource/shopping-cart.png</file>
   </qresource>
 </RCC>

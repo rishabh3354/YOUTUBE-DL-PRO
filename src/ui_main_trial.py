@@ -1231,26 +1231,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.addLayout(self.horizontalLayout_57)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.refresh_account_2 = QtWidgets.QPushButton(self.stack_accounts)
-        self.refresh_account_2.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.refresh_account_2.sizePolicy().hasHeightForWidth())
-        self.refresh_account_2.setSizePolicy(sizePolicy)
-        self.refresh_account_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.refresh_account_2.setStyleSheet("QPushButton{\n"
-"  background-color: #233547;\n"
-"  color: #E0E1E3;\n"
-"}\n"
-"\n"
-"QPushButton:hover {background-color: #314a62;}")
-        icon18 = QtGui.QIcon()
-        icon18.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-refresh-128.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.refresh_account_2.setIcon(icon18)
-        self.refresh_account_2.setIconSize(QtCore.QSize(25, 25))
-        self.refresh_account_2.setObjectName("refresh_account_2")
-        self.horizontalLayout_3.addWidget(self.refresh_account_2)
         self.purchase_licence_2 = QtWidgets.QPushButton(self.stack_accounts)
         self.purchase_licence_2.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -1260,17 +1240,60 @@ class Ui_MainWindow(object):
         self.purchase_licence_2.setSizePolicy(sizePolicy)
         self.purchase_licence_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.purchase_licence_2.setStyleSheet("QPushButton{\n"
-"  background-color: #233547;\n"
-"  color: #E0E1E3;\n"
-"}\n"
+"  background-color:#d23426;\n"
 "\n"
-"QPushButton:hover {background-color: #314a62;}")
-        icon19 = QtGui.QIcon()
-        icon19.addPixmap(QtGui.QPixmap(":/myresource/resource/icons8-buy-96.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.purchase_licence_2.setIcon(icon19)
+"\n"
+"\n"
+"color:#eff0f1;\n"
+"\n"
+"\n"
+"}\n"
+"    \n"
+"QPushButton:hover {background-color: #009b22\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+";}")
+        icon18 = QtGui.QIcon()
+        icon18.addPixmap(QtGui.QPixmap(":/myresource/resource/shopping-cart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.purchase_licence_2.setIcon(icon18)
         self.purchase_licence_2.setIconSize(QtCore.QSize(25, 25))
         self.purchase_licence_2.setObjectName("purchase_licence_2")
         self.horizontalLayout_3.addWidget(self.purchase_licence_2)
+        self.refresh_account_2 = QtWidgets.QPushButton(self.stack_accounts)
+        self.refresh_account_2.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.refresh_account_2.sizePolicy().hasHeightForWidth())
+        self.refresh_account_2.setSizePolicy(sizePolicy)
+        self.refresh_account_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.refresh_account_2.setStyleSheet("QPushButton{\n"
+"  background-color: #018282;\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"color:#eff0f1;\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover {background-color: #009b22\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+";}")
+        icon19 = QtGui.QIcon()
+        icon19.addPixmap(QtGui.QPixmap(":/myresource/resource/refresh--v1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.refresh_account_2.setIcon(icon19)
+        self.refresh_account_2.setIconSize(QtCore.QSize(25, 25))
+        self.refresh_account_2.setObjectName("refresh_account_2")
+        self.horizontalLayout_3.addWidget(self.refresh_account_2)
         self.verticalLayout_12.addLayout(self.horizontalLayout_3)
         self.error_message = QtWidgets.QLabel(self.stack_accounts)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -1914,8 +1937,8 @@ class Ui_MainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/myresource/resource/icons8-account-96.png\" width=\"40\"/></p></body></html>"))
-        self.refresh_account_2.setText(_translate("MainWindow", "Refresh Account"))
-        self.purchase_licence_2.setText(_translate("MainWindow", "Purchase Now"))
+        self.purchase_licence_2.setText(_translate("MainWindow", "PURCHASE NOW"))
+        self.refresh_account_2.setText(_translate("MainWindow", "REFRESH ACCOUNT"))
         self.error_message.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" color:#ef2929;\">Error Message</span></p></body></html>"))
         self.error_message_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" color:#4e9a06;\">If you have changed your PC or lost your account, </span><a href=\"https://warlordsoftwares.in/contact_us/\"><span style=\" text-decoration: underline; color:#ef2929;\">@Contact us</span></a><span style=\" color:#4e9a06;\"> to restore.</span></p></body></html>"))
         self.lineEdit_expires_on_2.setText(_translate("MainWindow", "Licence Expired! Purchase a new Licence"))
