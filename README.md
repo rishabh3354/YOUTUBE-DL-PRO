@@ -1,6 +1,6 @@
-**Y2mate Pro** is a Powerful Application For Downloading **YouTube Videos**, **Playlists and Music Audios** in **Full HD Resolutions.**
+**YouTube DL GUI** is a Powerful Application For Downloading **YouTube Videos**, **Playlists and Music Audios** in **Full HD Resolutions.**
 
-**Features of Y2mate Pro :-**
+**Features of YouTube DL GUI :-**
 
  * Download YouTube Videos in **One Click** with Different Formats.
  * Download YouTube **Whole Playlist** in Single Click.
