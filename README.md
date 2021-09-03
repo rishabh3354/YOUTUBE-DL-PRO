@@ -1,3 +1,5 @@
+Summary: Download YouTube Videos or Playlist or Music Audio in full HD formats
+
 **YouTube DL GUI** is a Powerful Application For Downloading **YouTube Videos**, **Playlists and Music Audios** in **Full HD Resolutions.**
 
 **Features of YouTube DL GUI :-**
