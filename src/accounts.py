@@ -45,7 +45,7 @@ class ApplicationStartupTask:
             context["email"] = f"{generate_account_id()}@warlordsoft.in"
             context["plan"] = "Free Trial"
             context["is_active"] = True
-            context["expiry_date"] = str(self.today_date + datetime.timedelta(days=7))
+            context["expiry_date"] = str(self.today_date + datetime.timedelta(days=3))
             context["created_on"] = str(self.today_date)
 
             try:
