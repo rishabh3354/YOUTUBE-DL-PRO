@@ -557,6 +557,7 @@ class MainWindow(QMainWindow):
                 self.mpv_arguments.append("--force-window")
                 self.mpv_arguments.append(stream)
                 self.mpv_arguments.append("--title={0}".format(self.title))
+                self.mpv_arguments.append("--gpu-context=x11")
                 self.process.start("mpv", self.mpv_arguments)
             else:
                 self.popup_message(title="No Audio/Video File To Play!", message="Please Select YouTube Video From The Home Tab.")
@@ -579,6 +580,7 @@ class MainWindow(QMainWindow):
                 self.mpv_arguments.append("--force-window")
                 self.mpv_arguments.append(stream)
                 self.mpv_arguments.append("--title={0}".format(stream_url.get("title")))
+                self.mpv_arguments.append("--gpu-context=x11")
                 self.process.start("mpv", self.mpv_arguments)
             except Exception as e:
                 print(e)
@@ -603,6 +605,7 @@ class MainWindow(QMainWindow):
                 self.mpv_arguments.append("--force-window")
                 self.mpv_arguments.append(stream)
                 self.mpv_arguments.append("--title={0}".format(stream_url.get("title")))
+                self.mpv_arguments.append("--gpu-context=x11")
                 self.process.start("mpv", self.mpv_arguments)
             except Exception as e:
                 print(e)
@@ -1313,6 +1316,7 @@ class MainWindow(QMainWindow):
                 self.mpv_arguments.append("--force-window")
                 self.mpv_arguments.append(play_path)
                 self.mpv_arguments.append("--title={0}".format(title))
+                self.mpv_arguments.append("--gpu-context=x11")
                 self.process.start("mpv", self.mpv_arguments)
             elif self.msg.clickedButton() == show_in_downloads:
                 self.show_downloads_page()
@@ -2391,6 +2395,7 @@ class MainWindow(QMainWindow):
                     self.mpv_arguments.append("--force-window")
                     self.mpv_arguments.append(file_path)
                     self.mpv_arguments.append("--title={0}".format(selected_video.get("title_show", PRODUCT_NAME)))
+                    self.mpv_arguments.append("--gpu-context=x11")
                     self.process.start("mpv", self.mpv_arguments)
             else:
                 self.popup_message(title="Please select file first!!", message="", error=True)
