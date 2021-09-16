@@ -2640,7 +2640,7 @@ class MainWindow(QMainWindow):
                 else:
                     warlord_soft_link = f"https://warlordsoftwares.in/warlord_soft/dashboard/"
                 webbrowser.open(warlord_soft_link)
-                time.sleep(2)
+                time.sleep(5)
                 webbrowser.open("https://warlordsoftwares.in/warlord_soft/your_plan/")
         else:
             self.popup_message(title="No internet connection", message="Please check your internet connection!")
