@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1105</width>
+    <width>1106</width>
     <height>599</height>
    </rect>
   </property>
@@ -2803,7 +2803,7 @@ QPushButton:hover {background-color: #009b22
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#4e9a06;&quot;&gt;If you have changed your PC or lost your account, &lt;/span&gt;&lt;a href=&quot;https://warlordsoftwares.in/contact_us/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ef2929;&quot;&gt;@Contact us&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#4e9a06;&quot;&gt; to restore.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#4e9a06;&quot;&gt;If you have changed your PC or lost your licence, &lt;/span&gt;&lt;a href=&quot;https://warlordsoftwares.in/contact_us/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#ef2929;&quot;&gt;Click here&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#4e9a06;&quot;&gt; to restore previous purchase licence.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -2829,7 +2829,7 @@ QPushButton:hover {background-color: #009b22
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1027</width>
+                   <width>1028</width>
                    <height>676</height>
                   </rect>
                  </property>
@@ -2842,14 +2842,21 @@ QPushButton:hover {background-color: #009b22
                     <layout class="QVBoxLayout" name="verticalLayout_16">
                      <item>
                       <layout class="QGridLayout" name="gridLayout_4">
-                       <item row="2" column="3" colspan="4">
-                        <widget class="QLabel" name="lineEdit_expires_on_2">
+                       <item row="0" column="0" colspan="3">
+                        <widget class="QLabel" name="lineEdit_5">
                          <property name="text">
-                          <string>Licence Expired! Purchase a new Licence</string>
+                          <string>Account ID:</string>
                          </property>
                         </widget>
                        </item>
-                       <item row="0" column="6">
+                       <item row="2" column="0" colspan="3">
+                        <widget class="QLabel" name="lineEdit_10">
+                         <property name="text">
+                          <string>Account Status:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="7">
                         <widget class="QToolButton" name="copy_id">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -2878,7 +2885,57 @@ QPushButton:hover {background-color: #009b22
                          </property>
                         </widget>
                        </item>
-                       <item row="3" column="0" colspan="7">
+                       <item row="0" column="8">
+                        <widget class="QToolButton" name="purchase_details">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>PointingHandCursor</cursorShape>
+                         </property>
+                         <property name="toolTip">
+                          <string>Purchase Details</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="resource.qrc">
+                           <normaloff>:/myresource/resource/icons8-feedback-hub-144.png</normaloff>:/myresource/resource/icons8-feedback-hub-144.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3" colspan="4">
+                        <widget class="QLabel" name="lineEdit_account_id_2">
+                         <property name="text">
+                          <string>8fjfdjhqoifj383ld</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0" colspan="3">
+                        <widget class="QLabel" name="lineEdit_6">
+                         <property name="text">
+                          <string>Account Type:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="3" colspan="6">
+                        <widget class="QLabel" name="lineEdit_expires_on_2">
+                         <property name="text">
+                          <string>Licence Expired! Purchase a new Licence</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="0" colspan="9">
                         <widget class="QProgressBar" name="account_progress_bar">
                          <property name="enabled">
                           <bool>true</bool>
@@ -2926,38 +2983,10 @@ border:none;
                          </property>
                         </widget>
                        </item>
-                       <item row="0" column="3" colspan="3">
-                        <widget class="QLabel" name="lineEdit_account_id_2">
-                         <property name="text">
-                          <string>8fjfdjhqoifj383ld</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="3" colspan="4">
+                       <item row="1" column="3" colspan="6">
                         <widget class="QLabel" name="lineEdit_plan_2">
                          <property name="text">
                           <string>Evaluation</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="0" column="0" colspan="3">
-                        <widget class="QLabel" name="lineEdit_5">
-                         <property name="text">
-                          <string>Account ID:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="0" colspan="3">
-                        <widget class="QLabel" name="lineEdit_6">
-                         <property name="text">
-                          <string>Account Type:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="0" colspan="3">
-                        <widget class="QLabel" name="lineEdit_10">
-                         <property name="text">
-                          <string>Account Status:</string>
                          </property>
                         </widget>
                        </item>
@@ -3393,7 +3422,7 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1041</width>
+                   <width>1042</width>
                    <height>419</height>
                   </rect>
                  </property>

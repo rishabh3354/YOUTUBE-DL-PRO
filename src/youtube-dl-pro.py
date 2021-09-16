@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 import sys
+import time
 import webbrowser
 from copy import deepcopy
 from PyQt5 import QtCore, QtWidgets, QtGui
@@ -52,6 +53,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("YouTube-Dl GUI")
         self.tip_count = -1
         self.pytube_status = True
+        self.ui.purchase_details.setEnabled(False)
 
         #  init net speed settings
         self.system_frequency = 1
@@ -232,6 +234,7 @@ class MainWindow(QMainWindow):
         self.ui.purchase_licence_2.clicked.connect(self.purchase_licence_2)
         self.ui.refresh_account_2.clicked.connect(self.refresh_account_2)
         self.ui.ge_more_apps.clicked.connect(self.ge_more_apps)
+        self.ui.purchase_details.clicked.connect(self.purchase_details_after_payment)
 
         # net speed settings
         self.ui.horizontalSlider_freq.valueChanged.connect(self.change_frequency_net)
@@ -2627,6 +2630,21 @@ class MainWindow(QMainWindow):
         feedback_link = "https://warlordsoftwares.in/contact_us/"
         webbrowser.open(feedback_link)
 
+    def purchase_details_after_payment(self):
+        if check_internet_connection():
+            account_dict = get_user_data_from_local()
+            if account_dict:
+                account_id = str(account_dict.get("email")).split("@")[0]
+                if account_id:
+                    warlord_soft_link = f"https://warlordsoftwares.in/warlord_soft/subscription/?product={PRODUCT_NAME}&account_id={account_id} "
+                else:
+                    warlord_soft_link = f"https://warlordsoftwares.in/warlord_soft/dashboard/"
+                webbrowser.open(warlord_soft_link)
+                time.sleep(2)
+                webbrowser.open("https://warlordsoftwares.in/warlord_soft/your_plan/")
+        else:
+            self.popup_message(title="No internet connection", message="Please check your internet connection!")
+
     def purchase_licence_2(self):
         if check_internet_connection():
             account_dict = get_user_data_from_local()
@@ -2707,6 +2725,7 @@ class MainWindow(QMainWindow):
         if plan == "Free Trial":
             self.ui.lineEdit_plan_2.setText("Evaluation")
         elif plan == "Life Time Free Plan":
+            self.ui.purchase_details.setEnabled(True)
             self.ui.purchase_licence_2.setEnabled(False)
             self.ui.refresh_account_2.setEnabled(False)
             self.ui.lineEdit_plan_2.setText(plan)
@@ -2719,6 +2738,7 @@ class MainWindow(QMainWindow):
                 self.one_time_congratulate = False
         else:
             self.ui.lineEdit_plan_2.setText(plan)
+            self.ui.purchase_details.setEnabled(True)
         if expiry_date:
             if plan == "Life Time Free Plan":
                 self.ui.lineEdit_expires_on_2.setText(f"{PRODUCT_NAME} PRO VERSION")
