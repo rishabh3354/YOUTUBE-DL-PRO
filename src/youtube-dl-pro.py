@@ -2737,6 +2737,7 @@ class MainWindow(QMainWindow):
                                            "Thankyou for your purchase.\n\nPLEASE RESTART YOUR APP TO SEE CHANGES.")
                 self.one_time_congratulate = False
         else:
+            self.ui.purchase_licence_2.setText("UPGRADE PLAN")
             self.ui.lineEdit_plan_2.setText(plan)
             self.ui.purchase_details.setEnabled(True)
         if expiry_date:
