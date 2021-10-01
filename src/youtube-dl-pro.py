@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
         self.is_plan_active = True
         self.delete_source_file = True
         self.one_time_congratulate = True
-        self.setWindowTitle("YouTube-Dl GUI")
+        self.setWindowTitle("DL-YOUTUBE PRO")
         self.tip_count = -1
         self.pytube_status = True
         self.ui.purchase_details.setEnabled(False)
@@ -421,9 +421,9 @@ class MainWindow(QMainWindow):
             self.ui.label_26.setVisible(True)
 
     def server_info_popup(self):
-        title = "YOUTUBE-Dl GUI SERVER INFO!"
+        title = "DL-YOUTUBE SERVER INFO!"
         message = "Change the server name if you are facing any issues related to loading Home page/Search on youtube.\n\n" \
-                  "Reason: It might be possible that youtube-dl-gui server is down for temporary basis on your country.\n\n" \
+                  "Reason: It might be possible that DL-YOUTUBE server is down for temporary basis on your country.\n\n" \
                   "Note: You can also switch to another server if home page loading speed is slow."
         self.popup_message(title, message)
 
@@ -432,7 +432,7 @@ class MainWindow(QMainWindow):
         self.msg.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.msg.setStyleSheet("background-color:#263a4e;color:#eaeaea;")
         self.msg.setIcon(QMessageBox.Information)
-        self.msg.setText("YOUTUBE-Dl GUI Tips and Tricks!")
+        self.msg.setText("DL-YOUTUBE Tips and Tricks!")
         if message:
             self.msg.setInformativeText(message)
         else:
@@ -453,7 +453,7 @@ class MainWindow(QMainWindow):
                         "Mpv stream player Keyboard shortcuts:\n\nQ :   Stop and Quit Player\nF :   "
                         "Toggle Fullscreen\nP :  Pause / Playback\n9 and 0 :    Volume Control\nW and E :"
                         "   ZoomIn/ZoomOut\nShift+A :    Screen Aspect Ratio\nArrow Keys :   Seek 5 seconds.",
-                        "Change Youtube-Dl-GUI server from the App settings if you are facing server down issues in your country.",
+                        "Change DL-YOUTUBE server from the App settings if you are facing server down issues in your country.",
                         ]
         try:
             if self.msg.clickedButton() == next_tip:
@@ -834,7 +834,7 @@ class MainWindow(QMainWindow):
 
     def server_error_handle(self, msg):
         self.ui.home_progress_bar.setRange(0, 1)
-        self.popup_message(title="Could not connect to the server!", message="Youtube-Dl GUI server is currently busy,"
+        self.popup_message(title="Could not connect to the server!", message="DL-YOUTUBE server is currently busy,"
                                                                              " please try again after some time.\n\n"
                                                                              "Tip: Switch to another server from settings might resolve this issue.")
 
@@ -2764,7 +2764,7 @@ class MainWindow(QMainWindow):
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setText("Evaluation period ended, Upgrade to Pro")
             self.msg.setInformativeText(
-                "In Youtube-dl GUI free version, HD+ video quality option is not available. But you can still download SD quality videos.\n"
+                "In DL-YOUTUBE free version, HD+ video quality option is not available. But you can still download SD quality videos.\n"
                 "Please support the developer and purchase a license to UNLOCK this feature.")
             purchase = self.msg.addButton(QMessageBox.Yes)
             close = self.msg.addButton(QMessageBox.Yes)

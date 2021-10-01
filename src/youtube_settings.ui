@@ -54,7 +54,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-122</y>
         <width>501</width>
         <height>522</height>
        </rect>
@@ -414,7 +414,7 @@ p, li { white-space: pre-wrap; }
           </sizepolicy>
          </property>
          <property name="title">
-          <string>YT-DL SERVER</string>
+          <string>DL-YOUTUBE SERVER</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_26">
           <item>

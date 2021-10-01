@@ -10,7 +10,7 @@ class YouTubeSettings(QWidget):
         QWidget.__init__(self)
         self.ui = Ui_YouTubeSettings()
         self.ui.setupUi(self)
-        self.setWindowTitle("YouTube-Dl GUI | Settings")
+        self.setWindowTitle("DL-YOUTUBE PRO | Settings")
 
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
         qtRectangle = self.frameGeometry()
@@ -24,7 +24,7 @@ class UrlDialog(QWidget):
         QWidget.__init__(self)
         self.ui = Ui_UrlDialog()
         self.ui.setupUi(self)
-        self.setWindowTitle("YouTube-Dl GUI | Enter Url")
+        self.setWindowTitle("DL-YOUTUBE PRO | Enter Url")
 
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
         qtRectangle = self.frameGeometry()

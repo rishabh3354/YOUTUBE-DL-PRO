@@ -1852,7 +1852,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(5)
+        self.tabWidget.setCurrentIndex(6)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1962,7 +1962,7 @@ class Ui_MainWindow(object):
         self.lineEdit_6.setText(_translate("MainWindow", "Account Type:"))
         self.lineEdit_expires_on_2.setText(_translate("MainWindow", "Licence Expired! Purchase a new Licence"))
         self.lineEdit_plan_2.setText(_translate("MainWindow", "Evaluation"))
-        self.label_27.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"70\"/></p><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; color:#888a85;\">YOUTUBE-DL GUI PRO</span></p><p align=\"center\"><span style=\" font-size:10pt; font-style:italic; color:#888a85;\">Congratulations you are using pro version!</span></p></body></html>"))
+        self.label_27.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"70\"/></p><p align=\"center\"><span style=\" font-size:12pt; font-weight:600; color:#888a85;\">DL-YOUTUBE PRO</span></p><p align=\"center\"><span style=\" font-size:10pt; font-style:italic; color:#888a85;\">Congratulations you are using pro version!</span></p></body></html>"))
         self.groupBox.setTitle(_translate("MainWindow", "PLAN COMPARISION"))
         self.toolButton_55.setText(_translate("MainWindow", "..."))
         self.lineEdit_4.setText(_translate("MainWindow", "(FREE VS PRO)  FEATURES "))
@@ -2012,7 +2012,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/myresource/resource/icons8-youtube-play-button-500.png\" width=\"90\" /></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#888a85;\">YOUTUBE-DL GUI</span></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600; color:#888a85;\">DL-YOUTUBE PRO</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#888a85;\">Language used: </span><span style=\" color:#888a85;\">Python</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#888a85;\">Version: 0.1</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#888a85;\"><br /></p></body></html>"))
