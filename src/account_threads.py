@@ -2,7 +2,7 @@ import time
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal
 from accounts import get_login_and_save_token, check_for_local_token, SignInUpdatePlan, check_internet_connection, \
-    get_pytube_status
+    get_pytube_status, sync_accound_id_with_db
 
 
 class RefreshButtonThread(QtCore.QThread):
@@ -66,3 +66,17 @@ class PytubeStatusThread(QtCore.QThread):
             self.change_value_pytube_status.emit(context)
         except Exception as e:
             self.change_value_pytube_status.emit(context)
+
+
+class SyncAccountIdWithDb(QtCore.QThread):
+
+    def __init__(self, data, parent=None):
+        super(SyncAccountIdWithDb, self).__init__(parent)
+        self.data = data
+
+    def run(self):
+        try:
+            sync_accound_id_with_db(self.data.get("sync_url"))
+            get_login_and_save_token(self.data)
+        except Exception as e:
+            pass

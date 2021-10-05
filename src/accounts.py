@@ -328,3 +328,25 @@ def get_pytube_status():
         context["message"] = ""
 
     return context["status"], context["title"], context["message"]
+
+
+def sync_accound_id_with_db(url):
+    get_api = DOMAIN + url
+    context = dict()
+    context["status"] = False
+    context["message"] = ""
+
+    try:
+        response = requests.get(get_api)
+        if response.status_code in [200, 201]:
+            context["status"] = True
+            context["message"] = "Success synced account id"
+        else:
+            context["status"] = False
+            context["message"] = "Internal Server Error"
+
+    except Exception as e:
+        context["status"] = False
+        context["message"] = "Internal Server Error"
+
+    return context

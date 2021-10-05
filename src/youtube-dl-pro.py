@@ -10,7 +10,7 @@ from PyQt5.QtCore import QUrl, QSettings, QStringListModel, QProcess
 from PyQt5.QtGui import QDesktopServices, QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QStyle, QCheckBox, QLineEdit, \
     QCompleter, QAbstractItemView, QTableWidgetItem, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
-from account_threads import SaveLocalInToken, RefreshButtonThread, PytubeStatusThread
+from account_threads import SaveLocalInToken, RefreshButtonThread, PytubeStatusThread, SyncAccountIdWithDb
 from accounts import get_user_data_from_local, days_left, ApplicationStartupTask, check_for_local_token
 from helper import process_html_data, check_internet_connection, check_default_location, process_html_data_playlist, \
     get_thumbnail_path_from_local, safe_string, get_local_download_data, save_after_delete, get_stream_quality, \
@@ -225,6 +225,7 @@ class MainWindow(QMainWindow):
         self.ui.error_message.setStyleSheet("color:red;")
         self.my_plan()
         self.check_pytube_issue()
+        self.sync_account_id_with_warlord_soft()
 
         # signal and slots
         self.ui.warlordsoft_button.clicked.connect(self.redirect_to_warlordsoft)
@@ -2663,6 +2664,23 @@ class MainWindow(QMainWindow):
                 self.save_token.start()
         else:
             self.popup_message(title="No internet connection", message="Please check your internet connection!")
+
+    def sync_account_id_with_warlord_soft(self):
+        try:
+            if check_internet_connection():
+                account_dict = get_user_data_from_local()
+                if account_dict:
+                    account_id = str(account_dict.get("email")).split("@")[0]
+                    data = dict()
+                    data["sync_url"] = f"warlord_soft/subscription/?product={PRODUCT_NAME}&account_id={account_id}"
+                    data["email"] = f"{account_id}@warlordsoft.in"
+                    data["password"] = f"{account_id}@warlordsoft.in"
+                    data["re_password"] = f"{account_id}@warlordsoft.in"
+                    self.sync_account = SyncAccountIdWithDb(data)
+                    self.sync_account.start()
+        except Exception as e:
+            print(e)
+            pass
 
     def refresh_account_2(self):
         self.ui.error_message.clear()
