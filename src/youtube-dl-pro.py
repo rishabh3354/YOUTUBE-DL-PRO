@@ -1002,6 +1002,8 @@ class MainWindow(QMainWindow):
         self.videoid_list = []
         self.table_view_default_setting()
         for item in data.get("result_data", [])[: self.home_button_item]:
+            if item.get("videoId", '') == '':
+                continue
             thumbnail = "https://i.ytimg.com/vi/" + \
                         item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
                             0] + "/mqdefault.jpg"
