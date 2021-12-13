@@ -1001,24 +1001,36 @@ class MainWindow(QMainWindow):
         self.pixmap_list = []
         self.videoid_list = []
         self.table_view_default_setting()
-        for item in data.get("result_data", [])[: self.home_button_item]:
-            if item.get("videoId", '') == '':
-                continue
-            thumbnail = "https://i.ytimg.com/vi/" + \
-                        item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
-                            0] + "/mqdefault.jpg"
-            video_id = 'https://www.youtube.com/watch?v=' + item.get("videoId", '')
-            content = """<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-weight:600;">{{title}}</span></p>
-            <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"><br /></p>
-            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Views</span><span style=" font-size:10pt;"> : {{views}}</span></p>
-            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Channel</span><span style=" font-size:10pt;"> : {{channel}}</span></p>
-            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Duration</span><span style=" font-size:10pt;">: {{duration}}</span></p>
-            <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Published</span><span style=" font-size:10pt;">: {{published_on}}</span></p>"""
-            content = content.replace("{{title}}", item.get("title", "")).replace("{{views}}", human_format(item.get("viewCount", 0))).replace("{{channel}}", item.get("author", "")).replace("{{duration}}", get_time_format(item.get("lengthSeconds", 0))).replace("{{published_on}}", item.get("publishedText", ""))
+        if not data.get("result_data", []):
+            self.country = "US"
+            self.youtube_setting_ui.ui.country.setCurrentText(COUNTRIES_REVERSE.get(self.country, "United States"))
+            self.settings.setValue("country", "US")
+            title = "YouTube Data Server is Under Maintenance In Your Region"
+            message = "\nTips:\n\n1. Try to change your server from the app settings." \
+                      "\n2. Try to change your region from the app settings." \
+                      "\n3. For now default country is set to US Region Automatically." \
+                      "\n\nPlease check in a while, Sorry For The Inconvenience."
+            self.popup_message(title, message)
+            self.get_home_page(True)
+        else:
+            for item in data.get("result_data", [])[: self.home_button_item]:
+                if item.get("videoId", '') == '':
+                    continue
+                thumbnail = "https://i.ytimg.com/vi/" + \
+                            item.get("videoThumbnails", {})[4].get("url", "").split("/vi/")[1].split("/")[
+                                0] + "/mqdefault.jpg"
+                video_id = 'https://www.youtube.com/watch?v=' + item.get("videoId", '')
+                content = """<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-weight:600;">{{title}}</span></p>
+                <p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"><br /></p>
+                <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Views</span><span style=" font-size:10pt;"> : {{views}}</span></p>
+                <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Channel</span><span style=" font-size:10pt;"> : {{channel}}</span></p>
+                <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Duration</span><span style=" font-size:10pt;">: {{duration}}</span></p>
+                <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt; font-weight:600;">Published</span><span style=" font-size:10pt;">: {{published_on}}</span></p>"""
+                content = content.replace("{{title}}", item.get("title", "")).replace("{{views}}", human_format(item.get("viewCount", 0))).replace("{{channel}}", item.get("author", "")).replace("{{duration}}", get_time_format(item.get("lengthSeconds", 0))).replace("{{published_on}}", item.get("publishedText", ""))
 
-            self.thumbnail_list.append(thumbnail)
-            self.videoid_list.append(video_id)
-            self.title_list.append(content)
+                self.thumbnail_list.append(thumbnail)
+                self.videoid_list.append(video_id)
+                self.title_list.append(content)
 
         if data.get("content_type", "") == "home":
             try:
