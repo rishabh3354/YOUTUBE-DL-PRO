@@ -1002,16 +1002,18 @@ class MainWindow(QMainWindow):
         self.videoid_list = []
         self.table_view_default_setting()
         if not data.get("result_data", []):
-            self.country = "US"
-            self.youtube_setting_ui.ui.country.setCurrentText(COUNTRIES_REVERSE.get(self.country, "United States"))
-            self.settings.setValue("country", "US")
-            title = "YouTube Data Server is Under Maintenance In Your Region"
-            message = "\nTips:\n\n1. Try to change your server from the app settings." \
+            self.country = "DE"
+            self.youtube_setting_ui.ui.country.setCurrentText(COUNTRIES_REVERSE.get(self.country, "Germany"))
+            self.settings.setValue("country", "DE")
+            title = "YouTube Home Page Server is Under Maintenance In Your Region"
+            message = "\nTips:\n1. Try to change your server from the app settings." \
                       "\n2. Try to change your region from the app settings." \
-                      "\n3. For now default country is set to US Region Automatically." \
-                      "\n\nPlease check in a while, Sorry For The Inconvenience."
+                      "\n3. For now default country is set to Germany Region Automatically." \
+                      "\n\nNote: Search and Download YouTube videos will work even when " \
+                      "the home page server is under Maintenance." \
+                      "\nPlease be patient, Sorry For The Inconvenience.\n\n!Please Restart your Application!"
             self.popup_message(title, message)
-            self.get_home_page(True)
+            self.ui.home_progress_bar.setRange(0, 1)
         else:
             for item in data.get("result_data", [])[: self.home_button_item]:
                 if item.get("videoId", '') == '':
