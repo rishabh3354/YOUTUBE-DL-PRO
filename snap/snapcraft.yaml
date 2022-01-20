@@ -73,7 +73,7 @@ parts:
       python-packages: 
           - requests
           - cryptography
-          - pytube
+          - git+https://github.com/JavDomGom/pytube
           - psutil
           - ffmpeg-python
           - python-slugify
