@@ -168,6 +168,12 @@ class DownloadVideo(QtCore.QThread):
                         out_file_name = f"{self.video_download_path}/{self.dash_video_filename}.{video_extension}"
                         dash_video_file = f"{self.dash_download_path}/{self.dash_video_filename}.{video_extension}"
 
+                    try:
+                        if not os.path.isfile(dash_video_file):
+                            dash_video_file = dash_video_file.replace(".webm", ".mp4")
+                    except Exception as e:
+                        pass
+
                     for progress_dict["progress"] in run_ffmpeg_command(
                             ['ffmpeg', '-i', dash_video_file, '-i', dash_audio_file, '-c:v', 'copy', '-c:a', 'copy',
                              out_file_name]):
