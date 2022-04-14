@@ -1,6 +1,6 @@
 name: youtube-dl-pro
-base: core18
-version: '0.4' # just for humans, typically '1.2+git' or '1.3.2'
+base: core20
+version: '2.0' # just for humans, typically '1.2+git' or '1.3.2'
 summary: Download videos or playlist or music audio from youtube.com in full HD formats
 description: DL-YOUTUBE PRO is a powerful GUI application for linux for downloading youtube videos, playlist and music audio in full UHD+ resolutions and supports MP4, WEBM and MP3 formats.
 grade: stable # must be 'stable' to release into candidate/stable channels  / before dev use devel
@@ -11,9 +11,16 @@ icon: snap/gui/icon.png
 architectures:
   - build-on: [amd64]
 
+environment:
+  SNAP_DESKTOP_RUNTIME: $SNAP/glances-pro
+  
 apps:
   youtube-dl-pro:
-    command: bin/desktop-launch python3 $SNAP/youtube-dl-pro.py
+    command: bin/desktop-launch youtube-dl-pro
+    desktop: youtube-dl-pro.desktop
+    environment:
+      DISABLE_WAYLAND: 1
+      
     plugs: 
        - home
        - gsettings
@@ -29,8 +36,6 @@ apps:
        - audio-playback
        - hardware-observe
 
-    desktop: youtube-dl-pro.desktop
-
 plugs:
   gsettings:
   gtk-3-themes:
@@ -45,37 +50,18 @@ plugs:
     interface: content
     target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes
-  pyqt5-runtime:
+  glances-pro:
     interface: content
-    target: $SNAP/pyqt5-runtime
-    default-provider: pyqt5-runtime
+    target: $SNAP/glances-pro
+    default-provider: glances-pro
 
 
 parts:
-  desktop-gui:
+  snap-launcher:
     plugin: dump
-    source: src/
+    source: snap_launcher/    
     override-build: |
       snapcraftctl build
       sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
       cp -rf ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/youtube-dl-pro.desktop
-
-
-  snap-launcher:
-    plugin: dump
-    source: snap_launcher/
-
-  youtube-dl-pro:
-      plugin: python
-      python-version: python3
-      source: .
-      python-packages: 
-          - requests
-          - cryptography
-          - pytube
-          - psutil
-          - ffmpeg-python
-          - python-slugify
-          - youtube_dl
-      build-attributes: [ keep-execstack ]

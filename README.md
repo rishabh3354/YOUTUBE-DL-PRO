@@ -35,7 +35,7 @@ ubuntu-restricted-extras package allows users to install ability to play popular
 
 If CPU Temp is not Coming/not accurate in the System Monitor, then run below command in your Terminal/Shell.
 
-    sudo snap connect speedx:hardware-observe
+    sudo snap connect youtube-dl-pro:hardware-observe
 
 **KEYWORDS:** 
 
