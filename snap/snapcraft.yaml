@@ -12,7 +12,7 @@ architectures:
   - build-on: [amd64]
 
 environment:
-  SNAP_DESKTOP_RUNTIME: $SNAP/glances-pro
+  SNAP_DESKTOP_RUNTIME: $SNAP/pyqt5-runtime-core20
   
 apps:
   youtube-dl-pro:
@@ -50,10 +50,10 @@ plugs:
     interface: content
     target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes
-  glances-pro:
+  pyqt5-runtime-core20:
     interface: content
-    target: $SNAP/glances-pro
-    default-provider: glances-pro
+    target: $SNAP/pyqt5-runtime-core20
+    default-provider: pyqt5-runtime-core20
 
 
 parts:
