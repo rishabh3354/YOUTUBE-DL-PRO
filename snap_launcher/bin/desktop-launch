@@ -160,12 +160,18 @@ append_dir PATH "$SNAP_DESKTOP_RUNTIME/usr/bin"
 #samba lib path
 append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/$ARCH/samba/"
 
-#python 3.8 path
-export PYTHONPATH=${PYTHONPATH}:$SNAP_DESKTOP_RUNTIME/usr/lib/python38.zip:$SNAP_DESKTOP_RUNTIME/usr/lib/python3.8:$SNAP_DESKTOP_RUNTIME/usr/lib/python3.8/lib-dynload:$SNAP_DESKTOP_RUNTIME/usr/lib/python3/dist-packages:$SNAP_DESKTOP_RUNTIME/lib/python3.8/site-packages
+#python 3.8 path 
+append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/usr/lib/python38.zip"
+append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/usr/lib/python3.8"
+append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/usr/lib/python3.8/lib-dynload"
+append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/usr/lib/python3/dist-packages"
+append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/lib/python3.8/site-packages"
+
+#yt-dlp dynamic module path
+YTDLP_PYTHONPATH=${YTDLP_PYTHONPATH}:$HOME/current/.local/share/yt-dlp
 
 #python 3.8 path for pyinstaller
-export PYINSTALLER_PYTHONPATH=${PYINSTALLER_PYTHONPATH}:$PYTHONPATH
-
+export PYINSTALLER_PYTHONPATH=${PYINSTALLER_PYTHONPATH}:$PYTHONPATH:$YTDLP_PYTHONPATH
 
 # XKB config
 export XKB_CONFIG_ROOT="$SNAP_DESKTOP_RUNTIME/usr/share/X11/xkb"
