@@ -168,7 +168,7 @@ append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/usr/lib/python3/dist-packages"
 append_dir PYTHONPATH "$SNAP_DESKTOP_RUNTIME/lib/python3.8/site-packages"
 
 #yt-dlp dynamic module path
-YTDLP_PYTHONPATH=${YTDLP_PYTHONPATH}:$HOME/current/.local/share/yt-dlp
+YTDLP_PYTHONPATH=$HOME/.local/share/yt-dlp
 
 #python 3.8 path for pyinstaller
 export PYINSTALLER_PYTHONPATH=${PYINSTALLER_PYTHONPATH}:$PYTHONPATH:$YTDLP_PYTHONPATH
