@@ -65,3 +65,15 @@ parts:
       sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
       cp -rf ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/youtube-dl-pro.desktop
+  
+
+  youtube-dl-pro:
+    plugin: python
+    source: .
+    python-packages:
+      - requests
+      - cryptography
+      - psutil
+      - python-slugify
+      - yt-dlp
+    build-attributes: [ keep-execstack ]
