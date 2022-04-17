@@ -18,6 +18,8 @@ apps:
   youtube-dl-pro:
     command: bin/desktop-launch youtube-dl-pro
     desktop: youtube-dl-pro.desktop
+    environment:
+      DISABLE_WAYLAND: 1
       
     plugs: 
        - home
