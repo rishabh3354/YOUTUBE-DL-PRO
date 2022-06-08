@@ -35,6 +35,8 @@ apps:
        - opengl
        - audio-playback
        - hardware-observe
+       - optical-drive
+       - removable-media
 
 plugs:
   gsettings:
