@@ -1,13 +1,6 @@
-**APP NOTE :#**
-
-IF APP IS NOT LAUNCHING AFTER INSTALL, THEN RUN CMD BELOW IN YOUR SHELL
-
-    sudo snap remove youtube-dl-pro --purge;sudo snap remove pyqt5-runtime-core20 --purge;sudo snap install pyqt5-runtime-core20;sudo snap install youtube-dl-pro;youtube-dl-pro
-
-
 **ABOUT APPLICATION :**
 
-DL-YOUTUBE is a Powerful Application For Downloading **YouTube Videos, Playlists, Music And Online Videos/Audios From The Internet** in HD Resolutions.
+DL-YOUTUBE aka YouTube Downloader is a Powerful Application For Downloading **YouTube Videos, Playlists, Music And Online Videos/Audios From The Internet** in HD Resolutions.
 
 
 **FEATURES :** 
@@ -34,19 +27,43 @@ DL-YOUTUBE is a Powerful Application For Downloading **YouTube Videos, Playlists
  - YouTube Search In The App with **Regional Country Support**.
 
 
-**NOTE  #1**
+## Install DL-YOUTUBE on Linux Desktop:
 
-ubuntu-restricted-extras package allows users to install ability to play popular non-free media formats, including DVD, MP3, Quicktime, and Windows Media formats. without this you would not be able to play videos inside the app.
+**Snap**
 
-    sudo apt-get install ubuntu-restricted-extras
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/youtube-dl-pro)
 
-**NOTE  #2**  
+Install with command-line
 
-If CPU Temp is not Coming/not accurate in the System Monitor, then run below command in your Terminal/Shell.
+`snap install youtube-dl-pro`
 
-    sudo snap connect youtube-dl-pro:hardware-observe
+and run
 
-Info: Some features might be paid in the app. App includes InApp purchase.
+`youtube-dl-pro`
+
+**Flatpak**
+
+<a href="https://flathub.org/apps/details/com.warlordsoftwares.youtube-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png"  height="56" width="186" alt="Get it from the Flathub Store" ></a>
+
+Install with command-line
+
+`flatpak install flathub com.warlordsoftwares.youtube-downloader`
+
+and run
+
+`flatpak run com.warlordsoftwares.youtube-downloader`
+
+## Screenshots of DL-YOUTUBE
+
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg?raw=true)
+
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg?raw=true)
+
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg?raw=true)
+
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg?raw=true)
+
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg?raw=true)
 
 **KEYWORDS:** 
 

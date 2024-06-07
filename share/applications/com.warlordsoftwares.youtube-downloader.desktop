@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=DL-YOUTUBE
+StartupWMClass=DL-YOUTUBE
+Comment=DL YouTube for Desktop
+GenericName=DL YouTube for Linux
+Exec=youtube-dl-pro.sh %u
+Icon=com.warlordsoftwares.youtube-downloader
+Terminal=false
+Type=Application
+StartupNotify=true
+Keywords=youtube downloader;video downloader;music downloader;playlist downloader;full HD downloader;audio downloader; youtube; youtube music;
+Categories=Utility;Qt;
