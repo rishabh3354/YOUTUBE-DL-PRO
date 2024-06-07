@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.warlordsoftwares.youtube-downloader</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/license/LICENSE</project_license>
+  <developer_name>Warlord Softwares</developer_name>
+  <name>YouTube Downloader</name>
+  <summary>Download 4k Videos from YouTube</summary>
+  <description>
+    <p>ABOUT APPLICATION :</p>
+    <p>YouTube Downloader or DL-YOUTUBE is a Powerful Application For Downloading YouTube Videos in 4K Resolutions.</p>
+    <p>FEATURES :</p>
+      <ul>
+      <li>Supports YouTube Videos, Music, Playlists with Different Formats.</li>
+      <li>Supports YouTube Subtitles and CC Download.</li>
+      <li>YouTube Search In The App with Regional Country Support.</li>
+      <li>Batch Download Support For Multiple Videos In one Click.</li>
+      <li>Stream/Play YouTube Videos Online Without Download.</li>
+      <li>YouTube Search Suggestion For Search Whole Youtube</li>
+      <li>Audio/Video Complete 100% Ads Free Online Stream NO ADS.</li>
+    </ul>
+  </description>
+  <keywords>
+        <keyword translate="no">DL-YOUTUBE</keyword>
+        <keyword>YouTube Downloader</keyword>
+        <keyword>SnapDownloader</keyword>
+        <keyword>By Click Downloader</keyword>
+        <keyword>VideoHunter</keyword>
+        <keyword>Youtube to mp3</keyword>
+        <keyword>snaptube</keyword>
+        <keyword>youtube dl</keyword>
+        <keyword>video downloader</keyword>
+        <keyword>VideoSolo</keyword>
+        <keyword>Inovideo</keyword>
+        <keyword>Leawo</keyword>
+        <keyword>4K Video Downloader</keyword>
+        <keyword>VideoProc</keyword>
+        <keyword>Y2mate</keyword>
+        <keyword>Youtube Download</keyword>
+        <keyword>SaveMedia</keyword>
+        <keyword>Addoncrop</keyword>
+        <keyword>YouTube Video Downloader</keyword>
+        <keyword>Facebook downloader</keyword>
+        <keyword>Instagram downloader</keyword>
+        <keyword>Tiktok downloader</keyword>
+        <keyword>Youtube shots downloader</keyword>
+        <keyword>Rumble video downloader</keyword>
+        <keyword>All file downloader</keyword>
+        <keyword>Snapchat downloader</keyword>
+        <keyword>linkedin video downloader</keyword>
+        <keyword>SoundCloud Downloader</keyword>
+	</keywords>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/rishabh3354/YOUTUBE-DL-PRO</url>
+  <url type="bugtracker">https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues</url>
+  <url type="contact">https://warlordsoftwares.com/contact-us/</url>
+  <url type="donation">https://www.paypal.me/rishabh3354/10</url>
+  <update_contact>contact@warlordsoftwares.com</update_contact>
+  <launchable type="desktop-id">com.warlordsoftwares.youtube-downloader.desktop</launchable>
+   <content_rating type="oars-1.1" />
+  <releases>
+  <release version="2024.6.7" date="2024-06-07" />
+  </releases>
+</component>
