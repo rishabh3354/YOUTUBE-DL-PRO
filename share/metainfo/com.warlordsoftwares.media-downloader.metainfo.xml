@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.warlordsoftwares.youtube-downloader</id>
+  <id>com.warlordsoftwares.media-downloader</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary=https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/license/LICENSE</project_license>
   <developer_name>Warlord Softwares</developer_name>
@@ -72,7 +72,7 @@
   <url type="contact">https://warlordsoftwares.com/contact-us/</url>
   <url type="donation">https://www.paypal.me/rishabh3354/10</url>
   <update_contact>contact@warlordsoftwares.com</update_contact>
-  <launchable type="desktop-id">com.warlordsoftwares.youtube-downloader.desktop</launchable>
+  <launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
    <content_rating type="oars-1.1" />
   <releases>
   <release version="2024.6.7" date="2024-06-07" />

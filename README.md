@@ -43,15 +43,15 @@ and run
 
 **Flatpak**
 
-<a href="https://flathub.org/apps/details/com.warlordsoftwares.youtube-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png"  height="56" width="186" alt="Get it from the Flathub Store" ></a>
+<a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png"  height="56" width="186" alt="Get it from the Flathub Store" ></a>
 
 Install with command-line
 
-`flatpak install flathub com.warlordsoftwares.youtube-downloader`
+`flatpak install flathub com.warlordsoftwares.media-downloader`
 
 and run
 
-`flatpak run com.warlordsoftwares.youtube-downloader`
+`flatpak run com.warlordsoftwares.media-downloader`
 
 ## Screenshots of DL-YOUTUBE
 
