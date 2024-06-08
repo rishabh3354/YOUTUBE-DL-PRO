@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary=https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/license/LICENSE</project_license>
   <developer_name>Warlord Softwares</developer_name>
-  <name>YouTube Downloader</name>
+  <name>Media Downloader</name>
   <summary>Download 4k Videos from YouTube</summary>
   <description>
     <p>ABOUT APPLICATION :</p>
@@ -23,6 +23,7 @@
   <keywords>
         <keyword translate="no">DL-YOUTUBE</keyword>
         <keyword>YouTube Downloader</keyword>
+        <keyword>Media Downloader</keyword>
         <keyword>SnapDownloader</keyword>
         <keyword>By Click Downloader</keyword>
         <keyword>VideoHunter</keyword>
