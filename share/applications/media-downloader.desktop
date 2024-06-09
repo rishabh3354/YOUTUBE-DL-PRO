@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=DL-YOUTUBE
-StartupWMClass=DL-YOUTUBE
-Comment=DL YouTube for Desktop
-GenericName=DL YouTube for Linux
+Name=Media Downloader
+StartupWMClass=Media-Downloader
+Comment=Media Downloader for Desktop
+GenericName=Media Downloader for Linux
 Exec=youtube-dl-pro.sh %u
-Icon=com.warlordsoftwares.youtube-downloader
+Icon=com.warlordsoftwares.media-downloader
 Terminal=false
 Type=Application
 StartupNotify=true
