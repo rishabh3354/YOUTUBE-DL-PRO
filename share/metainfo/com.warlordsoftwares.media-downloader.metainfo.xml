@@ -4,15 +4,19 @@
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>LicenseRef-proprietary=https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/license/LICENSE</project_license>
 	<developer_name>Warlord Softwares</developer_name>
+	<branding>
+		<color type="primary" scheme_preference="light">#e6e6e6</color>
+		<color type="primary" scheme_preference="dark">#161d1d</color>
+	</branding>
 	<name>Media Downloader</name>
 	<summary>Download 4k Videos from YouTube</summary>
 	<description>
 		<p>
-			<strong>ABOUT MEDIA DOWNLOADER :</strong>
+			ABOUT MEDIA DOWNLOADER :
 		</p>
 		<p>Media Downloader (Formerly known as DL-YOUTUBE) is a Powerful Application For Downloading YouTube Videos in 4K Resolutions.</p>
 		<p>
-			<strong>FEATURES :</strong>
+			FEATURES :
 		</p>
 		<ul>
 			<li>One-Click YouTube Video Downloads in Multiple Formats</li>
@@ -26,18 +30,18 @@
 			<li>Localized YouTube Search with Regional Support </li>
 		</ul>
 		<p>
-			<strong>NEW RELEASE :</strong>
+			NEW RELEASE :
 		</p>
 		<ul>
-			<li>4KTUBE is available in 35+ languages, including German, French, Spanish, and more</li>
+			<li>MEDIA DOWNLOADER is available in 35+ languages, including German, French, Spanish, and more</li>
 			<li>Smart YouTube Search Suggestions Within the App</li>
 			<li>Generic website Support Added</li>
 		</ul>
 	</description>
 	<keywords>
+		<!--		English Keywords-->
+		<keyword translate="no">MEDIA DOWNLOADER</keyword>
 		<keyword translate="no">DL-YOUTUBE</keyword>
-		<keyword>YouTube Downloader</keyword>
-		<keyword>Media Downloader</keyword>
 		<keyword>SnapDownloader</keyword>
 		<keyword>By Click Downloader</keyword>
 		<keyword>VideoHunter</keyword>
@@ -47,11 +51,9 @@
 		<keyword>video downloader</keyword>
 		<keyword>VideoSolo</keyword>
 		<keyword>Inovideo</keyword>
+		<keyword>MP3 Studio</keyword>
 		<keyword>Leawo</keyword>
-		<keyword>4K Video Downloader</keyword>
-		<keyword>VideoProc</keyword>
-		<keyword>Y2mate</keyword>
-		<keyword>Youtube Download</keyword>
+		<keyword>iTubeGo</keyword>
 		<keyword>YouTube to MP3</keyword>
 		<keyword>Audio downloader</keyword>
 		<keyword>Online video downloader</keyword>
@@ -63,6 +65,14 @@
 		<keyword>4K YouTube to MP3</keyword>
 		<keyword>YouTube 4K downloader</keyword>
 		<keyword>Music downloader</keyword>
+		<keyword>4K Video Downloader</keyword>
+		<keyword>Video downloader for YouTube</keyword>
+		<keyword>Music downloader</keyword>
+		<keyword>Media Downloader</keyword>
+		<keyword>VideoProc</keyword>
+		<keyword>Y2mate</keyword>
+		<keyword>SaveFrom</keyword>
+		<keyword>Youtube Download</keyword>
 		<keyword>SaveMedia</keyword>
 		<keyword>Addoncrop</keyword>
 		<keyword>YouTube Video Downloader</keyword>
@@ -75,47 +85,78 @@
 		<keyword>Snapchat downloader</keyword>
 		<keyword>linkedin video downloader</keyword>
 		<keyword>SoundCloud Downloader</keyword>
+		<!--		German keywords-->
+		<keyword xml:lang="de">YouTube zu MP3</keyword>
+		<keyword xml:lang="de">Video-Downloader</keyword>
+		<keyword xml:lang="de">Kostenloser YouTube-Downloader</keyword>
+		<keyword xml:lang="de">YouTube-Videos herunterladen</keyword>
+		<keyword xml:lang="de">4K-Videos herunterladen</keyword>
+		<keyword xml:lang="de">Musik-Downloader</keyword>
+		<keyword xml:lang="de">Alle-Dateien-Downloader</keyword>
+		<keyword xml:lang="de">Video-Downloader für YouTube</keyword>
+		<!--		French keywords-->
+		<keyword xml:lang="fr">Téléchargeur de vidéos en ligne</keyword>
+		<keyword xml:lang="fr">Téléchargeur de vidéos par lot</keyword>
+		<keyword xml:lang="fr">Téléchargeur YouTube gratuit</keyword>
+		<keyword xml:lang="fr">Télécharger des vidéos YouTube</keyword>
+		<keyword xml:lang="fr">Téléchargeur YouTube 4K</keyword>
+		<!--		Italian keywords-->
+		<keyword xml:lang="it">Scaricatore di video</keyword>
+		<keyword xml:lang="it">Scaricatore di video online</keyword>
+		<keyword xml:lang="it">Scaricatore YouTube 4K</keyword>
+		<!--		Spanish keywords-->
+		<keyword xml:lang="es">Descargador gratuito de YouTube</keyword>
+		<keyword xml:lang="es">Descargar videos en 4K</keyword>
+		<keyword xml:lang="es">Descargador de videos para YouTube</keyword>
+		<!--		Japanese keywords-->
+		<keyword xml:lang="ja">無料の YouTube ダウンローダー</keyword>
+		<keyword xml:lang="ja">4K ビデオダウンローダー</keyword>
+		<keyword xml:lang="ja">YouTube ビデオをダウンロード</keyword>
+		<!--		Swedish Keywords-->
+		<keyword xml:lang="sv">Ladda ner YouTube-videor</keyword>
+		<keyword xml:lang="sv">YouTube 4K nedladdare</keyword>
+		<keyword xml:lang="sv">Online videonedladdare</keyword>
 	</keywords>
 	<category>Network</category>
 	<category>Utility</category>
 	<screenshots>
 		<screenshot type="default">
-			<image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg</image>
+			<caption>Media Downloader: YouTube home page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg</image>
 		</screenshot>
 		<screenshot>
-			<image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg</image>
+			<caption>Media Downloader: Video download page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg</image>
 		</screenshot>
 		<screenshot>
-			<image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg</image>
+			<caption>Media Downloader: System monitor page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg</image>
 		</screenshot>
 		<screenshot>
-			<image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg</image>
+			<caption>Media Downloader: App settings page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg</image>
 		</screenshot>
 		<screenshot>
-			<image>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg</image>
+			<caption>Media Downloader: Downloads page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg</image>
 		</screenshot>
 	</screenshots>
-	<url type="official-website">https://warlordsoftwares.com/trending-apps/youtube-dl-gui-video-downloader-linux/</url>
-	<url type="homepage">https://github.com/rishabh3354/YOUTUBE-DL-PRO</url>
+	<url type="homepage">https://warlordsoftwares.com/trending-apps/youtube-dl-gui-video-downloader-linux/</url>
+	<url type="vcs-browser">https://github.com/rishabh3354/YOUTUBE-DL-PRO</url>
 	<url type="bugtracker">https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues</url>
 	<url type="contact">https://warlordsoftwares.com/contact-us/</url>
 	<url type="donation">https://www.paypal.me/rishabh3354/10</url>
-	<icon>https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/icons/icon.png</icon>
 	<update_contact>contact@warlordsoftwares.com</update_contact>
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
-	<content_rating type="oars-1.1">
-		<content_rating_system>OARS</content_rating_system>
-		<content_rating_component id="violence" rated="none" />
-		<content_rating_component id="sex" rated="none" />
-		<content_rating_component id="drugs" rated="none" />
-		<content_rating_component id="language" rated="none" />
-		<content_rating_component id="discrimination" rated="none" />
-	</content_rating>
+	<content_rating type="oars-1.1" />
 	<releases>
 		<release version="2024.9.10" date="2024-9-10">
 			<description>
-				<p>Now available in 35+ languages for global accessibility.</p>
-				<p>Resolved: Video title display issue in MPV streaming player.</p>
+				<p>New Features:</p>
+				<ul>
+					<li>Now available in 35+ languages for global accessibility.</li>
+					<li>Resolved: Video title display issue in MPV streaming player.</li>
+				</ul>
 			</description>
 		</release>
 		<release version="2024.9.1" date="2024-9-3">
