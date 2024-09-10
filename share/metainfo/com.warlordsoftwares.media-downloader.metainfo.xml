@@ -117,8 +117,10 @@
 		<keyword xml:lang="sv">YouTube 4K nedladdare</keyword>
 		<keyword xml:lang="sv">Online videonedladdare</keyword>
 	</keywords>
-	<category>Network</category>
-	<category>Utility</category>
+	<categories>
+		<category>Network</category>
+		<category>Utility</category>
+	</categories>
 	<screenshots>
 		<screenshot type="default">
 			<caption>Media Downloader: YouTube home page</caption>
