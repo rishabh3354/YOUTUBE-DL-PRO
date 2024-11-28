@@ -152,6 +152,11 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2024.12.1" date="2024-11-28">
+			<description>
+				<p>Download engine fixes</p>
+			</description>
+		</release>
 		<release version="2024.9.10" date="2024-9-10">
 			<description>
 				<p>New Features:</p>
