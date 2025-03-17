@@ -2,13 +2,14 @@
 
 DL-YOUTUBE is a powerful application designed for downloading **YouTube videos, playlists, music, and online videos/audios** from the internet in **HD resolution**. Now available in **35+ languages**, it provides a fast, simple, and efficient solution for all your video downloading needs.
 
-**FEATURES:**
+**Key Features:**
 
 - **One-click YouTube video downloads** in multiple formats.
 - Download entire **YouTube playlists** with a single click.
 - **One-click YouTube music/audio downloads**.
+-  **YouTube Multi-Language Audio Support :** Download videos with multiple dubbed audio tracks.  
 - Download videos and audio from **any website** in one click.
-- Supports video/audio downloads from platforms like **Facebook, Instagram, TikTok, Rumble, Odysee, Bitchute, Twitter, Twitch, ArteTV, Fandom**, and more.
+- Supports video/audio downloads from platforms like **Facebook, Instagram, TikTok, Rumble, Odysee, Bitchute, Twitter, Twitch, ArteTV, Fandom**, and 1400+ more.
 - **Batch download** multiple videos simultaneously.
 - **Stream or play YouTube videos** online without downloading.
 - Supports **YouTube subtitles and closed captions (CC)**.
