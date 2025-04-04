@@ -164,6 +164,14 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.4.4" date="2025-4-4">
+			<description>
+				<p>Added support for downloading from new platforms like twitter, twitch, vimeo etc..</p>
+				<p>Added YouTube Multi-Language Audio Support.</p>
+				<p>History file details UI enhancement.</p>
+				<p>Added new restore account button in account section.</p>
+			</description>
+		</release>
 		<release version="2025.3.26" date="2025-3-26">
 			<description>
 				<p>Added support for downloading from new platforms like twitter, twitch, vimeo etc..</p>
