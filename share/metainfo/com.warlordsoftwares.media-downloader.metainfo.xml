@@ -164,6 +164,13 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.4.22" date="2025-4-23">
+			<description>
+				<p>New feature added: Now you can check for urgent app updates from about me tab</p>
+				<p>Error message standardization and improvements</p>
+				<p>Window icon fixed for main windows</p>
+			</description>
+		</release>
 		<release version="2025.4.4" date="2025-4-4">
 			<description>
 				<p>Added support for downloading from new platforms like twitter, twitch, vimeo etc..</p>
