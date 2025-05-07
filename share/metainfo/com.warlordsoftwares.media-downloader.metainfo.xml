@@ -164,6 +164,13 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.5.7" date="2025-5-7">
+			<description>
+				<p>New feature added: Automated account restore portal linked via restore button</p>
+				<p>Other platform engine fixes - twitter, twitch etc</p>
+				<p>MPV Player issue fixed.</p>
+			</description>
+		</release>
 		<release version="2025.4.22" date="2025-4-23">
 			<description>
 				<p>New feature added: Now you can check for urgent app updates from about me tab</p>
