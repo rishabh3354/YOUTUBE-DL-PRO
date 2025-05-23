@@ -164,6 +164,12 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.5.23" date="2025-5-23">
+			<description>
+				<p>Fix: Download only 720p YouTube videos bug fixed</p>
+				<p>Other improvements and fixes</p>
+			</description>
+		</release>
 		<release version="2025.5.14" date="2025-5-14">
 			<description>
 				<p>New feature added: Automated account restore portal linked via restore button.</p>
