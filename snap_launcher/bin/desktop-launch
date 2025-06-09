@@ -144,7 +144,7 @@ function is_subpath() {
 }
 
 #RUNTIME_NAME
-RUNTIME_NAME="pyqt5-runtime-core22"
+RUNTIME_NAME="content-snap-core22"
 
 if ! snapctl is-connected $RUNTIME_NAME; then
   echo "ERROR: not connected to the $RUNTIME_NAME content interface."
