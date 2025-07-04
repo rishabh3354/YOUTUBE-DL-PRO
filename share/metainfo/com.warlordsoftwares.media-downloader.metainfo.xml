@@ -166,6 +166,12 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.7.4" date="2025-7-4">
+			<description>
+				<p>Fixed bug video not downloading, failing.</p>
+				<p>Bug fixes and improvements</p>
+			</description>
+		</release>
 		<release version="2025.6.13" date="2025-6-13">
 			<description>
 				<p>New Feature: Now you can download sign-in-required videos from YouTube by authenticating your account.</p>
