@@ -166,6 +166,13 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2025.8.11" date="2025-8-11">
+			<description>
+				<p>Download engine fixes: some yt videos not downloading, showing only 360p only</p>
+				<p>Major Bug fixes and improvements of the app</p>
+				<p>Minor UI fixes of the app</p>
+			</description>
+		</release>
 		<release version="2025.7.4" date="2025-7-4">
 			<description>
 				<p>Fixed bug video not downloading, failing.</p>
