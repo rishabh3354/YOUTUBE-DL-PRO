@@ -8,6 +8,7 @@ confinement: strict
 
 icon: snap/gui/icon.png
 
+
 architectures:
   - build-on: [amd64]
 
