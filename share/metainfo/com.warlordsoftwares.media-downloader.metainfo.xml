@@ -166,6 +166,12 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+         <release version="2025.8.25" date="2025-8-25">
+			<description>
+				<p>YouTube fixes: Some videos only show 360p format.</p>
+				<p>Downloading engine fixes for YouTube</p>
+			</description>
+		</release>
 		<release version="2025.8.20" date="2025-8-20">
 			<description>
 				<p>Extractor changes for other platforms including youtube</p>
