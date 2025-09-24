@@ -27,6 +27,7 @@ DL-YOUTUBE is a powerful application designed for downloading **YouTube videos, 
 
 Install with command-line
 
+
 `snap install youtube-dl-pro`
 
 and run
