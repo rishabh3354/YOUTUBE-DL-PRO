@@ -166,6 +166,11 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+        <release version="2025.10.22" date="2025-10-22">
+			<description>
+				<p>YouTube downloading fixed</p>
+			</description>
+		</release>
         <release version="2025.10.1" date="2025-10-1">
 			<description>
 				<p>App not starting fixed</p>
