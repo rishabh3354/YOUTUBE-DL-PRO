@@ -71,16 +71,6 @@
 		<keyword>Music downloader</keyword>
 		<keyword>4K Video Downloader</keyword>
 		<keyword>Video downloader for YouTube</keyword>
-		<keyword>xvideos downloader</keyword>
-		<keyword>xhamster downloader</keyword>
-		<keyword>xnxx downloader</keyword>
-		<keyword>tube8 downloader</keyword>
-		<keyword>pornhub downloader</keyword>
-		<keyword>youporn downloader</keyword>
-		<keyword>redtube downloader</keyword>
-		<keyword>iporntv downloader</keyword>
-		<keyword>ixxx downloader</keyword>
-		<keyword>beeg downloader</keyword>
 		<keyword>Music downloader</keyword>
 		<keyword>Media Downloader</keyword>
 		<keyword>VideoProc</keyword>
@@ -166,6 +156,11 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+         <release version="2025.11.11" date="2025-11-12">
+			<description>
+				<p>YouTube search fixes: Search on YouTube not working, fixed server</p>
+			</description>
+		</release>
          <release version="2025.11.2" date="2025-11-2">
 			<description>
 				<p>YouTube fixes: Error showing unable to load all video formats, fixed</p>
