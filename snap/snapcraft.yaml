@@ -13,15 +13,15 @@ architectures:
 
 environment:
   SNAP_DESKTOP_RUNTIME: $SNAP/content-snap-core22
-  
+
 apps:
   youtube-dl-pro:
     command: bin/desktop-launch youtube-dl-pro
     desktop: youtube-dl-pro.desktop
     environment:
       DISABLE_WAYLAND: 1
-      
-    plugs: 
+
+    plugs:
        - home
        - gsettings
        - network
@@ -70,7 +70,7 @@ parts:
 
   snap-launcher:
     plugin: dump
-    source: snap_launcher/    
+    source: snap_launcher/
     override-build: |
       craftctl default
       sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop
@@ -85,3 +85,4 @@ parts:
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin
       cp YOUTUBE_DL ${SNAPCRAFT_PART_INSTALL}/bin/youtube-dl-pro
       chmod +x ${SNAPCRAFT_PART_INSTALL}/bin/youtube-dl-pro
+
