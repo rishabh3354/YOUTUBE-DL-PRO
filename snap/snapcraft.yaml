@@ -1,6 +1,6 @@
 name: youtube-dl-pro
 base: core22
-version: '2026.1.15'
+version: '2026.1.29'
 summary: Download videos or playlist or music audio from youtube.com in full HD formats
 description: DL-YOUTUBE PRO is a powerful GUI application for linux for downloading youtube videos, playlist and music audio in full UHD+ resolutions and supports MP4, WEBM and MP3 formats.
 grade: stable
@@ -13,15 +13,15 @@ architectures:
 
 environment:
   SNAP_DESKTOP_RUNTIME: $SNAP/content-snap-core22
-
+  
 apps:
   youtube-dl-pro:
     command: bin/desktop-launch youtube-dl-pro
     desktop: youtube-dl-pro.desktop
     environment:
       DISABLE_WAYLAND: 1
-
-    plugs:
+      
+    plugs: 
        - home
        - gsettings
        - network
@@ -70,7 +70,7 @@ parts:
 
   snap-launcher:
     plugin: dump
-    source: snap_launcher/
+    source: snap_launcher/    
     override-build: |
       craftctl default
       sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/youtube-dl-pro.desktop
