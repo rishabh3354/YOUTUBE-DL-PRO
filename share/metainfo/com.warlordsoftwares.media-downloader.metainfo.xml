@@ -156,6 +156,13 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2026.2.10" date="2026-2-10">
+			<description>
+				<p>Multi-Dubbed audio tracks in YouTube fixed</p>
+				<p>New YouTube server for home page and search results</p>
+				<p>YouTube downloading issue fixed for some videos</p>
+			</description>
+		</release>
 		<release version="2026.1.29" date="2026-1-29">
 			<description>
 				<p>YouTube downloading issue fixed</p>
