@@ -156,6 +156,19 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2026.2.24" date="2026-2-24">
+			<description>
+				<p>Light Theme is finally here - find it in the settings, Hope you love the fresh new look!</p>
+				<p>YouTube video downloading fixes: MKV file downloading instead of MP4</p>
+				<p>YouTube audio downloading fixes: file already exists for different audios</p>
+				<p>YouTube searches in the homepage fixed</p>
+				<p>YouTube signin fixes: Unable to signin for some users</p>
+				<p>YouTube dubbed audio fixes</p>
+				<p>Bulk video and playlist saves inside directory</p>
+				<p>file saves as video title name, no more safe strings</p>
+				<p>Other bug fixes and improvements</p>
+			</description>
+		</release>
 		<release version="2026.2.20" date="2026-2-20">
 			<description>
 				<p>Light Theme is finally here - find it in the settings, Hope you love the fresh new look!</p>
