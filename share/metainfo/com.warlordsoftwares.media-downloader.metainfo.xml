@@ -156,6 +156,11 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2026.3.5" date="2026-3-5">
+			<description>
+				<p>Bug fixes and improvements</p>
+			</description>
+		</release>
 		<release version="2026.2.24" date="2026-2-24">
 			<description>
 				<p>Light Theme is finally here - find it in the settings, Hope you love the fresh new look!</p>
