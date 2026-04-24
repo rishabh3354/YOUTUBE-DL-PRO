@@ -1,6 +1,6 @@
 name: youtube-dl-pro
 base: core22
-version: '2026.4.1'
+version: '2026.4.24'
 summary: Download videos or playlist or music audio from youtube.com in full HD formats
 description: DL-YOUTUBE PRO is a powerful GUI application for linux for downloading youtube videos, playlist and music audio in full UHD+ resolutions and supports MP4, WEBM and MP3 formats.
 grade: stable
@@ -20,6 +20,13 @@ apps:
     desktop: youtube-dl-pro.desktop
     environment:
       DISABLE_WAYLAND: 1
+      FONTCONFIG_PATH: /etc/fonts
+      LANG: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
+      QT_AUTO_SCREEN_SCALE_FACTOR: "1"
+      QT_ENABLE_HIGHDPI_SCALING: "1"
+      QT_SCALE_FACTOR_ROUNDING_POLICY: PassThrough
+      XDG_DATA_DIRS: $SNAP/usr/share:$XDG_DATA_DIRS
       
     plugs: 
        - home
