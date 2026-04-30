@@ -48,15 +48,15 @@ and run
 
 ## Screenshots of DL-YOUTUBE
 
-![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg?raw=true)
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/video_download.png?raw=true)
 
-![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg?raw=true)
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_search.png?raw=true)
 
-![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg?raw=true)
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png?raw=true)
 
-![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg?raw=true)
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/videos_downloaded.png?raw=true)
 
-![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg?raw=true)
+![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png?raw=true)
 
 
 
