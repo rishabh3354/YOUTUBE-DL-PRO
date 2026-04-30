@@ -127,24 +127,24 @@
 	</categories>
 	<screenshots>
 		<screenshot type="default">
-			<caption>Media Downloader: YouTube home page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_1.jpg</image>
-		</screenshot>
-		<screenshot>
 			<caption>Media Downloader: Video download page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_2.jpg</image>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/video_download.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Media Downloader: System monitor page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_3.jpg</image>
+			<caption>Media Downloader: YouTube search page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_search.png</image>
 		</screenshot>
 		<screenshot>
-			<caption>Media Downloader: App settings page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_4.jpg</image>
+			<caption>Media Downloader: Playlist download page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Media Downloader: Downloads page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/dl-youtube-warlordsoftwares_5.jpg</image>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/videos_downloaded.png</image>
+		</screenshot>
+		<screenshot>
+			<caption>Media Downloader: App settings page</caption>
+			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png</image>
 		</screenshot>
 	</screenshots>
 	<url type="homepage">https://warlordsoftwares.com/trending-apps/youtube-dl-gui-video-downloader-linux/</url>
