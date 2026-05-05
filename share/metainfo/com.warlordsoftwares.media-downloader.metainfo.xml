@@ -156,7 +156,7 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
-		<release version="2026.4.24" date="2026-4-24">
+		<release version="2026.5.5" date="2026-5-5">
 			<description>
 				<p>1. Optimized and improved translations across all supported languages.</p>
 				<p>2. Fixed sign-in issues: improved Settings button behavior and added a sign-in status indicator in Settings.</p>
