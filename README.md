@@ -36,6 +36,7 @@ and run
 
 **FLATPAK PACKAGE**
 
+
 <a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png"  height="56" width="186" alt="Get it from the Flathub Store" ></a>
 
 Install with command-line
