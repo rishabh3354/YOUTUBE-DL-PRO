@@ -156,6 +156,12 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2026.7.2" date="2026-7-1">
+			<description>
+				<p>1. YouTube multilanguage audio bug fixed</p>
+				<p>2. Minor UI fixes and improvements</p>
+			</description>
+		</release>
 		<release version="2026.6.1" date="2026-6-1">
 			<description>
 				<p>1. Optimized and improved translations across all supported languages.</p>
