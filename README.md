@@ -59,14 +59,7 @@
 | ![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png?raw=true) | ![DL-YOUTUBE](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png?raw=true) |
 
 ---
-### 🚀 Download Now
 
-<p align="center">
-  <a href="https://snapcraft.io/youtube-dl-pro"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" height="56" alt="Get it from the Snap Store"></a>&nbsp;
-  <a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png"  height="56" width="186" alt="Get it from the Flathub Store" ></a>
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage"><img src="https://raw.githubusercontent.com/srevinsaju/get-appimage/master/static/badges/get-appimage-branding-blue.png" height="56" alt="Get AppImage"></a>&nbsp;
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YOUTUBE.exe"><img src="https://user-images.githubusercontent.com/66430340/187172806-a8edd12a-ef58-4a05-96a3-99d7490b42f6.png" height="56" alt="Download for Windows"></a>
-</p>
 
 *🎯 _(Keywords):_*  
   
