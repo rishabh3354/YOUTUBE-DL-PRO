@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DL-YouTube — Video Downloader for 1400+ Sites (Linux &amp; Windows)</title>
+<meta name="description" content="Free all-in-one video downloader for Linux and Windows. Save video and audio from YouTube, Instagram, TikTok and 1400+ sites in HD or MP3. No ads, no trackers.">
+<link rel="canonical" href="https://rishabh3354.github.io/YOUTUBE-DL-PRO/">
+<meta name="author" content="Warlord Softwares">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Warlord Softwares">
+<meta property="og:title" content="DL-YouTube — Video Downloader for 1400+ Sites (Linux &amp; Windows)">
+<meta property="og:description" content="Free all-in-one video downloader for Linux and Windows. Save video and audio from YouTube, Instagram, TikTok and 1400+ sites in HD or MP3. No ads, no trackers.">
+<meta property="og:url" content="https://rishabh3354.github.io/YOUTUBE-DL-PRO/">
+<meta property="og:image" content="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube-dl-pro_banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DL-YouTube — Video Downloader for 1400+ Sites (Linux &amp; Windows)">
+<meta name="twitter:description" content="Free all-in-one video downloader for Linux and Windows. Save video and audio from YouTube, Instagram, TikTok and 1400+ sites in HD or MP3. No ads, no trackers.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube-dl-pro_banner.png">
+<link rel="icon" href="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/icons/icon.png">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#ffffff;--panel:#f6f7f9;--text:#16181d;--muted:#5b6270;--line:#e3e6ea;
+  --accent:#f0803c;--code-bg:#f0f2f5;--shadow:0 1px 3px rgba(0,0,0,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1115;--panel:#171a20;--text:#e9ecf1;--muted:#98a0ae;--line:#252a33;
+        --code-bg:#1c2028;--shadow:0 1px 3px rgba(0,0,0,.4)}
+}
+:root[data-theme="dark"]{--bg:#0f1115;--panel:#171a20;--text:#e9ecf1;--muted:#98a0ae;
+  --line:#252a33;--code-bg:#1c2028;--shadow:0 1px 3px rgba(0,0,0,.4)}
+:root[data-theme="light"]{--bg:#ffffff;--panel:#f6f7f9;--text:#16181d;--muted:#5b6270;
+  --line:#e3e6ea;--code-bg:#f0f2f5;--shadow:0 1px 3px rgba(0,0,0,.07)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.25rem}
+header.hero{padding:3.5rem 0 2.5rem;text-align:center;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(1.75rem,4.5vw,2.6rem);line-height:1.2;letter-spacing:-.02em;margin:0 0 .6rem}
+.sub{color:var(--muted);font-size:clamp(1rem,2.2vw,1.15rem);max-width:44rem;margin:0 auto 1.75rem}
+.banner{border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow);margin:0 0 2rem}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:0 0 1.75rem}
+.badges img{display:inline-block}
+.cta{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.btn{display:inline-block;padding:.7rem 1.3rem;border-radius:8px;font-weight:600;font-size:.95rem;
+  border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+section{padding:3rem 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.01em;margin:0 0 1.25rem}
+h3{font-size:1.02rem;margin:0 0 .35rem}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem}
+.card p{margin:0;color:var(--muted);font-size:.93rem}
+.card h3{color:var(--text)}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:.85rem 1rem;
+  overflow-x:auto;margin:.5rem 0 0}
+code{font:.88rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+dl.ref{margin:0;display:grid;gap:.9rem}
+dl.ref dt{font-weight:600;font-size:.9rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+dl.ref dd{margin:.25rem 0 0;color:var(--muted);font-size:.95rem;word-spacing:.1em}
+.shots{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.shots img{border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.9rem 1.1rem;margin:0 0 .6rem}
+details summary{cursor:pointer;font-weight:600;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";float:right;color:var(--accent);font-weight:700}
+details[open] summary::after{content:"\2212"}
+details p{margin:.7rem 0 0;color:var(--muted);font-size:.95rem}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:8px;padding:1rem 1.2rem;color:var(--muted);font-size:.93rem}
+footer{padding:2.5rem 0 3.5rem;color:var(--muted);font-size:.9rem}
+footer a{color:var(--muted);text-decoration:underline}
+footer nav{margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:1rem}
+.tbl{width:100%;border-collapse:collapse;font-size:.94rem}
+.tbl th,.tbl td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl td:last-child{color:var(--muted)}
+.scroll{overflow-x:auto}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DL-YouTube","applicationCategory":"MultimediaApplication","operatingSystem":"Linux, Windows 10, Windows 11","description":"Free all-in-one video downloader for Linux and Windows. Save video and audio from YouTube, Instagram, TikTok and 1400+ sites in HD or MP3. No ads, no trackers.","url":"https://rishabh3354.github.io/YOUTUBE-DL-PRO/","downloadUrl":"https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage","screenshot":"https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube-dl-pro_banner.png","softwareVersion":"latest","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"Warlord Softwares","url":"https://warlordsoftwares.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is DL-YouTube free?","acceptedAnswer":{"@type":"Answer","text":"It is free to download and use. A one-time Pro upgrade removes limits and unlocks the full feature set \u2014 there is no subscription."}},{"@type":"Question","name":"Does it work on Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes, Linux is its primary platform. Install it from Flathub, the Snap Store or as a portable AppImage on Ubuntu, Debian, Fedora, Arch, Linux Mint and Pop!_OS."}},{"@type":"Question","name":"Which sites does it support?","acceptedAnswer":{"@type":"Answer","text":"More than 1400, including YouTube, Instagram, TikTok, Facebook, X (Twitter), Twitch, Vimeo, Reddit, SoundCloud, Rumble and Odysee."}},{"@type":"Question","name":"How do I download a video as MP3?","acceptedAnswer":{"@type":"Answer","text":"Paste the link, switch the output to audio, pick MP3 or FLAC, M4A or Opus, and download. Only the audio track is saved."}},{"@type":"Question","name":"Can it download a whole playlist?","acceptedAnswer":{"@type":"Answer","text":"Yes. Paste a playlist URL and every video in it is queued for download."}},{"@type":"Question","name":"Does it download subtitles?","acceptedAnswer":{"@type":"Answer","text":"Yes. Subtitle and closed-caption tracks can be saved alongside the video."}},{"@type":"Question","name":"Does it contain ads, trackers or bundled software?","acceptedAnswer":{"@type":"Answer","text":"No. It ships from Flathub, the Snap Store and signed GitHub releases with no advertising, no analytics and no bundled installers."}},{"@type":"Question","name":"How is it different from 4KTUBE?","acceptedAnswer":{"@type":"Answer","text":"DL-YouTube is the general-purpose downloader with the widest site coverage. 4KTUBE is the YouTube specialist, tuned for maximum resolution, playlists and in-app search."}}]}</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>DL-YouTube — Video Downloader for 1400+ Sites (Linux &amp; Windows)</h1>
+    <p class="sub">One desktop app instead of a different sketchy website for every platform. Save video and audio from YouTube, Instagram, TikTok, Facebook, X, Twitch, Reddit, SoundCloud and 1400+ other sites — in HD, as MP4 or MP3, in batches, with subtitles.</p>
+    <div class="badges">
+      <img src="https://img.shields.io/flathub/downloads/com.warlordsoftwares.media-downloader?style=flat-square&label=Flathub%20installs&color=4A90D9" alt="Flathub installs" height="20">
+      <img src="https://img.shields.io/snapcraft/v/youtube-dl-pro/latest/stable?style=flat-square&label=Snap&color=E95420" alt="Snap Store version" height="20">
+      <img src="https://img.shields.io/github/v/release/rishabh3354/YOUTUBE-DL-PRO?style=flat-square&label=Release&color=2ea44f" alt="Latest release" height="20">
+      <img src="https://img.shields.io/github/stars/rishabh3354/YOUTUBE-DL-PRO?style=flat-square&color=f5c518" alt="GitHub stars" height="20">
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage">Download AppImage</a>
+      <a class="btn" href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YOUTUBE.exe">Download for Windows</a>
+      <a class="btn" href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader">Flathub</a>
+      <a class="btn" href="https://snapcraft.io/youtube-dl-pro">Snap Store</a>
+      <a class="btn" href="https://github.com/rishabh3354/YOUTUBE-DL-PRO">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="screenshot-banner">
+    <div class="wrap">
+      <img class="banner" src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube-dl-pro_banner.png" alt="DL-YouTube — Media Downloader for 1400+ Sites" width="1600" height="600">
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <h2>Download and install DL-YouTube</h2>
+      <h3>Linux — Snap</h3>
+      <pre><code>sudo snap install youtube-dl-pro</code></pre>
+      <h3>Linux — Flatpak</h3>
+      <pre><code>flatpak install flathub com.warlordsoftwares.media-downloader</code></pre>
+      <h3>Linux — AppImage (any distribution)</h3>
+      <pre><code>wget https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage
+chmod +x DL-YouTube-x86_64.AppImage
+./DL-YouTube-x86_64.AppImage</code></pre>
+      <h3>Windows 10 and 11</h3>
+      <p>Download <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YOUTUBE.exe">DL-YOUTUBE.exe</a> from the
+      <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest">latest release</a> and run the installer.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card"><h3>1400+ websites</h3><p>One app instead of a different download site for every platform.</p></div>
+        <div class="card"><h3>One-click video download</h3><p>Paste a link and save it as MP4, WEBM or MKV.</p></div>
+        <div class="card"><h3>One-click audio download</h3><p>Extract MP3, M4A, WAV, FLAC or Opus from any supported video.</p></div>
+        <div class="card"><h3>YouTube playlists</h3><p>Queue an entire playlist in a single action.</p></div>
+        <div class="card"><h3>Multi-language audio tracks</h3><p>Choose the dubbed track you want instead of the default.</p></div>
+        <div class="card"><h3>Subtitles and closed captions</h3><p>Save CC tracks alongside the video.</p></div>
+        <div class="card"><h3>Batch downloading</h3><p>Run many downloads at once instead of waiting in line.</p></div>
+        <div class="card"><h3>Built-in YouTube search</h3><p>Find videos inside the app, with regional results.</p></div>
+        <div class="card"><h3>35+ interface languages</h3><p>The app itself is fully localised.</p></div>
+        <div class="card"><h3>No ads, no trackers</h3><p>No advertising, no analytics, no bundled installers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reference">
+    <div class="wrap">
+      <h2>Supported sites</h2>
+      <dl class="ref">
+        <dt>Video</dt><dd>YouTube · Vimeo · Dailymotion · Twitch · Rumble · Odysee · BitChute · Brighteon · Bilibili</dd>
+        <dt>Social</dt><dd>Instagram · TikTok · Facebook · X (Twitter) · Reddit · Snapchat · Pinterest · LinkedIn</dd>
+        <dt>Audio</dt><dd>SoundCloud · YouTube Music</dd>
+        <dt>News &amp; other</dt><dd>ESPN · Yahoo · Arte · Fandom · Wikimedia · and 1400+ more</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="tasks">
+    <div class="wrap">
+      <h2>What you can download</h2>
+      <div class="scroll">
+        <table class="tbl">
+          <thead><tr><th>Task</th><th>What DL-YouTube does</th></tr></thead>
+          <tbody>
+          <tr><td>Download a YouTube video</td><td>MP4 or WEBM at your chosen resolution.</td></tr>
+          <tr><td>Download a YouTube playlist</td><td>Every video queued automatically.</td></tr>
+          <tr><td>Convert YouTube to MP3</td><td>Audio-only extraction at high bitrate.</td></tr>
+          <tr><td>Download an Instagram reel</td><td>Saved as MP4.</td></tr>
+          <tr><td>Download a TikTok video</td><td>Saved as MP4, watermark-free where available.</td></tr>
+          <tr><td>Download a Twitch VOD or clip</td><td>Saved locally for offline viewing.</td></tr>
+          <tr><td>Download a Reddit video</td><td>Video and audio merged into one file.</td></tr>
+          <tr><td>Batch download a list of links</td><td>Paste many URLs and let the queue run.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="screenshots">
+    <div class="wrap">
+      <h2>Screenshots</h2>
+      <div class="shots">
+        <img src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/video_download.png" alt="DL-YouTube downloading a video with format and quality options" loading="lazy" width="1200" height="750">
+        <img src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_search.png" alt="Searching YouTube directly inside the DL-YouTube desktop app" loading="lazy" width="1200" height="750">
+        <img src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png" alt="DL-YouTube batch downloading several videos at once" loading="lazy" width="1200" height="750">
+        <img src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png" alt="DL-YouTube application settings and download preferences" loading="lazy" width="1200" height="750">
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Frequently asked questions</h2>
+        <details><summary>Is DL-YouTube free?</summary><p>It is free to download and use. A one-time Pro upgrade removes limits and unlocks the full feature set — there is no subscription.</p></details>
+        <details><summary>Does it work on Linux?</summary><p>Yes, Linux is its primary platform. Install it from Flathub, the Snap Store or as a portable AppImage on Ubuntu, Debian, Fedora, Arch, Linux Mint and Pop!_OS.</p></details>
+        <details><summary>Which sites does it support?</summary><p>More than 1400, including YouTube, Instagram, TikTok, Facebook, X (Twitter), Twitch, Vimeo, Reddit, SoundCloud, Rumble and Odysee.</p></details>
+        <details><summary>How do I download a video as MP3?</summary><p>Paste the link, switch the output to audio, pick MP3 or FLAC, M4A or Opus, and download. Only the audio track is saved.</p></details>
+        <details><summary>Can it download a whole playlist?</summary><p>Yes. Paste a playlist URL and every video in it is queued for download.</p></details>
+        <details><summary>Does it download subtitles?</summary><p>Yes. Subtitle and closed-caption tracks can be saved alongside the video.</p></details>
+        <details><summary>Does it contain ads, trackers or bundled software?</summary><p>No. It ships from Flathub, the Snap Store and signed GitHub releases with no advertising, no analytics and no bundled installers.</p></details>
+        <details><summary>How is it different from 4KTUBE?</summary><p>DL-YouTube is the general-purpose downloader with the widest site coverage. 4KTUBE is the YouTube specialist, tuned for maximum resolution, playlists and in-app search.</p></details>
+    </div>
+  </section>
+
+    <section id="responsible-use">
+      <div class="wrap">
+        <h2>Responsible use</h2>
+        <p class="notice">DL-YouTube is a tool for saving content you have the right to save — your own uploads, Creative Commons material, public-domain video, and content you have permission to keep offline. Please respect copyright and the terms of service of the sites you download from.</p>
+      </div>
+    </section>
+  <section id="other-apps">
+    <div class="wrap">
+      <h2>Other apps by Warlord Softwares</h2>
+      <div class="scroll">
+        <table class="tbl">
+          <thead><tr><th>App</th><th>What it does</th></tr></thead>
+          <tbody>
+          <tr><td><a href="https://rishabh3354.github.io/FORMAT_LAB/">FormatLab</a></td><td>Video &amp; Audio Converter for Linux and Windows</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/4KTUBE/">4KTUBE</a></td><td>YouTube Downloader for Linux and Windows</td></tr>
+          <tr><td><a href="https://rishabh3354.github.io/4KWALL/">4KWALL</a></td><td>Wallpaper Manager &amp; Auto Wallpaper Changer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO">GitHub repository</a>
+      <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest">Releases</a>
+      <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues">Report an issue</a>
+      <a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader">Flathub</a>
+      <a href="https://snapcraft.io/youtube-dl-pro">Snap Store</a>
+      <a href="https://warlordsoftwares.com/">Website</a>
+      <a href="https://warlordsoftwares.com/privacy-policy/">Privacy policy</a>
+    </nav>
+    <p>DL-YouTube is proprietary software. &copy; 2024&ndash;2026 Rishabh Bhardwaj / Warlord Softwares.</p>
+  </div>
+</footer>
+
+</body>
+</html>
