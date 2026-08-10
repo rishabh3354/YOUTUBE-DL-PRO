@@ -207,6 +207,7 @@ DL-YouTube is a tool for saving content you have the right to save — your own 
 
 ## 🔗 Links
 
+- 📄 **Download page:** [rishabh3354.github.io/YOUTUBE-DL-PRO](https://rishabh3354.github.io/YOUTUBE-DL-PRO/)
 - 🌐 **Website:** [warlordsoftwares.com](https://warlordsoftwares.com/)
 - 📦 **Flathub:** [com.warlordsoftwares.media-downloader](https://flathub.org/apps/details/com.warlordsoftwares.media-downloader)
 - 📦 **Snap Store:** [snapcraft.io/youtube-dl-pro](https://snapcraft.io/youtube-dl-pro)
