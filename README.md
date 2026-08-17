@@ -21,7 +21,7 @@
   <img src="https://img.shields.io/badge/Ads-none-success?style=flat-square" alt="No ads and no trackers">
 </p>
 
-> ⭐ **Installed 220,000+ times on Flathub.** If this replaced a browser full of shady download sites for you, [star the repo](https://github.com/rishabh3354/YOUTUBE-DL-PRO/stargazers) — that is how most people find it.
+> **Installed 220,000+ times on Flathub.**
 
 ---
 
@@ -197,11 +197,7 @@ DL-YouTube is a tool for saving content you have the right to save — your own 
 
 ## 🧩 More apps by Warlord Softwares
 
-| App | What it does |
-|---|---|
-| **[4KTUBE](https://github.com/rishabh3354/4KTUBE)** | YouTube-focused downloader for 4K / 8K video and playlists |
-| **[FormatLab](https://github.com/rishabh3354/FORMAT_LAB)** | Convert and compress video and audio between 40+ formats |
-| **[4KWALL](https://github.com/rishabh3354/4KWALL)** | Wallpaper manager with auto-rotation and multi-monitor support |
+Other apps by Warlord Softwares are listed on [warlordsoftwares.com](https://warlordsoftwares.com/).
 
 ---
 
@@ -218,9 +214,3 @@ DL-YouTube is a tool for saving content you have the right to save — your own 
 ## 📄 License
 
 DL-YouTube is proprietary software. © 2024–2026 Rishabh Bhardwaj / Warlord Softwares. See [LICENSE](LICENSE).
-
----
-
-<p align="center">
-  <strong>Found this useful? ⭐ Star the repo — it genuinely helps other people find it.</strong>
-</p>
