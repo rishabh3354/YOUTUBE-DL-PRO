@@ -2,7 +2,7 @@
 <component type="desktop">
 	<id>com.warlordsoftwares.media-downloader</id>
 	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>LicenseRef-proprietary=https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/license/LICENSE</project_license>
+	<project_license>LicenseRef-proprietary=https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/license/LICENSE</project_license>
 	<developer_name>Warlord Softwares</developer_name>
 	<branding>
 		<color type="primary" scheme_preference="light">#e6e6e6</color>
@@ -128,34 +128,40 @@
 	<screenshots>
 		<screenshot type="default">
 			<caption>Media Downloader: Video download page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/video_download.png</image>
+			<image type="source">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/screenshots/video_download.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Media Downloader: YouTube search page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_search.png</image>
+			<image type="source">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/screenshots/youtube_search.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Media Downloader: Playlist download page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png</image>
+			<image type="source">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/screenshots/batch_downloading.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Media Downloader: Downloads page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/videos_downloaded.png</image>
+			<image type="source">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/screenshots/videos_downloaded.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Media Downloader: App settings page</caption>
-			<image type="source">https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png</image>
+			<image type="source">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/raw/main/share/screenshots/youtube_app_settings.png</image>
 		</screenshot>
 	</screenshots>
 	<url type="homepage">https://warlordsoftwares.com/trending-apps/youtube-dl-gui-video-downloader-linux/</url>
-	<url type="vcs-browser">https://github.com/rishabh3354/YOUTUBE-DL-PRO</url>
-	<url type="bugtracker">https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues</url>
+	<url type="vcs-browser">https://gitlab.com/warlordsoftwares/youtube-dl-pro</url>
+	<url type="bugtracker">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/issues</url>
 	<url type="contact">https://warlordsoftwares.com/contact-us/</url>
 	<url type="donation">https://www.paypal.me/rishabh3354/10</url>
 	<update_contact>contact@warlordsoftwares.com</update_contact>
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
+		<release version="2026.8.18" date="2026-8-18">
+			<description>
+				<p>YouTube fixes: failing download videos fixed</p>
+				<p>Other bug fixes</p>
+			</description>
+		</release>
 		<release version="2026.8.8" date="2026-8-8">
 			<description>
 				<p>SignIn fixed for YouTube</p>
