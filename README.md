@@ -3,14 +3,13 @@
 **DL-YouTube, also known as Media Downloader, is an all-in-one desktop video downloader for Linux and Windows.** Save video and audio from YouTube, Instagram, TikTok, Facebook, X (Twitter), Twitch, Reddit, SoundCloud and **1400+ other websites** — in HD, as MP4 or MP3, in batches, with subtitles, in 35+ languages. No ads, no trackers, no browser extension.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube-dl-pro_banner.png" alt="DL-YouTube Media Downloader for Linux and Windows — download video and audio from YouTube, Instagram, TikTok and 1400+ sites" width="100%">
+  <img src="share/screenshots/youtube-dl-pro_banner.png" alt="DL-YouTube Media Downloader for Linux and Windows — download video and audio from YouTube, Instagram, TikTok and 1400+ sites" width="100%">
 </p>
 
 <p align="center">
   <a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader"><img src="https://img.shields.io/flathub/downloads/com.warlordsoftwares.media-downloader?style=for-the-badge&label=Flathub%20installs&color=4A90D9" alt="Flathub installs"></a>
   <a href="https://snapcraft.io/youtube-dl-pro"><img src="https://img.shields.io/snapcraft/v/youtube-dl-pro/latest/stable?style=for-the-badge&label=Snap&color=E95420" alt="Snap Store version"></a>
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest"><img src="https://img.shields.io/github/v/release/rishabh3354/YOUTUBE-DL-PRO?style=for-the-badge&label=Release&color=2ea44f" alt="Latest release"></a>
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/stargazers"><img src="https://img.shields.io/github/stars/rishabh3354/YOUTUBE-DL-PRO?style=for-the-badge&color=f5c518" alt="GitHub stars"></a>
+  <a href="https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases"><img src="https://img.shields.io/gitlab/v/tag/WarlordSoftwares%2Fyoutube-dl-pro?style=for-the-badge&label=Release&color=2ea44f" alt="Latest release"></a>
 </p>
 
 <p align="center">
@@ -45,8 +44,8 @@
 <p align="center">
   <a href="https://snapcraft.io/youtube-dl-pro"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" height="56" alt="Install DL-YouTube Media Downloader from the Snap Store"></a>&nbsp;
   <a href="https://flathub.org/apps/details/com.warlordsoftwares.media-downloader"><img src="https://flathub.org/assets/badges/flathub-badge-en.png" height="56" width="186" alt="Install DL-YouTube Media Downloader from Flathub"></a>&nbsp;
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage"><img src="https://raw.githubusercontent.com/srevinsaju/get-appimage/master/static/badges/get-appimage-branding-blue.png" height="56" alt="Download the DL-YouTube AppImage for Linux"></a>&nbsp;
-  <a href="https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YOUTUBE.exe"><img src="https://user-images.githubusercontent.com/66430340/187172806-a8edd12a-ef58-4a05-96a3-99d7490b42f6.png" height="56" alt="Download DL-YouTube for Windows 10 and Windows 11"></a>
+  <a href="https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases"><img src="https://raw.githubusercontent.com/srevinsaju/get-appimage/master/static/badges/get-appimage-branding-blue.png" height="56" alt="Download the DL-YouTube AppImage for Linux"></a>&nbsp;
+  <a href="https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases"><img src="https://user-images.githubusercontent.com/66430340/187172806-a8edd12a-ef58-4a05-96a3-99d7490b42f6.png" height="56" alt="Download DL-YouTube for Windows 10 and Windows 11"></a>
 </p>
 
 ### Install on Linux (terminal)
@@ -61,15 +60,16 @@ flatpak install flathub com.warlordsoftwares.media-downloader
 
 ### Install on Linux (AppImage — works on any distro)
 
+Download the latest `.AppImage` from the [releases page](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases), then:
+
 ```bash
-wget https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YouTube-x86_64.AppImage
 chmod +x DL-YouTube-x86_64.AppImage
 ./DL-YouTube-x86_64.AppImage
 ```
 
 ### Install on Windows
 
-Download **[DL-YOUTUBE.exe](https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest/download/DL-YOUTUBE.exe)** from the [latest release](https://github.com/rishabh3354/YOUTUBE-DL-PRO/releases/latest) and run the installer. Windows 10 and Windows 11 (64-bit) are supported.
+Download the Windows installer from the [releases page](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases) and run it. Windows 10 and Windows 11 (64-bit) are supported.
 
 ---
 
@@ -120,11 +120,11 @@ Download **[DL-YOUTUBE.exe](https://github.com/rishabh3354/YOUTUBE-DL-PRO/releas
 
 | Video download | In-app YouTube search |
 |---|---|
-| ![DL-YouTube downloading a video with format and quality options](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/video_download.png) | ![Searching YouTube directly inside the DL-YouTube desktop app](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_search.png) |
+| ![DL-YouTube downloading a video with format and quality options](share/screenshots/video_download.png) | ![Searching YouTube directly inside the DL-YouTube desktop app](share/screenshots/youtube_search.png) |
 
 | Batch downloading | Settings |
 |---|---|
-| ![DL-YouTube batch downloading several videos at once](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/batch_downloading.png) | ![DL-YouTube application settings and download preferences](https://raw.githubusercontent.com/rishabh3354/YOUTUBE-DL-PRO/main/share/screenshots/youtube_app_settings.png) |
+| ![DL-YouTube batch downloading several videos at once](share/screenshots/batch_downloading.png) | ![DL-YouTube application settings and download preferences](share/screenshots/youtube_app_settings.png) |
 
 ---
 
@@ -176,7 +176,7 @@ No. DL-YouTube is a proprietary desktop application. This repository hosts the r
 
 ### How is this different from 4KTUBE?
 
-DL-YouTube is the general-purpose downloader — the widest site coverage, aimed at grabbing media from anywhere. [4KTUBE](https://github.com/rishabh3354/4KTUBE) is the YouTube specialist, tuned for maximum resolution (4K / 8K), playlists and in-app search.
+DL-YouTube is the general-purpose downloader — the widest site coverage, aimed at grabbing media from anywhere. [4KTUBE](https://gitlab.com/WarlordSoftwares/4ktube) is the YouTube specialist, tuned for maximum resolution (4K / 8K), playlists and in-app search.
 
 ---
 
@@ -203,11 +203,10 @@ Other apps by Warlord Softwares are listed on [warlordsoftwares.com](https://war
 
 ## 🔗 Links
 
-- 📄 **Download page:** [rishabh3354.github.io/YOUTUBE-DL-PRO](https://rishabh3354.github.io/YOUTUBE-DL-PRO/)
 - 🌐 **Website:** [warlordsoftwares.com](https://warlordsoftwares.com/)
 - 📦 **Flathub:** [com.warlordsoftwares.media-downloader](https://flathub.org/apps/details/com.warlordsoftwares.media-downloader)
 - 📦 **Snap Store:** [snapcraft.io/youtube-dl-pro](https://snapcraft.io/youtube-dl-pro)
-- 🐞 **Issues:** [github.com/rishabh3354/YOUTUBE-DL-PRO/issues](https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues)
+- 🐞 **Issues:** [gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues)
 
 ---
 
