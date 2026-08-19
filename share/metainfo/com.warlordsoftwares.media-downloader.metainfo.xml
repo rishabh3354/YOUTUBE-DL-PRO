@@ -155,6 +155,7 @@
 	<update_contact>contact@warlordsoftwares.com</update_contact>
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
+
 	<releases>
 		<release version="2026.8.18" date="2026-08-18">
 			<description>
