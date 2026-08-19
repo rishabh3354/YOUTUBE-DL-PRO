@@ -156,16 +156,9 @@
 	<launchable type="desktop-id">com.warlordsoftwares.media-downloader.desktop</launchable>
 	<content_rating type="oars-1.1" />
 	<releases>
-		<release version="2026.8.18" date="2026-8-18">
+		<release version="2026.8.18" date="2026-08-18">
 			<description>
-				<p>YouTube fixes: failing download videos fixed</p>
-				<p>Other bug fixes</p>
-			</description>
-		</release>
-		<release version="2026.8.8" date="2026-8-8">
-			<description>
-				<p>SignIn fixed for YouTube</p>
-				<p>Other platform engine fixes - twitter, twitch etc.</p>
+				<p>YouTube 403 bug fixed</p>
 			</description>
 		</release>
 		<release version="2026.7.20" date="2026-7-20" />
