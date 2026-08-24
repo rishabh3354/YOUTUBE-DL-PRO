@@ -157,6 +157,11 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.8.24" date="2026-8-24">
+			<description>
+				<p>YouTube music playlist fixes</p>
+			</description>
+		</release>
 		<release version="2026.8.18" date="2026-08-18">
 			<description>
 				<p>YouTube 403 bug fixed</p>
