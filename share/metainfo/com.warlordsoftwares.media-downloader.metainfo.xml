@@ -148,8 +148,8 @@
 		</screenshot>
 	</screenshots>
 	<url type="homepage">https://warlordsoftwares.com/trending-apps/youtube-dl-gui-video-downloader-linux/</url>
-	<url type="vcs-browser">https://gitlab.com/warlordsoftwares/youtube-dl-pro</url>
-	<url type="bugtracker">https://gitlab.com/warlordsoftwares/youtube-dl-pro/-/issues</url>
+	<url type="vcs-browser">https://github.com/rishabh3354/YOUTUBE-DL-PRO</url>
+	<url type="bugtracker">https://github.com/rishabh3354/YOUTUBE-DL-PRO/issues</url>
 	<url type="contact">https://warlordsoftwares.com/contact-us/</url>
 	<url type="donation">https://www.paypal.me/rishabh3354/10</url>
 	<update_contact>contact@warlordsoftwares.com</update_contact>
@@ -157,6 +157,11 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.9.7" date="2026-9-7">
+			<description>
+				<p>YouTube downloading issue fixed</p>
+			</description>
+		</release>
 		<release version="2026.8.24" date="2026-8-24">
 			<description>
 				<p>YouTube music playlist fixes</p>
