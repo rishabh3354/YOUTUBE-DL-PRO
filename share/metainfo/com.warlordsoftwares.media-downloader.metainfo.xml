@@ -157,6 +157,20 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.10.12" date="2026-10-12">
+			<description>
+				<p>Auto-generated captions are used automatically when a video has no uploaded subtitles</p>
+				<p>New subtitle language option for playlist and batch downloads</p>
+				<p>New setting to embed subtitles inside the video file</p>
+				<p>Subtitles and auto-generated captions now show while playing videos, including from playlist and batch lists</p>
+				<p>Home page shows new videos every day</p>
+				<p>Fixed: video playback had sound but no picture on X11 desktops such as Cinnamon, XFCE and MATE</p>
+				<p>Fixed: error 403 when downloading age-restricted videos while signed in</p>
+				<p>Fixed: some videos failed to load, and subtitles were missed for some languages</p>
+				<p>Fixed: quality change no longer resets the selected format and subtitle options</p>
+				<p>Smoother video playback and stability improvements</p>
+			</description>
+		</release>
 		<release version="2026.9.7" date="2026-9-7">
 			<description>
 				<p>YouTube downloading issue fixed</p>
