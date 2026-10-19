@@ -157,6 +157,12 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.10.19" date="2026-10-19">
+			<description>
+				<p>Subtitles no longer make a download fail: if YouTube refuses them, the video still downloads and the app tells you why</p>
+				<p>Clear help when YouTube blocks a download (too many requests, bot check, age-restricted, members-only or private videos), with one-click sign-in, in your language</p>
+			</description>
+		</release>
 		<release version="2026.10.12" date="2026-10-12">
 			<description>
 				<p>Auto-generated captions are used automatically when a video has no uploaded subtitles</p>
