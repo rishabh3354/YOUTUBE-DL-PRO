@@ -157,6 +157,14 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.11.3" date="2026-11-03">
+			<description>
+				<p>Fixed crashes when closing the app, while loading home-page thumbnails and when showing a video's description</p>
+				<p>Clear messages, in your language, when a website blocks a download, the chosen quality is not available, converting the file fails or there is no internet connection</p>
+				<p>Fixed playlist downloads that could fail to start, and many smaller errors with thumbnails, album art, the media player, search and download history</p>
+				<p>Long titles in Thai, emoji and other scripts no longer break downloads</p>
+			</description>
+		</release>
 		<release version="2026.10.19" date="2026-10-19">
 			<description>
 				<p>Subtitles no longer make a download fail: if YouTube refuses them, the video still downloads and the app tells you why</p>
