@@ -86,3 +86,4 @@ parts:
       cp YOUTUBE_DL ${SNAPCRAFT_PART_INSTALL}/bin/youtube-dl-pro
       chmod +x ${SNAPCRAFT_PART_INSTALL}/bin/youtube-dl-pro
 
+
