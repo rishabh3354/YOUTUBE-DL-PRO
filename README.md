@@ -214,3 +214,4 @@ Other apps by Warlord Softwares are listed on [warlordsoftwares.com](https://war
 
 DL-YouTube is proprietary software. © 2024–2026 Rishabh Bhardwaj / Warlord Softwares. See [LICENSE](LICENSE).
 
+
