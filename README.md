@@ -1,6 +1,6 @@
-# DL-YouTube (Media Downloader) — Download Video & Audio from 1400+ Sites on Linux and Windows
+# DL-YouTube (Media Downloader): download video and audio from 1400+ sites on Linux and Windows
 
-**DL-YouTube, also known as Media Downloader, is an all-in-one desktop video downloader for Linux and Windows.** Save video and audio from YouTube, Instagram, TikTok, Facebook, X (Twitter), Twitch, Reddit, SoundCloud and **1400+ other websites** — in HD, as MP4 or MP3, in batches, with subtitles, in 35+ languages. No ads, no trackers, no browser extension.
+DL-YouTube, also called Media Downloader, is a desktop video downloader for Linux and Windows. It saves video and audio from YouTube, Instagram, TikTok, Facebook, X (Twitter), Twitch, Reddit, SoundCloud and 1400+ other websites, in HD or as MP3, one at a time or in batches, with subtitles. The interface comes in 35+ languages. It has no ads and no trackers, and you don't need a browser extension.
 
 <p align="center">
   <img src="share/screenshots/youtube-dl-pro_banner.png" alt="DL-YouTube Media Downloader for Linux and Windows — download video and audio from YouTube, Instagram, TikTok and 1400+ sites" width="100%">
@@ -20,26 +20,22 @@
   <img src="https://img.shields.io/badge/Ads-none-success?style=flat-square" alt="No ads and no trackers">
 </p>
 
-> **Installed 220,000+ times on Flathub.**
-
----
+> Installed 220,000+ times on Flathub.
 
 ## Contents
 
-- [Download and install](#-download-and-install)
-- [Features](#-features)
-- [What you can download](#-what-you-can-download)
-- [Supported sites](#-supported-sites)
-- [Screenshots](#-screenshots)
-- [System requirements](#-system-requirements)
-- [FAQ](#-faq)
-- [How it compares](#-how-dl-youtube-compares)
-- [Responsible use](#-responsible-use)
-- [More apps](#-more-apps-by-warlord-softwares)
+- [Download and install](#download-and-install)
+- [Features](#features)
+- [What you can download](#what-you-can-download)
+- [Supported sites](#supported-sites)
+- [Screenshots](#screenshots)
+- [System requirements](#system-requirements)
+- [FAQ](#faq)
+- [How it compares](#how-dl-youtube-compares)
+- [Responsible use](#responsible-use)
+- [More apps](#more-apps-by-warlord-softwares)
 
----
-
-## 📥 Download and install
+## Download and install
 
 <p align="center">
   <a href="https://snapcraft.io/youtube-dl-pro"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" height="56" alt="Install DL-YouTube Media Downloader from the Snap Store"></a>&nbsp;
@@ -58,7 +54,7 @@ sudo snap install youtube-dl-pro
 flatpak install flathub com.warlordsoftwares.media-downloader
 ```
 
-### Install on Linux (AppImage — works on any distro)
+### Install on Linux (AppImage, any distro)
 
 Download the latest `.AppImage` from the [releases page](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases), then:
 
@@ -69,54 +65,46 @@ chmod +x DL-YouTube-x86_64.AppImage
 
 ### Install on Windows
 
-Download the Windows installer from the [releases page](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases) and run it. Windows 10 and Windows 11 (64-bit) are supported.
+Download the Windows installer from the [releases page](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/releases) and run it. It supports 64-bit Windows 10 and Windows 11.
 
----
+## Features
 
-## 🌟 Features
+- Download from 1400+ websites with one app, instead of a different sketchy site for every platform.
+- Paste a link and save the video as MP4, WEBM or MKV in one click.
+- Save just the audio of any supported video as MP3, M4A, WAV, FLAC or Opus.
+- Queue a whole YouTube playlist at once.
+- Pick the dubbed audio track you want instead of the default one.
+- Save subtitle and closed-caption tracks next to the video.
+- Run many downloads at the same time.
+- Search YouTube inside the app, with results for your region.
+- Preview a video in the app, without ads, before you save it.
+- The whole interface is translated into 35+ languages.
+- No ads, no trackers, no bundled installers.
 
-- **Download from 1400+ websites** — one app instead of a different sketchy site for every platform.
-- **One-click video download** — paste a link and save it in MP4, WEBM or MKV.
-- **One-click audio download** — extract MP3, M4A, WAV, FLAC or Opus from any supported video.
-- **YouTube playlists** — queue an entire playlist in a single action.
-- **Multi-language audio tracks** — choose the dubbed track you want instead of the default.
-- **Subtitles and closed captions** — save CC tracks alongside the video.
-- **Batch downloading** — run many downloads at once instead of waiting in line.
-- **Built-in YouTube search** — find videos inside the app, with regional results.
-- **Ad-free in-app streaming** — preview a video before deciding to save it.
-- **35+ interface languages** — the app itself is fully localised.
-- **No ads, no trackers, no bundled installers.**
-
----
-
-## 🎯 What you can download
+## What you can download
 
 | Task | Result |
 |---|---|
-| **Download a YouTube video** | MP4 / WEBM at your chosen resolution |
-| **Download a YouTube playlist** | Every video queued automatically |
-| **Convert YouTube to MP3** | Audio-only extraction at high bitrate |
-| **Download an Instagram video or reel** | Saved as MP4 |
-| **Download a TikTok video** | Saved as MP4, watermark-free where available |
-| **Download a Facebook video** | Saved as MP4 |
-| **Download a video from X (Twitter)** | Saved as MP4 |
-| **Download a Twitch VOD or clip** | Saved locally for offline viewing |
-| **Download a Reddit video** | Video and audio merged into one file |
-| **Download SoundCloud audio** | Saved as MP3 / M4A |
-| **Download with subtitles** | Subtitle tracks saved with the video |
-| **Batch download a list of links** | Paste many URLs and let the queue run |
+| Download a YouTube video | MP4 / WEBM at your chosen resolution |
+| Download a YouTube playlist | Every video queued automatically |
+| Convert YouTube to MP3 | Audio only, at high bitrate |
+| Download an Instagram video or reel | Saved as MP4 |
+| Download a TikTok video | Saved as MP4, without the watermark where possible |
+| Download a Facebook video | Saved as MP4 |
+| Download a video from X (Twitter) | Saved as MP4 |
+| Download a Twitch VOD or clip | Saved locally for offline viewing |
+| Download a Reddit video | Video and audio merged into one file |
+| Download SoundCloud audio | Saved as MP3 / M4A |
+| Download with subtitles | Subtitle tracks saved with the video |
+| Batch download a list of links | Paste many URLs and let the queue run |
 
----
+## Supported sites
 
-## 🌐 Supported sites
-
-**1400+ platforms**, including:
+More than 1400 sites, including:
 
 `YouTube` · `YouTube Music` · `Instagram` · `TikTok` · `Facebook` · `X (Twitter)` · `Twitch` · `Vimeo` · `Dailymotion` · `Reddit` · `SoundCloud` · `Rumble` · `Odysee` · `BitChute` · `Brighteon` · `Pinterest` · `LinkedIn` · `Snapchat` · `ESPN` · `Yahoo` · `Arte` · `Fandom` · `Bilibili` · `Wikimedia`
 
----
-
-## 📸 Screenshots
+## Screenshots
 
 | Video download | In-app YouTube search |
 |---|---|
@@ -126,29 +114,25 @@ Download the Windows installer from the [releases page](https://gitlab.com/Warlo
 |---|---|
 | ![DL-YouTube batch downloading several videos at once](share/screenshots/batch_downloading.png) | ![DL-YouTube application settings and download preferences](share/screenshots/youtube_app_settings.png) |
 
----
-
-## 💻 System requirements
+## System requirements
 
 | | Minimum |
 |---|---|
-| **Linux** | Ubuntu 20.04+, Debian 11+, Fedora 36+, Arch, or any distro that runs Flatpak / Snap / AppImage |
-| **Windows** | Windows 10 or Windows 11, 64-bit |
-| **Architecture** | x86_64 |
-| **RAM** | 4 GB |
-| **Network** | Broadband recommended for HD downloads |
+| Linux | Ubuntu 20.04+, Debian 11+, Fedora 36+, Arch, or any distro that runs Flatpak / Snap / AppImage |
+| Windows | Windows 10 or Windows 11, 64-bit |
+| Architecture | x86_64 |
+| RAM | 4 GB |
+| Network | Broadband recommended for HD downloads |
 
----
-
-## ❓ FAQ
+## FAQ
 
 ### Is DL-YouTube free?
 
-It is free to download and use. A one-time Pro upgrade removes limits and unlocks the full feature set — there is no subscription. See [plans and pricing](https://warlordsoftwares.com/apps/plans-and-pricing/).
+It is free to download and use. A one-time Pro upgrade removes the limits and unlocks every feature. There is no subscription. See [plans and pricing](https://warlordsoftwares.com/apps/plans-and-pricing/).
 
 ### Does it work on Linux?
 
-Yes — Linux is its primary platform. Install it from Flathub, the Snap Store, or as a portable AppImage on Ubuntu, Debian, Fedora, Arch, Linux Mint, Pop!\_OS and others.
+Yes, Linux is its main platform. Install it from Flathub, the Snap Store, or as a portable AppImage on Ubuntu, Debian, Fedora, Arch, Linux Mint, Pop!\_OS and others.
 
 ### Which sites does it support?
 
@@ -164,7 +148,7 @@ Yes. Paste a playlist URL and every video in it is queued for download.
 
 ### Does it download subtitles?
 
-Yes — subtitle and closed-caption tracks can be saved alongside the video.
+Yes. It can save subtitle and closed-caption tracks next to the video.
 
 ### Does it contain ads, trackers or bundled software?
 
@@ -172,46 +156,34 @@ No. It ships from Flathub, the Snap Store and signed GitHub releases with no adv
 
 ### Is it open source?
 
-No. DL-YouTube is a proprietary desktop application. This repository hosts the releases, packaging metadata, issue tracker and documentation rather than the application source.
+No. DL-YouTube is a proprietary desktop application. This repository holds the releases, packaging metadata, issue tracker and documentation. The application source is not here.
 
 ### How is this different from 4KTUBE?
 
-DL-YouTube is the general-purpose downloader — the widest site coverage, aimed at grabbing media from anywhere. [4KTUBE](https://gitlab.com/WarlordSoftwares/4ktube) is the YouTube specialist, tuned for maximum resolution (4K / 8K), playlists and in-app search.
+DL-YouTube is the general-purpose downloader, with the widest site coverage. [4KTUBE](https://gitlab.com/WarlordSoftwares/4ktube) focuses on YouTube: the highest resolutions (4K / 8K), playlists and in-app search.
 
----
+## How DL-YouTube compares
 
-## ⚖️ How DL-YouTube compares
+- Online downloader sites (y2mate, SaveFrom, ssyoutube and similar) show pop-ups and fake buttons, cap the quality, and send your links through their servers. DL-YouTube runs on your computer and has no quality cap.
+- Browser extensions get pulled from extension stores often and break when a site changes.
+- Command-line tools (yt-dlp, youtube-dl) are powerful and free, but you drive them with flags. DL-YouTube adds an interface, a download queue, search and previews.
+- Paid Windows downloaders (SnapDownloader, iTubeGo, Allavsoft, VideoHunter) are built for Windows first and charge a subscription. DL-YouTube is a one-time purchase and supports Linux as fully as Windows.
 
-- **Online downloader sites** (y2mate, SaveFrom, ssyoutube and friends) — pop-ups, fake buttons, quality caps, and your links pass through their servers. DL-YouTube runs locally with no cap.
-- **Browser extensions** — regularly pulled from extension stores and easily broken by a site change.
-- **Command-line tools** (yt-dlp, youtube-dl) — powerful and free, but flag-driven. DL-YouTube gives you a real interface, a download queue, search and previews.
-- **Paid Windows downloaders** (SnapDownloader, iTubeGo, Allavsoft, VideoHunter) — Windows-first with subscription pricing. DL-YouTube is a one-time purchase and treats Linux as a first-class platform.
+## Responsible use
 
----
+Use DL-YouTube to save content you have the right to save: your own uploads, Creative Commons material, public-domain video, and content you have permission to keep offline. Please respect copyright and the terms of service of the sites you download from.
 
-## 🛡️ Responsible use
-
-DL-YouTube is a tool for saving content you have the right to save — your own uploads, Creative Commons material, public-domain video, and content you have permission to keep offline. Please respect copyright and the terms of service of the sites you download from.
-
----
-
-## 🧩 More apps by Warlord Softwares
+## More apps by Warlord Softwares
 
 Other apps by Warlord Softwares are listed on [warlordsoftwares.com](https://warlordsoftwares.com/).
 
----
+## Links
 
-## 🔗 Links
+- Website: [warlordsoftwares.com](https://warlordsoftwares.com/)
+- Flathub: [com.warlordsoftwares.media-downloader](https://flathub.org/apps/details/com.warlordsoftwares.media-downloader)
+- Snap Store: [snapcraft.io/youtube-dl-pro](https://snapcraft.io/youtube-dl-pro)
+- Issues: [gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues)
 
-- 🌐 **Website:** [warlordsoftwares.com](https://warlordsoftwares.com/)
-- 📦 **Flathub:** [com.warlordsoftwares.media-downloader](https://flathub.org/apps/details/com.warlordsoftwares.media-downloader)
-- 📦 **Snap Store:** [snapcraft.io/youtube-dl-pro](https://snapcraft.io/youtube-dl-pro)
-- 🐞 **Issues:** [gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues](https://gitlab.com/WarlordSoftwares/youtube-dl-pro/-/issues)
-
----
-
-## 📄 License
+## License
 
 DL-YouTube is proprietary software. © 2024–2026 Rishabh Bhardwaj / Warlord Softwares. See [LICENSE](LICENSE).
-
-
