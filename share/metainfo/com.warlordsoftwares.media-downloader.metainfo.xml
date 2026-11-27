@@ -157,6 +157,11 @@
 	<content_rating type="oars-1.1" />
 
 	<releases>
+		<release version="2026.11.27" date="2026-11-27">
+			<description>
+				<p>YouTube downloading fixes</p>
+			</description>
+		</release>
 		<release version="2026.11.3" date="2026-11-03">
 			<description>
 				<p>Fixed crashes when closing the app, while loading home-page thumbnails and when showing a video's description</p>
